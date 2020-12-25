@@ -43,9 +43,6 @@ PUSHER_APP_SECRET=
 
 
 ---------------------new created project--------------------------
-
-
-
 APP_NAME=TokenLite
 APP_ENV=local
 APP_KEY=base64:pnA4gzGLECMrHg2YaL3nxTXD4+yWnB9mOK7X6jzBHSE=
