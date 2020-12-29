@@ -109,7 +109,6 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="password" class="input-item-label">{{__('Password')}}
-{{--                            <span class="text-require text-danger">*</span>--}}
                         </label>
                         <div class="input-wrap">
                             <input required class="input-bordered" placeholder="*******" type="password" minlength="6"
@@ -140,20 +139,7 @@
                     </div>{{-- .col --}}
                 @endif
 
-{{--            @if(field_value('kyc_phone', 'show' ))--}}
-{{--                <div class="col-md-6">--}}
-{{--                    <div class="input-item input-with-label">--}}
-{{--                        <label for="phone-number"--}}
-{{--                               class="input-item-label">{{__('Phone Number ')}}</label>--}}
-{{--                        <div class="input-wrap">--}}
-{{--                            <input--}}
-{{--                                {{ field_value('kyc_phone', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"--}}
-{{--                                type="text" value="{{ isset($user_kyc) ? $user_kyc->phone : ''}}" id="phone-number"--}}
-{{--                                name="phone">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}{{-- .input-item --}}
-{{--                </div>--}}{{-- .col --}}
-{{--            @endif--}}
+
             @if(field_value('kyc_dob', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
@@ -226,27 +212,8 @@
                 </div>{{-- .input-item --}}
             </div>{{-- .col --}}
             @endif
-{{--            @if(field_value('kyc_telegram', 'show' ))--}}
-{{--                <div class="col-md-6">--}}
-{{--                    <div class="input-item input-with-label">--}}
-{{--                        <label for="telegram"--}}
-{{--                               class="input-item-label">{{__('Telegram Username')}}</label>--}}
-{{--                        <div class="input-wrap">--}}
-{{--                            <input--}}
-{{--                                {{ field_value('kyc_telegram', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"--}}
-{{--                                type="text" value="{{ isset($user_kyc) ? $user_kyc->telegram : ''}}" id="telegram"--}}
-{{--                                name="telegram">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}{{-- .input-item --}}
-{{--                </div>--}}{{-- .col --}}
-{{--            @endif--}}
         </div>{{-- .row --}}
-{{--        <div class="step-head">--}}
-{{--            <div class="step-number">{{ $step_02 }}</div>--}}
-{{--            <div class="step-head-text">--}}
-{{--                <h4>{{__('Registered Address Details')}}</h4>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+
         <div class="gaps-3x"></div>
         <div class="form-step-head">
             <div class="step-head">
@@ -259,8 +226,7 @@
         </div>
         <div class="gaps-3x"></div>
 
-        {{--<div class="step-number">{{ $step_02 }}</div>
-        <h4 class="text-secondary mgt-0-5x">{{__('Registered Address Details')}}</h4>--}}
+        
         <div class="row">
             @if(field_value('kyc_country', 'show' ))
                 <div class="col-md-6">
@@ -369,6 +335,7 @@
         </div>{{-- .row --}}
     </div>{{-- .step-fields --}}
 </div>
+
 @if($has_docs)
     <div class="form-step form-step3">
         <div class="form-step-head card-innr">
@@ -517,36 +484,7 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="sap sap-gap"></div>--}}
-{{--            <div class="col-md-6">--}}
-{{--                <div class="input-item input-with-label">--}}
-{{--                    <label for="document_no"--}}
-{{--                           class="input-item-label">{{__('Document Number')}}</label>--}}
-{{--                    <div class="input-wrap">--}}
-{{--                        <input {{ field_value('kyc_address1', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"--}}
-{{--                               type="text" value="{{ isset($user_kyc) ? $user_kyc->address1 : ''}}"--}}
-{{--                               style="text-transform:uppercase" id="document_no"--}}
-{{--                               name="document_no">--}}
-{{--                    </div>--}}
-{{--                </div>--}}{{-- .input-item --}}
-{{--            </div>--}}{{-- .col --}}
-{{--            <div class="col-md-6">--}}
-{{--                <div class="input-item input-with-label">--}}
-{{--                    <label for="Proof of Address Type"--}}
-{{--                           class="input-item-label">{{__('Proof of Address Type')}} </label>--}}
-{{--                    <div class="input-wrap">--}}
-{{--                        <select class="select-bordered select-block" name="Proof of Address Type" id="Proof of Address Type"--}}
-{{--                                data-dd-class="search-on">--}}
-{{--                            <option value="">{{__('Select option')}}</option>--}}
 
-{{--                            <option >Utility Bill</option>--}}
-{{--                            <option >Phone Bill</option>--}}
-{{--                            <option >Bank Statement</option>--}}
-{{--                            <option >Tax Statement</option>--}}
-{{--                        </select>--}}
-{{--                    </div>--}}
-{{--                </div>--}}{{-- .input-item --}}
-{{--            </div>--}}{{-- .col --}}
 
 
         </div>
@@ -609,48 +547,7 @@
     </div>
 @endif
 
-{{--@if($has_wallet)
-<div class="form-step form-step3">
-    <div class="form-step-head card-innr">
-        <div class="step-head">
-            <div class="step-number">{{ $step_04 }}</div>
-            <div class="step-head-text">
-                <h4>{{__('Your Paying Wallet')}}</h4>
-                <p>{{__('Submit your wallet address that you are going to send funds')}}</p>
-            </div>
-        </div>
-    </div>--}}{{-- .step-head --}}{{--
-    <div class="form-step-fields card-innr">
-        <div class="note note-plane note-light-alt note-md pdb-1x">
-            <em class="fas fa-info-circle"></em>
-            <p>{{__('DO NOT USE your exchange wallet address such as Kraken, Bitfinex, Bithumb, Binance etc.')}}</p>
-        </div>
-        @if($wallet_count > 1)
-        <div class="row">
-            <div class="col-md-6">
-                <div class="input-item input-with-label">
-                    <label for="swalllet" class="input-item-label">{{__('Select Wallet')}} {!! required_mark('kyc_wallet') !!}</label>
-                    <div class="input-wrap">
-                        <select {{ field_value('kyc_wallet', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-bordered select-block" name="wallet_name" id="swalllet">
-                            {!! $option !!}
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>--}}{{-- .row --}}{{--
-        @else
-        <input type="hidden" name="wallet_name" value="{{array_keys($wallets)[0]}}">
-        @endif
-        <div class="input-item input-with-label">
-            <label for="token-address" class="input-item-label">{{ ($wallet_count ==1) ? __('Enter your :Name wallet address', ['name' => array_values($wallets)[0]]) : __('Enter your wallet address') }}{!! required_mark('kyc_wallet') !!}</label>
-            <div class="input-wrap">
-                <input {{ field_value('kyc_wallet', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" id="token-address" name="wallet_address" placeholder="{{__('Your personal wallet address')}}">
-            </div>
-            <span class="input-note">{{__('Note:')}} {{ get_setting('kyc_wallet_note') }}</span>
-        </div>--}}{{-- .input-item --}}{{--
-    </div>--}}{{-- .step-fields --}}{{--
-</div>
-@endif--}}
+
 <div class="form-step form-step-final">
     <div class="form-step-fields card-innr">
         @if(get_page('privacy', 'status') == 'active' || get_page('terms', 'status') == 'active')
@@ -667,20 +564,13 @@
                    required="required" data-msg-required="{{ __("Confirm that all information is correct.") }}">
             <label for="info-currect">{{__('All the personal information I have entered is correct.')}}</label>
         </div>
-        {{--<div class="input-item">
-            <input class="input-checkbox input-checkbox-md" id="certification" name="certification" type="checkbox" required="required" data-msg-required="{{ __("Certify that you are individual.") }}">
-            <label for="certification">{{__("I certify that, I am registering to participate in the token distribution event(s) in the capacity of an individual (and beneficial owner) and not as an agent or representative of a third party corporate entity.")}}</label>
-        </div>
-        @if($has_wallet)
-        <div class="input-item">
-            <input class="input-checkbox input-checkbox-md" id="tokenKnow" name="tokenKnow" type="checkbox" required="required" data-msg-required="{{ __("Confirm that you understand.") }}">
-            <label for="tokenKnow">{{__("I understand that, I can participate in the token distribution event(s) only with the wallet address that was entered in the application form.")}}</label>
-        </div>
-        @endif--}}
+        
         <div class="gaps-1x"></div>
         <button class="btn btn-primary" type="submit">{{__('Proceed to Verify')}}</button>
     </div>{{-- .step-fields --}}
 </div>
+
+
 <div class="hiddenFiles"></div>
 
 

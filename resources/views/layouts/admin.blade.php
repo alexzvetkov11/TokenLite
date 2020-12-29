@@ -62,7 +62,7 @@
                                     <div class="user-status-balance"><small>{{ auth()->user()->email }}</small></div>
                                 </div>
                                 <ul class="user-links">
-                                    <li><a href="{{ route('admin.profile') }}"><i class="ti ti-settings"></i>Settings</a></li>
+                                    <li><a href="{{ route('admin.profile') }}"><i class="ti ti-settings"></i>Account Details</a></li>
 
                                     <li><a href="{{ route('admin.profile.activity') }}"><i class="ti ti-eye"></i>Activity</a></li>
                                 </ul>
@@ -93,7 +93,7 @@
 
 
                         <li>
-                            <a href="#"><em class="ikon ikon-docs"></em>Entities</a>
+                            <a href="{{ route('admin.entities') }}"><em class="ikon ikon-docs"></em>Entities</a>
                         </li>
                         <li>
                             <a href="#"><em class="ikon ikon-docs"></em>Messages</a>
@@ -119,12 +119,16 @@
                             <a href="{{ route('admin.stages') }}"><em class="ikon ikon-coins"></em> ICO/STO Stage</a>
                         </li>
                         @endif--}}
+                        {{-- ****** --}}
                         @if(gup('setting'))
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-settings"></em> Settings</a>
                             <ul class="navbar-dropdown">
                                 <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Setting</a></li>
+                                <li><a href="{{ route('admin.jurisdiction') }}">Jurisdictions</a></li>
                                 <li><a href="{{ route('admin.settings') }}">Website Setting</a></li>
+                                <li><a href="{{ route('admin.entity') }}">Entity Types</a></li>
                                 <li><a href="{{ route('admin.settings.referral') }}">Referral Setting</a></li>
+                                <li><a href="#"> Statutory Framework</a></li>
                                 <li><a href="{{ route('admin.settings.email') }}">Mailing Setting</a></li>
                                 <li><a href="{{ route('admin.payments.setup') }}">Payment Methods</a></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
@@ -204,6 +208,7 @@
     <script src="{{ asset('assets/js/jquery.bundle.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/script.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/admin.app.js').css_js_ver() }}"></script>
+    <script src="{{ asset('assets/js/custom.js').css_js_ver() }}"></script>
     @stack('footer')
     @if(session()->has('global'))
     <script type="text/javascript">

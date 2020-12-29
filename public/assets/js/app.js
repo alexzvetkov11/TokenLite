@@ -92,8 +92,8 @@ function purchase_form_submit(e = $(".validate-form"), t = !0, n = "ti ti-info-a
                 dataType: "json",
                 success: function(o) {
                     if (btn_actived(e.find("button.save-disabled"), !1), o.trnx || show_toast(o.msg, o.message, n), "success" == o.msg || !0 === t && $(a).clearForm(), o.link && setTimeout(function() {
-                        window.location.href = o.link
-                    }, 2e3), o.modal) {
+                            window.location.href = o.link
+                        }, 2e3), o.modal) {
                         var i = e.parents(".modal"),
                             r = !0;
                         is_changed = !0, i.modal("hide").addClass("hold"), i.find(".modal-content").html(o.modal), init_inside_modal(), i.on("hidden.bs.modal", function() {

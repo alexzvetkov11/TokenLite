@@ -9,7 +9,9 @@
         <div class="card content-area content-area-mh">
             <div class="card-innr">
                 <div class="card-head has-aside">
-                    <h4 class="card-title">{{ ucfirst($is_page) }} User List</h4>
+                    <h4 class="card-title">
+                        {{-- {{ ucfirst($is_page) }}  --}}
+                        User List</h4>
                     <div class="relative d-inline-block d-md-none">
                         <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                         <div class="toggle-class dropdown-content dropdown-content-center-left pd-2x">
@@ -55,7 +57,7 @@
                                 </div>
                             </form>
                         </div>
-                        @if(!empty(env_file()) && nio_status() && !empty(app_key()))
+                        {{--  @if( !empty(app_key()))  --}}
                         <div class="tools w-100 w-sm-auto">
                             <ul class="btn-grp guttar-8px">
                                 <li>
@@ -114,9 +116,9 @@
                                 </li>
                             </ul>
                         </div>
-                        @endif
+                        {{--  @endif  --}}
                     </div>
-                    @if(!empty(env_file()) && nio_status() && !empty(app_key()))
+                    {{--  @if(!empty(env_file()) && !empty(app_key()))  --}}
                     <div class="search-adv-wrap hide">
                         <form class="adv-search" id="adv-search" action="{{ route('admin.users') }}" method="GET" autocomplete="off">
                             <div class="adv-search">
@@ -222,9 +224,9 @@
                             </div>
                         </form>
                     </div>
-                    @endif
+                    {{--  @endif  --}}
 
-                    @if (request()->get('filter') || request()->s)
+                    {{--  @if (request()->get('filter') || request()->s)  --}}
                     <div class="search-adv-result">
                         <div class="search-info">Found <span class="search-count">{{ $users->total() }}</span> Users{{ (isset(request()->adm) && request()->adm=='yes') ? ' including admin user.' : '.' }}</div>
                         <ul class="search-opt">
@@ -252,14 +254,14 @@
                             <li><a href="{{ route('admin.users') }}" class="link link-underline">Clear All</a></li>
                         </ul>
                     </div>
-                    @endif
+                    {{--  @endif  --}}
                 </div>
 
                 @if($users->total() > 0)
                 <table class="data-table user-list">
                     <thead>
                         <tr class="data-item data-head">
-                            <th class="data-col data-col-wd-md filter-data dt-user">User</th>
+                            <th class="data-col data-col-wd-md filter-data dt-user">User Name</th>
                             <th class="data-col data-col-wd-md dt-email">Email</th>
                             <!--<th class="data-col dt-token">Tokens</th>-->
                             <th class="data-col dt-verify">Verified Status</th>
@@ -275,11 +277,11 @@
                                 <div class="d-flex align-items-center">
                                     <div class="fake-class">
                                         <span class="lead user-name text-wrap">{{ $user->name }}</span>
-                                        <span class="sub user-id">{{ set_id($user->id, 'user') }}
+                                        {{-- <span class="sub user-id">{{ set_id($user->id, 'user') }}
                                             @if($user->role == 'admin')
                                             <span class="badge badge-xs badge-dim badge-{{($user->type != 'demo')?'success':'danger'}}">ADMIN</span>
                                             @endif
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                             </td>
@@ -337,8 +339,14 @@
                                             @endif @endif
 
                                             <li>
+                                                <!--
                                                 <a href="{{route('admin.delete_users',encrypt($user->id))}}"    {{--class="user-action"--}}>
                                                     <em class="fas fa-ban"></em>Delete
+                                                </a>
+                                                -->
+                                                <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.delete_users',encrypt($user->id))}}">
+                                                    <em class="fas fa-ban"></em>
+                                                    Delete
                                                 </a>
                                             </li>
 
@@ -495,5 +503,6 @@
         </div>{{-- .modal-content --}}
     </div>{{-- .modal-dialog --}}
 </div>
+
 
 @endsection

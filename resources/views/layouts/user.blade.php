@@ -80,18 +80,18 @@ $language=Setting::where('field',auth()->id())->first();
 
         <div class="navbar">
             <div class="container-fluid">
-                <div class="container-fluid navbar-innr">
+                <div class="container navbar-innr">
                     <ul class="navbar-menu" id="main-nav">
-                        <li><a href="{{ route('user.home') }}"><em class="ikon ikon-dashboard"></em> {{__('Dashboard')}}</a></li>
-                        <li><a href="{{ route('user.account') }}"><em class="ikon ikon-user"></em> {{__('Profile')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Entities')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Balances & Holdings')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Corporate Actions')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Announcements')}}</a></li>
-                        <li><a href="{{ route('user.transactions') }}"><em class="ikon ikon-transactions"></em> {{__('Transactions')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Messages')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Funding')}}</a></li>
-                        <li><a href="#"><em class="ikon ikon-user"></em> {{__('Support')}}</a></li>
+                        <li style="padding:0 0;"><a href="{{ route('user.home') }}"><em class="ikon ikon-dashboard"></em> {{__('Dashboard')}}</a></li>
+                        <li style="padding:0 0;"><a href="{{ route('user.account') }}"><em class="ikon ikon-user"></em> {{__('Profile')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Entities')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Balances&Holdings')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('CorporateActions')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Announcements')}}</a></li>
+                        <li style="padding:0 0;"><a href="{{ route('user.transactions') }}"><em class="ikon ikon-transactions"></em> {{__('Transactions')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Messages')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Funding')}}</a></li>
+                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Support')}}</a></li>
 
                         {{--                        <li><a href="{{ route('user.token') }}"><em class="ikon ikon-coins"></em> {{__('Buy Token')}}</a></li>--}}
                         {{--@if(get_page('distribution', 'status') == 'active')

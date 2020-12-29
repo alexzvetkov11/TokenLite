@@ -63,6 +63,8 @@ class UsersController extends Controller
     public function delete_users($user_id) {
 
         $user_id=decrypt($user_id);
+        //exit($user_id);
+
         $user=User::find($user_id);
         if ($user) {
             $user->delete();
@@ -75,6 +77,7 @@ class UsersController extends Controller
             $ret['msg'] = 'error';
             $ret['message'] = __('User Not Found');
         }
+
         return back()->with([$ret['msg'] => $ret['message']]);
     }
     /**

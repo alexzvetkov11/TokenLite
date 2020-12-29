@@ -97,6 +97,12 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/settings/email', 'Admin\EmailSettingController@index')->middleware(['ico', 'super_admin'])->name('settings.email');
     Route::get('/settings/referral', 'Admin\SettingController@referral_setting')->middleware(['ico', 'super_admin'])->name('settings.referral'); // v1.1.2
     Route::get('/settings/rest-api', 'Admin\SettingController@api_setting')->middleware(['ico', 'super_admin'])->name('settings.api'); // v1.0.6
+
+    Route::get('/entity', 'Admin\EntityController@index')->middleware(['ico', 'super_admin'])->name('entity');
+    Route::get('/add_entity', 'Admin\EntityController@add_entity')->middleware(['ico', 'super_admin'])->name('addentity');
+    Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
+    Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico','super_admin'])->name('jurisdiction');
+    
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
     Route::get('/payment-methods/edit/{slug}', 'Admin\PaymentMethodController@edit')->middleware(['ico', 'super_admin'])->name('payments.setup.edit');
     Route::get('/stages', 'Admin\IcoController@index')->middleware('ico')->name('stages');

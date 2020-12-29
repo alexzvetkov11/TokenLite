@@ -76,7 +76,7 @@
             </thead>
             <tbody>
                 @foreach($trnxs as $trnx)
-                @php 
+                @php
                     $text_danger = ( $trnx->tnx_type=='refund' || ($trnx->tnx_type=='transfer' && $trnx->extra=='sent') ) ? ' text-danger' : '';
                 @endphp
                 <tr class="data-item tnx-item-{{ $trnx->id }}">
@@ -96,23 +96,23 @@
                         <span class="sub sub-symbol">{{ token_symbol() }}</span>
                     </td>
                     <td class="data-col dt-amount{{ $text_danger }}">
-                        @if ($trnx->tnx_type=='referral'||$trnx->tnx_type=='bonus') 
+                        @if ($trnx->tnx_type=='referral'||$trnx->tnx_type=='bonus')
                             <span class="lead amount-pay">{{ '~' }}</span>
-                        @else 
+                        @else
                         <span class="lead amount-pay{{ $text_danger }}">{{ to_num($trnx->amount, 'max') }}</span>
                         <span class="sub sub-symbol">{{ strtoupper($trnx->currency) }} <em class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="1 {{ token('symbol') }} = {{ to_num($trnx->currency_rate, 'max').' '.strtoupper($trnx->currency) }}"></em></span>
                         @endif
                     </td>
                     <td class="data-col dt-usd-amount">
-                        @if ($trnx->tnx_type=='referral'||$trnx->tnx_type=='bonus') 
+                        @if ($trnx->tnx_type=='referral'||$trnx->tnx_type=='bonus')
                             <span class="lead amount-pay">{{ '~' }}</span>
-                        @else 
+                        @else
                         <span class="lead amount-pay{{ $text_danger }}">{{ to_num($trnx->base_amount, 'auto') }}</span>
                         <span class="sub sub-symbol">{{ base_currency(true) }} <em class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="1 {{ token('symbol') }} = {{ to_num($trnx->base_currency_rate, 'max').' '.base_currency(true) }}"></em></span>
                         @endif
                     </td>
                     <td class="data-col dt-account">
-                        @php 
+                        @php
                         $pay_to = ($trnx->payment_method=='system') ? '~' : ( ($trnx->payment_method=='bank') ? explode(',', $trnx->payment_to) : show_str($trnx->payment_to) );
                         $extra = ($trnx->tnx_type == 'refund') ? (is_json($trnx->extra, true) ?? $trnx->extra) : '';
                         @endphp
@@ -155,7 +155,7 @@
                                 <li><a href="{{ route('user.ajax.transactions.delete', $trnx->id) }}" class="btn btn-danger-alt btn-xs btn-icon user_tnx_trash" data-tnx_id="{{ $trnx->id }}"><em class="ti ti-trash"></em></a></li>
                                 @endif
                             </ul>
-                            @else 
+                            @else
                                 <a href="javascript:void(0)" class="view-transaction btn btn-light-alt btn-xs btn-icon" data-id="{{ $trnx->id }}"><em class="ti ti-eye"></em></a>
                             @endif
                         @else

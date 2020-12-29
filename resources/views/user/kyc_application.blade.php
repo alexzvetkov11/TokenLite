@@ -9,7 +9,7 @@ $has_sidebar = false;
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7 text-center">
             <h2 class="page-title">{{__('Begin your ID-Verification')}}</h2>
-            <p class="large">{{__('Verify your identity to participate in token sale.')}}</p>
+            <p class="large">{{__('Verify your identity to confirm your account.')}}</p>
         </div>
     </div>
 </div>

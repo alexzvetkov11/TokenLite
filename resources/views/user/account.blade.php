@@ -34,14 +34,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="full-name" class="input-item-label">{{__('First Name')}}</label>
-                                <div class="input-wrap">
-                                    <input class="input-bordered" type="text" id="full-name" name="name" required="required" placeholder="{{ __('Enter Full Name') }}" minlength="3" value="{{ $user->name }}">
-                                </div>
-                            </div>{{-- .input-item --}}
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
                                 <label for="email-address" class="input-item-label">{{__('Email Address')}}</label>
                                 <div class="input-wrap">
                                     <input class="input-bordered" type="text" id="email-address" name="email" required="required" placeholder="{{ __('Enter Email Address') }}" value="{{ $user->email }}" readonly>
@@ -50,17 +42,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="mobile-number" class="input-item-label">{{__('Mobile Number')}}</label>
+                                <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="text" id="mobile-number" name="mobile" placeholder="{{ __('Enter Mobile Number') }}" value="{{ $user->mobile }}">
-                                </div>
-                            </div>{{-- .input-item --}}
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <label for="date-of-birth" class="input-item-label">{{__('Date of Birth')}}</label>
-                                <div class="input-wrap">
-                                    <input class="input-bordered date-picker-dob" type="text" id="date-of-birth" name="dateOfBirth" required="required" placeholder="mm/dd/yyyy" value="{{ ($user->dateOfBirth != NULL ? _date($user->dateOfBirth, 'm/d/Y') : '') }}">
+                                    <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
                                 </div>
                             </div>{{-- .input-item --}}
                         </div>{{-- .col --}}
@@ -79,16 +63,7 @@
 {{--                        </div>--}}{{-- .col --}}
                     </div>{{-- .row --}}
                     <div class="gaps-1x"></div>{{-- 10px gap --}}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
-                                <div class="input-wrap">
-                                    <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
-                                </div>
-                            </div>{{-- .input-item --}}
-                        </div>{{-- .col --}}
-                    </div>{{-- .row --}}
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">

@@ -43,7 +43,113 @@
                                 </div>
                             </form>
                         </div>
-                        @if(!empty(env_file()) && nio_status() && !empty(app_key()))
+                        {{--  <div class="search flex-grow-1 pl-lg-4 w-100 w-sm-auto">
+                            <div class="relative float-right pr-1">
+                                <a href="#" class="btn btn-light-alt btn-sm btn-icon toggle-tigger"> <em class="ti ti-settings"></em> </a>
+                                <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Show') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type10" checked value="">
+                                            <label for="type10">{{ __('10') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type20" >
+                                            <label for="type20">{{ __('20') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type50" >
+                                            <label for="type50">{{ __('50') }}</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Order') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-all" checked value="">
+                                            <label for="status-all">{{ __('Desc') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-approved" value="approved">
+                                            <label for="status-approved">{{ __('Asc') }}</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="relative float-right pr-1">
+                                <a href="#" class="btn-light-alt btn-sm btn-icon toggle-tigger"> <em class="ti ti-server"></em> </a>
+                                <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Types') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-all" checked value="">
+                                            <label for="type-all">{{ __('Any Type') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-purchase" value="Purchase">
+                                            <label for="type-purchase">{{ __('Purchase') }}</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Status') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-all" checked value="">
+                                            <label for="status-all">{{ __('Show All') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-approved" value="approved">
+                                            <label for="status-approved">{{ __('Approved') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="pending" id="status-pending">
+                                            <label for="status-pending">{{ __('Pending') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="canceled" id="status-canceled">
+                                            <label for="status-canceled">{{ __('Canceled') }}</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="relative float-right pr-1">
+                                <a href="#" class="btn-light-alt btn-sm btn-icon toggle-tigger"> <em class="ti ti-panel"></em> </a>
+                                <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Types') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-all" checked value="">
+                                            <label for="type-all">{{ __('Any Type') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-purchase" value="Purchase">
+                                            <label for="type-purchase">{{ __('Purchase') }}</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li><h6 class="dropdown-title">{{ __('Status') }}</h6></li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-all" checked value="">
+                                            <label for="status-all">{{ __('Show All') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-approved" value="approved">
+                                            <label for="status-approved">{{ __('Approved') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="pending" id="status-pending">
+                                            <label for="status-pending">{{ __('Pending') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="canceled" id="status-canceled">
+                                            <label for="status-canceled">{{ __('Canceled') }}</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>  --}}
+
+
+
+                        {{--  @if(!empty(env_file()) && nio_status() && !empty(app_key()))  --}}
                         <div class="tools w-100 w-sm-auto">
                             <ul class="btn-grp guttar-8px">
                                 <li><a href="#" class="btn btn-light btn-sm btn-icon btn-outline bg-white advsearch-opt"> <em class="ti ti-panel"></em> </a></li>
@@ -86,9 +192,9 @@
                                 </li>
                             </ul>
                         </div>
-                        @endif
+                        {{--  @endif  --}}
                     </div>
-                    @if(!empty(env_file()) && nio_status() && !empty(app_key()))
+                    {{--  @if(!empty(env_file()) && nio_status() && !empty(app_key()))  --}}
                     <div class="search-adv-wrap hide">
                         <form class="adv-search" id="adv-search" action="{{ route('admin.kycs') }}" method="GET" autocomplete="off">
                             <div class="adv-search">
@@ -148,7 +254,7 @@
                             </div>
                         </form>
                     </div>
-                    @endif
+                    {{--  @endif  --}}
                     @if (request()->get('filter') || request()->s)
                     <div class="search-adv-result">
                         <div class="search-info">Found <span class="search-count">{{ $kycs->total() }}</span> Applications.</div>
