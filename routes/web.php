@@ -69,6 +69,9 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     // My Token v1.1.2
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
 
+    Route::get('/entities', 'User\EntitiesController@index')->name('entities');
+    Route::get('/addentities', 'User\EntitiesController@add_entities')->name('addentities');
+    
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
@@ -102,7 +105,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/add_entity', 'Admin\EntityController@add_entity')->middleware(['ico', 'super_admin'])->name('addentity');
     Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico','super_admin'])->name('jurisdiction');
-    
+
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
     Route::get('/payment-methods/edit/{slug}', 'Admin\PaymentMethodController@edit')->middleware(['ico', 'super_admin'])->name('payments.setup.edit');
     Route::get('/stages', 'Admin\IcoController@index')->middleware('ico')->name('stages');

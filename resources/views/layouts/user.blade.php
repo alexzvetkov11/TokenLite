@@ -84,7 +84,7 @@ $language=Setting::where('field',auth()->id())->first();
                     <ul class="navbar-menu" id="main-nav">
                         <li style="padding:0 0;"><a href="{{ route('user.home') }}"><em class="ikon ikon-dashboard"></em> {{__('Dashboard')}}</a></li>
                         <li style="padding:0 0;"><a href="{{ route('user.account') }}"><em class="ikon ikon-user"></em> {{__('Profile')}}</a></li>
-                        <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Entities')}}</a></li>
+                        <li style="padding:0 0;"><a href="{{ route('user.entities') }}"><em class="ikon ikon-user"></em> {{__('Entities')}}</a></li>
                         <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Balances&Holdings')}}</a></li>
                         <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('CorporateActions')}}</a></li>
                         <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Announcements')}}</a></li>

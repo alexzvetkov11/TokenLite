@@ -48,19 +48,6 @@
                                 </div>
                             </div>{{-- .input-item --}}
                         </div>{{-- .col --}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <div class="input-item input-with-label">--}}
-{{--                                <label for="nationality" class="input-item-label">{{__('Nationality')}}</label>--}}
-{{--                                <div class="input-wrap">--}}
-{{--                                    <select class="select-bordered select-block" name="nationality" id="nationality" required="required" data-dd-class="search-on">--}}
-{{--                                        <option value="">{{__('Select Country')}}</option>--}}
-{{--                                        @foreach($countries as $country)--}}
-{{--                                        <option {{$user->nationality == $country ? 'selected ' : ''}}value="{{ $country }}">{{ $country }}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}{{-- .input-item --}}
-{{--                        </div>--}}{{-- .col --}}
                     </div>{{-- .row --}}
                     <div class="gaps-1x"></div>{{-- 10px gap --}}
                     
@@ -202,7 +189,7 @@
 
                     <li>
                         <div class="data-details-head">Date of Birth</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->dob) !!}</div>
+                        <div class="data-details-des"> {!! (optional($user_kyc)->dob) !!}</div>
                     </li>{{-- li --}}
                     <li>
                         <div class="data-details-head">Country of Birth</div>

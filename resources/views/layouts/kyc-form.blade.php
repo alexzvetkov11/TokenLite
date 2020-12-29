@@ -213,26 +213,26 @@
             </div>{{-- .col --}}
             @endif
         </div>{{-- .row --}}
+    </div>{{-- .step-fields --}}
+</div>
 
-        <div class="gaps-3x"></div>
-        <div class="form-step-head">
-            <div class="step-head">
-                <div class="step-number">{{ $step_02 }}</div>
-                <div class="step-head-text">
-                    <h4>{{__('Registered Address Details')}}</h4>
-                    <p>{{__('To verify your identity, we ask you to enter your address details as your identity card provided by the government.')}}</p>
-                </div>
+<div class="form-step form-step2">
+    <div class="form-step-head card-innr">
+        <div class="step-head">
+            <div class="step-number">{{ $step_02 }}</div>
+            <div class="step-head-text">
+                <h4>{{__('Registered Address Details')}}</h4>
+                <p>{{__('To verify your identity, we ask you to enter your address details as your identity card provided by the government.')}}</p>
             </div>
         </div>
-        <div class="gaps-3x"></div>
-
-        
+    </div>
+    <div class="form-step-head card-innr">  
         <div class="row">
             @if(field_value('kyc_country', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="country"
-                               class="input-item-label">{{__('Country')}}</label>
+                                class="input-item-label">{{__('Country')}}</label>
                         <div class="input-wrap">
                             <select
                                 {{ field_value('kyc_country', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block"
@@ -251,7 +251,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="state"
-                               class="input-item-label">{{__('State / Province')}} </label>
+                                class="input-item-label">{{__('State / Province')}} </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_state', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
@@ -265,12 +265,12 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="city"
-                               class="input-item-label">{{__('City / Town')}}</label>
+                                class="input-item-label">{{__('City / Town')}}</label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_city', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
-                                   type="text" value="{{ isset($user_kyc) ? $user_kyc->city : ''}}"
-                                   style="text-transform:uppercase" id="city"
-                                   name="city">
+                                    type="text" value="{{ isset($user_kyc) ? $user_kyc->city : ''}}"
+                                    style="text-transform:uppercase" id="city"
+                                    name="city">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -278,8 +278,7 @@
             @if(field_value('kyc_zip', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="zip"
-                               class="input-item-label">{{__('Zip / Postal Code')}}</label>
+                        <label for="zip" class="input-item-label">{{__('Zip / Postal Code')}} <span class="text-require text-danger">*</span></label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_zip', 'req' ) == '1' ? 'required ' : '' }}  onkeypress="CheckSpace(event)"
@@ -293,7 +292,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="address_1"
-                               class="input-item-label">{{__('Street Name')}}</label>
+                                class="input-item-label">{{__('Street Name')}}</label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_address_1', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
@@ -308,7 +307,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="address_2"
-                               class="input-item-label">{{__('Street / Building Number')}}</label>
+                                class="input-item-label">{{__('Street / Building Number')}}</label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_Building', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
@@ -323,19 +322,18 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="floor"
-                               class="input-item-label">{{__('Floor / Unit')}}</label>
+                                class="input-item-label">{{__('Floor / Unit')}}</label>
                         <div class="input-wrap">
                             <input
                             {{ field_value('kyc_Floor', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text"
-                               name="floor">
+                                name="floor">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
             @endif
         </div>{{-- .row --}}
-    </div>{{-- .step-fields --}}
+    </div>
 </div>
-
 @if($has_docs)
     <div class="form-step form-step3">
         <div class="form-step-head card-innr">
@@ -437,11 +435,11 @@
                         </div>
                     </div>
                 </div>
-                <div
-                    class="doc-upload doc-upload-d2{{ (isset($default_docs['doc']) && $default_docs['doc'] == 'nidcard') ? '' : ' hide' }}">
+                <div class="doc-upload doc-upload-d2{{ (isset($default_docs['doc']) && $default_docs['doc'] == 'nidcard') ? '' : ' hide' }}">
                     <h6 class="font-mid">{{ __('Upload Here Your National ID Back Side') }}</h6>
                     <div class="row align-items-center">
                         <div class="col-sm-8">
+                            
                             <div class="upload-box">
                                 <div class="upload-zone document_two">
                                     <div class="dz-message" data-dz-message>
@@ -489,6 +487,7 @@
 
         </div>
     </div>
+    <div class="gaps-3x"></div>
     <div class="form-step form-step4">
         <div class="form-step-head card-innr">
             <div class="step-head">
@@ -500,12 +499,22 @@
             </div>
         </div>{{-- .step-head --}}
         <div class="form-step-fields card-innr">
+            <div class="col-md-12">
+                <p class="text-secondary font-bold">{{__('To avoid delays with verification process, please double-check to ensure the below requirements are fully met:')}}</p>
+                <ul class="list-check">
+                    {{--  <li>{{__('Chosen credential must not be expired.')}}</li>  --}}
+                    <li>{{__('Document should be in good condition and clearly visible.')}}</li>
+                    {{--  <li>{{__('There is no light glare or reflections on the card.')}}</li>
+                    <li>{{__('File is at least 1 MB in size and has at least 300 dpi resolution.')}}</li>  --}}
+                </ul>
+                <div class="gaps-2x"></div>
+            </div>
             <div class="col-md-6">
                 <div class="input-item input-with-label">
                     <label for="Proof of Address Type"
                            class="input-item-label">{{__('Proof of Address Type')}} </label>
                     <div class="input-wrap">
-                        <select class="select-bordered select-block" name="Proof of Address Type" id="Proof of Address Type"
+                        <select class="select-bordered select-block" name="Proof of Address Type" id="proof_of_address-type"
                                 data-dd-class="search-on">
                             <option value="">{{__('Select option')}}</option>
 
@@ -516,7 +525,7 @@
                         </select>
                     </div>
                 </div>{{-- .input-item --}}
-                <h6 class="font-mid">Upload here your proof of Address document</h6>
+                <h6 class="font-mid">Upload Here Your Proof of Address Document</h6>
                 <div class="upload-box">
                     <div class="upload-zone document_proof_of_address">
                         <div class="dz-message" data-dz-message>
@@ -529,7 +538,7 @@
                 </div>
             </div>{{-- .col --}}
 
-            <div class="sap sap-gap"></div>
+            {{--  <div class="sap sap-gap"></div>
             <div class="col-md-6">
                 <div class="input-item input-with-label">
                     <label for="document_no"
@@ -540,8 +549,8 @@
                                style="text-transform:uppercase" id="document_no"
                                name="document_no">
                     </div>
-                </div>{{-- .input-item --}}
-            </div>{{-- .col --}}
+                </div>
+            </div>  --}}
 
         </div>
     </div>
