@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -43,13 +42,14 @@ class Entity extends Model
     }
 
     /**
-    * Search/Filter parametter exchnage with database value
-    *
-    * @version 1.0.0
-    * @since 1.1.0
-    * @return void
-    */
-    public function getAll($request) {
+     * Search/Filter parametter exchnage with database value
+     *
+     * @version 1.0.0
+     * @since 1.1.0
+     * @return void
+     */
+    public function getAll($request)
+    {
         // $result = [];
         // $find = ['state', 'doc'];
         // $replace = ['status', 'documentType'];
@@ -63,6 +63,5 @@ class Entity extends Model
         // }
         return $this;
     }
-
 
 }

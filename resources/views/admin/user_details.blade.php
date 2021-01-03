@@ -70,12 +70,12 @@
                     <h6 class="card-sub-title">Login Credientials</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">First Name</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->firstName ? optional($user->kyc_infoSingle)->firstName : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->firstName ? optional($user->kyc_infoSingle)->firstName : '&nbsp;' !!}</div>
                         {{--                    </li>--}}{{-- li --}}{{--{!! $user->email ? $user->name : '&nbsp;' !!}--}}
                         <li>
-                            <div class="data-details-head">Email</div>
-                            <div class="data-details-des">{!! $user->email ? $user->email : '&nbsp;' !!}</div>
+                            <div class="data-details-head" >Email</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->email ? $user->email : '&nbsp;' !!}</div>
                         </li>
                         {{--                    --}}{{-- li --}}{{--{!! explode_user_for_demo($user->email, auth()->user()->type) !!}--}}
                     </ul>
@@ -83,95 +83,78 @@
                     <h6 class="card-sub-title">Personal Information</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">First Name</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->firstName ? optional($user->kyc_infoSingle)->firstName : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->firstName ? optional($user->kyc_infoSingle)->firstName : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Last Name</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->lastName ? optional($user->kyc_infoSingle)->lastName : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Last Name</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->lastName ? optional($user->kyc_infoSingle)->lastName : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Gender</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->gender !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Gender</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->gender ? optional($user->kyc_infoSingle)->gender : "&nbsp;" !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Date of Birth</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->dob ? _date(optional($user->kyc_infoSingle)->dob) : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Date of Birth</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->dob ? _date(optional($user->kyc_infoSingle)->dob) : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Country of Birth</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->country_of_birth !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country of Birth</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->country_of_birth ?  optional($user->kyc_infoSingle)->country_of_birth : "&nbsp;" !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Place of Birth</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->place_of_birth ? $user->kyc_infoSingle->place_of_birth : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Place of Birth</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->place_of_birth ? $user->kyc_infoSingle->place_of_birth : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Nationality</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->nationality ? optional($user->kyc_infoSingle)->nationality : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Nationality</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->nationality ? optional($user->kyc_infoSingle)->nationality : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Nationality Identification Number</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->nationality_id ? optional($user->kyc_infoSingle)->nationality_id : '&nbsp;' !!}</div>
-                        </li>{{-- li --}}
-                        {{--                    <li>--}}
-                        {{--                        <div class="data-details-head">Email Address</div>--}}
-                        {{--                        <div class="data-details-des">{!! explode_user_for_demo($user->email, auth()->user()->type) !!}</div>--}}
-                        {{--                    </li>--}}{{-- li --}}
-                        {{--                    <li>--}}
-                        {{--                        <div class="data-details-head">Mobile Number</div>--}}
-                        {{--                        <div class="data-details-des">{!! $user->mobile ? $user->mobile : '&nbsp;' !!}</div>--}}
-                        {{--                    </li>--}}{{-- li --}}
-                        {{--                    <li>--}}
-                        {{--                        <div class="data-details-head">Wallet Address</div>--}}
-                        {{--                        <div class="data-details-des">--}}
-                        {{--                            <span>--}}
-                        {{--                                {!! $user->walletAddress ? $user->walletAddress : '<small class="text-light">Not added yet!</small>' !!}--}}
-                        {{--                                {!! ($user->walletType) ? "<small>(".ucfirst($user->walletType)." Wallet)</small>" : '' !!}--}}
-                        {{--                            </span>--}}
-                        {{--                        </div>--}}
-                        {{--                    </li>--}}{{-- li --}}
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Nationality Identification Number</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->nationality_id ? optional($user->kyc_infoSingle)->nationality_id : '&nbsp;' !!}</div>
+                        </li>
                     </ul>
                     <div class="gaps-3x"></div>
                     <h6 class="card-sub-title">Registered Address</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">Country</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->country ? $user->kyc_infoSingle->country : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->country ? $user->kyc_infoSingle->country : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">State/Province</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->state ? $user->kyc_infoSingle->state : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">State/Province</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->state ? $user->kyc_infoSingle->state : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         @if(isset($refered) && $refered && count($refered) > 0)
                             <li>
-                                <div class="data-details-head">Zip/Postal Code</div>
-                                <div class="data-details-des">{!! optional($user->kyc_infoSingle)->zip ? $user->kyc_infoSingle->zip : '&nbsp;' !!}</div>
+                                <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Zip/Postal Code</div>
+                                <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->zip ? $user->kyc_infoSingle->zip : '&nbsp;' !!}</div>
                             </li>{{-- li --}}
                         @endif
                         <li>
-                            <div class="data-details-head">Town City</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->city ? $user->kyc_infoSingle->city : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Town City</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->city ? $user->kyc_infoSingle->city : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Street Name</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->address1 ? $user->kyc_infoSingle->address1 : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street Name</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->address1 ? $user->kyc_infoSingle->address1 : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Street / Building Number</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->address2 ? $user->kyc_infoSingle->address2 : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street / Building</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->address2 ? $user->kyc_infoSingle->address2 : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Floor/Unit</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->floor ? $user->kyc_infoSingle->floor : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Floor/Unit</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->floor ? $user->kyc_infoSingle->floor : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                     </ul>
                     <div class="gaps-3x"></div>
                     <h6 class="card-sub-title">ID Documents</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">Identification Type</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->documentType ? $user->kyc_infoSingle->documentType : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Identification Type</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->documentType ? $user->kyc_infoSingle->documentType : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
                             @if(optional($user->kyc_infoSingle)->document4 !== NULL)
@@ -189,7 +172,7 @@
                             </div>
                             @endif
                         </li>{{-- li --}}
-                            <div class="gaps-3x"></div>
+                            {{--  <div class="gaps-3x"></div>  --}}
                             <li>
                                 @if(optional($user->kyc_infoSingle)->document2 !== NULL)
                                 <div class="data-details-head">ID Document Back</div>
@@ -214,8 +197,8 @@
                     <h6 class="card-sub-title">Address Document</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">Proof of Address Type</div>
-                            <div class="data-details-des">{!! optional($user->kyc_infoSingle)->addressType ? optional($user->kyc_infoSingle)->addressType : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Proof of Address Type</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->addressType ? optional($user->kyc_infoSingle)->addressType : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
                             @if(optional($user->kyc_infoSingle)->document3 !== NULL)
@@ -241,38 +224,38 @@
                     <h6 class="card-sub-title">Roles</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">{!! $user->name ? $user->name : '&nbsp;' !!}</div>
-                            <div class="data-details-des">{!! $user->role ? $user->role : '&nbsp;' !!}</div>
+                            <div class="data-details-head" >{!! $user->name ? $user->name : '&nbsp;' !!}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->role ? $user->role : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                     </ul>
                     <div class="gaps-3x"></div>
                     <h6 class="card-sub-title">More Information</h6>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head">Joining Date</div>
-                            <div class="data-details-des">{!! $user->created_at ? _date($user->created_at) : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Joining Date</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->created_at ? _date($user->created_at) : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">Referred By</div>
-                            <div class="data-details-des">{!! ($user->referral != NULL && !empty($user->referee->name) ? '<span>'.$user->referee->name.' <small>('.set_id($user->referral).')</small></span>' : '<small class="text-light">Join without referral!</small>') !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Referred By</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! ($user->referral != NULL && !empty($user->referee->name) ? '<span>'.$user->referee->name.' <small>('.set_id($user->referral).')</small></span>' : '<small class="text-light">Join without referral!</small>') !!}</div>
                         </li>{{-- li --}}
                         @if(isset($refered) && $refered && count($refered) > 0)
                             <li>
-                                <div class="data-details-head">Total Referred</div>
-                                <div class="data-details-des">{!! count($refered).' Contributors' !!}</div>
+                                <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Total Referred</div>
+                                <div class="data-details-des" style="border-left: 0px">{!! count($refered).' Contributors' !!}</div>
                             </li>{{-- li --}}
                         @endif
                         <li>
-                            <div class="data-details-head">Reg Method</div>
-                            <div class="data-details-des">{!! $user->registerMethod ? ucfirst($user->registerMethod) : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Reg Method</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->registerMethod ? ucfirst($user->registerMethod) : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
-                            <div class="data-details-head">2FA Enabled</div>
-                            <div class="data-details-des">{!! $user->google2fa==1 ? 'Yes' : 'No' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">2FA Enabled</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->google2fa==1 ? 'Yes' : 'No' !!}</div>
                         </li>{{-- li --}}
                         <li>
                             <div class="data-details-head">Last Login</div>
-                            <div class="data-details-des">{!! $user->lastLogin && $user->email_verified_at !== null ? _date($user->lastLogin) : '<small class="text-light">Not logged yet!</small>' !!}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $user->lastLogin && $user->email_verified_at !== null ? _date($user->lastLogin) : '<small class="text-light">Not logged yet!</small>' !!}</div>
                         </li>{{-- li --}}
                     </ul>
                 </div>{{-- .card-innr --}}

@@ -19,5 +19,10 @@ $(document).ready(function() {
         })
     });
 
+    //admin jurisdition.blade.php edit modal
+    $(".editJurisdiction").click(function() {
+        $("[name='juris_name']").val($(this).data('juris'));
+        $("[name='juris_id']").val($(this).data('id'));
+    });
 
 })

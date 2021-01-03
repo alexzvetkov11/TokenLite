@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 /**
  * Users Controller
  *
@@ -8,19 +9,18 @@ namespace App\Http\Controllers\Admin;
  * @author Softnio
  * @version 1.1.3
  */
-use Mail;
-use Validator;
-use App\Models\KYC;
-use App\Models\User;
-use App\Models\UserMeta;
+use App\Http\Controllers\Controller;
 use App\Mail\EmailToUser;
 use App\Models\GlobalMeta;
-use Illuminate\Http\Request;
-use App\Notifications\Reset2FA;
+use App\Models\User;
+use App\Models\UserMeta;
 use App\Notifications\ConfirmEmail;
-use App\Http\Controllers\Controller;
 use App\Notifications\PasswordResetByAdmin;
+use App\Notifications\Reset2FA;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Mail;
+use Validator;
 
 class UsersController extends Controller
 {
@@ -34,46 +34,46 @@ class UsersController extends Controller
      */
     public function index(Request $request, $role = '')
     {
-        $role_data  = '';
-        $per_page   = gmvl('user_per_page', 10);
-        $order_by   = (gmvl('user_order_by', 'id')=='token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
-        $ordered    = gmvl('user_ordered', 'DESC');
-        $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
+        $role_data = '';
+        $per_page = gmvl('user_per_page', 10);
+        $order_by = (gmvl('user_order_by', 'id') == 'token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
+        $ordered = gmvl('user_ordered', 'DESC');
+        $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
 
-        if(!empty($role)) {
+        if (!empty($role)) {
             $users = User::whereNotIn('status', ['deleted'])->where('role', $role)->orderBy($order_by, $ordered)->paginate($per_page);
         } else {
             $users = User::whereNotIn('status', ['deleted'])->orderBy($order_by, $ordered)->paginate($per_page);
         }
 
-        if($request->s){
+        if ($request->s) {
             $users = User::AdvancedFilter($request)
-                        ->orderBy($order_by, $ordered)->paginate($per_page);
+                ->orderBy($order_by, $ordered)->paginate($per_page);
         }
 
         if ($request->filter) {
             $users = User::AdvancedFilter($request)
-                        ->orderBy($order_by, $ordered)->paginate($per_page);
+                ->orderBy($order_by, $ordered)->paginate($per_page);
         }
 
         $pagi = $users->appends(request()->all());
         return view('admin.users', compact('users', 'role_data', 'is_page', 'pagi'));
     }
 
-    public function delete_users($user_id) {
+    public function delete_users($user_id)
+    {
 
-        $user_id=decrypt($user_id);
+        $user_id = decrypt($user_id);
         //exit($user_id);
 
-        $user=User::find($user_id);
+        $user = User::find($user_id);
         if ($user) {
             $user->delete();
 
             $ret['msg'] = 'success';
             $ret['message'] = __('User Delete Successfully');
 
-        }
-        else {
+        } else {
             $ret['msg'] = 'error';
             $ret['message'] = __('User Not Found');
         }
@@ -122,7 +122,7 @@ class UsersController extends Controller
 
                 try {
                     Mail::to($user->email)
-                    ->later($when, new EmailToUser($data));
+                        ->later($when, new EmailToUser($data));
                     $ret['msg'] = 'success';
                     $ret['message'] = __('messages.mail.send');
                 } catch (\Exception $e) {
@@ -174,7 +174,7 @@ class UsersController extends Controller
             $ret['message'] = $msg;
             return response()->json($ret);
         } else {
-            if($request->input('role')=='admin' && !super_access()) {
+            if ($request->input('role') == 'admin' && !super_access()) {
                 $ret['msg'] = 'warning';
                 $ret['message'] = __("You do not have enough permissions to perform requested operation.");
             } else {
@@ -197,7 +197,7 @@ class UsersController extends Controller
                     $meta = UserMeta::create([
                         'userId' => $user->id,
                     ]);
-                    $meta->notify_admin = ($request->input('role')=='user')?0:1;
+                    $meta->notify_admin = ($request->input('role') == 'user') ? 0 : 1;
                     $meta->email_token = str_random(65);
                     $meta->email_expire = now()->addMinutes(75);
                     $meta->save();
@@ -220,8 +220,8 @@ class UsersController extends Controller
                         $ret['errors'] = $e->getMessage();
                         $ret['link'] = route('admin.users');
                         $ret['msg'] = 'warning';
-                        $ret['message'] = __('messages.insert.success', ['what' => 'User']).' '.__('messages.email.failed');
-                        ;
+                        $ret['message'] = __('messages.insert.success', ['what' => 'User']) . ' ' . __('messages.email.failed');
+
                     }
                 } else {
                     $ret['msg'] = 'warning';
@@ -246,9 +246,9 @@ class UsersController extends Controller
      * @version 1.1
      * @since 1.0
      */
-    public function show(Request $request, $id=null, $type=null)
+    public function show(Request $request, $id = null, $type = null)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $id = $request->input('uid');
             $type = $request->input('req_type');
             $user = User::FindOrFail($id);
@@ -265,9 +265,9 @@ class UsersController extends Controller
                 $refered = User::where('referral', $user->id)->get(['id', 'name', 'created_at']);
                 foreach ($refered as $refer) {
                     $ref_count = User::where('referral', $refer->id)->count();
-                    if($ref_count > 0){
+                    if ($ref_count > 0) {
                         $refer->refer_to = $ref_count;
-                    }else{
+                    } else {
                         $refer->refer_to = 0;
                     }
                 }
@@ -287,10 +287,10 @@ class UsersController extends Controller
         $id = $request->input('uid');
         $type = $request->input('req_type');
 
-        if(!super_access()) {
+        if (!super_access()) {
             $up = User::where('id', $id)->first();
-            if($up) {
-                if($up->role!='user') {
+            if ($up) {
+                if ($up->role != 'user') {
                     $result['msg'] = 'warning';
                     $result['message'] = __("You do not have enough permissions to perform requested operation.");
                     return response()->json($result);
@@ -434,29 +434,26 @@ class UsersController extends Controller
         $ret['msg'] = 'info';
         $ret['message'] = __('messages.nothing');
 
-        $user = User::where(['registerMethod' => "Email", 'email_verified_at' => NULL])->get();
-        if($user->count()){
-            $data = $user->each(function($item){
+        $user = User::where(['registerMethod' => "Email", 'email_verified_at' => null])->get();
+        if ($user->count()) {
+            $data = $user->each(function ($item) {
                 $item->meta()->delete();
                 $item->logs()->delete();
                 $item->delete();
             });
 
-            if($data){
+            if ($data) {
                 $ret['msg'] = 'success';
                 $ret['message'] = __('messages.delete.delete', ['what' => 'Unvarified users']);
-            }
-            else{
+            } else {
                 $ret['msg'] = 'warning';
                 $ret['message'] = __('messages.delete.delete_failed', ['what' => 'Unvarified users']);
             }
-        }
-        else{
+        } else {
             $ret['msg'] = 'success';
             $ret['alt'] = 'no';
             $ret['message'] = __('There has not any unvarified users!');
         }
-
 
         if ($request->ajax()) {
             return response()->json($ret);

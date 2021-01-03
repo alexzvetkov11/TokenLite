@@ -8,10 +8,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middle-ware group. Now create something great!
 |
-*/
+ */
 
-if(application_installed()){
-    Route::get('/install/final', function(){
+if (application_installed()) {
+    Route::get('/install/final', function () {
         return redirect('/');
     });
 }
@@ -23,7 +23,7 @@ Route::get('/locale', 'PublicController@set_lang')->name('language');
 // Authenticates Routes
 Route::get('/auth/{service}', 'Auth\SocialAuthController@redirect')->name('social.login');
 Route::get('/auth/{service}/callback', 'Auth\SocialAuthController@callback')->name('social.login.callback');
-Route::post( '/auth/social/register', 'Auth\SocialAuthController@register' )->name('social.register');
+Route::post('/auth/social/register', 'Auth\SocialAuthController@register')->name('social.register');
 
 // Authenticates Routes
 Auth::routes();
@@ -37,7 +37,7 @@ Route::any('log-out', 'Auth\LoginController@logout')->name('log-out');
 Route::get('/login/2fa', 'Auth\SocialAuthController@show_2fa_form')->middleware('auth')->name('auth.2fa');
 Route::get('/login/2fa/reset', 'Auth\SocialAuthController@show_2fa_reset_form')->name('auth.2fa.reset');
 Route::post('/login/2fa/reset', 'Auth\SocialAuthController@reset_2fa');
-Route::post('/login/2fa', function(){
+Route::post('/login/2fa', function () {
     return redirect()->route('home');
 })->middleware(['auth', 'g2fa']);
 
@@ -46,7 +46,7 @@ Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('admin.log
 Route::post('admin/login', 'Auth\LoginController@login');
 Route::post('admin/logout', 'Auth\LoginController@logout')->name('admin.logout');
 Route::get('admin/login/2fa', 'Auth\SocialAuthController@show_2fa_form')->middleware('auth')->name('admin.auth.2fa');
-Route::post('admin/login/2fa', function(){
+Route::post('admin/login/2fa', function () {
     return redirect()->route('home');
 })->middleware(['auth', 'g2fa']);
 // }
@@ -71,7 +71,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
 
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
     Route::get('/addentities', 'User\EntitiesController@add_entities')->name('addentities');
-    
+
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
@@ -104,7 +104,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/entity', 'Admin\EntityController@index')->middleware(['ico', 'super_admin'])->name('entity');
     Route::get('/add_entity', 'Admin\EntityController@add_entity')->middleware(['ico', 'super_admin'])->name('addentity');
     Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
-    Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico','super_admin'])->name('jurisdiction');
+    Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
 
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
     Route::get('/payment-methods/edit/{slug}', 'Admin\PaymentMethodController@edit')->middleware(['ico', 'super_admin'])->name('payments.setup.edit');
@@ -154,13 +154,16 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/pages/upload', 'Admin\PageController@upload_zone')->name('pages.upload')->middleware('demo_user');
         Route::post('/pages/view', 'Admin\PageController@show')->name('pages.view');
         Route::post('/pages/update', 'Admin\PageController@update')->name('pages.update')->middleware('demo_user');
-        Route::post('/settings/update', 'Admin\SettingController@update')->middleware(['super_admin','demo_user'])->name('settings.update');
+        Route::post('/settings/update', 'Admin\SettingController@update')->middleware(['super_admin', 'demo_user'])->name('settings.update');
         // Settings UpdateMeta v1.1.0
-        Route::post('/settings/meta/update', 'Admin\SettingController@update_meta')->middleware(['super_admin','demo_user'])->name('settings.meta.update');
+        Route::post('/settings/meta/update', 'Admin\SettingController@update_meta')->middleware(['super_admin', 'demo_user'])->name('settings.meta.update');
         Route::post('/settings/email/update', 'Admin\EmailSettingController@update')->middleware(['super_admin', 'demo_user'])->name('settings.email.update');
         Route::post('/settings/email/template/update', 'Admin\EmailSettingController@update_template')->middleware(['super_admin', 'demo_user'])->name('settings.email.template.update');
         Route::post('/languages', 'Admin\LanguageController@language_action')->middleware(['ico', 'demo_user'])->name('lang.action'); // v1.1.3
         Route::post('/languages/translate', 'Admin\LanguageController@language_action')->middleware(['ico', 'demo_user'])->name('lang.translate.action'); // v1.1.3
+
+        Route::post('/jurisdiction/edit', 'Admin\JurisdictionController@editJuris')->middleware(['ico', 'demo_user'])->name('juris.edit');
+
     });
 
     //Clear Cache facade value:

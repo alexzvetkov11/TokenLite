@@ -77,115 +77,71 @@ $space = "&nbsp;";
                 <h6 class="card-sub-title">Personal Information</h6>
                 <ul class="data-details-list">
                     <li>
-                        <div class="data-details-head">First Name</div>
-                        <div class="data-details-des">{!! ($kyc->firstName) ? _x($kyc->firstName) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->firstName) ? _x($kyc->firstName) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Last Name</div>
-                        <div class="data-details-des">{!! ($kyc->lastName) ? _x($kyc->lastName) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Last Name</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->lastName) ? _x($kyc->lastName) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Gender</div>
-                        <div class="data-details-des">{!! ($kyc->gender) ? _x($kyc->gender) : $space !!}</div>
-                    </li>{{-- li --}}
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Phone Number</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->phone) ? _x($kyc->phone) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <li>
-                        <div class="data-details-head">Date of Birth</div>
-                        <div class="data-details-des">{!! ($kyc->dob) ? _date($kyc->dob, get_setting('site_date_format')) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9" >Gender</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->gender) ? _x($kyc->gender) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Country of Birth</div>
-                        <div class="data-details-des">{!! ($kyc->country_of_birth) ? _x($kyc->country_of_birth) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Date of Birth</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->dob) ? _date($kyc->dob, get_setting('site_date_format')) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Place of Birth</div>
-                        <div class="data-details-des">{!! ($kyc->place_of_birth) ? _x($kyc->place_of_birth) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country of Birth</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->country_of_birth) ? _x($kyc->country_of_birth) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Nationality</div>
-                        <div class="data-details-des">{!! ($kyc->nationality) ? _x($kyc->nationality) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Place of Birth</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->place_of_birth) ? _x($kyc->place_of_birth) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">National Identification Number</div>
-                        <div class="data-details-des">{!! ($kyc->nationality_id) ? _x($kyc->nationality_id) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Nationality</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->nationality) ? _x($kyc->nationality) : $space !!}</div>
                     </li>{{-- li --}}
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Wallet Type</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->walletName) ? _x($kyc->walletName) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Wallet Address</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->walletAddress) ? _x($kyc->walletAddress) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Telegram Username</div>-->
-                    <!--    <div class="data-details-des">-->
-                    <!--        @if ($kyc->telegram)-->
-                    <!--        <span>{{ '@'.preg_replace('/@/', '', _x($kyc->telegram), 1) }}</span><a href="https://t.me/{{preg_replace('/@/', '', _x($kyc->telegram), 1)}}" target="_blank"><em class="far fa-paper-plane"></em></a>-->
-                    <!--        @else -->
-                    <!--        &nbsp;-->
-                    <!--        @endif-->
-                    <!--    </div>-->
-                    <!--</li>{{-- li --}}-->
+                    <li>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">National Identification Number</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->nationality_id) ? _x($kyc->nationality_id) : $space !!}</div>
+                    </li>{{-- li --}}
+
                 </ul>
                 <div class="gaps-3x"></div>
                 <h6 class="card-sub-title">Address Information</h6>
 
                 <ul class="data-details-list">
                     <li>
-                        <div class="data-details-head">Country</div>
-                        <div class="data-details-des">{!! ($kyc->country) ? _x($kyc->country) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->country) ? _x($kyc->country) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">State / Province</div>
-                        <div class="data-details-des">{!! ($kyc->state) ? _x($kyc->state) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">State / Province</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->state) ? _x($kyc->state) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">City / Town</div>
-                        <div class="data-details-des">{!! ($kyc->city) ? _x($kyc->city) : $space !!}</div>
-                    </li>{{-- li --}}
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Phone Number</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->phone) ? _x($kyc->phone) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <li>
-                        <div class="data-details-head">Zip / Postal Code</div>
-                        <div class="data-details-des">{!! ($kyc->zip) ? _x($kyc->zip) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">City / Town</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->city) ? _x($kyc->city) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Street Name</div>
-                        <div class="data-details-des">{!! ($kyc->address1) ? _x($kyc->address1) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Zip / Postal Code</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->zip) ? _x($kyc->zip) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Street / Building Number</div>
-                        <div class="data-details-des">{!! ($kyc->address2) ? _x($kyc->address2) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street Name</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address1) ? _x($kyc->address1) : $space !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Floor / Unit</div>
-                        <div class="data-details-des">{!! ($kyc->floor) ? _x($kyc->floor) : $space !!}</div>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street / Building</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address2) ? _x($kyc->address2) : $space !!}</div>
                     </li>{{-- li --}}
-
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Wallet Type</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->walletName) ? _x($kyc->walletName) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Wallet Address</div>-->
-                    <!--    <div class="data-details-des">{!! ($kyc->walletAddress) ? _x($kyc->walletAddress) : $space !!}</div>-->
-                    <!--</li>{{-- li --}}-->
-                    <!--<li>-->
-                    <!--    <div class="data-details-head">Telegram Username</div>-->
-                    <!--    <div class="data-details-des">-->
-                    <!--        @if ($kyc->telegram)-->
-                    <!--        <span>{{ '@'.preg_replace('/@/', '', _x($kyc->telegram), 1) }}</span><a href="https://t.me/{{preg_replace('/@/', '', _x($kyc->telegram), 1)}}" target="_blank"><em class="far fa-paper-plane"></em></a>-->
-                    <!--        @else -->
-                    <!--        &nbsp;-->
-                    <!--        @endif-->
-                    <!--    </div>-->
-                    <!--</li>{{-- li --}}-->
+                    <li>
+                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Floor / Unit</div>
+                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->floor) ? _x($kyc->floor) : $space !!}</div>
+                    </li>{{-- li --}}
                 </ul>
                 <div class="gaps-3x"></div>
                 <h6 class="card-sub-title">Uploaded Documents</h6>

@@ -62,9 +62,9 @@
                                     <div class="user-status-balance"><small>{{ auth()->user()->email }}</small></div>
                                 </div>
                                 <ul class="user-links">
-                                    <li><a href="{{ route('admin.profile') }}"><i class="ti ti-settings"></i>Account Details</a></li>
+                                    <li><a href="{{ route('admin.profile') }}"><i class="far fa-address-card"></i></em>  Account Details</a></li>
 
-                                    <li><a href="{{ route('admin.profile.activity') }}"><i class="ti ti-eye"></i>Activity</a></li>
+                                    <li><a href="{{ route('admin.profile.activity') }}"><i class="fas fa-eye"></i>  Activity</a></li>
                                 </ul>
                                 <ul class="user-links bg-light">
                                     <li><a href="{{ route('log-out') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="ti ti-power-off"></i>Logout</a></li>

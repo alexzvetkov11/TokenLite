@@ -90,9 +90,9 @@ class AdminController extends Controller
 
         if ($type == 'personal_data') {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:4',
+                'firstname' => 'required|min:1',
+                'lastname'=> 'required|min:1',
             ]);
-
             if ($validator->fails()) {
                 $msg = '';
                 if ($validator->errors()->has('name')) {
@@ -106,9 +106,10 @@ class AdminController extends Controller
                 return response()->json($ret);
             } else {
                 $user = User::FindOrFail(Auth::id());
-                $user->name = $request->input('name');
+                $user->first_name = $request->input('firstname');
+                $user->last_name = $request->input('lastname');
                 //$user->email = $request->input('email');
-                $user->mobile = $request->input('mobile');
+                // $user->mobile = $request->input('mobile');
                 $user_saved = $user->save();
 
                 if ($user) {

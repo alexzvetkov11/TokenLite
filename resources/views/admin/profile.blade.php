@@ -27,7 +27,7 @@
                                     <form action="{{ route('admin.ajax.profile.update') }}" method="POST" {{--id="pwd_change"--}} {{--class="validate-modern"--}}>
                                         @csrf
                                         <input type="hidden" name="action_type" value="pwd_change">
-                                      
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="input-item input-with-label">
@@ -130,7 +130,7 @@
                                 </div>
                             </div> {{-- .tab-pane --}}
                             <div class="tab-pane fade"  id="personaldata">
-                                                                
+
                                 <div class="w-xl-16x">
                                     <form action="{{ route('admin.ajax.profile.update') }}" method="POST" {{--id="user_account_update"--}}>
                                         @csrf
@@ -140,7 +140,7 @@
                                                 <div class="input-item input-with-label">
                                                     <label for="first-name" class="input-item-label ucap">First Name</label>
                                                     <div class="input-wrap">
-                                                        <input class="input-bordered" type="text" value="{{ $user->name }}" placeholder="First Name" id="first-name" name="firstname" required>
+                                                        <input class="input-bordered" type="text" value="{{ $user->first_name }}" placeholder="First Name" id="first-name" name="firstname" required>
                                                     </div>
                                                 </div>{{-- .input-item --}}
                                             </div>
@@ -148,7 +148,7 @@
                                                 <div class="input-item input-with-label">
                                                     <label for="last-name" class="input-item-label ucap">Last Name</label>
                                                     <div class="input-wrap">
-                                                        <input class="input-bordered" type="text" placeholder="Last Name" id="last-name" name="lastname" required>
+                                                        <input class="input-bordered" type="text" value={{ $user->last_name }} placeholder="Last Name" id="last-name" name="lastname" required>
                                                     </div>
                                                 </div>{{-- .input-item --}}
                                             </div>
@@ -160,8 +160,8 @@
                                     </form>
                                 </div>
                             </div> {{-- .tab-pane --}}
-                            
-                            
+
+
                         </div>{{-- .tab-content --}}
                     </div>{{-- .card-innr --}}
                 </div>{{-- .card --}}

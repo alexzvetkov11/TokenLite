@@ -1,5 +1,6 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page).' User List')
+{{-- @section('title', ucfirst($is_page).' User List') --}}
+@section('title', 'Users')
 @section('content')
 
 <div class="page-content">
@@ -17,7 +18,6 @@
                         <div class="toggle-class dropdown-content dropdown-content-center-left pd-2x">
                             <div class="card-opt data-action-list">
                                 <ul class="btn-grp btn-grp-block guttar-20px guttar-vr-10px">
-{{--                                    <li><a class="btn btn-auto btn-info btn-outline btn-sm" href="{{ route('admin.users.wallet.change') }}">Wallet Change Request</a></li>--}}
                                     <li>
                                         <a href="#" class="btn btn-auto btn-sm btn-primary" data-toggle="modal" data-target="#addUser">
                                             <em class="fas fa-plus-circle"> </em>
@@ -30,7 +30,6 @@
                     </div>
                     <div class="card-opt data-action-list d-none d-md-inline-flex">
                         <ul class="btn-grp btn-grp-block guttar-20px">
-{{--                            <li><a class="btn btn-info btn-outline btn-sm" href="{{ route('admin.users.wallet.change') }}">Wallet Change Request</a></li>--}}
                             <li>
                                 <a href="#" class="btn btn-auto btn-sm btn-primary" data-toggle="modal" data-target="#addUser">
                                     <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">User</span></span>
@@ -57,7 +56,7 @@
                                 </div>
                             </form>
                         </div>
-                        {{--  @if( !empty(app_key()))  --}}
+                         @if( !empty(app_key()))
                         <div class="tools w-100 w-sm-auto">
                             <ul class="btn-grp guttar-8px">
                                 <li>
@@ -100,8 +99,8 @@
                                                         <a href="#" data-meta="orderby=id">User ID</a></li>
                                                     <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=name">Name</a></li>
-                                                    <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
-                                                        <a href="#" data-meta="orderby=token">Token</a></li>
+                                                    {{-- <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
+                                                        <a href="#" data-meta="orderby=token">Token</a></li> --}}
                                                 </ul>
                                                 <ul class="dropdown-list">
                                                     <li><h6 class="dropdown-title">Order</h6></li>
@@ -116,7 +115,7 @@
                                 </li>
                             </ul>
                         </div>
-                        {{--  @endif  --}}
+                         @endif
                     </div>
                     {{--  @if(!empty(env_file()) && !empty(app_key()))  --}}
                     <div class="search-adv-wrap hide">
@@ -148,10 +147,10 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-4 col-mb-6">
-                                        <div class="input-wrap input-item-middle text-left">
+                                        {{-- <div class="input-wrap input-item-middle text-left">
                                             <input {{ request()->get('wallet') == 'yes' ? 'checked' : '' }} name="wallet" value="yes" class="input-checkbox input-checkbox-md" id="has-wallet" type="checkbox">
                                             <label for="has-wallet">Has Wallet</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-4 col-sm-8 col-mb-6">
                                         <div class="input-wrap input-item-middle text-left">
@@ -159,7 +158,7 @@
                                             <label for="include-admin">Including Admin</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
+                                    <div class="col-sm-4 col-lg-3 col-mb-6">
                                         <div class="input-wrap input-with-label">
                                             <label class="input-item-label input-item-label-s2 text-exlight">Account Status</label>
                                             <select name="state" class="select select-sm select-block select-bordered" data-dd-class="search-off">
@@ -169,19 +168,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
-                                        <div class="input-wrap input-with-label">
-                                            <label class="input-item-label input-item-label-s2 text-exlight">Reg Method</label>
-                                            <select name="reg" class="select select-sm select-block select-bordered" data-dd-class="search-off">
-                                                <option value="">Any Method</option>
-                                                <option {{ request()->get('reg') == 'internal' ? ' selected' : '' }} value="internal">Internal</option>
-                                                <option {{ request()->get('reg') == 'email' ? ' selected' : '' }} value="email">Email</option>
-                                                <option {{ request()->get('reg') == 'google' ? ' selected' : '' }} value="google">Google</option>
-                                                <option {{ request()->get('reg') == 'facebook' ? ' selected' : '' }} value="facebook">Facebook</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
+
+                                    <div class="col-sm-4 col-lg-3 col-mb-6">
                                         <div class="input-wrap input-with-label">
                                             <label class="input-item-label input-item-label-s2 text-exlight">Verified Status</label>
                                             <select name="valid" class="select select-sm select-block select-bordered" data-dd-class="search-off">
@@ -192,27 +180,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
-                                        <div class="input-wrap input-with-label">
-                                            <label class="input-item-label input-item-label-s2 text-exlight">Token Balance</label>
-                                            <select name="token" class="select select-sm select-block select-bordered" data-dd-class="search-off">
-                                                <option value="">Any Amount</option>
-                                                <option {{ request()->get('token') == 'has' ? 'selected' : '' }} value="has">Has Token</option>
-                                                <option {{ request()->get('token') == 'zero' ? 'selected' : '' }} value="zero">Zero Token</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
-                                        <div class="input-wrap input-with-label">
-                                            <label class="input-item-label input-item-label-s2 text-exlight">Is Referred By</label>
-                                            <select name="refer" class="select select-sm select-block select-bordered" data-dd-class="search-off">
-                                                <option value="">Anything</option>
-                                                <option {{ request()->get('refer') == 'yes' ? 'selected' : '' }} value="yes">Yes</option>
-                                                <option {{ request()->get('refer') == 'no' ? 'selected' : '' }} value="no">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-lg-2 col-mb-6">
+
+                                    <div class="col-sm-4 col-lg-3 col-mb-6">
                                         <div class="input-wrap">
                                             <input type="hidden" name="filter" value="1">
                                             <button class="btn btn-sm btn-sm-s2 btn-auto btn-primary">
@@ -220,6 +189,7 @@
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </form>
@@ -261,9 +231,8 @@
                 <table class="data-table user-list">
                     <thead>
                         <tr class="data-item data-head">
-                            <th class="data-col data-col-wd-md filter-data dt-user">User Name</th>
+                            <th class="data-col data-col-wd-md filter-data dt-user">Full Name</th>
                             <th class="data-col data-col-wd-md dt-email">Email</th>
-                            <!--<th class="data-col dt-token">Tokens</th>-->
                             <th class="data-col dt-verify">Verified Status</th>
                             <th class="data-col dt-login">Last Login</th>
                             <th class="data-col dt-status">Status</th>
@@ -276,12 +245,12 @@
                             <td class="data-col data-col-wd-md dt-user">
                                 <div class="d-flex align-items-center">
                                     <div class="fake-class">
-                                        <span class="lead user-name text-wrap">{{ $user->name }}</span>
-                                        {{-- <span class="sub user-id">{{ set_id($user->id, 'user') }}
+                                        <span class="lead user-name text-wrap">{{  $user->first_name ." ". $user->last_name }}</span>
+                                        <span class="sub user-id">{{ set_id($user->id, 'user') }}
                                             @if($user->role == 'admin')
                                             <span class="badge badge-xs badge-dim badge-{{($user->type != 'demo')?'success':'danger'}}">ADMIN</span>
                                             @endif
-                                        </span> --}}
+                                        </span>
                                     </div>
                                 </div>
                             </td>
@@ -345,7 +314,7 @@
                                                 </a>
                                                 -->
                                                 <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.delete_users',encrypt($user->id))}}">
-                                                    <em class="fas fa-ban"></em>
+                                                    <em class="fa fa-trash"></em>
                                                     Delete
                                                 </a>
                                             </li>
