@@ -163,6 +163,10 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/languages/translate', 'Admin\LanguageController@language_action')->middleware(['ico', 'demo_user'])->name('lang.translate.action'); // v1.1.3
 
         Route::post('/jurisdiction/edit', 'Admin\JurisdictionController@editJuris')->middleware(['ico', 'demo_user'])->name('juris.edit');
+        Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
+        Route::get('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
+
+        Route::post('/entities/add', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entities.add');
 
     });
 

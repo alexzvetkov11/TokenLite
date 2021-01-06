@@ -20,7 +20,7 @@
 
             <div class="<!--kyc-form-steps--> card mx-lg-4">
                 <div class="card-head has-aside pd-2x">
-                    <h4 class="card-title">Entities > Add Entity</h4>
+                    <h4 >Entities > Add Entity Type</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entity') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -28,8 +28,8 @@
                     </div>
                 </div>
 
-                <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
-                <form class="<!--validate-modern-->" action="{{ route('user.ajax.kyc.submit') }}" method="POST" id="<!--kyc_submit-->">
+                {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
+                <form class="<!--validate-modern-->" action="{{ route('admin.ajax.entities.add') }}" method="POST" id="<!--kyc_submit-->">
                     @csrf
 
                     <div class="form-step form-step1">
@@ -48,8 +48,10 @@
                                     <div class="input-item input-with-label">
                                         <label for="jurisdiction"  class="input-item-label">{{__('Jurisdiction')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="jurisdiction" id="jurisdiction"  data-dd-class="search-on">
-                                                <option default value="">Select Country</option>
+                                            <select class="select-bordered select-block" name="jurisdiction" id="jurisdiction"  data-dd-class="search-on">
+                                                @foreach( $juris as $jur)
+                                                <option value="{{ $jur->jurisdiction_name }}"> {{ $jur->jurisdiction_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -59,55 +61,59 @@
                                         <label for="participant-type" class="input-item-label">{{__('Participant Type')}}</label>
                                         <div class="input-wrap">
                                             <select onchange="onChange()" class="select-bordered select-block" name="participant_type" id="participant-type" data-dd-class="search-on">
-                                                <option default >Participant Type</option>
-                                                <option value="sharefolders">SHAREHOLDERS</option>
-                                                <option value="members">MEMBERS</option>
-                                                <option value="partners">PARTNERS</option>
-                                                <option value="benificiaries">BENEFICIARIES</option>
+                                                <option default value="sharefolders">Shareholders</option>
+                                                <option value="members">Members</option>
+                                                <option value="partners">Partners</option>
+                                                <option value="benificiaries">Beneficiaries</option>
                                             </select>
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="entityname" class="input-item-label">{{__('Entity Type: Full Name')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" class="input-bordered" id="entityname" name="entityname" placeholder="Full Name">
+                                            <input required type="text" class="input-bordered" id="entityname" name="entityname" placeholder="Full Name">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
-                    
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="longabbreviation" class="input-item-label">{{__('Entity Type: Long Abbreviation')}}  </label>
                                         <div class="input-wrap">
-                                            <input required class="input-bordered" placeholder="Long Abbreviation" type="text" id="longabbreviation" name="longabbreviation">
+                                            <input class="input-bordered" placeholder="Long Abbreviation" type="text" id="longabbreviation" name="longabb">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
-                                
-                   
-                          
+
+
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="shortabbreviation" class="input-item-label">{{__('Entity Type: Short Abbreviation')}}  </label>
                                         <div class="input-wrap">
-                                            <input required class="input-bordered" placeholder="Short Abbreviation" type="text" id="shortabbreviation" name="shortabbreviation">
+                                            <input class="input-bordered" placeholder="Short Abbreviation" type="text" id="shortabbreviation" name="shortabb">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
-                                
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="format" class="input-item-label">{{__('Abbreviation Format')}}</label>
+                                        <label for="abbformat" class="input-item-label">{{__('Abbreviation Format')}}</label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" type="text" name="format" id="format" placeholder="Set Format">
+                                            {{--  <input class="input-bordered" type="text" name="abbformat" id="format" placeholder="Set Format">  --}}
+                                            <select class="select-bordered select-block" name="abbformat" id="abbformat" data-dd-class="search-on">
+                                                <option value="before">Before</option>
+                                                <option default value="after">After</option>
+                                            </select>
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
-                
+
                             </div>{{-- .row --}}
-                        </div>{{-- .step-fields --}}
+                        </div>
                     </div>
 
                     <div class="form-step form-step1" id="sharefolders">
@@ -124,84 +130,104 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="principal1"  class="input-item-label">{{__('Principal Statute')}}</label>
+                                        <label for="principal"  class="input-item-label">{{__('Principal Statute')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" required class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
+                                            <input type="text" class="input-bordered" id="principal" name="principal" placeholder="Principal Statute">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="governing1" class="input-item-label">{{__('Governing Body')}}</label>
+                                        <label for="register" class="input-item-label">{{__('Register')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" required class="input-bordered" id="governing1" name="governing1" placeholder="Governing Body">
+                                            <input type="text" class="input-bordered" id="register" name="register" placeholder="Register">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="language1" class="input-item-label">{{__('Standard Language')}}</label>
+                                        <label for="language" class="input-item-label">{{__('Standard Language')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="language1" id="language1"  data-dd-class="search-on">
-                                                <option value="">{{__('Select Language')}}</option>
+                                            <select class="select-bordered select-block" name="language" id="language"  data-dd-class="search-on">
+                                                <option default value="English">{{__('English')}}</option>
+                                                <option value="Arab">{{__('Arab')}}</option>
+                                                <option value="Chinese">{{__('Chinese')}}</option>
+                                                <option value="Dutch">{{__('Dutch')}}</option>
+                                                <option value="French">{{__('French')}}</option>
+                                                <option value="German">{{__('German')}}</option>
+                                                <option value="Hindi">{{__('Hindi')}}</option>
+                                                <option value="Japanese">{{__('Japanese')}}</option>
+                                                <option value="Korean">{{__('Korean')}}</option>
+                                                <option value="Portuguese">{{__('Portuguese')}}</option>
+                                                <option value="Russian">{{__('Russian')}}</option>
+                                                <option value="Spanish">{{__('Spanish')}}</option>
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                    
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="currency1" class="input-item-label">{{__('Standard Currency')}}</label>
-                                        <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                   
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="requirement1" class="input-item-label">{{__('Local Director/Secretary Requirement')}}</label>
-                                        <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="requirement1" id="requirement1"  data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                    
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="transferability1" class="input-item-label">{{__('Share Transferability')}}</label>
-                                        <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="transferability1" id="transferability1" data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="minimum1" class="input-item-label">{{__('Minimum Share Capital')}}  </label>
+                                        <label for="currency" class="input-item-label">{{__('Standard Currency')}}</label>
                                         <div class="input-wrap">
-                                            <input required class="input-bordered" placeholder="Minimum Share Capital" type="text" id="minimum1" name="minimum1">
+                                            <select class="select-bordered select-block" name="currency" id="currency" data-dd-class="search-on">
+                                                <option default value="USD">United States Dollar (USD)</option>
+                                                <option value="GBP">British Pound (GBP)</option>
+                                                <option value="EUR">Euro (EUR)</option>
+                                                <option value="CHF">Swiss Franc (CHF)</option>
+                                            </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                                
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-item input-with-label">
+                                        <label for="requirement" class="input-item-label">{{__('Local Director/Secretary Requirement')}}</label>
+                                        <div class="input-wrap">
+                                            <select class="select-bordered select-block" name="requirement" id="requirement"  data-dd-class="search-on">
+                                                <option default value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-item input-with-label">
+                                        <label for="transferability" class="input-item-label">{{__('Share Transferability')}}</label>
+                                        <div class="input-wrap">
+                                            <select class="select-bordered select-block" name="transferability" id="transferability" data-dd-class="search-on">
+                                                <option default value="Private">Private</option>
+                                                <option value="Public">Public</option>
+                                                <option value="Statutes">As per Statutes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-item input-with-label">
+                                        <label for="minimum" class="input-item-label">{{__('Minimum Share Capital')}}  </label>
+                                        <div class="input-wrap">
+                                            <input class="input-bordered" placeholder="Minimum Share Capital" type="text" id="minimum" name="minimum">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="maximum" class="input-item-label">{{__('Maximum Number of Shareholders')}}</label>
                                         <div class="input-wrap">
                                             <input class="input-bordered" type="text" name="maximum" id="maximum" placeholder="Maximum Number of Shareholders">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                
+                                    </div>
+                                </div>
+
                             </div>{{-- .row --}}
                         </div>{{-- .step-fields --}}
                     </div>
 
-                    <div class="form-step form-step1" id="members">
+                    {{-- <div class="form-step form-step1" id="members">
                         <div class="form-step-head card-innr">
                             <div class="step-head">
                                 <div class="step-number">03</div>
@@ -210,90 +236,89 @@
                                     <p>{{__('Fill in the legal details of the new Entity Type.')}}</p>
                                 </div>
                             </div>
-                        </div>{{-- .step-head --}}
+                        </div>
                         <div class="form-step-fields card-innr">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="principal1"  class="input-item-label">{{__('Principal Statute')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" required class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
+                                            <input type="text" class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="governing1" class="input-item-label">{{__('Governing Body')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" required class="input-bordered" id="governing1" name="governing1" placeholder="Governing Body">
+                                            <input type="text" class="input-bordered" id="governing1" name="governing1" placeholder="Governing Body">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="language1" class="input-item-label">{{__('Standard Language')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="language1" id="language1"  data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="language1" id="language1"  data-dd-class="search-on">
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                    
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="currency1" class="input-item-label">{{__('Standard Currency')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                   
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="requirement1" class="input-item-label">{{__('Local Director/Secretary Requirement')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="requirement1" id="requirement1"  data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="requirement1" id="requirement1"  data-dd-class="search-on">
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                    
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="transferability1" class="input-item-label">{{__('Share Transferability')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="transferability1" id="transferability1" data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="transferability1" id="transferability1" data-dd-class="search-on">
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
+                                    </div>
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="minimum1" class="input-item-label">{{__('Minimum Share Capital')}}  </label>
                                         <div class="input-wrap">
-                                            <input required class="input-bordered" placeholder="Minimum Share Capital" type="text" id="minimum1" name="minimum1">
+                                            <input class="input-bordered" placeholder="Minimum Share Capital" type="text" id="minimum1" name="minimum1">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                                
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="maximum" class="input-item-label">{{__('Maximum Number of Shareholders')}}</label>
                                         <div class="input-wrap">
                                             <input class="input-bordered" type="text" name="maximum" id="maximum" placeholder="Maximum Number of Shareholders">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                
-                            </div>{{-- .row --}}
-                        </div>{{-- .step-fields --}}
-                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
                     <div class="form-step form-step1" id="benificiaries">
                         <div class="form-step-head card-innr">
                             <div class="step-head">
-                                <div class="step-number">04</div>
+                                <div class="step-number">02</div>
                                 <div class="step-head-text">
                                     <h4>{{__('Statutory Details')}}</h4>
                                     <p>{{__('Fill in the legal details of the new Entity Type.')}}</p>
@@ -306,16 +331,16 @@
                                     <div class="input-item input-with-label">
                                         <label for="principal1"  class="input-item-label">{{__('Principal Statute')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" required class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
+                                            <input type="text" class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
-                               
+
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="currency1" class="input-item-label">{{__('Standard Currency')}}</label>
                                         <div class="input-wrap">
-                                            <select required class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
                                             </select>
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -328,7 +353,7 @@
                         <div class="form-step-fields card-innr">
                             <button class="btn btn-primary"> Add Entity Type</button>
                         </div>
-                    </div>  
+                    </div>
                     <div class="gaps-1x"></div>
                 </form>
             </div>
@@ -338,7 +363,7 @@
     </div>
     <script type="text/javascript">
         onChange();
-        
+
         function CheckSpace(event) {
             console.log(event.which);
             if (event.which === 32) {
@@ -349,16 +374,18 @@
 
         function onChange(){
             var x = document.getElementById("participant-type").value;
-            console.log(x);
             document.getElementById("sharefolders").style.display="none";
-            document.getElementById("members").style.display="none";
+            //document.getElementById("members").style.display="none";
             document.getElementById("benificiaries").style.display="none";
+
             if ( x.length > 0 ){
-                if ( x=="partners")
-                    document.getElementById("members").style.display="block";
-                else document.getElementById(x).style.display="block";
+                if ( x=="partners" || x=="members" )
+                    document.getElementById("sharefolders").style.display="block";
+                else if(x=="sharefolders" || x=="benificiaries" )
+                    document.getElementById(x).style.display="block";
             }
-                
+
         }
+
     </script>
 @endsection

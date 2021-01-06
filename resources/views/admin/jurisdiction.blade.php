@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="gaps-1x"></div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-12">
                         <div class="float-right position-relative">
                             <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em class="ti ti-settings"></em> </a>
@@ -56,11 +56,48 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="float-right position-relative">
+                            <a href="#" class="btn btn-light bg-white btn-sm btn-icon toggle-tigger btn-outline"><em class="ti ti-settings"></em> </a>
+                            <div class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
+                                <form class="update-meta" action="#" data-type="user_page_meta">
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Show</h6></li>
+                                        <li{!! (gmvl('user_per_page', 10)==10) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=10">10</a></li>
+                                        <li{!! (gmvl('user_per_page', 10)==20) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=20">20</a></li>
+                                        <li{!! (gmvl('user_per_page', 10)==50) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=50">50</a></li>
+                                    </ul>
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Order By</h6></li>
+                                        <li{!! (gmvl('user_order_by', 'id')=='id') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=id">Jurisdiction</a></li>
+                                        {{-- <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=name">Name</a></li>
+                                        <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=token">Token</a></li>
+                                    </ul> --}}
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Order</h6></li>
+                                        <li{!! (gmvl('user_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="ordered=DESC">DESC</a></li>
+                                        <li{!! (gmvl('user_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="ordered=ASC">ASC</a></li>
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
-
-                @if($entity->total() > 0)
+                @if($juris->total() > 0)
                 <table class="data-table dt-filter-init user-list" >
                     <thead>
                         <tr class="data-item data-head">
@@ -71,13 +108,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($entity as $en)
+                        @foreach($juris as $jur)
                         <tr class="data-item ">
-                            {{--  <td class="data-col dt-user">
+                            {{-- <td class="data-col dt-user">
                                 <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
                             </td>  --}}
                             <td class="data-col dt-email" >
-                                <span class="lead user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                <span class="lead user-name text-wrap">{{ $jur->jurisdiction_name }}</span>
                             </td>
                             {{--  <td class="data-col data-col-wd-md dt-status">
                                 <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($en->status,'status') }}">{{ __status($en->status,'text') }}</span>
@@ -87,12 +124,12 @@
                                 <div class="relative d-inline-block">
                                     <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
-                                        <ul class="dropdown-list more-menu-{{$en->id}}">
+                                        <ul class="dropdown-list more-menu-{{$jur->id}}">
                                             <li>
-                                                <a href="#" data-toggle="modal" data-target="#editJurisdiction" data-id="{{ $en->id }}" data-juris="{{ $en->jurisdiction }}" class="user-action front editJurisdiction">
+                                                <a href="#" data-toggle="modal" data-target="#editJurisdiction" data-id="{{ $jur->id }}" data-juris="{{ $jur->jurisdiction_name }}" class="user-action front editJurisdiction">
                                                     <em class="fas fa-edit"></em>Edit
                                                 </a>
-                                                <a href="#" data-uid="{{ $en->id }}" data-type="delete_user" class="user-action front">
+                                                <a href="#" data-uid="{{ $jur->id }}" data-type="delete_user" data-url="{{ route('admin.ajax.juris.delete', $jur->id) }}" class="user-action front">
                                                     <em class="fas fa-trash-alt"></em>Delete
                                                 </a>
                                             </li>
@@ -158,14 +195,12 @@
             <div class="popup-body popup-body-md">
                 <h3 class="popup-title">Add New Jurisdiction</h3>
                 <div class="gaps-1x"></div>
-                <form  method="POST" class="adduser-form validate-modern" id="addUserForm" autocomplete="false">
-                    {{--  action="{{ route('admin.ajax.users.add') }}"  --}}
+                <form method="POST" class="adduser-form validate-modern" id="addJurisForm" autocomplete="false" action="{{ route('admin.ajax.juris.add') }}" >
                     @csrf
-
                     <div class="input-item input-with-label">
                         <label class="input-item-label">Jurisdiction</label>
                         <div class="input-wrap">
-                            <input name="jurisdiction" class="input-bordered" required="required" type="text" placeholder="Add Jurisdiction">
+                            <input name="juris_name" class="input-bordered" required="required" type="text" placeholder="Add Jurisdiction">
                         </div>
                     </div>
                     <div class="gaps-1x"></div>
@@ -183,20 +218,20 @@
         <div class="modal-content">
             <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
             <div class="popup-body popup-body-md">
-                <h3 class="popup-title">Add New Jurisdiction</h3>
+                <h3 class="popup-title">Edit Jurisdiction</h3>
                 <div class="gaps-1x"></div>
-                    <form  method="Post" class="adduser-form validate-modern" id="editJuristForm" autocomplete="false" action="{{ route('admin.ajax.juris.edit') }}">
-                        @csrf
-                        <div class="input-item input-with-label">
-                            <label class="input-item-label">Jurisdiction</label>
-                            <div class="input-wrap">
-                                <input name="juris_name" class="input-bordered" required="required" type="text" placeholder="Change Jurisdiction">
-                                <input name="juris_id" type="hidden">
-                            </div>
+                <form  method="Post" class="adduser-form validate-modern" id="editJuristForm" autocomplete="false" action="{{ route('admin.ajax.juris.edit') }}">
+                    @csrf
+                    <div class="input-item input-with-label">
+                        <label class="input-item-label">Jurisdiction</label>
+                        <div class="input-wrap">
+                            <input name="juris_name" class="input-bordered" required="required" type="text" placeholder="Change Jurisdiction">
+                            <input name="juris_id" type="hidden">
                         </div>
-                        <div class="gaps-1x"></div>
-                        <button class="btn btn-md btn-primary" type="submit">Change</button>
-                    </form>
+                    </div>
+                    <div class="gaps-1x"></div>
+                    <button class="btn btn-md btn-primary" type="submit">Change Jurisdiction</button>
+                </form>
             </div>
         </div>
         {{-- .modal-content --}}

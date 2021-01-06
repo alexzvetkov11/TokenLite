@@ -15,6 +15,7 @@ use IcoHandler;
 use App\Models\KYC;
 use App\Models\User;
 use App\Models\UserMeta;
+use App\Models\Setting;
 use App\Helpers\ReCaptcha;
 use Illuminate\Http\Request;
 use App\Notifications\KycStatus;
@@ -119,8 +120,27 @@ class KycController extends Controller
             $user_kyc = new KYC();
         }
         $title = KYC::documents();
-
-        return view('user.kyc_application', compact('user_kyc', 'countries', 'title'));
+        $setting = [
+            "kyc_firstname"=>"",
+            "kyc_lastname" =>"",
+            "kyc_gender"=>"",
+            "kyc_country_birth"=>"",
+            "kyc_birthPlace"=>"",
+            "kyc_nationality"=>"",
+            "kyc_nationalityId"=>"",
+            "kyc_country"=>"",
+            "kyc_state"=>"",
+            "kyc_city"=>"",
+            "kyc_zip"=>"",
+            "kyc_address1"=>"",
+            "kyc_address2"=>"",
+            "kyc_Floor"=>"",
+            "kyc_firstname"=>"",
+        ];
+        foreach ($setting as $key=>$val){
+            $setting[$key] = json_decode(Setting::getValue($key));
+        }
+        return view('user.kyc_application', compact('user_kyc', 'countries', 'title', 'setting'));
     }
 
     /**

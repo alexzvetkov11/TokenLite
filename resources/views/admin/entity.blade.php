@@ -12,7 +12,7 @@
                     <h4 class="card-title">Entity Type</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.addentity') }}" class="btn btn-auto btn-sm btn-primary" >
-                            <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">Entity</span></span>
+                            <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">Entity Type</span></span>
                         </a>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                                 <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
                             </td>
                             <td class="data-col dt-email">
-                                <span class="lead user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                <span class="user-name text-wrap">{{ $en->jurisdiction }}</span>
                             </td>
                             <td class="data-col data-col-wd-md dt-status">
                                 <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($en->status,'status') }}">{{ __status($en->status,'text') }}</span>

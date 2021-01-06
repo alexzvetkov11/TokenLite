@@ -12,6 +12,7 @@
         $wallets[$custom['cw_name']] = $custom['cw_text'];
     }
     $wallet_count = count($wallets);
+
     if($wallet_count > 0){
         foreach($wallets as $wallet_opt => $value){
             $option .= '<option value="'.strtolower($value).'">'.ucfirst($value).'</option>';
@@ -64,11 +65,16 @@
             @if(field_value('kyc_firstname', 'show'))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="first-name"
-                               class="input-item-label">{{__('First Name')}}</label>
+                        <label for="first-name" class="input-item-label">
+                            {{__('First Name')}}
+                            @if (field_value('kyc_firstname', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
+                            {{-- style="text-transform:uppercase" --}}
                             <input
-                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} style="text-transform:uppercase"
+                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} 
                                 class="input-bordered" type="text"
                                 value="{{ isset($user_kyc) ? $user_kyc->firstName : ''}}" id="first-name"
                                 name="first_name">
@@ -79,11 +85,15 @@
             @if(field_value('kyc_lastname', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="last-name"
-                               class="input-item-label">{{__('Last Name')}}</label>
+                        <label for="last-name" class="input-item-label">
+                            {{__('Last Name')}}
+                            @if (field_value('kyc_lastname', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
-                                {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   style="text-transform:uppercase"
+                                {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
                                 class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->lastName : ''}}"
                                 type="text" id="last-name" name="last_name">
                         </div>
@@ -93,8 +103,12 @@
             @if(field_value('kyc_email', 'show' ) && isset($input_email) && $input_email == true)
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="email"
-                               class="input-item-label">{{__('Email Address')}}</label>
+                        <label for="email" class="input-item-label">
+                            {{__('Email Address')}}
+                            @if (field_value('kyc_email', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_email', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
@@ -108,7 +122,9 @@
             @if(!isset($user_kyc))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="password" class="input-item-label">{{__('Password')}}
+                        <label for="password" class="input-item-label">
+                            {{__('Password')}}
+                            <span class="text-require text-danger">*</span>
                         </label>
                         <div class="input-wrap">
                             <input required class="input-bordered" placeholder="*******" type="password" minlength="6"
@@ -117,34 +133,41 @@
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
             @endif
-                @if(field_value('kyc_gender', 'show' ))
-                    <div class="col-md-6">
-                        <div class="input-item input-with-label">
-                            <label for="gender"
-                                   class="input-item-label">{{__('Gender')}}</label>
-                            <div class="input-wrap">
-                                <select
-                                    {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block"
-                                    name="gender" id="gender">
-                                    <option value="">{{__('Select Gender')}}</option>
-                                    <option
-                                        {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'male')?"selected":"" }} value="male">{{__('Male')}}</option>
-                                    <option
-                                        {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'female')?"selected":"" }} value="female">{{__('Female')}}</option>
-                                    <option
-                                        {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'other')?"selected":"" }} value="other">{{__('Other')}}</option>
-                                </select>
-                            </div>
-                        </div>{{-- .input-item --}}
-                    </div>{{-- .col --}}
-                @endif
-
+            @if(field_value('kyc_gender', 'show' ))
+                <div class="col-md-6">
+                    <div class="input-item input-with-label">
+                        <label for="gender" class="input-item-label">
+                            {{__('Gender')}}
+                            @if (field_value('kyc_gender', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
+                        <div class="input-wrap">
+                            <select
+                                {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block"
+                                name="gender" id="gender">
+                                <option value="">{{__('Select Gender')}}</option>
+                                <option
+                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'male')?"selected":"" }} value="male">{{__('Male')}}</option>
+                                <option
+                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'female')?"selected":"" }} value="female">{{__('Female')}}</option>
+                                <option
+                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'other')?"selected":"" }} value="other">{{__('Other')}}</option>
+                            </select>
+                        </div>
+                    </div>{{-- .input-item --}}
+                </div>{{-- .col --}}
+            @endif
 
             @if(field_value('kyc_dob', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="date-of-birth"
-                               class="input-item-label">{{__('Date of Birth')}}</label>
+                        <label for="date-of-birth" class="input-item-label">
+                            {{__('Date of Birth')}}
+                            @if (field_value('kyc_dob', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered date-picker-dob"
@@ -157,8 +180,12 @@
             @if(field_value('kyc_country_birth', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="Country of Birth"
-                               class="input-item-label">{{__('Country of Birth')}}</label>
+                        <label for="Country of Birth"  class="input-item-label">
+                            {{__('Country of Birth')}}
+                            @if (field_value('kyc_country_birth', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <select class="select-bordered select-block" name="Country_of_Birth" id="Country_of_Birth"
                                     data-dd-class="search-on">
@@ -175,9 +202,14 @@
             @if(field_value('kyc_birthPlace', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="email" class="input-item-label">{{__('Place of Birth')}}</label>
+                        <label for="email" class="input-item-label">
+                            {{__('Place of Birth')}}
+                            @if (field_value('kyc_birthPlace', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
-                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" style="text-transform:uppercase"
+                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
                                    name="place_of_birth">
                         </div>
                     </div>{{-- .input-item --}}
@@ -185,32 +217,42 @@
 
             @endif
             @if(field_value('kyc_nationality', 'show' ))
-            <div class="col-md-6">
-                <div class="input-item input-with-label">
-                    <label for="Nationality" class="input-item-label">{{__('Nationality')}} </label>
-                    <div class="input-wrap">
-                        <select {{ field_value('kyc_nationality', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block" name="Nationality" id="Nationality"
-                                data-dd-class="search-on">
-                            <option value="">{{__('Select Country')}}</option>
-                            @foreach($countries as $country)
-                                <option
-                                    {{ (isset($user_kyc) ? $user_kyc->country : '') == $country ? 'selected' : '' }} value="{{ $country }}">{{ $country }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>{{-- .input-item --}}
-            </div>{{-- .col --}}
+                <div class="col-md-6">
+                    <div class="input-item input-with-label">
+                        <label for="Nationality" class="input-item-label">
+                            {{__('Nationality')}} 
+                            @if (field_value('kyc_nationality', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
+                        <div class="input-wrap">
+                            <select {{ field_value('kyc_nationality', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block" name="Nationality" id="Nationality"
+                                    data-dd-class="search-on">
+                                <option value="">{{__('Select Country')}}</option>
+                                @foreach($countries as $country)
+                                    <option
+                                        {{ (isset($user_kyc) ? $user_kyc->country : '') == $country ? 'selected' : '' }} value="{{ $country }}">{{ $country }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>{{-- .input-item --}}
+                </div>{{-- .col --}}
             @endif
             @if(field_value('kyc_nationalityId', 'show' ))
-            <div class="col-md-6">
-                <div class="input-item input-with-label">
-                    <label for="email" class="input-item-label">{{__('National Identification Number')}}</label>
-                    <div class="input-wrap">
-                        <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" style="text-transform:uppercase"
-                               name="National Identification Number">
-                    </div>
-                </div>{{-- .input-item --}}
-            </div>{{-- .col --}}
+                <div class="col-md-6">
+                    <div class="input-item input-with-label">
+                        <label for="email" class="input-item-label">
+                            {{__('National Identification Number')}}
+                            @if (field_value('kyc_nationalityId', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
+                        <div class="input-wrap">
+                            <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
+                                name="National Identification Number">
+                        </div>
+                    </div>{{-- .input-item --}}
+                </div>{{-- .col --}}
             @endif
         </div>{{-- .row --}}
     </div>{{-- .step-fields --}}
@@ -226,13 +268,17 @@
             </div>
         </div>
     </div>
-    <div class="form-step-head card-innr">  
+    <div class="form-step-head card-innr">
         <div class="row">
             @if(field_value('kyc_country', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="country"
-                                class="input-item-label">{{__('Country')}}</label>
+                        <label for="country"  class="input-item-label">
+                            {{__('Country')}}
+                            @if (field_value('kyc_country', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <select
                                 {{ field_value('kyc_country', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block"
@@ -250,8 +296,12 @@
             @if(field_value('kyc_state', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="state"
-                                class="input-item-label">{{__('State / Province')}} </label>
+                        <label for="state" class="input-item-label">
+                            {{__('State / Province')}} 
+                            @if (field_value('kyc_state', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_state', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
@@ -264,13 +314,16 @@
             @if(field_value('kyc_city', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="city"
-                                class="input-item-label">{{__('City / Town')}}</label>
+                        <label for="city" class="input-item-label">
+                            {{__('City / Town')}}
+                            @if (field_value('kyc_city', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_city', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
                                     type="text" value="{{ isset($user_kyc) ? $user_kyc->city : ''}}"
-                                    style="text-transform:uppercase" id="city"
-                                    name="city">
+                                    id="city" name="city">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -278,7 +331,12 @@
             @if(field_value('kyc_zip', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="zip" class="input-item-label">{{__('Zip / Postal Code')}} <span class="text-require text-danger">*</span></label>
+                        <label for="zip" class="input-item-label">
+                            {{__('Zip / Postal Code')}} 
+                            @if (field_value('kyc_zip', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_zip', 'req' ) == '1' ? 'required ' : '' }}  onkeypress="CheckSpace(event)"
@@ -291,14 +349,17 @@
             @if(field_value('kyc_address_1', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="address_1"
-                                class="input-item-label">{{__('Street Name')}}</label>
+                        <label for="address_1"  class="input-item-label">
+                            {{__('Street Name')}}
+                            @if (field_value('kyc_address_1', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_address_1', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
                                 type="text" value="{{ isset($user_kyc) ? $user_kyc->address1 : ''}}"
-                                style="text-transform:uppercase" id="address_1"
-                                name="address_1">
+                                id="address_1" name="address_1">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -306,14 +367,17 @@
             @if(field_value('kyc_Building', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="address_2"
-                                class="input-item-label">{{__('Street / Building Number')}}</label>
+                        <label for="address_2"  class="input-item-label">
+                            {{__('Street / Building Number')}}
+                            @if (field_value('kyc_Building', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                                 {{ field_value('kyc_Building', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
                                 type="text" value="{{ isset($user_kyc) ? $user_kyc->address2 : ''}}"
-                                style="text-transform:uppercase" id="address_2"
-                                name="address_2">
+                                id="address_2" name="address_2">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -321,8 +385,12 @@
             @if(field_value('kyc_Floor', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="floor"
-                                class="input-item-label">{{__('Floor / Unit')}}</label>
+                        <label for="floor"  class="input-item-label">
+                            {{__('Floor / Unit')}}
+                            @if (field_value('kyc_Floor', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
                         <div class="input-wrap">
                             <input
                             {{ field_value('kyc_Floor', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text"
@@ -334,6 +402,7 @@
         </div>{{-- .row --}}
     </div>
 </div>
+
 @if($has_docs)
     <div class="form-step form-step3">
         <div class="form-step-head card-innr">
@@ -439,7 +508,7 @@
                     <h6 class="font-mid">{{ __('Upload Here Your National ID Back Side') }}</h6>
                     <div class="row align-items-center">
                         <div class="col-sm-8">
-                            
+
                             <div class="upload-box">
                                 <div class="upload-zone document_two">
                                     <div class="dz-message" data-dz-message>
@@ -499,59 +568,49 @@
             </div>
         </div>{{-- .step-head --}}
         <div class="form-step-fields card-innr">
-            <div class="col-md-12">
+            <div >
                 <p class="text-secondary font-bold">{{__('To avoid delays with verification process, please double-check to ensure the below requirements are fully met:')}}</p>
                 <ul class="list-check">
-                    {{--  <li>{{__('Chosen credential must not be expired.')}}</li>  --}}
                     <li>{{__('Document should be in good condition and clearly visible.')}}</li>
+                    <li>{{__('Document should be less than 90 days old.')}}</li> 
                     {{--  <li>{{__('There is no light glare or reflections on the card.')}}</li>
                     <li>{{__('File is at least 1 MB in size and has at least 300 dpi resolution.')}}</li>  --}}
                 </ul>
                 <div class="gaps-2x"></div>
             </div>
-            <div class="col-md-6">
-                <div class="input-item input-with-label">
-                    <label for="Proof of Address Type"
-                           class="input-item-label">{{__('Proof of Address Type')}} </label>
-                    <div class="input-wrap">
-                        <select class="select-bordered select-block" name="Proof of Address Type" id="proof_of_address-type"
-                                data-dd-class="search-on">
-                            <option value="">{{__('Select option')}}</option>
+            <div class="doc-upload doc-upload-d3">
+                <div class="row align-items-center">
+                    <div class="col-sm-8">
+                        <div class="input-item input-with-label">
+                            <label for="Proof of Address Type"
+                                class="input-item-label">{{__('Proof of Address Type')}} </label>
+                            <div class="input-wrap">
+                                <select class="select-bordered select-block" name="Proof of Address Type" id="proof_of_address-type"
+                                        data-dd-class="search-on">
+                                    <option value="">{{__('Select option')}}</option>
 
-                            <option >Utility Bill</option>
-                            <option >Phone Bill</option>
-                            <option >Bank Statement</option>
-                            <option >Tax Statement</option>
-                        </select>
-                    </div>
-                </div>{{-- .input-item --}}
-                <h6 class="font-mid">Upload Here Your Proof of Address Document</h6>
-                <div class="upload-box">
-                    <div class="upload-zone document_proof_of_address">
-                        <div class="dz-message" data-dz-message>
-                            <span class="dz-message-text">{{__('Drag and drop file')}}</span>
-                            <span class="dz-message-or">{{__('or')}}</span>
-                            <button type="button" class="btn btn-primary">{{__('Select')}}</button>
+                                    <option >Utility Bill</option>
+                                    <option >Phone Bill</option>
+                                    <option >Bank Statement</option>
+                                    <option >Tax Statement</option>
+                                </select>
+                            </div>
+                        </div>{{-- .input-item --}}
+                        
+                        <h6 class="font-mid">Upload Here Your Proof of Address Document</h6>
+                        <div class="upload-box">
+                            <div class="upload-zone document_proof_of_address">
+                                <div class="dz-message" data-dz-message>
+                                    <span class="dz-message-text">{{__('Drag and drop file')}}</span>
+                                    <span class="dz-message-or">{{__('or')}}</span>
+                                    <button type="button" class="btn btn-primary">{{__('Select')}}</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="document_proof_of_address"/>
                         </div>
                     </div>
-                    <input type="hidden" name="document_proof_of_address"/>
                 </div>
-            </div>{{-- .col --}}
-
-            {{--  <div class="sap sap-gap"></div>
-            <div class="col-md-6">
-                <div class="input-item input-with-label">
-                    <label for="document_no"
-                           class="input-item-label">{{__('Document Number')}}</label>
-                    <div class="input-wrap">
-                        <input {{ field_value('kyc_address1', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered"
-                               type="text" value="{{ isset($user_kyc) ? $user_kyc->address1 : ''}}"
-                               style="text-transform:uppercase" id="document_no"
-                               name="document_no">
-                    </div>
-                </div>
-            </div>  --}}
-
+            </div>
         </div>
     </div>
 @endif
@@ -573,7 +632,7 @@
                    required="required" data-msg-required="{{ __("Confirm that all information is correct.") }}">
             <label for="info-currect">{{__('All the personal information I have entered is correct.')}}</label>
         </div>
-        
+
         <div class="gaps-1x"></div>
         <button class="btn btn-primary" type="submit">{{__('Proceed to Verify')}}</button>
     </div>{{-- .step-fields --}}

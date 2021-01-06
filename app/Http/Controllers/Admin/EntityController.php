@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 use Auth;
 use Validator;
 use App\Models\Entity;
+use App\Models\EntityTypes;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,16 +27,47 @@ class EntityController extends Controller
         $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
 
         $entity = Entity::orderBy($order_by, $ordered)->paginate($per_page);
-
         $pagi = $entity->appends(request()->all());
-        // print("<pre>");
-        // print_r( $entity);
-        // print_r($is_page);
-        // print("</pre>");
-        // exit;
         return view('admin.entity', compact('entity', 'pagi', 'is_page'));
     }
     public function add_entity( Request $request){
-        return view('admin.entityadd');
+        $juris = \DB::table('jurisdictions')->get();
+        return view('admin.entityadd')->with('juris', $juris);
     }
+
+    public function addEntities( Request $request){
+        
+        $validator = Validator::make( $request->all(), [
+           "entityname" => "required|min:4",
+       ]);
+       if ( $validator->fails()){
+           $ret['msg']="warning";
+           $ret['message']= __('messages.form.wrong');
+           return response()->json($ret);
+       } else {
+           $entype = new EntityTypes;
+           $entype->entity_type_name = $request->entityname;
+           $entype->entity_type_abbrev_long = $request->longabb;
+
+           $entype->entity_type_abbrev_short = $request->shortabb;
+           $entype->entity_type_abbrev_long = $request->longabb;
+           // $entype->entity_type_abbrev_long = $request->abbformat;
+           $entype->entity_type_register = $request->register;
+           $entype->entity_type_loc_dir_sec = $request->requirement;
+           $entype->entity_principal_statute = $request->principal;
+           $entype->entity_type_lang = $request->language;
+           $entype->entity_type_cur = $request->currency;
+           $entype->entity_type_share_transfer = $request->transferability;
+           $entype->entity_type_share_cap_min = $request->minimum;
+           $entype->entity_type_shareholder_max = $request->maximum;
+           try{
+               $entype->save();
+           } catch(\Exception $e){
+               echo $e->getMessage();
+           }
+           $ret['msg']="success";
+           $ret['message']=__("message.insert.success");
+           return redirect()->route('admin.entity');
+       }
+   }
 }

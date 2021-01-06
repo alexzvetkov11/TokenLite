@@ -36,7 +36,7 @@
                             <div class="input-item input-with-label">
                                 <label for="email-address" class="input-item-label">{{__('Email Address')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="text" id="email-address" name="email" required="required" placeholder="{{ __('Enter Email Address') }}" value="{{ $user->email }}" readonly>
+                                    <input class="input-bordered" type="text" id="email-address" name="email" required="required" placeholder="{{ __('Enter Email Address') }}" value="{{ $user->email }}" disabled>
                                 </div>
                             </div>{{-- .input-item --}}
                         </div>
@@ -175,37 +175,37 @@
                 <h6 class="card-sub-title">Personal Information</h6>
                 <ul class="data-details-list">
                     <li>
-                        <div class="data-details-head">First Name</div>
-                        <div class="data-details-des">{!! $user->name !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">First Name</div>
+                        <div class="data-details-des" style="border-left:0px">{!! ($user->name)?$user->name: "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Last Name</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->lastName) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Last Name</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->lastName) ? (optional($user_kyc)->lastName): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Gender</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->gender) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Gender</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->gender)?(optional($user_kyc)->gender):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
 
                     <li>
-                        <div class="data-details-head">Date of Birth</div>
-                        <div class="data-details-des"> {!! (optional($user_kyc)->dob) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Date of Birth</div>
+                        <div class="data-details-des" style="border-left:0px"> {!! (optional($user_kyc)->dob)?(optional($user_kyc)->dob):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Country of Birth</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->country_of_birth) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Country of Birth</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->country_of_birth)?(optional($user_kyc)->country_of_birth):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Place of Birth</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->place_of_birth) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Place of Birth</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->place_of_birth)?(optional($user_kyc)->place_of_birth):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Nationality</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->nationality) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Nationality</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->nationality)?(optional($user_kyc)->nationality):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
                         <div class="data-details-head">National Identification Number</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->nationality_id) !!}</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->nationality_id)?(optional($user_kyc)->nationality_id):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
 
                 </ul>
@@ -213,33 +213,33 @@
                 <h6 class="card-sub-title">Address Information</h6>
                 <ul class="data-details-list">
                     <li>
-                        <div class="data-details-head">Country</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->country) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Country</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->country)?(optional($user_kyc)->country): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">State / Province</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->state) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">State / Province</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->state)?(optional($user_kyc)->state):"&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">City / Town</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->city) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">City / Town</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->city)?(optional($user_kyc)->city): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
 
                     <li>
-                        <div class="data-details-head">Zip / Postal Code</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->zip) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Zip / Postal Code</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->zip)?(optional($user_kyc)->zip): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Street Name</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->address1) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Street Name</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->address1)?(optional($user_kyc)->address1): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
-                        <div class="data-details-head">Street / Building Number</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->address2) !!}</div>
+                        <div class="data-details-head" style="border-bottom:1px solid #d2dde9;">Street/Building Number</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->address2)?(optional($user_kyc)->address2): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
                     <li>
                         <div class="data-details-head">Floor / Unit</div>
-                        <div class="data-details-des">{!! (optional($user_kyc)->floor) !!}</div>
+                        <div class="data-details-des" style="border-left:0px">{!! (optional($user_kyc)->floor)?(optional($user_kyc)->floor): "&nbsp;" !!}</div>
                     </li>{{-- li --}}
 
                 </ul>
@@ -274,9 +274,6 @@
                         <div class="card-head">
                             <h4 class="card-title">{!! __('Two-Factor Verification') !!}</h4>
                         </div>
-
-
-
                         <p>{!! __("Two-factor authentication is a method for protection of your account. When it is activated you are required to enter not only your password, but also a special code. You can receive this code in mobile app. Even if third party gets access to your password, they still won't be able to access your account without the 2FA code.") !!}</p>
                         <div class="d-sm-flex justify-content-between align-items-center pdt-1-5x">
                             <span class="text-light ucap d-inline-flex align-items-center"><span class="mb-0"><small>{{ __('Current Status:') }}</small></span> <span class="badge badge-{{ $user->google2fa == 1 ? 'info' : 'disabled' }} ml-2">{{ $user->google2fa == 1 ? __('Enabled') : __('Disabled') }}</span></span>

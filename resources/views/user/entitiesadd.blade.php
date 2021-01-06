@@ -25,7 +25,7 @@
                 </div>  --}}
                 
                 <div class="card-head has-aside pd-2x">
-                    <h4 class="card-title">Entities > Add Entity</h4>
+                    <h4 >Entities > Add Entity</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entity') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -56,12 +56,12 @@
                                         <input class="document-type" type="radio" name="documentType" value="newentity"
                                             id="docType-newentity" data-title="Passport"
                                             data-img="{{ asset('assets/images/vector-passport.png') }}" checked>
-                                        <label for="docType-newentity" >
+                                        <label for="docType-newentity"  >
                                             <div class="document-type-icon">
                                                 <img src="{{ asset('assets/images/icon-passport.png') }}" alt="">
                                                 <img src="{{ asset('assets/images/icon-passport-color.png') }}" alt="">
                                             </div>
-                                            <span>Incorporate New Entity</span>
+                                            <span style="text-transform: none;">Incorporate New Entity</span>
                                         </label>
                                     </div>
                                 </li>
@@ -75,7 +75,7 @@
                                                 <img src="{{ asset('assets/images/icon-national-id.png') }}" alt="">
                                                 <img src="{{ asset('assets/images/icon-national-id-color.png') }}" alt="">
                                             </div>
-                                            <span>Add Existing Entity</span>
+                                            <span style="text-transform: none;">Add Existing Entity</span>
                                         </label>
                                     </div>
                                 </li>
@@ -100,7 +100,9 @@
                                         <label for="jurisdictions" class="input-item-label">Supported Jurisdictions</label>
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="jurisdictions" id="jurisdictions" data-dd-class="search-on">
-                                                <option value="" default>Jurisdictions</option>
+                                                @foreach ($juris as $jur)
+                                                    <option value="{{ $jur->jurisdiction_name }}"> {{ $jur->jurisdiction_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -158,9 +160,9 @@
                                     <div class="input-item input-with-label">
                                         <label for="first-name" class="input-item-label">Entity Name</label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" type="text" id="first-name" name="first_name" value="Mercer Worth">
+                                            <input class="input-bordered" onchange="newEntityName(this.value)" type="text" id="first-name" name="first_name" value="" placeholder="Enter Entity Name">
                                             <div class="gaps-1x"> </div>
-                                            <div> <strong>Full Name: </strong> Mercer Worth B.V.</p></div>
+                                            <div> <strong>Full Name: </strong><span id="newEntityName"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -260,9 +262,9 @@
                                     <div class="input-item input-with-label">
                                         <label for="first-name" class="input-item-label">Entity Name</label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" type="text" id="first-name" name="first_name" value="Mercer Worth">
+                                            <input class="input-bordered" onchange="addEntityName(this.value)" type="text" id="first-name" name="first_name" value="" placeholder="Entity Name">
                                             <div class="gaps-1x"> </div>
-                                            <div> <strong>Full Name: </strong> Mercer Worth B.V.</p></div>
+                                            <div> <strong>Full Name: </strong> <span id="addEntityName"> </span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -358,7 +360,17 @@
                     y[i].style.display="block";
             }
         }
-        
-
+        function newEntityName( val){
+            if ( val.length>0)
+                document.getElementById("newEntityName").innerText = val + " B.V.";
+            else
+                document.getElementById("newEntityName").innerText = "";
+        }
+        function addEntityName( val){
+            if ( val.length>0)
+                document.getElementById("addEntityName").innerText = val + " B.V.";
+            else
+                document.getElementById("addEntityName").innerText = "";
+        }
     </script>
 @endsection

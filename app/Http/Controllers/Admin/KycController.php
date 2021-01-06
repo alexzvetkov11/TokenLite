@@ -100,7 +100,6 @@ class KycController extends Controller
     {
         $type = $request->input('req_type');
         $available_wallets = KYC::WALLETS;
-
         if ($type == 'kyc_settings') {
             return view('modals.kyc_settings', compact('available_wallets'))->render();
         }
