@@ -54,21 +54,22 @@
                     </div>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative">
-                            <span class="user-welcome d-none d-lg-inline-block">Hello! {{ ucfirst(auth()->user()->role) }}</span>
+                            <span class="user-welcome d-none d-lg-inline-block">Hello! {{ ucfirst(auth()->user()->first_name) }}</span>
                             <a class="toggle-tigger user-thumb" href="#"><em class="ti ti-user"></em></a>
                             <div class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown">
                                 <div class="user-status">
-                                    <h6 class="user-status-title">{{ auth()->user()->name }} <span class="text-white-50">({{ set_id(auth()->user()->id) }})</span></h6>
+                                    <h6 class="user-status-title">{{ auth()->user()->role }} <span class="text-white-50">({{ set_id(auth()->user()->id) }})</span></h6>
                                     <div class="user-status-balance"><small>{{ auth()->user()->email }}</small></div>
                                 </div>
-                                <ul class="user-links">
-                                    <li><a href="{{ route('admin.profile') }}"><i class="far fa-address-card"></i></em>  Account Details</a></li>
-
-                                    <li><a href="{{ route('admin.profile.activity') }}"><i class="fas fa-eye"></i>  Activity</a></li>
-                                </ul>
                                 <ul class="user-links bg-light">
+                                    <li><a href="{{ route('admin.profile') }}"><i class="far fa-address-card mr-2"></i>Account Details</a></li>
+
+                                    <li><a href="{{ route('admin.profile.activity') }}"><i class="ti ti-eye"></i>Activity</a></li>
                                     <li><a href="{{ route('log-out') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="ti ti-power-off"></i>Logout</a></li>
                                 </ul>
+                                {{-- <ul class="user-links bg-light">
+                                    
+                                </ul> --}}
                             </div>
                         </li>{{-- .topbar-nav-item --}}
                     </ul>{{-- .topbar-nav --}}
@@ -81,12 +82,12 @@
                     <ul class="navbar-menu" id="main-nav">
                         <li><a href="{{ route('admin.home') }}"><em class="ikon ikon-dashboard"></em> Dashboard</a></li>
                         @if(gup('user')||gup('view_user'))
-                            <li{!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
+                            <li {!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
                                 <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a>
                             </li>
                         @endif
                         @if(gup('kyc')||gup('view_kyc'))
-                            <li{!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                            <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
                                 <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a>
                             </li>
                         @endif

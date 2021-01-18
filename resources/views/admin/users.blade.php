@@ -97,16 +97,16 @@
                                                     <li><h6 class="dropdown-title">Order By</h6></li>
                                                     <li {!! (gmvl('user_order_by', 'id')=='id') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=id">User ID</a></li>
-                                                    <li {!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
-                                                        <a href="#" data-meta="orderby=name">Name</a></li>
+                                                    <li {!! (gmvl('user_order_by', 'id')=='first_name') ? ' class="active"' : '' !!}>
+                                                        <a href="#" data-meta="orderby=first_name">Name</a></li>
                                                     {{-- <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=token">Token</a></li> --}}
                                                 </ul>
                                                 <ul class="dropdown-list">
                                                     <li><h6 class="dropdown-title">Order</h6></li>
-                                                    <li{!! (gmvl('user_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="ordered=DESC">DESC</a></li>
-                                                    <li{!! (gmvl('user_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_ordered', 'DESC')=='ASC') ? 'class="active"' : '' !!}>
                                                         <a href="#" data-meta="ordered=ASC">ASC</a></li>
                                                 </ul>
                                             </form>
@@ -231,8 +231,8 @@
                 <table class="data-table user-list">
                     <thead>
                         <tr class="data-item data-head">
-                            <th class="data-col data-col-wd-md filter-data dt-user">Full Name</th>
-                            <th class="data-col data-col-wd-md dt-email">Email</th>
+                            <th class="data-col data-col-wd-ld filter-data dt-user">Full Name</th>
+                            <th class="data-col data-col-wd-ld dt-email">Email</th>
                             <th class="data-col dt-verify">Verified Status</th>
                             <th class="data-col dt-login">Last Login</th>
                             <th class="data-col dt-status">Status</th>
@@ -242,7 +242,7 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr class="data-item">
-                            <td class="data-col data-col-wd-md dt-user">
+                            <td class="data-col data-col-wd-ld dt-user">
                                 <div class="d-flex align-items-center">
                                     <div class="fake-class">
                                         <span class="lead user-name text-wrap">{{  $user->first_name ." ". $user->last_name }}</span>
@@ -254,7 +254,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="data-col data-col-wd-md dt-email">
+                            <td class="data-col data-col-wd-ld dt-email">
                                 <span class="sub sub-s2 sub-email text-wrap">{{ explode_user_for_demo($user->email, auth()->user()->type ) }}</span>
                             </td>
                             <!--<td class="data-col dt-token">-->

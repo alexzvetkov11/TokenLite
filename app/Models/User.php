@@ -157,13 +157,15 @@ class User extends Authenticatable // implements MustVerifyEmail
                         ->when($request->valid, function($q) use ($request){
                             $kyc_ids = KYC::where('status', 'approved')->pluck('userId');
                             if($request->valid == 'email'){
-                                $q->whereNotNull('email_verified_at');
+                                // $q->whereNotNull('email_verified_at');
+                                $q->whereNull('email_verified_at');
                             }
                             if($request->valid == 'kyc'){
-                                $q->whereIn('id', $kyc_ids);
+                                // $q->whereIn('id', $kyc_ids);
+                                $q->whereNotIn('id', $kyc_ids);
                             }
                             if($request->valid == 'both'){
-                                $q->whereIn('id', $kyc_ids)->whereNotNull('email_verified_at');
+                                $q->whereNotIn('id', $kyc_ids)->whereNull('email_verified_at');
                             }
                         })
                         ->when($request->search, function($q) use ($request){

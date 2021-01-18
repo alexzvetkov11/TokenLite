@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Admin;
  * @author Softnio
  * @version 1.1.3
  */
+
 use App\Http\Controllers\Controller;
 use App\Mail\EmailToUser;
 use App\Models\GlobalMeta;
@@ -34,30 +35,36 @@ class UsersController extends Controller
      */
     public function index(Request $request, $role = '')
     {
-        $role_data = '';
-        $per_page = gmvl('user_per_page', 10);
-        $order_by = (gmvl('user_order_by', 'id') == 'token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
-        $ordered = gmvl('user_ordered', 'DESC');
-        $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
+        try {
 
-        if (!empty($role)) {
-            $users = User::whereNotIn('status', ['deleted'])->where('role', $role)->orderBy($order_by, $ordered)->paginate($per_page);
-        } else {
-            $users = User::whereNotIn('status', ['deleted'])->orderBy($order_by, $ordered)->paginate($per_page);
+
+            $role_data = '';
+            $per_page = gmvl('user_per_page', 10);
+            $order_by = (gmvl('user_order_by', 'id') == 'token') ? 'tokenBalance' : gmvl('user_order_by', 'first_name');
+            $ordered = gmvl('user_ordered', 'DESC');
+            $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
+
+            //$order_by = "first_name";
+            if (!empty($role)) {
+                $users = User::whereNotIn('status', ['deleted'])->where('role', $role)->orderBy($order_by, $ordered)->paginate($per_page);
+            } else {
+                $users = User::whereNotIn('status', ['deleted'])->orderBy($order_by, $ordered)->paginate($per_page);
+            }
+
+            if ($request->s) {
+                $users = User::AdvancedFilter($request)
+                    ->orderBy($order_by, $ordered)->paginate($per_page);
+            }
+
+            if ($request->filter) {
+                $users = User::AdvancedFilter($request)
+                    ->orderBy($order_by, $ordered)->paginate($per_page);
+            }
+            $pagi = $users->appends(request()->all());
+            return view('admin.users', compact('users', 'role_data', 'is_page', 'pagi'));
+        } catch (\Exception $e) {
+            echo $e->getMessage();
         }
-
-        if ($request->s) {
-            $users = User::AdvancedFilter($request)
-                ->orderBy($order_by, $ordered)->paginate($per_page);
-        }
-
-        if ($request->filter) {
-            $users = User::AdvancedFilter($request)
-                ->orderBy($order_by, $ordered)->paginate($per_page);
-        }
-
-        $pagi = $users->appends(request()->all());
-        return view('admin.users', compact('users', 'role_data', 'is_page', 'pagi'));
     }
 
     public function delete_users($user_id)
@@ -72,7 +79,6 @@ class UsersController extends Controller
 
             $ret['msg'] = 'success';
             $ret['message'] = __('User Delete Successfully');
-
         } else {
             $ret['msg'] = 'error';
             $ret['message'] = __('User Not Found');
@@ -221,7 +227,6 @@ class UsersController extends Controller
                         $ret['link'] = route('admin.users');
                         $ret['msg'] = 'warning';
                         $ret['message'] = __('messages.insert.success', ['what' => 'User']) . ' ' . __('messages.email.failed');
-
                     }
                 } else {
                     $ret['msg'] = 'warning';
@@ -460,5 +465,4 @@ class UsersController extends Controller
         }
         return back()->with([$ret['msg'] => $ret['message']]);
     }
-
 }

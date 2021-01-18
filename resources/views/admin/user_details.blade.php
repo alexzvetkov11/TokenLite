@@ -50,9 +50,9 @@
                             <span class="data-details-title">User Status</span>
                             <span class="badge badge-{{ __status($user->status, 'status' ) }} ucap">{{ $user->status }}</span>
                         </div>
-                        <div>
+                        <div class="status_user fake-class">
                             <span class="data-details-title">Verified Status</span>
-                            <ul class="data-vr-list">
+                            <ul class="data-vr-list pt-1">
                                 <li><div class="data-state data-state-sm data-state-{{ $user->email_verified_at !== null ? 'approved' : 'pending'}}"></div> Email</li>
                                 @php
                                     if(isset($user->kyc_info->status)){
@@ -96,7 +96,7 @@
                         </li>{{-- li --}}
                         <li>
                             <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Date of Birth</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->dob ? _date(optional($user->kyc_infoSingle)->dob) : '&nbsp;' !!}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! optional($user->kyc_infoSingle)->dob ? _date(optional($user->kyc_infoSingle)->dob,"d M Y") : '&nbsp;' !!}</div>
                         </li>{{-- li --}}
                         <li>
                             <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country of Birth</div>
