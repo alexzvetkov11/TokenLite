@@ -58,8 +58,6 @@
                     </div>
                 </div>
 
-
-
                 @if($entity->total() > 0)
                 <table class="data-table dt-filter-init user-list">
                     <thead>
@@ -74,7 +72,7 @@
                         @foreach($entity as $en)
                         <tr class="data-item">
                             <td class="data-col dt-user">
-                                <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
+                                <span class="lead user-name text-wrap"><a href="{{ route('admin.entity.typedetail', $en->id) }}"> {{ $en->entity_type }} </a></span>
                             </td>
                             <td class="data-col dt-email">
                                 <span class="user-name text-wrap">{{ $en->jurisdiction }}</span>

@@ -20,11 +20,12 @@ class EntitiesController extends Controller
 {
     public function index(Request $request, $status = '')
     {
-        return view('user.entities', compact('entity', 'pagi', 'is_page'));
+        //return view('user.entities', compact('entity', 'pagi', 'is_page'));
+        return view('user.entities');
     }
     public function add_entities( Request $request){
         $juris = Jurisdictions::select('jurisdiction_name')->get();
-         
+
         return view('user.entitiesadd')->with(["juris"=> $juris]);
     }
 }

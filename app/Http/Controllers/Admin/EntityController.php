@@ -36,10 +36,10 @@ class EntityController extends Controller
     }
 
     public function addEntities( Request $request){
-        
+
         $validator = Validator::make( $request->all(), [
            "entityname" => "required|min:4",
-       ]);
+        ]);
        if ( $validator->fails()){
            $ret['msg']="warning";
            $ret['message']= __('messages.form.wrong');
@@ -69,5 +69,24 @@ class EntityController extends Controller
            $ret['message']=__("message.insert.success");
            return redirect()->route('admin.entity');
        }
-   }
+    }
+
+    public function typedetail( Request $request){
+        // $validator = Validator::make( $request->all(), [
+        //     "id" => "required",
+        // ]);
+        // if ($validator->fails()){
+        //     $ret['msg']="warning";
+        //     $ret['message']= __('messages.form.wrong');
+        //     return back()->with([$ret['msg'] => $ret['message']]);
+        // } else {
+        //     $entity_one = Entity::where('id', $request->id)->first();
+        //     dd($entity_one);
+        //     exit;
+        //     return view('admin.entitydetail')->with('obj', $entity_one);
+        // }
+        
+        $entity_one = Entity::where('id', $request->id)->first();
+        return view('admin.entitydetail')->with('obj', $entity_one);
+    }
 }

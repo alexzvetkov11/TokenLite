@@ -8,6 +8,7 @@
         @include('vendor.notice')
         <div class="card content-area content-area-mh">
             <div class="card-innr">
+
                 <div class="card-head has-aside">
                     <h4 class="card-title">Entity Type</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">

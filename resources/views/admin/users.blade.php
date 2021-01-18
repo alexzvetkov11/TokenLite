@@ -12,7 +12,7 @@
                 <div class="card-head has-aside">
                     <h4 class="card-title">
                         {{-- {{ ucfirst($is_page) }}  --}}
-                        User List</h4>
+                        Users</h4>
                     <div class="relative d-inline-block d-md-none">
                         <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                         <div class="toggle-class dropdown-content dropdown-content-center-left pd-2x">
@@ -61,7 +61,7 @@
                             <ul class="btn-grp guttar-8px">
                                 <li>
                                     <form action="{{ route('admin.ajax.users.delete') }}" method="POST">
-                                        <li><a href="javascript:void(0)" title="Delete all unvarified users" data-toggle="tooltip" class="btn btn-danger btn-icon btn-outline btn-sm delete-unverified-user mr-md-2"> <em class="ti ti-trash"></em> </a></li>
+                                        <li><a href="javascript:void(0)" title="Delete all unverified users" data-toggle="tooltip" class="btn btn-danger btn-icon btn-outline btn-sm delete-unverified-user mr-md-2"> <em class="ti ti-trash"></em> </a></li>
                                     </form>
                                 </li>
 
@@ -86,18 +86,18 @@
                                             <form class="update-meta" action="#" data-type="user_page_meta">
                                                 <ul class="dropdown-list">
                                                     <li><h6 class="dropdown-title">Show</h6></li>
-                                                    <li{!! (gmvl('user_per_page', 10)==10) ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_per_page', 10)==10) ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="perpage=10">10</a></li>
-                                                    <li{!! (gmvl('user_per_page', 10)==20) ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_per_page', 10)==20) ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="perpage=20">20</a></li>
-                                                    <li{!! (gmvl('user_per_page', 10)==50) ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_per_page', 10)==50) ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="perpage=50">50</a></li>
                                                 </ul>
                                                 <ul class="dropdown-list">
                                                     <li><h6 class="dropdown-title">Order By</h6></li>
-                                                    <li{!! (gmvl('user_order_by', 'id')=='id') ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_order_by', 'id')=='id') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=id">User ID</a></li>
-                                                    <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
+                                                    <li {!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=name">Name</a></li>
                                                     {{-- <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=token">Token</a></li> --}}
@@ -163,7 +163,7 @@
                                             <label class="input-item-label input-item-label-s2 text-exlight">Account Status</label>
                                             <select name="state" class="select select-sm select-block select-bordered" data-dd-class="search-off">
                                                 <option value="">Any Status</option>
-                                                <option {{ request()->get('state') == 'active' ? ' selected' : '' }} value="active">Actived</option>
+                                                <option {{ request()->get('state') == 'active' ? ' selected' : '' }} value="active">Active</option>
                                                 <option {{ request()->get('state') == 'suspend' ? ' selected' : '' }} value="suspend">Suspended</option>
                                             </select>
                                         </div>
@@ -174,9 +174,9 @@
                                             <label class="input-item-label input-item-label-s2 text-exlight">Verified Status</label>
                                             <select name="valid" class="select select-sm select-block select-bordered" data-dd-class="search-off">
                                                 <option value="">Anything</option>
-                                                <option{{ request()->get('valid') == 'email' ? ' selected' : '' }} value="email">Email Verified</option>
-                                                <option{{ request()->get('valid') == 'kyc' ? ' selected' : '' }} value="kyc">KYC Verified</option>
-                                                <option{{ request()->get('valid') == 'both' ? ' selected' : '' }} value="both">Both Verified</option>
+                                                <option {{ request()->get('valid') == 'email' ? ' selected' : '' }} value="email">Email Unverified</option>
+                                                <option {{ request()->get('valid') == 'kyc' ? ' selected' : '' }} value="kyc">KYC Unverified</option>
+                                                <option {{ request()->get('valid') == 'both' ? ' selected' : '' }} value="both">Both Unverified</option>
                                             </select>
                                         </div>
                                     </div>

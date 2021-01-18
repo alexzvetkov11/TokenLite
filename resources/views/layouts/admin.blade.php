@@ -82,7 +82,7 @@
                         <li><a href="{{ route('admin.home') }}"><em class="ikon ikon-dashboard"></em> Dashboard</a></li>
                         @if(gup('user')||gup('view_user'))
                             <li{!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
-                                <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users List</a>
+                                <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a>
                             </li>
                         @endif
                         @if(gup('kyc')||gup('view_kyc'))
