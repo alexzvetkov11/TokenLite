@@ -20,7 +20,7 @@
 
             <div class="<!--kyc-form-steps--> card mx-lg-4">
                 <div class="card-head has-aside pd-2x">
-                    <h4 >Entities > Add Entity Type</h4>
+                    <div style="font-size:1.29em; color:#342d6e"> <b>Entities ></b> <span style="font-size:0.8em">Add Entity Type</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entity') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -138,9 +138,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="register" class="input-item-label">{{__('Register')}}</label>
+                                        <label for="register" class="input-item-label">{{__('Commercial Register')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" class="input-bordered" id="register" name="register" placeholder="Register">
+                                            <input type="text" class="input-bordered" id="register" name="register" placeholder="Commercial Register">
                                         </div>
                                     </div>
                                 </div>

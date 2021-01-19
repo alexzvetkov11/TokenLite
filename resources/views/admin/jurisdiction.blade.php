@@ -62,8 +62,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="float-right position-relative">
-                            <a href="#" class="btn btn-light bg-white btn-sm btn-icon toggle-tigger btn-outline"><em class="ti ti-settings"></em> </a>
-                            <div class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
+                            <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em class="ti ti-settings"></em> </a>
+                            <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
                                 <form class="update-meta" action="#" data-type="jurisdiction_page_meta">
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Show</h6></li>

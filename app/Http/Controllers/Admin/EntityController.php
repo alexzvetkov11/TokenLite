@@ -23,7 +23,7 @@ class EntityController extends Controller
         $role_data  = '';
         $per_page   = gmvl('entity_per_page', 10);
         $order_by   = gmvl('entity_order_by', 'entity_type');
-        $ordered    = gmvl('entity_ordered', 'ASC');
+        $ordered    = gmvl('entity_ordered', 'DESC');
         $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
 
         $entity = Entity::orderBy($order_by, $ordered)->paginate($per_page);

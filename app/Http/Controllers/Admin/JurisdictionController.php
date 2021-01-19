@@ -30,7 +30,6 @@ class JurisdictionController extends Controller
         // } catch (\Exception $e) {
         //     echo $e->getMessage();
         // }
-        print("here");
         $pagi = $juris->appends(request()->all());
 
         return view('admin.jurisdiction', compact('juris', 'pagi', 'is_page'));

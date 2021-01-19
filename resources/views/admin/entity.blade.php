@@ -23,43 +23,40 @@
                         <div class="float-right position-relative">
                             <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em class="ti ti-settings"></em> </a>
                             <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
-                                <ul class="dropdown-list dropdown-list-s2">
-                                    <li><h6 class="dropdown-title">{{ __('Types') }}</h6></li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-all" checked value="">
-                                        <label for="type-all">{{ __('Any Type') }}</label>
-                                    </li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-type" id="type-purchase" value="Purchase">
-                                        <label for="type-purchase">{{ __('Purchase') }}</label>
-                                    </li>
-                                </ul>
-                                <ul class="dropdown-list dropdown-list-s2">
-                                    <li><h6 class="dropdown-title">{{ __('Status') }}</h6></li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-all" checked value="">
-                                        <label for="status-all">{{ __('Show All') }}</label>
-                                    </li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" id="status-approved" value="approved">
-                                        <label for="status-approved">{{ __('Approved') }}</label>
-                                    </li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="pending" id="status-pending">
-                                        <label for="status-pending">{{ __('Pending') }}</label>
-                                    </li>
-                                    <li>
-                                        <input class="data-filter input-checkbox input-checkbox-sm" type="radio" name="tnx-status" value="canceled" id="status-canceled">
-                                        <label for="status-canceled">{{ __('Canceled') }}</label>
-                                    </li>
-                                </ul>
+                                <form class="update-meta" action="#" data-type="entity_page_meta">
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Show</h6></li>
+                                        <li {!! (gmvl('entity_per_page', 10)==10) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=10">10</a></li>
+                                        <li {!! (gmvl('entity_per_page', 10)==20) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=20">20</a></li>
+                                        <li {!! (gmvl('entity_per_page', 10)==50) ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="perpage=50">50</a></li>
+                                    </ul>
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Order By</h6></li>
+                                        <li {!! (gmvl('entity_order_by', 'entity_type')=='entity_type') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=entity_type">Entity Type</a></li>
+                                        {{-- <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=name">Name</a></li>
+                                        <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=token">Token</a></li>
+                                    </ul> --}}
+                                    <ul class="dropdown-list">
+                                        <li><h6 class="dropdown-title">Order</h6></li>
+                                        <li {!! (gmvl('entity_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="ordered=DESC">DESC</a></li>
+                                        <li {!! (gmvl('entity_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="ordered=ASC">ASC</a></li>
+                                    </ul>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 @if($entity->total() > 0)
-                <table class="data-table dt-filter-init user-list">
+                <table class="data-table dt-filter-init user-list pt-3">
                     <thead>
                         <tr class="data-item data-head">
                             <th class="data-col filter-data dt-user ">Entity Type</th>
@@ -87,8 +84,8 @@
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
                                         <ul class="dropdown-list more-menu-{{$en->id}}">
                                             <li><a href="#"><em class="far fa-eye"></em> View Details</a></li>
-                                            <li><a class="user-email-action" href="#" data-uid="{{ $en->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Statutory Framework</a></li>
-                                            <li><a href="javascript:void(0)" data-uid="{{ $en->id }}" data-type="deactivate" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Deactivate</a></li>
+                                            {{-- <li><a class="user-email-action" href="#" data-uid="{{ $en->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Statutory Framework</a></li>
+                                            <li><a href="javascript:void(0)" data-uid="{{ $en->id }}" data-type="deactivate" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Deactivate</a></li> --}}
                                             <li>
                                                 {{--  <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.entity.delete_users',encrypt($en->id))}}">  --}}
                                                 <a href="#" data-uid="{{ $en->id }}" data-type="delete_user" class="user-action front">
