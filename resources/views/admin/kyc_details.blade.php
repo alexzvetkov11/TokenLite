@@ -48,7 +48,7 @@ $space = "&nbsp;";
                     @if($kyc->reviewedBy != 0)
                     <div class="fake-class">
                         <span class="data-details-title">Checked By</span>
-                        <span class="data-details-info">{{ $kyc->checker_info->name }}</span>
+                        <span class="data-details-info">{{ $kyc->checker_info->first_name .' '. $kyc->checker_info->last_name }}</span>
                     </div>
                     @else
                     <div class="fake-class">

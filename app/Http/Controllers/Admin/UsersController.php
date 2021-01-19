@@ -43,7 +43,7 @@ class UsersController extends Controller
             $order_by = (gmvl('user_order_by', 'id') == 'token') ? 'tokenBalance' : gmvl('user_order_by', 'first_name');
             $ordered = gmvl('user_ordered', 'DESC');
             $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
-
+            
             //$order_by = "first_name";
             if (!empty($role)) {
                 $users = User::whereNotIn('status', ['deleted'])->where('role', $role)->orderBy($order_by, $ordered)->paginate($per_page);

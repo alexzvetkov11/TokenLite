@@ -19,11 +19,10 @@ class JurisdictionController extends Controller
 {
     public function index(Request $request)
     {
-        $role_data = '';
+        //$role_data = '';
         $per_page = gmvl('jurisdiction_per_page', 10);
-        // $order_by = gmvl('jurisdiction_order_by', 'jurisdiction_id');
         $order_by = gmvl('jurisdiction_order_by', 'id');
-        $ordered = gmvl('id', 'ASC');
+        $ordered = gmvl('jurisdiction_ordered', 'DESC');
         $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
         $juris = Jurisdictions::orderby($order_by, $ordered)->paginate($per_page);
         // try {
@@ -31,6 +30,7 @@ class JurisdictionController extends Controller
         // } catch (\Exception $e) {
         //     echo $e->getMessage();
         // }
+        print("here");
         $pagi = $juris->appends(request()->all());
 
         return view('admin.jurisdiction', compact('juris', 'pagi', 'is_page'));

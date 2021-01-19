@@ -9,7 +9,7 @@
         <div class="card content-area content-area-mh">
             <div class="card-innr">
                 <div class="card-head has-aside">
-                    <h4 class="card-title">Jurisdiction</h4>
+                    <h4 class="card-title">Jurisdictions</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="#" data-toggle="modal" data-target="#addJurisdiction" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">Jurisdiction</span></span>
@@ -64,20 +64,20 @@
                         <div class="float-right position-relative">
                             <a href="#" class="btn btn-light bg-white btn-sm btn-icon toggle-tigger btn-outline"><em class="ti ti-settings"></em> </a>
                             <div class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
-                                <form class="update-meta" action="#" data-type="user_page_meta">
+                                <form class="update-meta" action="#" data-type="jurisdiction_page_meta">
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Show</h6></li>
-                                        <li{!! (gmvl('user_per_page', 10)==10) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('jurisdiction_per_page', 10)==10) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=10">10</a></li>
-                                        <li{!! (gmvl('user_per_page', 10)==20) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('jurisdiction_per_page', 10)==20) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=20">20</a></li>
-                                        <li{!! (gmvl('user_per_page', 10)==50) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('jurisdiction_per_page', 10)==50) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=50">50</a></li>
                                     </ul>
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order By</h6></li>
-                                        <li{!! (gmvl('user_order_by', 'id')=='id') ? ' class="active"' : '' !!}>
-                                            <a href="#" data-meta="orderby=id">Jurisdiction</a></li>
+                                        <li {!! (gmvl('jurisdiction_order_by', 'jurisdiction_name')=='jurisdiction_name') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=jurisdiction_name">Jurisdiction</a></li>
                                         {{-- <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="orderby=name">Name</a></li>
                                         <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
@@ -85,9 +85,9 @@
                                     </ul> --}}
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order</h6></li>
-                                        <li{!! (gmvl('user_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('jurisdiction_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="ordered=DESC">DESC</a></li>
-                                        <li{!! (gmvl('user_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('jurisdiction_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="ordered=ASC">ASC</a></li>
                                     </ul>
                                 </form>
@@ -98,11 +98,11 @@
 
 
                 @if($juris->total() > 0)
-                <table class="data-table dt-filter-init user-list" >
+                <table class="data-table dt-filter-init user-list pt-3" >
                     <thead>
                         <tr class="data-item data-head">
                             {{--  <th class="data-col filter-data dt-user ">Entity Type</th>  --}}
-                            <th class="data-col filter-data dt-email">Jurisdiction</th>
+                            <th class="data-col filter-data dt-email">Jurisdictions</th>
                             {{--  <th class="data-col dt-status"> Status</th>  --}}
                             <th class="data-col"></th>
                         </tr>
