@@ -63,7 +63,6 @@
                                 </div>
                                 <ul class="user-links bg-light">
                                     <li><a href="{{ route('admin.profile') }}"><i class="far fa-address-card mr-2"></i>Account Details</a></li>
-
                                     <li><a href="{{ route('admin.profile.activity') }}"><i class="ti ti-eye"></i>Activity</a></li>
                                     <li><a href="{{ route('log-out') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="ti ti-power-off"></i>Logout</a></li>
                                 </ul>
@@ -109,7 +108,7 @@
                         </li>--}}
 {{--                        @endif--}}
                         @if(nio_module()->has('Withdraw') && has_route('withdraw:admin.index') && gup('withdraw'))
-                        <li{!! ((is_page('withdraw'))? ' class="active"' : '') !!}>
+                        <li {!! ((is_page('withdraw'))? ' class="active"' : '') !!}>
                             <a href="{{ route('withdraw:admin.index') }}"><em class="ikon ikon-wallet"></em> Withdraw</a>
                         </li>
                         @endif
@@ -125,6 +124,7 @@
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-settings"></em> Settings</a>
                             <ul class="navbar-dropdown">
                                 <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Setting</a></li>
+                                <li><a href="{{ route('admin.articles') }}">Articles</a></li>
                                 <li><a href="{{ route('admin.jurisdiction') }}">Jurisdictions</a></li>
                                 <li><a href="{{ route('admin.settings') }}">Website Setting</a></li>
                                 <li><a href="{{ route('admin.entity') }}">Entity Types</a></li>

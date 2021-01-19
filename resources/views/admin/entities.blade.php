@@ -110,8 +110,8 @@
                         </div>
 
                         <div class="search-adv-wrap hide">
-                            <form class="adv-search" id="adv-search" action="{{ route('admin.users') }}" method="GET"
-                                autocomplete="off">
+                            <form class="adv-search" id="adv-search"  method="GET" autocomplete="off">
+                                {{-- action="{{ route('admin.users') }}" --}}
                                 <div class="adv-search">
                                     <div class="row align-items-end guttar-20px guttar-vr-15px">
                                         <div class="col-lg-6">

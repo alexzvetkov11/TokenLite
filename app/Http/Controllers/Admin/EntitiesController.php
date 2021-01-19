@@ -1,13 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-/**
- * KYC Controller
- *
- * @package TokenLite
- * @author Softnio
- * @version 1.1.0
- */
+
 use Auth;
 use Validator;
 use App\Models\Setting;
