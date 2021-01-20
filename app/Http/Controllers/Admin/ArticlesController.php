@@ -12,16 +12,24 @@ class ArticlesController extends Controller
 {
     public function index(Request $request)
     {
-        $role_data  = '';
-        $per_page   = gmvl('article_per_page', 10);
-        $order_by   = gmvl('article_order_by', 'article_label');
-        $ordered    = gmvl('article_ordered', 'DESC');
-        $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
+        try{
+            $role_data  = '';
+            $per_page   = gmvl('article_per_page', 10);
+            $order_by   = gmvl('article_order_by', 'article_label');
+            $ordered    = gmvl('article_ordered', 'DESC');
+            $is_page    = (empty($role) ? 'all' : ($role=='user' ? 'investor' : $role));
+    
+            $articles = Articles::orderBy($order_by, $ordered)->paginate($per_page);
+    
+            $pagi = $articles->appends(request()->all());
+            return view('admin.articles', compact('articles', 'pagi', 'is_page'));
+        } catch(\Exception $e){
+            echo $e->getMessage();
+        }
+        
+    }
+    public function delArticle($article_id){
 
-        $articles = Articles::orderBy($order_by, $ordered)->paginate($per_page);
-
-        $pagi = $articles->appends(request()->all());
-        return view('admin.articles', compact('articles', 'pagi', 'is_page'));
     }
     
 }

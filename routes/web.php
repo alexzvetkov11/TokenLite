@@ -106,7 +106,9 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
     Route::get('/entity/user-entity-type/{id}', 'Admin\EntityController@typedetail')->middleware(['ico', 'super_admin'])->name('entity.typedetail');
-    Route::get('/articles', 'Admin/ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
+    Route::get('/articles', 'Admin\ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
+    
+
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
     Route::get('/payment-methods/edit/{slug}', 'Admin\PaymentMethodController@edit')->middleware(['ico', 'super_admin'])->name('payments.setup.edit');
     Route::get('/stages', 'Admin\IcoController@index')->middleware('ico')->name('stages');
@@ -166,6 +168,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/jurisdiction/edit', 'Admin\JurisdictionController@editJuris')->middleware(['ico', 'demo_user'])->name('juris.edit');
         Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
         Route::get('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
+        Route::get('/article/delete/{article_id}', 'Admin\ArticlesController@delArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
 
         Route::post('/entities/add', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entities.add');
 

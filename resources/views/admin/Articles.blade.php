@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page).'Articles')
+@section('title', 'Articles')
 @section('content')
 
 <div class="page-content">
@@ -51,24 +51,24 @@
                 </div>
 
 
-                @if($juris->total() > 0)
+                @if($articles->total() > 0)
                 <table class="data-table dt-filter-init user-list pt-3" >
                     <thead>
                         <tr class="data-item data-head">
-                            {{--  <th class="data-col filter-data dt-user ">Entity Type</th>  --}}
-                            <th class="data-col filter-data dt-email">Jurisdictions</th>
-                            {{--  <th class="data-col dt-status"> Status</th>  --}}
+                            <th class="data-col filter-data dt-user ">Article Title</th> 
+                            <th class="data-col filter-data dt-email">Statue Type</th>
+                            {{-- <th class="data-col dt-status"> Status</th>  --}}
                             <th class="data-col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($juris as $jur)
+                        @foreach($articles as $article)
                         <tr class="data-item ">
-                            {{-- <td class="data-col dt-user">
-                                <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
-                            </td>  --}}
+                            <td class="data-col dt-user">
+                                <span class="lead user-name text-wrap">{{ $article->article_label }}</span>
+                            </td> 
                             <td class="data-col dt-email" >
-                                <span class="lead user-name text-wrap">{{ $jur->jurisdiction_name }}</span>
+                                <span class="lead user-name text-wrap">{{ $article->statue_type }}</span>
                             </td>
                             {{--  <td class="data-col data-col-wd-md dt-status">
                                 <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($en->status,'status') }}">{{ __status($en->status,'text') }}</span>
@@ -78,12 +78,15 @@
                                 <div class="relative d-inline-block">
                                     <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
-                                        <ul class="dropdown-list more-menu-{{$jur->id}}">
+                                        <ul class="dropdown-list more-menu-{{$article->id}}">
                                             <li>
-                                                <a href="#" data-toggle="modal" data-target="#editJurisdiction" data-id="{{ $jur->id }}" data-juris="{{ $jur->jurisdiction_name }}" class="user-action front editJurisdiction">
+                                                {{-- {{ route('admin.kyc.view', [$kyc->id, 'kyc_details']) }} --}}
+                                                <a href="#"><em class="fas fa-edit"></em> EDIT ARTICLE DETAILS </a>
+                                                <a class="kyc_action kyc_approve" href="#" ><em class="far fa-edit"></em>EDIT ARTICLE TEXT </a>
+                                                {{-- <a href="#" data-toggle="modal" data-target="#editArticle" data-id="{{ $article->id }}" data-article="{{ $article->article_label }}" class="user-action front editJurisdiction">
                                                     <em class="fas fa-edit"></em>Edit
-                                                </a>
-                                                <a href="#" data-uid="{{ $jur->id }}" data-type="delete_user" data-url="{{ route('admin.ajax.juris.delete', $jur->id) }}" class="user-action front">
+                                                </a> --}}
+                                                <a href="#" data-uid="{{ $article->id }}" data-type="delete_article" data-url="{{ route('admin.ajax.article.delete', $article->id) }}" class="user-action front">
                                                     <em class="fas fa-trash-alt"></em>Delete
                                                 </a>
                                             </li>
@@ -167,24 +170,30 @@
     {{-- .modal-dialog --}}
 </div>
 
-<div class="modal fade" id="editJurisdiction" tabindex="-1">
+<div class="modal fade" id="addArticle" tabindex="-1">
     <div class="modal-dialog modal-dialog-md modal-dialog-centered">
         <div class="modal-content">
             <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
             <div class="popup-body popup-body-md">
-                <h3 class="popup-title">Edit Jurisdiction</h3>
+                <h3 class="popup-title">Add Article</h3>
                 <div class="gaps-1x"></div>
-                <form  method="Post" class="adduser-form validate-modern" id="editJuristForm" autocomplete="false" action="{{ route('admin.ajax.juris.edit') }}">
+                <form  method="Post" class="adduser-form validate-modern" id="addArticletForm" autocomplete="false" action="{{ route('admin.ajax.juris.edit') }}">
                     @csrf
                     <div class="input-item input-with-label">
-                        <label class="input-item-label">Jurisdiction</label>
+                        <label class="input-item-label">Article Title</label>
                         <div class="input-wrap">
-                            <input name="juris_name" class="input-bordered" required="required" type="text" placeholder="Change Jurisdiction">
-                            <input name="juris_id" type="hidden">
+                            <input name="article_title" class="input-bordered" required="required" type="text" placeholder="Article Title">
+                            <input name="article_id" type="hidden">
+                        </div>
+                    </div>
+                    <div class="input-item input-with-label">
+                        <label class="input-item-label">Statue Type</label>
+                        <div class="input-wrap">
+                            <input name="statue_type" class="input-bordered" required="required" type="text" placeholder="Statue Type">
                         </div>
                     </div>
                     <div class="gaps-1x"></div>
-                    <button class="btn btn-md btn-primary" type="submit">Change Jurisdiction</button>
+                    <button class="btn btn-md btn-primary" type="submit">Add Article</button>
                 </form>
             </div>
         </div>
