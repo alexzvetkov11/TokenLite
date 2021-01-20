@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page) . ' Entity Type')
+@section('title', ucfirst($is_page) . 'Entities')
 @section('content')
 
     <div class="page-content">

@@ -28,8 +28,19 @@ class ArticlesController extends Controller
         }
         
     }
-    public function delArticle($article_id){
+    public function article_detail($article_id){
+        try{
 
+            $entity_types = \DB::table('entity_types')
+                    ->join('jurisdictions', 'entity_types.jurisdiction_id','=', 'jurisdictions.id')
+                    ->orderBy('entity_type_name')->get();
+            $article = Articles::where('id', $article_id)->first();
+            return view('admin.article-detail', compact('entity_types', 'article'));
+
+        } catch(\Exception $e){
+            echo $e->getMessage();
+        }
+        
     }
     
 }

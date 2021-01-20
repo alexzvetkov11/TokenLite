@@ -107,7 +107,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
     Route::get('/entity/user-entity-type/{id}', 'Admin\EntityController@typedetail')->middleware(['ico', 'super_admin'])->name('entity.typedetail');
     Route::get('/articles', 'Admin\ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
-    
+    Route::get('/articles/detail/{article_id}', 'Admin\ArticlesController@article_detail')->middleware(['ico', 'super_admin'])->name('articles.detail');
 
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
     Route::get('/payment-methods/edit/{slug}', 'Admin\PaymentMethodController@edit')->middleware(['ico', 'super_admin'])->name('payments.setup.edit');

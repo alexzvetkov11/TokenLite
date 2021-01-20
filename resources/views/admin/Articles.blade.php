@@ -81,7 +81,7 @@
                                         <ul class="dropdown-list more-menu-{{$article->id}}">
                                             <li>
                                                 {{-- {{ route('admin.kyc.view', [$kyc->id, 'kyc_details']) }} --}}
-                                                <a href="#"><em class="fas fa-edit"></em> EDIT ARTICLE DETAILS </a>
+                                                <a href="{{ route("admin.articles.detail", $article->id) }}"><em class="fas fa-edit"></em> EDIT ARTICLE DETAILS </a>
                                                 <a class="kyc_action kyc_approve" href="#" ><em class="far fa-edit"></em>EDIT ARTICLE TEXT </a>
                                                 {{-- <a href="#" data-toggle="modal" data-target="#editArticle" data-id="{{ $article->id }}" data-article="{{ $article->article_label }}" class="user-action front editJurisdiction">
                                                     <em class="fas fa-edit"></em>Edit
@@ -238,3 +238,7 @@
 </div>
 
 @endsection
+@push("footer")
+
+
+@endpush
