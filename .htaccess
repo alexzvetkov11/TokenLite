@@ -2,13 +2,8 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
-
+    DirectoryIndex index.html index.php
     RewriteEngine On
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> cc98fa2de563a08f890f455ffc3c231ad68e7154
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
