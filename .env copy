@@ -1,16 +1,16 @@
 APP_NAME='TokenLite'
 APP_VERSION='1.1.7'
-APP_ENV=production
+APP_ENV=local
 APP_KEY=base64:hcd7LG5XWs+r30DggGLIesbPjaqGHq9ng7mGN557T2U=
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
-APP_URL=https://einnovention.tech/token_lite/public
+APP_URL=http://apollo.mercerworth.com/
 
-FORCE_HTTPS=true
+
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=geoserver_token_lite
+DB_DATABASE=mercerworth_tok
 DB_USERNAME=root
 DB_PASSWORD=
 

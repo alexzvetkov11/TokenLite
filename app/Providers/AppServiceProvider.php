@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\UrlGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,15 +19,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
-        if (!$this->app->isLocal()) {
-            $this->app['request']->server->set('HTTPS', true);
-       }
         if(is_https_active()){
             URL::forceScheme('https');
         }
-        
+        //$url->forceScheme('http');
         Schema::defaultStringLength(191);
 
         if ( application_installed(true)) {
