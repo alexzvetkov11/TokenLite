@@ -1,14 +1,5 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middle-ware group. Now create something great!
-|
- */
+
 
 if (application_installed()) {
     Route::get('/install/final', function () {
@@ -34,6 +25,7 @@ Route::get('verify/success', 'Auth\LoginController@verified')->name('verified');
 Route::get('register/success', 'Auth\LoginController@registered')->name('registered');
 Route::any('log-out', 'Auth\LoginController@logout')->name('log-out');
 // Google 2FA Routes
+
 Route::get('/login/2fa', 'Auth\SocialAuthController@show_2fa_form')->middleware('auth')->name('auth.2fa');
 Route::get('/login/2fa/reset', 'Auth\SocialAuthController@show_2fa_reset_form')->name('auth.2fa.reset');
 Route::post('/login/2fa/reset', 'Auth\SocialAuthController@reset_2fa');
@@ -218,3 +210,5 @@ Route::name('public.')->group(function () {
 Route::prefix('ajax')->name('ajax.')->group(function () {
     Route::post('/kyc/file-upload', 'User\KycController@upload')->name('kyc.file.upload');
 });
+
+

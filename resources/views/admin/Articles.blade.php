@@ -238,7 +238,3 @@
 </div>
 
 @endsection
-@push("footer")
-
-
-@endpush

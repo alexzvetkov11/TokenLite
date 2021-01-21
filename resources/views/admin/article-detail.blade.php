@@ -47,15 +47,9 @@
                         <table id="example" class="display nowrap" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                    <th>Extn.</th>
+                                    @foreach ( $entity_types as $key->$en )
                                     <th>E-mail</th>
+                                    @endforeach
                                 </tr>
                             </thead>
                             <tbody>
