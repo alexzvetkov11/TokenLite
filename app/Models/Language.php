@@ -18,7 +18,7 @@ class Language extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['native_name', 'label', 'code'];
+	protected $fillable = ['name', 'label', 'short', 'code'];
 
 	/**
      *

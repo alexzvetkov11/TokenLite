@@ -25,4 +25,15 @@ $(document).ready(function() {
         $("[name='juris_id']").val($(this).data('id'));
     });
 
+    $("[data-target='#editArticle']").on("click", function(){
+        $name = $(this).data('selector');
+        $('#textEditHide').val($name);
+        $('#textEdit').trumbowyg('html', $('#'+ $name).val());
+    });
+
+    // $("[data-target='#addArticle']").on("click", function(){
+    //     $name = $(this).data('selector');
+    //     $('#textEditHide').val($name);
+    //     $('#textEdit').trumbowyg('html', $('#'+ $name).val());
+    // });
 })

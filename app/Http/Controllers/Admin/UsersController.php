@@ -36,6 +36,8 @@ class UsersController extends Controller
     public function index(Request $request, $role = '')
     {
         try {
+
+
             $role_data = '';
             $per_page = gmvl('user_per_page', 10);
             $order_by = (gmvl('user_order_by', 'id') == 'token') ? 'tokenBalance' : gmvl('user_order_by', 'first_name');

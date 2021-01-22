@@ -1,5 +1,14 @@
 <?php
-
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middle-ware group. Now create something great!
+|
+ */
 
 if (application_installed()) {
     Route::get('/install/final', function () {
@@ -25,7 +34,6 @@ Route::get('verify/success', 'Auth\LoginController@verified')->name('verified');
 Route::get('register/success', 'Auth\LoginController@registered')->name('registered');
 Route::any('log-out', 'Auth\LoginController@logout')->name('log-out');
 // Google 2FA Routes
-
 Route::get('/login/2fa', 'Auth\SocialAuthController@show_2fa_form')->middleware('auth')->name('auth.2fa');
 Route::get('/login/2fa/reset', 'Auth\SocialAuthController@show_2fa_reset_form')->name('auth.2fa.reset');
 Route::post('/login/2fa/reset', 'Auth\SocialAuthController@reset_2fa');
@@ -161,6 +169,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
         Route::get('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
         Route::get('/article/delete/{article_id}', 'Admin\ArticlesController@delArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
+        Route::get('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
         Route::post('/entities/add', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entities.add');
 
@@ -210,5 +219,3 @@ Route::name('public.')->group(function () {
 Route::prefix('ajax')->name('ajax.')->group(function () {
     Route::post('/kyc/file-upload', 'User\KycController@upload')->name('kyc.file.upload');
 });
-
-

@@ -9,7 +9,7 @@
             <div class="card content-area content-area-mh">
                 <div class="card-innr">
                     <div class="card-head has-aside">
-                        <div style="font-size:1.29em; color:#342d6e"> <b>Entities > {{ $article->article_label }} ></b>
+                        <div style="font-size:1.29em; color:#342d6e"> <b>Articles > {{ $article->article_label }} ></b>
                             <span style="font-size:0.8em">Edit Article Text </span>
                         </div>
                         <div class="card-opt data-action-list d-md-inline-flex">
@@ -18,12 +18,9 @@
                             </a>
                         </div>
                     </div>
-
                     <hr />
-
-
                     <div class="card-head has-aside">
-                        <div class="input-item input-with-label">
+                        <div class="input-item input-with-label col-md-4">
                             <label class="input-item-label">Entity Type</label>
                             <div class="input-wrap">
                                 <select name="token_wallet_opt[]" class="select select-block select-bordered" value=""
@@ -43,51 +40,65 @@
                     </div>
                     <div class="gaps-1x"></div>
 
-                    @if (count($entity_types) > 0)
-                        <table id="example" class="display nowrap" style="width:100%">
+                    @if (count($contents) > 0)
+                        <table id="example" class="display text-center wrap" style="width:100%">
                             <thead>
                                 <tr>
-                                    @foreach ( $entity_types as $key->$en )
-                                    <th>E-mail</th>
+                                    <th>Section</th>
+                                    @foreach( $entity_types as $en)
+                                    <th style="word-wrap: break-word;">
+                                        {{ $en->entity_type_name .' ('. $en->jurisdiction_name.')'}}
+                                    </th>
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody>
+                                @for( $i=1; $i<=$section_num; $i++)
                                 <tr>
-                                    <td>Tiger</td>
-                                    <td>Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                    <td>5421</td>
-                                    <td>t.nixon@datatables.net</td>
+                                    <td>{{ $i }}</td>
+                                    @foreach( $entity_types as $en)
+                                        <td class="text-center">
+                                            @php
+                                                $flag=false;
+                                                foreach($contents as $content){
+                                                    if ($content->section == $i && $content->entity_types==$en->entity_type_id){
+                                                        $flag = true; break;
+                                                    }
+                                                }
+                                            @endphp
+
+                                            @if( $flag==true)
+                                            <a href="#" name="articleEdit" data-toggle="modal" data-target="#editArticle" data-selector="content-{{$i}}-{{$en->entity_type_id}}"
+                                                class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
+                                                    Edit
+                                            </a>
+                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="{{ $content->text }}">
+                                            @else
+                                            <a href="#" data-toggle="modal" data-target="#editArticle" style="opacity: 0.6"data-selector="content-{{$i}}-{{$en->entity_type_id}}"
+                                                class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
+                                                    Add
+                                            </a>
+                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="">
+                                            @endif
+                                        </td>
+                                    @endforeach
                                 </tr>
-                                <tr>
-                                    <td>Garrett</td>
-                                    <td>Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                    <td>8422</td>
-                                    <td>g.winters@datatables.net</td>
-                                </tr>
+                                @endfor
                             </tbody>
                         </table>
                     @else
-                        {{-- <div class="bg-light text-center rounded pdt-5x pdb-5x">
-                            <p><em
-                                    class="ti ti-server fs-24"></em><br>{{ $is_page == 'all' ? 'No investor / user found!' : 'No ' . $is_page . ' user here!' }}
-                            </p>
+                        <div class="bg-light text-center rounded pdt-5x pdb-5x">
+                            <p><em class="ti ti-server fs-24"></em><br>No investor / user found!  user here! </p>
                             <p><a class="btn btn-primary btn-auto" href="{{ route('admin.users', 'user') }}">View All
-                                    Users</a></p>
-                        </div> --}}
+                                    Users
+                                </a>
+                            </p>
+                        </div>
                     @endif
-
-
+                    <div class="gaps-3x"></div>
+                    <button class="btn btn-md btn-primary" type="submit">
+                        <i class="ti ti-reload"></i><span>Update</span>
+                    </button>
                 </div>
             </div>{{-- .card --}}
         </div>{{-- .container --}}
@@ -96,34 +107,6 @@
 @endsection
 
 @section('modals')
-
-    <div class="modal fade" id="addJurisdiction" tabindex="-1">
-        <div class="modal-dialog modal-dialog-md modal-dialog-centered">
-            <div class="modal-content">
-                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
-                <div class="popup-body popup-body-md">
-                    <h3 class="popup-title">Add New Jurisdiction</h3>
-                    <div class="gaps-1x"></div>
-                    <form method="POST" class="adduser-form validate-modern" id="addJurisForm" autocomplete="false"
-                        action="{{ route('admin.ajax.juris.add') }}">
-                        @csrf
-                        <div class="input-item input-with-label">
-                            <label class="input-item-label">Jurisdiction</label>
-                            <div class="input-wrap">
-                                <input name="juris_name" class="input-bordered" required="required" type="text"
-                                    placeholder="Add Jurisdiction">
-                            </div>
-                        </div>
-                        <div class="gaps-1x"></div>
-                        <button class="btn btn-md btn-primary" type="submit">Add Jurisdiction</button>
-                    </form>
-                </div>
-            </div>
-            {{-- .modal-content --}}
-        </div>
-        {{-- .modal-dialog --}}
-    </div>
-
     <div class="modal fade" id="addArticle" tabindex="-1">
         <div class="modal-dialog modal-dialog-md modal-dialog-centered">
             <div class="modal-content">
@@ -131,22 +114,25 @@
                 <div class="popup-body popup-body-md">
                     <h3 class="popup-title">Add Article</h3>
                     <div class="gaps-1x"></div>
-                    <form method="Post" class="adduser-form validate-modern" id="addArticletForm" autocomplete="false"
+                    <form method="Post" class="adduser-form validate-modern" id="addArticleForm" autocomplete="false"
                         action="{{ route('admin.ajax.juris.edit') }}">
                         @csrf
+                       
                         <div class="input-item input-with-label">
-                            <label class="input-item-label">Article Title</label>
+                            <label class="input-item-label">Select Entity Type</label>
                             <div class="input-wrap">
-                                <input name="article_title" class="input-bordered" required="required" type="text"
-                                    placeholder="Article Title">
-                                <input name="article_id" type="hidden">
+                                <select name="token_wallet_opt[]" class="select select-block select-bordered" value="" data-placeholder="Entity Type">
+                                    @foreach ($entity_types as $key => $en)
+                                        <option value="{{ $en->entity_type_name }}">{{ $en->entity_type_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="input-item input-with-label">
-                            <label class="input-item-label">Statue Type</label>
+                        <div class="input-item  input-with-label">
+                            <label for="textAdd" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
-                                <input name="statue_type" class="input-bordered" required="required" type="text"
-                                    placeholder="Statue Type">
+                                <textarea id="textAdd" name="textAdd" class="input-bordered input-textarea editor" ></textarea>
+                                <input type="hidden" id="textAddHide" value="">
                             </div>
                         </div>
                         <div class="gaps-1x"></div>
@@ -154,49 +140,33 @@
                     </form>
                 </div>
             </div>
-            {{-- .modal-content --}}
         </div>
-        {{-- .modal-dialog --}}
     </div>
 
-    <div class="modal fade" id="EmailUser" tabindex="-1">
+    <div class="modal fade" id="editArticle" tabindex="-1">
         <div class="modal-dialog modal-dialog-md modal-dialog-centered">
             <div class="modal-content">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
                 <div class="popup-body popup-body-md">
-                    <h3 class="popup-title">Send Email to User </h3>
-                    <div class="msg-box"></div>
-                    <form class="validate-modern" id="emailToUser" action="{{ route('admin.ajax.users.email') }}"
-                        method="POST" autocomplete="off">
+                    <h3 class="popup-title">Edit Article</h3>
+                    <div class="gaps-1x"></div>
+                    <form method="Post" class="adduser-form validate-modern" id="editArticleForm" autocomplete="false"
+                        action="{{ route('admin.ajax.article.edit') }}">
                         @csrf
-                        <input type="hidden" name="user_id" id="user_id">
-                        <div class="input-item input-with-label">
-                            <label class="clear input-item-label">Email Subject</label>
+                        <div class="input-item  input-with-label">
+                            <label for="textEdit" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
-                                <input type="text" name="subject" class="input-bordered cls" placeholder="New Message">
+                                <textarea id="textEdit" name="textEdit" class="input-bordered input-textarea editor" ></textarea>
+                                <input type="hidden" id="textEditHide" value="">
                             </div>
                         </div>
-                        <div class="input-item input-with-label">
-                            <label class="clear input-item-label">Email Greeting</label>
-                            <div class="input-wrap">
-                                <input type="text" name="greeting" class="input-bordered cls" placeholder="Hello User">
-                            </div>
-                        </div>
-                        <div class="input-item input-with-label">
-                            <label class="clear input-item-label">Your Message</label>
-                            <div class="input-wrap">
-                                <textarea required="required" name="message"
-                                    class="input-bordered cls input-textarea input-textarea-sm" type="text"
-                                    placeholder="Write something..."></textarea>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Email</button>
+                        <div class="gaps-1x"></div>
+                        <button class="btn btn-md btn-primary" type="submit">Edit Article</button>
                     </form>
                 </div>
-            </div>{{-- .modal-content --}}
-        </div>{{-- .modal-dialog --}}
+            </div>
+        </div>
     </div>
-
 @endsection
 
 @push('footer')
@@ -210,19 +180,30 @@
         (function($) {
             if ($('.editor').length > 0) {
                 $('.editor').trumbowyg({
-                    autogrow: true
+                    autogrow: true,
+                    changeActiveDropdownIcon: true,
+                    autogrowOnEnter: true,
                 });
             }
-            var $_form = $('form#update_page');
+            var $_form = $('form#editArticleForm');
             if ($_form.length > 0) {
                 ajax_form_submit($_form, false);
             }
 
             $('#example').DataTable({
-                "scrollX": true
+                "scrollX":      true,
+                "scrollY":      200,
+                "scrollCollapse": true,
+                "ordering":     false,
+                "searching":    false,
+                "paging":       true,
+                "info":         true,
+                // "data":         dataList,
+                "deferRender":  true,
+                // "autoWidth":    false,
             });
+
             $('#example_length').hide();
-            $('#example_filter').hide();
         })(jQuery);
 
     </script>

@@ -180,8 +180,8 @@ class LoginController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function checkLoginState(AuthRequest $request)
-    {   
-        exit("here");
+    {
+
         if (application_installed(true) == false) {
             return redirect(url('/install'));
         }
