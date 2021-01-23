@@ -99,6 +99,7 @@
                     <button class="btn btn-md btn-primary" type="submit">
                         <i class="ti ti-reload"></i><span>Update</span>
                     </button>
+                    <div class="gaps-3x"></div>
                 </div>
             </div>{{-- .card --}}
         </div>{{-- .container --}}
