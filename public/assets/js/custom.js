@@ -27,9 +27,7 @@ $(document).ready(function () {
 
     $("[data-target='#editArticle']").on("click", function () {
         $name = $(this).data('selector');
-        console.log($name);
         if ($name == "empty") {
-            console.log($name);
             $("#type").val('insert');
             $("#entityAll").show();
             $val = "";
