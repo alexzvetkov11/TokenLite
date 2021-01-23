@@ -107,8 +107,6 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
     Route::get('/entity/user-entity-type/{id}', 'Admin\EntityController@typedetail')->middleware(['ico', 'super_admin'])->name('entity.typedetail');
     Route::get('/articles', 'Admin\ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
-    
-
     Route::get('/articles/detail/{article_id}', 'Admin\ArticlesController@article_detail')->middleware(['ico', 'super_admin'])->name('articles.detail');
 
     Route::get('/payment-methods', 'Admin\PaymentMethodController@index')->middleware(['ico', 'super_admin'])->name('payments.setup');
@@ -172,7 +170,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::get('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
         Route::post('/article/new_add', 'Admin\ArticlesController@newAdd')->middleware(['ico', 'demo_user'])->name('article.new');
         
-        Route::get('/article/delete/{article_id}', 'Admin\ArticlesController@delArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
+        Route::get('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
         Route::post('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
         Route::post('/entities/add', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entities.add');

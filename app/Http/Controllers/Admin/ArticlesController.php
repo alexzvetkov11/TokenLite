@@ -108,6 +108,23 @@ class ArticlesController extends Controller
             $ret['msg'] = 'warning';
             $ret['message'] = __('messages.form.wrong');
         }
+        return back()->with([$ret['msg']=>$ret['message'] ]);
+    }
+
+    public function deleteArticle($article_id)
+    {
+        try {
+            $article = Articles::where('id', $article_id)->first();
+            $article->delete();
+
+            $ret['msg'] = "success";
+            $ret['message'] = __("message.insert.success");
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            $ret['msg'] = 'warning';
+            $ret['message'] = __('messages.form.wrong');
+        }
+        // return back()->with([$ret['msg']=>$ret['message'] ]);
         return response()->json($ret);
     }
 }

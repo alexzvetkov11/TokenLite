@@ -86,7 +86,7 @@
                                                 {{-- <a href="#" data-toggle="modal" data-target="#editArticle" data-id="{{ $article->id }}" data-article="{{ $article->article_label }}" class="user-action front editJurisdiction">
                                                     <em class="fas fa-edit"></em>Edit
                                                 </a> --}}
-                                                <a href="#" data-uid="{{ $article->id }}" data-type="delete_article" data-url="{{ route('admin.ajax.article.delete', $article->id) }}" class="user-action front">
+                                                <a href="#" data-uid="{{ $article->id }}" data-type="delete_user" data-url="{{ route('admin.ajax.article.delete', $article->id) }}" class="user-action front">
                                                     <em class="fas fa-trash-alt"></em>Delete
                                                 </a>
                                             </li>

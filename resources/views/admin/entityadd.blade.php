@@ -50,7 +50,7 @@
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="jurisdiction" id="jurisdiction"  data-dd-class="search-on">
                                                 @foreach( $juris as $jur)
-                                                <option value="{{ $jur->jurisdiction_name }}"> {{ $jur->jurisdiction_name }}</option>
+                                                <option value="{{ $jur->id }}"> {{ $jur->jurisdiction_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
 
-                    <div class="form-step form-step1" id="sharefolders">
+                    <div class="form-step form-step1">
                         <div class="form-step-head card-innr">
                             <div class="step-head">
                                 <div class="step-number">02</div>
@@ -125,10 +125,10 @@
                                     <p>{{__('Fill in the legal details of the new Entity Type.')}}</p>
                                 </div>
                             </div>
-                        </div>{{-- .step-head --}}
+                        </div>
                         <div class="form-step-fields card-innr">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-6" >
                                     <div class="input-item input-with-label">
                                         <label for="principal"  class="input-item-label">{{__('Principal Statute')}}</label>
                                         <div class="input-wrap">
@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="register" class="input-item-label">{{__('Commercial Register')}}</label>
                                         <div class="input-wrap">
@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="language" class="input-item-label">{{__('Standard Language')}}</label>
                                         <div class="input-wrap">
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="requirement" class="input-item-label">{{__('Local Director/Secretary Requirement')}}</label>
                                         <div class="input-wrap">
@@ -192,7 +192,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="transferability" class="input-item-label">{{__('Share Transferability')}}</label>
                                         <div class="input-wrap">
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="minimum" class="input-item-label">{{__('Minimum Share Capital')}}  </label>
                                         <div class="input-wrap">
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="maximum" class="input-item-label">{{__('Maximum Number of Shareholders')}}</label>
                                         <div class="input-wrap">
@@ -222,100 +222,12 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>{{-- .row --}}
-                        </div>{{-- .step-fields --}}
+                            </div>
+                        </div>
                     </div>
 
-                    {{-- <div class="form-step form-step1" id="members">
-                        <div class="form-step-head card-innr">
-                            <div class="step-head">
-                                <div class="step-number">03</div>
-                                <div class="step-head-text">
-                                    <h4>{{__('Statutory Details')}}</h4>
-                                    <p>{{__('Fill in the legal details of the new Entity Type.')}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-step-fields card-innr">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="principal1"  class="input-item-label">{{__('Principal Statute')}}</label>
-                                        <div class="input-wrap">
-                                            <input type="text" class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="governing1" class="input-item-label">{{__('Governing Body')}}</label>
-                                        <div class="input-wrap">
-                                            <input type="text" class="input-bordered" id="governing1" name="governing1" placeholder="Governing Body">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="language1" class="input-item-label">{{__('Standard Language')}}</label>
-                                        <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="language1" id="language1"  data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="currency1" class="input-item-label">{{__('Standard Currency')}}</label>
-                                        <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="requirement1" class="input-item-label">{{__('Local Director/Secretary Requirement')}}</label>
-                                        <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="requirement1" id="requirement1"  data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="transferability1" class="input-item-label">{{__('Share Transferability')}}</label>
-                                        <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="transferability1" id="transferability1" data-dd-class="search-on">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="minimum1" class="input-item-label">{{__('Minimum Share Capital')}}  </label>
-                                        <div class="input-wrap">
-                                            <input class="input-bordered" placeholder="Minimum Share Capital" type="text" id="minimum1" name="minimum1">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="input-item input-with-label">
-                                        <label for="maximum" class="input-item-label">{{__('Maximum Number of Shareholders')}}</label>
-                                        <div class="input-wrap">
-                                            <input class="input-bordered" type="text" name="maximum" id="maximum" placeholder="Maximum Number of Shareholders">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    <div class="form-step form-step1" id="benificiaries">
+                    <input type="hidden" name="type" value="shar">
+                    {{-- <div class="form-step form-step1" id="benificiaries">
                         <div class="form-step-head card-innr">
                             <div class="step-head">
                                 <div class="step-number">02</div>
@@ -324,30 +236,29 @@
                                     <p>{{__('Fill in the legal details of the new Entity Type.')}}</p>
                                 </div>
                             </div>
-                        </div>{{-- .step-head --}}
+                        </div>
                         <div class="form-step-fields card-innr">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="principal1"  class="input-item-label">{{__('Principal Statute')}}</label>
                                         <div class="input-wrap">
-                                            <input type="text" class="input-bordered" id="principal1" name="principal1" placeholder="Principal Statute">
+                                            <input type="text" class="input-bordered" id="principal1" name="principal" placeholder="Principal Statute">
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="currency1" class="input-item-label">{{__('Standard Currency')}}</label>
                                         <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="currency1" id="currency1" data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="currency" id="currency" data-dd-class="search-on">
                                             </select>
                                         </div>
-                                    </div>{{-- .input-item --}}
-                                </div>{{-- .col --}}
-                            </div>{{-- .row --}}
-                        </div>{{-- .step-fields --}}
-                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="form-step form-step1">
                         <div class="form-step-fields card-innr">
@@ -374,15 +285,19 @@
 
         function onChange(){
             var x = document.getElementById("participant-type").value;
-            document.getElementById("sharefolders").style.display="none";
-            //document.getElementById("members").style.display="none";
-            document.getElementById("benificiaries").style.display="none";
-
+            var y =  document.querySelectorAll('div[name="share"]');
+            console.log(x)
             if ( x.length > 0 ){
-                if ( x=="partners" || x=="members" )
-                    document.getElementById("sharefolders").style.display="block";
-                else if(x=="sharefolders" || x=="benificiaries" )
-                    document.getElementById(x).style.display="block";
+                if (x=="benificiaries" ){
+                    document.getElementsByName("type").value= "beni";
+                    for ( var i=0; i<y.length; i++)
+                        y[i].style.display='none';
+                } else {
+                    document.getElementsByName("type").value= "shar";
+                    for ( var i=0; i<y.length; i++)
+                        y[i].style.display='block';
+                }
+                    
             }
 
         }
