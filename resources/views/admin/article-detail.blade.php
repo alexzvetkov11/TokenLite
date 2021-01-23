@@ -26,14 +26,14 @@
                                 <select name="token_wallet_opt[]" class="select select-block select-bordered" value=""
                                     data-placeholder="Entity Type" multiple="multiple">
                                     @foreach ($entity_types as $key => $en)
-                                        <option value="{{ $en->entity_type_name }}">{{ $en->entity_type_name }}</option>
+                                        <option value="{{ $en->entity_type_id }}">{{ $en->entity_type_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="card-opt data-action-list d-md-inline-flex">
-                            <a href="#" data-toggle="modal" data-target="#addArticle"
-                                class="btn btn-auto btn-lg btn-primary pdl-4x pdr-4x">
+                            <a href="#" data-toggle="modal" data-target="#editArticle" 
+                            class="btn btn-auto btn-lg btn-primary pdl-4x pdr-4x" data-selector="empty">
                                 <em class="fas fa-plus-circle"> </em><span>Add </span>
                             </a>
                         </div>
@@ -107,7 +107,7 @@
 @endsection
 
 @section('modals')
-    <div class="modal fade" id="addArticle" tabindex="-1">
+    {{-- <div class="modal fade" id="addArticle" tabindex="-1">
         <div class="modal-dialog modal-dialog-md modal-dialog-centered">
             <div class="modal-content">
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
@@ -123,7 +123,7 @@
                             <div class="input-wrap">
                                 <select name="token_wallet_opt[]" class="select select-block select-bordered" value="" data-placeholder="Entity Type">
                                     @foreach ($entity_types as $key => $en)
-                                        <option value="{{ $en->entity_type_name }}">{{ $en->entity_type_name }}</option>
+                                        <option value="{{ $en->entity_type_name }}">{{ $en->entity_type_name .' ('. $en->jurisdiction_name .')'}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -141,7 +141,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="modal fade" id="editArticle" tabindex="-1">
         <div class="modal-dialog modal-dialog-md modal-dialog-centered">
@@ -155,8 +155,19 @@
                         action="{{ route('admin.ajax.article.edit') }}">
                         @csrf
                         {{-- <h4> Article Title: {{ $article->article_label }}</h4> --}}
+                        <div class="input-item input-with-label" id="entityAll">
+                            <label class="input-item-label">Select Entity Type</label>
+                            <div class="input-wrap">
+                                <select name="entityAll" class="select select-block select-bordered" value="" data-placeholder="Entity Type">
+                                    @foreach ($entity_types as $en)
+                                        <option value="{{ $en->entity_type_id }}">{{ $en->entity_type_name .' ('. $en->jurisdiction_name .')'}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="input-item input-with-label" id="articleAll">
-                            <label class="input-item-label">Entity Type</label>
+                            <label class="input-item-label">Article Type</label>
                             <div class="input-wrap">
                                 <select name="articleAll" class="select select-block select-bordered" value="" data-placeholder="Article Type">
                                     @foreach ($articlesAll as $ar)
@@ -208,7 +219,7 @@
 
             $('#example').DataTable({
                 "scrollX":      true,
-                "scrollY":      200,
+                // "scrollY":      200,
                 "scrollCollapse": true,
                 "ordering":     false,
                 "searching":    false,

@@ -57,16 +57,24 @@ class ArticlesController extends Controller
     public function editArticle(Request $request)
     {
         try {
-            list($temp, $section, $entity) = explode("-", $request->textEditHide);
             $text = str_replace(['<script>', '</script>'], ['&lt;script&gt;', '&lt;/script&gt;'], trim($request->textEdit));
             if ($request->type == "update") {
+                list($temp, $section, $entity) = explode("-", $request->textEditHide);
                 $content = ArticleContents::where('section', $section)->where('entity_types', $entity)->first();
                 $content->text = $text;
                 $content->save();
-            } else {
+            } else if ($request->type =="create"){
+                list($temp, $section, $entity) = explode("-", $request->textEditHide);
                 $content = new ArticleContents;
                 $content->section = $section;
                 $content->entity_types = $entity;
+                $content->text = $text;
+                $content->article_title = $request->articleAll;
+                $content->save();
+            } else if ($request->type == "insert"){
+                $content = new ArticleContents;
+                $content->section = \DB::table('article_contents')->distinct('section')->count('section') + 1;
+                $content->entity_types = $request->entityAll;
                 $content->text = $text;
                 $content->article_title = $request->articleAll;
                 $content->save();
@@ -83,7 +91,6 @@ class ArticlesController extends Controller
         if ($request->type == "update") {
             return back()->with([$ret['msg'] => $ret['message']]);
         } else {
-            
             return redirect()->route('admin.articles.detail', $request->articleId);
         }
     }
