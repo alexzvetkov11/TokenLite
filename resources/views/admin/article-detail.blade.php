@@ -74,11 +74,11 @@
                                             </a>
                                             <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="{{ $content->text }}">
                                             @else
-                                            <a href="#" data-toggle="modal" data-target="#editArticle" style="opacity: 0.6"data-selector="content-{{$i}}-{{$en->entity_type_id}}"
+                                            <a href="#" data-toggle="modal" data-target="#editArticle" style="opacity: 0.6" data-selector="content-{{$i}}-{{$en->entity_type_id}}"
                                                 class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
                                                     Add
                                             </a>
-                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="">
+                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="null">
                                             @endif
                                         </td>
                                     @endforeach
@@ -132,7 +132,7 @@
                             <label for="textAdd" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
                                 <textarea id="textAdd" name="textAdd" class="input-bordered input-textarea editor" ></textarea>
-                                <input type="hidden" id="textAddHide" value="">
+                                <input type="hidden" id="textAddHide" name="textAddHide" value="">
                             </div>
                         </div>
                         <div class="gaps-1x"></div>
@@ -149,15 +149,30 @@
                 <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
                 <div class="popup-body popup-body-md">
                     <h3 class="popup-title">Edit Article</h3>
-                    <div class="gaps-1x"></div>
+                    {{-- <div class="gaps-1x"></div> --}}
+                    <hr/>
                     <form method="Post" class="adduser-form validate-modern" id="editArticleForm" autocomplete="false"
                         action="{{ route('admin.ajax.article.edit') }}">
                         @csrf
+                        {{-- <h4> Article Title: {{ $article->article_label }}</h4> --}}
+                        <div class="input-item input-with-label" id="articleAll">
+                            <label class="input-item-label">Entity Type</label>
+                            <div class="input-wrap">
+                                <select name="articleAll" class="select select-block select-bordered" value="" data-placeholder="Article Type">
+                                    @foreach ($articlesAll as $ar)
+                                        <option value="{{ $ar->id }}">{{ $ar->article_label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <input name="type" id="type" value="" type="hidden">
+                        <input name="articleId" type="hidden" value="{{ $article->id}}" >
                         <div class="input-item  input-with-label">
+
                             <label for="textEdit" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
                                 <textarea id="textEdit" name="textEdit" class="input-bordered input-textarea editor" ></textarea>
-                                <input type="hidden" id="textEditHide" value="">
+                                <input type="hidden" id="textEditHide" name="textEditHide" value="">
                             </div>
                         </div>
                         <div class="gaps-1x"></div>
@@ -183,12 +198,13 @@
                     autogrow: true,
                     changeActiveDropdownIcon: true,
                     autogrowOnEnter: true,
+                    fullscreen: false,
                 });
             }
-            var $_form = $('form#editArticleForm');
-            if ($_form.length > 0) {
-                ajax_form_submit($_form, false);
-            }
+            // var $_form = $('form#editArticleForm');
+            // if ($_form.length > 0) {
+            //     ajax_form_submit($_form, false);
+            // }
 
             $('#example').DataTable({
                 "scrollX":      true,
@@ -198,8 +214,8 @@
                 "searching":    false,
                 "paging":       true,
                 "info":         true,
-                // "data":         dataList,
                 "deferRender":  true,
+                // "data":         dataList,
                 // "autoWidth":    false,
             });
 

@@ -28,7 +28,16 @@ $(document).ready(function() {
     $("[data-target='#editArticle']").on("click", function(){
         $name = $(this).data('selector');
         $('#textEditHide').val($name);
-        $('#textEdit').trumbowyg('html', $('#'+ $name).val());
+        $val = $('#'+ $name).val();
+        if ( $val=='null'){
+            $val= "";
+            $("#articleAll").show();
+            $("#type").val('create');
+        } else{
+            $("#articleAll").hide();
+            $("#type").val('update');
+        }
+        $('#textEdit').trumbowyg('html', $val);
     });
 
     // $("[data-target='#addArticle']").on("click", function(){

@@ -17,7 +17,7 @@ class Articles extends Model
     }
 
    
-    public function getAll($request)
+    public function getAll()
     {
         return $this;
     }

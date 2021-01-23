@@ -177,7 +177,7 @@
             <div class="popup-body popup-body-md">
                 <h3 class="popup-title">Add Article</h3>
                 <div class="gaps-1x"></div>
-                <form  method="Post" class="adduser-form validate-modern" id="addArticletForm" autocomplete="false" action="{{ route('admin.ajax.juris.edit') }}">
+                <form  method="Post" class="adduser-form validate-modern" id="addArticletForm" autocomplete="false" action="{{ route('admin.ajax.article.new') }}">
                     @csrf
                     <div class="input-item input-with-label">
                         <label class="input-item-label">Article Title</label>

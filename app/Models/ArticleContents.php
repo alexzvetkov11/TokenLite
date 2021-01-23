@@ -8,7 +8,7 @@ class ArticleContents extends Model
 {
     protected $table = 'article_contents';
     protected $fillable = [
-        'article_title', 'section', 'entity_types_id', 'text'
+        'article_title', 'section', 'entity_types', 'text',
     ];
 
     public function __construct()
