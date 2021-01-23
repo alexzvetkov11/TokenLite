@@ -148,10 +148,10 @@
                         <li><a id="clear-cache" class="btn btn-auto btn-xs btn-dark btn-outline" href="{{ route('admin.clear.cache') }}"><em class="ti ti-trash"></em><span>CLEAR CACHE</span></a></li>
                     </ul>
                     @endif
-                </div>{{-- .navbar-innr --}}
-            </div>{{-- .container --}}
-        </div>{{-- .navbar --}}
-    </div>{{-- .topbar-wrap --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
     @yield('content')
 
@@ -162,8 +162,8 @@
                     <div class="copyright-text text-center pb-3">{!! site_whitelabel('copyright') !!}</div>
                 </div>
             </div>
-        </div>{{-- .container --}}
-    </div>{{-- .footer-bar --}}
+        </div>
+    </div>
     <form id="logout-form" action="{{ (is_maintenance() ? route('admin.logout') : route('logout')) }}" method="POST" style="display: none;">
         @csrf
     </form>
