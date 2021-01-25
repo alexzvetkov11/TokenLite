@@ -180,7 +180,7 @@ return [
         // Custom Service Provider or Override Provider
         App\Providers\EMailServiceProvider::class,
         // Override the Translation System
-        App\Providers\NioTranslationServiceProvider::class,
+        //App\Providers\NioTranslationServiceProvider::class,
     ],
 
     /*

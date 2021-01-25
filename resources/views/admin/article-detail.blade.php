@@ -13,29 +13,36 @@
                             <span style="font-size:0.8em">Edit Article Text </span>
                         </div>
                         <div class="card-opt data-action-list d-md-inline-flex">
-                            <a href="{{route('admin.articles')}}"  class="btn btn-auto btn-sm btn-primary">
+                            <a href="{{ route('admin.articles') }}" class="btn btn-auto btn-sm btn-primary">
                                 <em class="fas fa-arrow-left"> </em><span>Back </span>
                             </a>
                         </div>
                     </div>
-                    <hr />
-                    <div class="card-head has-aside">
-                        <div class="input-item input-with-label col-md-4">
-                            <label class="input-item-label">Entity Type</label>
-                            <div class="input-wrap">
-                                <select name="token_wallet_opt[]" class="select select-block select-bordered" value=""
-                                    data-placeholder="Entity Type" multiple="multiple">
-                                    @foreach ($entity_types as $key => $en)
-                                        <option value="{{ $en->entity_type_id }}">{{ $en->entity_type_name }}</option>
-                                    @endforeach
-                                </select>
+                    <div class="gaps-2x"></div>
+                    <div class="row align-items-end guttar-20px guttar-vr-15px">
+                        <div class="col-sm-4 col-lg-4 col-mb-6">
+                            <div class="input-item input-with-label">
+                                <label class="input-item-label">Entity Type</label>
+                                <div class="input-wrap">
+                                    <select name="selectionEntity" class="select select-block select-bordered" value=""
+                                        data-placeholder="Entity Type" multiple="multiple">
+                                        @foreach ($entity_types as $key => $en)
+                                            <option value="{{ $en->entity_type_id }}">
+                                                {{ $en->entity_type_name . ' (' . $en->jurisdiction_name . ')' }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
                             </div>
                         </div>
-                        <div class="card-opt data-action-list d-md-inline-flex">
-                            <a href="#" data-toggle="modal" data-target="#editArticle" 
-                            class="btn btn-auto btn-lg btn-primary pdl-4x pdr-4x" data-selector="empty">
-                                <em class="fas fa-plus-circle"> </em><span>Add </span>
-                            </a>
+
+                        <div class="col-sm-4 col-lg-4 col-mb-6">
+                            <div class="input-wrap input-item" >
+                                <a href="#" data-toggle="modal" data-target="#editArticle"
+                                    class="btn btn-sm btn-sm-s2 btn-auto btn-primary pdl-4x pdr-4x" data-selector="empty">
+                                    <em class="fas fa-plus-circle"> </em><span>Add </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="gaps-1x"></div>
@@ -45,50 +52,72 @@
                             <thead>
                                 <tr>
                                     <th>Section</th>
-                                    @foreach( $entity_types as $en)
-                                    <th style="word-wrap: break-word;">
-                                        {{ $en->entity_type_name .' ('. $en->jurisdiction_name.')'}}
-                                    </th>
+                                    @foreach ($entity_types as $en)
+                                        <th style="word-wrap: break-word" name="column{{ $en->entity_type_id}}">
+                                            <div> {{ $en->entity_type_name . ' (' . $en->jurisdiction_name . ')' }}</div>
+                                            <div>
+                                            <a href="#" >
+                                                <div class="data-state data-state-sm data-state-canceled mr-2"></div>
+                                            </a>
+                                            </div>
+                                        </th>
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody>
-                                @for( $i=1; $i<=$section_num; $i++)
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    @foreach( $entity_types as $en)
-                                        <td class="text-center">
-                                            @php
-                                                $flag=false;
-                                                foreach($contents as $content){
-                                                    if ($content->section == $i && $content->entity_types==$en->entity_type_id){
-                                                        $flag = true; break;
-                                                    }
-                                                }
-                                            @endphp
-
-                                            @if( $flag==true)
-                                            <a href="#" name="articleEdit" data-toggle="modal" data-target="#editArticle" data-selector="content-{{$i}}-{{$en->entity_type_id}}"
-                                                class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
-                                                    Edit
+                                {{-- @for ($i = 1; $i <= $section_num; $i++)
+                                    <tr>
+                                        <a href="#" >
+                                            <div class="data-state data-state-sm data-state-canceled mr-2"></div>
+                                        </a>
+                                    </tr>
+                                @endfor --}}
+                                @for ($i = 1; $i <= $section_num; $i++)
+                                    <tr>
+                                        <td>
+                                            <a href="#" >
+                                                <div class="data-state data-state-sm data-state-canceled mr-2"></div>{{ $i }}
                                             </a>
-                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="{{ $content->text }}">
-                                            @else
-                                            <a href="#" data-toggle="modal" data-target="#editArticle" style="opacity: 0.6" data-selector="content-{{$i}}-{{$en->entity_type_id}}"
-                                                class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
-                                                    Add
-                                            </a>
-                                            <input type="hidden" id="content-{{$i}}-{{$en->entity_type_id}}" value="null">
-                                            @endif
                                         </td>
-                                    @endforeach
-                                </tr>
+                                        @foreach ($entity_types as $en)
+                                            <td class="text-center" name="column{{ $en->entity_type_id}}">
+                                                @php
+                                                    $flag=false;
+                                                    foreach($contents as $content){
+                                                        if ($content->section == $i && $content->entity_types==$en->entity_type_id){
+                                                            $flag = true; break;
+                                                        }
+                                                    }
+                                                @endphp
+
+                                                @if ($flag == true)
+                                                    <a href="#" name="articleEdit" data-toggle="modal"
+                                                        data-target="#editArticle"
+                                                        data-selector="content-{{ $i }}-{{ $en->entity_type_id }}"
+                                                        class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
+                                                        Edit
+                                                    </a>
+                                                    <input type="hidden" id="content-{{ $i }}-{{ $en->entity_type_id }}"
+                                                        value="{{ $content->text }}">
+                                                @else
+                                                    <a href="#" data-toggle="modal" data-target="#editArticle"
+                                                        style="opacity: 0.6"
+                                                        data-selector="content-{{ $i }}-{{ $en->entity_type_id }}"
+                                                        class="btn btn-auto btn-sm btn-info pdl-4x pdr-4x">
+                                                        Add
+                                                    </a>
+                                                    <input type="hidden" id="content-{{ $i }}-{{ $en->entity_type_id }}"
+                                                        value="null">
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                    </tr>
                                 @endfor
                             </tbody>
                         </table>
                     @else
                         <div class="bg-light text-center rounded pdt-5x pdb-5x">
-                            <p><em class="ti ti-server fs-24"></em><br>No investor / user found!  user here! </p>
+                            <p><em class="ti ti-server fs-24"></em><br>No investor / user found! user here! </p>
                             <p><a class="btn btn-primary btn-auto" href="{{ route('admin.users', 'user') }}">View All
                                     Users
                                 </a>
@@ -96,9 +125,14 @@
                         </div>
                     @endif
                     <div class="gaps-3x"></div>
-                    <button class="btn btn-md btn-primary" type="submit">
-                        <i class="ti ti-reload"></i><span>Update</span>
-                    </button>
+                    <div class="justify-content-between d-flex align-items-center">
+                        <button class="btn btn-md btn-primary" type="submit">
+                            <i class="fas fa-plus-circle"></i><span>Add Section</span>
+                        </button>
+                        <button class="btn btn-lg btn-primary" type="submit">
+                            <i class="ti ti-reload"></i><span>Update</span>
+                        </button>
+                    </div>
                     <div class="gaps-3x"></div>
                 </div>
             </div>{{-- .card --}}
@@ -118,13 +152,15 @@
                     <form method="Post" class="adduser-form validate-modern" id="addArticleForm" autocomplete="false"
                         action="{{ route('admin.ajax.juris.edit') }}">
                         @csrf
-                       
+
                         <div class="input-item input-with-label">
                             <label class="input-item-label">Select Entity Type</label>
                             <div class="input-wrap">
-                                <select name="token_wallet_opt[]" class="select select-block select-bordered" value="" data-placeholder="Entity Type">
+                                <select name="token_wallet_opt[]" class="select select-block select-bordered" value=""
+                                    data-placeholder="Entity Type">
                                     @foreach ($entity_types as $key => $en)
-                                        <option value="{{ $en->entity_type_name }}">{{ $en->entity_type_name .' ('. $en->jurisdiction_name .')'}}</option>
+                                        <option value="{{ $en->entity_type_name }}">
+                                            {{ $en->entity_type_name . ' (' . $en->jurisdiction_name . ')' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -132,7 +168,8 @@
                         <div class="input-item  input-with-label">
                             <label for="textAdd" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
-                                <textarea id="textAdd" name="textAdd" class="input-bordered input-textarea editor" ></textarea>
+                                <textarea id="textAdd" name="textAdd"
+                                    class="input-bordered input-textarea editor"></textarea>
                                 <input type="hidden" id="textAddHide" name="textAddHide" value="">
                             </div>
                         </div>
@@ -151,17 +188,20 @@
                 <div class="popup-body popup-body-md">
                     <h3 class="popup-title">Edit Article</h3>
                     {{-- <div class="gaps-1x"></div> --}}
-                    <hr/>
+                    <hr />
                     <form method="Post" class="adduser-form validate-modern" id="editArticleForm" autocomplete="false"
                         action="{{ route('admin.ajax.article.edit') }}">
                         @csrf
-                        {{-- <h4> Article Title: {{ $article->article_label }}</h4> --}}
+                        {{-- <h4> Article Title: {{ $article->article_label }}</h4>
+                        --}}
                         <div class="input-item input-with-label" id="entityAll">
                             <label class="input-item-label">Select Entity Type</label>
                             <div class="input-wrap">
-                                <select name="entityAll" class="select select-block select-bordered" value="" data-placeholder="Entity Type">
+                                <select name="entityAll" class="select select-block select-bordered" value=""
+                                    data-placeholder="Entity Type">
                                     @foreach ($entity_types as $en)
-                                        <option value="{{ $en->entity_type_id }}">{{ $en->entity_type_name .' ('. $en->jurisdiction_name .')'}}</option>
+                                        <option value="{{ $en->entity_type_id }}">
+                                            {{ $en->entity_type_name . ' (' . $en->jurisdiction_name . ')' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -170,7 +210,8 @@
                         <div class="input-item input-with-label" id="articleAll">
                             <label class="input-item-label">Article Type</label>
                             <div class="input-wrap">
-                                <select name="articleAll" class="select select-block select-bordered" value="" data-placeholder="Article Type">
+                                <select name="articleAll" class="select select-block select-bordered" value=""
+                                    data-placeholder="Article Type">
                                     @foreach ($articlesAll as $ar)
                                         <option value="{{ $ar->id }}">{{ $ar->article_label }}</option>
                                     @endforeach
@@ -178,12 +219,13 @@
                             </div>
                         </div>
                         <input name="type" id="type" value="" type="hidden">
-                        <input name="articleId" type="hidden" value="{{ $article->id}}" >
+                        <input name="articleId" type="hidden" value="{{ $article->id }}">
                         <div class="input-item  input-with-label">
 
                             <label for="textEdit" class="input-item-label">Article Content</label>
                             <div class="input-wrap">
-                                <textarea id="textEdit" name="textEdit" class="input-bordered input-textarea editor" ></textarea>
+                                <textarea id="textEdit" name="textEdit"
+                                    class="input-bordered input-textarea editor"></textarea>
                                 <input type="hidden" id="textEditHide" name="textEditHide" value="">
                             </div>
                         </div>
@@ -219,14 +261,14 @@
             // }
 
             $('#example').DataTable({
-                "scrollX":      true,
+                "scrollX": true,
                 // "scrollY":      200,
                 "scrollCollapse": true,
-                "ordering":     false,
-                "searching":    false,
-                "paging":       true,
-                "info":         true,
-                "deferRender":  true,
+                "ordering": false,
+                "searching": false,
+                "paging": true,
+                "info": true,
+                "deferRender": true,
                 // "data":         dataList,
                 // "autoWidth":    false,
             });

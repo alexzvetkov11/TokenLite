@@ -25,6 +25,7 @@ $(document).ready(function () {
         $("[name='juris_id']").val($(this).data('id'));
     });
 
+    //admin article_detail.blade.php edit modal
     $("[data-target='#editArticle']").on("click", function () {
         $name = $(this).data('selector');
         if ($name == "empty") {
@@ -47,9 +48,11 @@ $(document).ready(function () {
         $('#textEdit').trumbowyg('html', $val);
     });
 
-    // $("[data-target='#addArticle']").on("click", function(){
-    //     $name = $(this).data('selector');
-    //     $('#textEditHide').val($name);
-    //     $('#textEdit').trumbowyg('html', $('#'+ $name).val());
-    // });
+    $("[name='selectionEntity']").on('change', function(){
+        $val = $(this).val();
+        $('[name^="column"]').hide();
+        $.each($val, function (index, value){
+            $('[name="column' + value + '"]' ).show();
+        })
+    });
 })
