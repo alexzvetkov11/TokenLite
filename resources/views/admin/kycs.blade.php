@@ -11,7 +11,8 @@
             <div class="card content-area content-area-mh">
                 <div class="card-innr">
                     <div class="card-head has-aside">
-                        <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application</h4>
+                        {{-- <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application</h4> --}}
+                        <h4 class="card-title"> KYC Application</h4>
                         <div class="card-opt">
                             <ul class="btn-grp btn-grp-block guttar-20px">
                                 <li>

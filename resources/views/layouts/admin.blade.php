@@ -80,20 +80,36 @@
                 <div class="navbar-innr">
                     <ul class="navbar-menu" id="main-nav">
                         <li><a href="{{ route('admin.home') }}"><em class="ikon ikon-dashboard"></em> Dashboard</a></li>
+
+                                
+
                         @if(gup('user')||gup('view_user'))
-                            <li {!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
-                                <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a>
-                            </li>
+                        <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user-list"></em> Users</a>
+                            <ul class="navbar-dropdown">
+                                <li {!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a> --}}
+                                    <a href="{{ route('admin.users', 'user') }}">Users</a>
+                                </li>
+                                @if(gup('kyc')||gup('view_kyc'))
+                                    <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                        {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                        <a href="{{ route('admin.kycs', 'pending') }}"> KYC Applications</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
                         @endif
-                        @if(gup('kyc')||gup('view_kyc'))
+                        {{-- @if(gup('kyc')||gup('view_kyc'))
                             <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
                                 <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a>
                             </li>
-                        @endif
+                        @endif --}}
 
-
-                        <li>
-                            <a href="{{ route('admin.entities') }}"><em class="ikon ikon-docs"></em>Entities</a>
+                        <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user-list"></em> Entities</a>
+                            <ul class="navbar-dropdown">
+                                <li><a href="{{ route('admin.entities') }}">Entities</a></li>
+                                <li><a href="{{ route('admin.entities') }}">Entity Applications</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#"><em class="ikon ikon-docs"></em>Messages</a>
@@ -123,19 +139,20 @@
                         @if(gup('setting'))
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-settings"></em> Settings</a>
                             <ul class="navbar-dropdown">
-                                <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Setting</a></li>
-                                <li><a href="{{ route('admin.articles') }}">Articles</a></li>
                                 <li><a href="{{ route('admin.jurisdiction') }}">Jurisdictions</a></li>
-                                <li><a href="{{ route('admin.settings') }}">Website Setting</a></li>
                                 <li><a href="{{ route('admin.entity') }}">Entity Types</a></li>
-                                <li><a href="{{ route('admin.settings.referral') }}">Referral Setting</a></li>
+                                <li><a href="{{ route('admin.articles') }}">Articles</a></li>
                                 <li><a href="#"> Statutory Framework</a></li>
+                                <li><a href="{{ route('admin.settings') }}">Website Setting</a></li>
                                 <li><a href="{{ route('admin.settings.email') }}">Mailing Setting</a></li>
-                                <li><a href="{{ route('admin.payments.setup') }}">Payment Methods</a></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
+                                <li><a href="{{ route('admin.lang.manage') }}">Languages Setting</a></li>
                                 <li><a href="{{ route('admin.settings.api') }}">Application API</a></li>
-                                <li><a href="{{ route('admin.lang.manage') }}">Manage Languages</a></li>
+                                <li><a href="{{ route('admin.settings.referral') }}">Referral Setting</a></li>
+                                <li><a href="{{ route('admin.payments.setup') }}">Payment Methods</a></li>
+                                <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Setting</a></li>
                                 <li><a href="{{ route('admin.system') }}">System Status</a></li>
+
                                 @if(has_route('manage_access:admin.index'))
                                 <li><a href="{{ route('manage_access:admin.index') }}">Manage Admin</a></li>
                                 @endif

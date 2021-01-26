@@ -1,7 +1,9 @@
 $(document).ready(function () {
     $("[data-type='delete_user']").click(function () {
+        $title = $(this).data("title");
+        if (!$title) $title = "Are you sure?";
         swal({
-            title: "Are you sure?",
+            title: $title,
             text: "Once Delete, You will not get back this log in future!",
             icon: "warning",
             buttons: !0,

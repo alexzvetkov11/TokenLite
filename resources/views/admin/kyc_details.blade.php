@@ -69,7 +69,7 @@ $space = "&nbsp;";
                     <div class="gaps-2x w-100 d-none d-md-block"></div>
                     <div class="w-100">
                         <span class="data-details-title">Admin Note</span>
-                        <span class="data-details-info">{!! $kyc->notes !!}</span>
+                        <span class="data-details-info">{{ $kyc->notes }}</span>
                     </div>
                     @endif
                 </div>

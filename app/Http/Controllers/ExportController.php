@@ -40,7 +40,9 @@ class ExportController extends Controller
             $route = ($which) ? $which : 'home';
             return redirect()->route('admin.'.$which)->with(['global' => 'You do not have permission to download.']);
         }
-        if (empty(env_file()) || !nio_status() || empty(app_key())) {
+   
+        // if (empty(env_file()) || !nio_status() || empty(app_key())) {
+        if ( empty(app_key())) {
             $response['msg'] = 'warning';
             $response['status'] = 'die';
             $response['message'] = __('auth.health.save_action');

@@ -73,8 +73,8 @@
                                             <ul class="dropdown-list">
                                                 <li><h6 class="dropdown-title">Export</h6></li>
                                                 <li><a href="{{ route('admin.export', array_merge([ 'table' => 'users', 'format' => 'entire'], request()->all())) }}">Entire</a></li>
-                                                <li><a href="{{ route('admin.export',array_merge([ 'table' => 'users', 'format' => 'minimal'], request()->all())) }}">Minimal</a></li>
-                                                <li><a href="{{ route('admin.export',array_merge([ 'table' => 'users', 'format' => 'compact'], request()->all())) }}">Compact</a></li>
+                                                {{-- <li><a href="{{ route('admin.export',array_merge([ 'table' => 'users', 'format' => 'minimal'], request()->all())) }}">Minimal</a></li> --}}
+                                                {{-- <li><a href="{{ route('admin.export',array_merge([ 'table' => 'users', 'format' => 'compact'], request()->all())) }}">Compact</a></li> --}}
                                             </ul>
                                         </div>
                                     </div>
@@ -313,7 +313,7 @@
                                                     <em class="fas fa-ban"></em>Delete
                                                 </a>
                                                 -->
-                                                <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.delete_users',encrypt($user->id))}}">
+                                                <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" data-title="Really you want to delete this User?" class="user-action front" data-url="{{route('admin.delete_users',encrypt($user->id))}}">
                                                     <em class="fa fa-trash"></em>
                                                     Delete
                                                 </a>
