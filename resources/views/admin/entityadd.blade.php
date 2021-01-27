@@ -50,7 +50,7 @@
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="jurisdiction" id="jurisdiction"  data-dd-class="search-on">
                                                 @foreach( $juris as $jur)
-                                                <option value="{{ $jur->id }}"> {{ $jur->jurisdiction_name }}</option>
+                                                <option value="{{ $jur->jur_id }}"> {{ $jur->jurisdiction_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

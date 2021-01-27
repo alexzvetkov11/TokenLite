@@ -1015,6 +1015,12 @@ if (!function_exists('__status')) {
                 'status' => 'success',
                 'null' => null,
             ],
+            'inactive' => (object) [
+                'icon' => 'canceled',
+                'text' => 'Inactive',
+                'status' => 'danger',
+                'null' => null,
+            ],
             'default' => (object) [
                 'icon' => 'pending',
                 'text' => 'Pending',

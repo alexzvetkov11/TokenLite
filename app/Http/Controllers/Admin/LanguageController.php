@@ -294,7 +294,7 @@ class LanguageController extends Controller
      * @param   string $action
      */
     public function generate_translate($request) {
-//        dd($request);
+        // dd($request); 
         $result['error'] = true;
         $result['msg'] = 'warning';
         $result['icon'] = 'ti ti-alert';
@@ -416,6 +416,7 @@ class LanguageController extends Controller
     /**
      * Get translate row by using key for language
      *
+     * 
      * @version 1.0.0
      * @since   1.1.3
      * @param   string $key

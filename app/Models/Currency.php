@@ -15,12 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static orderBy(string $string, string $string1)
  * @method static FindOrFail($id)
  */
-class Jurisdictions extends Model
+class Currency extends Model
 {
     /*
      * Table Name
      */
-    protected $table = 'jurisdictions';
+    protected $table = 'currencies';
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +28,7 @@ class Jurisdictions extends Model
      * @var array
      */
     protected $fillable = [
-        'jurisdiction_name','language_code','main_currency_code', 'jur_status',
+        'cur_code', 'cur_label',
     ];
 
     /**

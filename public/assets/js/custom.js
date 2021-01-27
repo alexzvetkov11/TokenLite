@@ -1,5 +1,5 @@
-$(document).ready(function () {
-    $("[data-type='delete_user']").click(function () {
+$(document).ready(function() {
+    $("[data-type='delete_user']").click(function() {
         $title = $(this).data("title");
         if (!$title) $title = "Are you sure?";
         swal({
@@ -14,7 +14,7 @@ $(document).ready(function () {
                 console.log(o, csrf_token);
                 $.get(o).done(t => {
                     location.reload();
-                }).fail(function (e, t, n) {
+                }).fail(function(e, t, n) {
                     show_toast("error", "Network or Database Error."), _log(e, t, n)
                 })
             }
@@ -22,13 +22,22 @@ $(document).ready(function () {
     });
 
     //admin jurisdition.blade.php edit modal
-    $(".editJurisdiction").click(function () {
+    $(".editJurisdiction").click(function() {
         $("[name='juris_name']").val($(this).data('juris'));
+        $("[name='lang_code']").val($(this).data('langcode')).trigger('change');
+        $("[name='cur_code']").val($(this).data('curcode')).trigger('change');
+        console.log($(this).data('statue'));
+        if ($(this).data('statue') == 'active')
+
+            $("[name='statue_switcher']").prop('checked', true);
+        else
+            $("[name='statue_switcher']").prop('checked', false);
+
         $("[name='juris_id']").val($(this).data('id'));
     });
 
     //admin article_detail.blade.php edit modal
-    $("[data-target='#editArticle']").on("click", function () {
+    $("[data-target='#editArticle']").on("click", function() {
         $name = $(this).data('selector');
         if ($name == "empty") {
             $("#type").val('insert');
@@ -50,11 +59,11 @@ $(document).ready(function () {
         $('#textEdit').trumbowyg('html', $val);
     });
 
-    $("[name='selectionEntity']").on('change', function(){
+    $("[name='selectionEntity']").on('change', function() {
         $val = $(this).val();
         $('[name^="column"]').hide();
-        $.each($val, function (index, value){
-            $('[name="column' + value + '"]' ).show();
+        $.each($val, function(index, value) {
+            $('[name="column' + value + '"]').show();
         })
     });
 })

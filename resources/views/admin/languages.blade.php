@@ -63,7 +63,7 @@
                                                         <li><a href="{{ route('admin.lang.translate', $lang->code) }}" >Translation</a> </li>
                                                         <li><a href="{{ route('admin.generate.translate', $lang->code) }}" >Generate</a> </li>
 {{--                                                        <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-confirm="yes" data-actions="generate">Generate</a> </li>--}}
-                                                        <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-modal="edit" data-actions="update">Update</a></li>
+                                                        {{-- <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-modal="edit" data-actions="update">Update</a></li> --}}
                                                         @if($lang->code!='en')
                                                             @if($lang->status)
                                                             <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-confirm="yes" data-actions="disable">Disable</a> </li>
@@ -231,6 +231,7 @@
             if(is_confirm==='yes') {
                 var action = $this.data('actions'), swal_btx = (action=='delete') ? 'Delete' : ((action=='generate') ? 'Regenerate' : 'Yes'),
                 swal_bcn = (action=='delete') ? 'danger' : '', swal_text = "Please confirm if you want to "+ action +" the language?";
+                console.log( action );
                 swal({
                     title: "Are you sure?",
                     icon: (action=='delete'||action=='generate') ? 'warning' : 'info',
@@ -242,10 +243,14 @@
                     dangerMode: (action=='delete') ? true : false
                 })
                 .then(function(data) {
-                    if(data) { post_submit(lang_action_url, $this.data(), $ajmod); }
+                    if(data) { 
+                        post_submit(lang_action_url, $this.data()); 
+                        location.reload();
+                    }
                 });
             } else {
-                if($this.data()) { post_submit(lang_action_url, $this.data(), $ajmod); }
+                console.log(lang_action_url);
+                //if($this.data()) { post_submit(lang_action_url, $this.data()); }
             }
         });
     })(jQuery);

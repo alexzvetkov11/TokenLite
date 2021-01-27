@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Admin;
  */
 use App\Http\Controllers\Controller;
 use App\Models\Jurisdictions;
+use App\Models\Language;
+use App\Models\Currency;
 use Auth;
 use Illuminate\Http\Request;
 use Validator;
@@ -19,20 +21,22 @@ class JurisdictionController extends Controller
 {
     public function index(Request $request)
     {
+
         //$role_data = '';
         $per_page = gmvl('jurisdiction_per_page', 10);
-        $order_by = gmvl('jurisdiction_order_by', 'id');
+        $order_by = gmvl('jurisdiction_order_by', 'jur_id');
         $ordered = gmvl('jurisdiction_ordered', 'DESC');
         $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
-        $juris = Jurisdictions::orderby($order_by, $ordered)->paginate($per_page);
-        // try {
-        //     $juris = Jurisdictions::orderby($order_by, $ordered)->paginate($per_page);
-        // } catch (\Exception $e) {
-        //     echo $e->getMessage();
-        // }
+        $juris = \DB::table("jurisdictions")->select(['*', 'jurisdictions.id as jur_id'])
+                    ->join('languages', 'jurisdictions.language_code', '=', 'languages.id')
+                    ->join('currencies', 'jurisdictions.main_currency_code', '=', 'currencies.cur_id')
+                    ->orderby($order_by, $ordered)->paginate($per_page);
         $pagi = $juris->appends(request()->all());
+        
+        $languages = Language::orderby('id', 'ASC')->get();
+        $currencies = Currency::orderby('cur_id', 'ASC')->get();
 
-        return view('admin.jurisdiction', compact('juris', 'pagi', 'is_page'));
+        return view('admin.jurisdiction', compact('juris', 'pagi', 'is_page', 'languages', 'currencies'));
     }
 
     public function editJuris(Request $request)
@@ -50,10 +54,14 @@ class JurisdictionController extends Controller
         } else {
             $juris_one = Jurisdictions::where("id", $request['juris_id'])->first();
             $juris_one->jurisdiction_name = $request->juris_name;
+            $juris_one->language_code = $request->lang_code;
+            $juris_one->main_currency_code = $request->cur_code;
+            $juris_one->jur_status = ($request->statue_switcher ? 'active' : 'inactive');
             try {
                 $juris_one->save(); // returns false
             } catch (\Exception $e) {
                 echo $e->getMessage(); // insert query
+                exit;
             }
             $ret['msg'] = 'success';
             $ret['message'] = __('messages.update.success', ['what' => 'Jurisdiction']);
@@ -77,9 +85,12 @@ class JurisdictionController extends Controller
             return response()->json($ret);
         } else {
             try{
-                $juris =new Jurisdictions;
-                $juris->jurisdiction_name = $request->juris_name;
-                $juris->save();
+                $juris_one =new Jurisdictions;
+                $juris_one->jurisdiction_name = $request->juris_name;
+                $juris_one->language_code = $request->lang_code;
+                $juris_one->main_currency_code = $request->cur_code;
+                $juris_one->jur_status = ($request->statue_switcher ? 'active' : 'inactive');
+                $juris_one->save();
             } catch(\Exception $e){
                 echo $e->getMessage();
             }
