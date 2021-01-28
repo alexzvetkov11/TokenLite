@@ -12,7 +12,7 @@ $(document).ready(function() {
             if (t) {
                 var o = $(this).data("url");
                 console.log(o, csrf_token);
-                $.get(o).done(t => {
+                $.post(o).done(t => {
                     location.reload();
                 }).fail(function(e, t, n) {
                     show_toast("error", "Network or Database Error."), _log(e, t, n)

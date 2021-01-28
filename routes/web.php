@@ -101,7 +101,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/settings/referral', 'Admin\SettingController@referral_setting')->middleware(['ico', 'super_admin'])->name('settings.referral'); // v1.1.2
     Route::get('/settings/rest-api', 'Admin\SettingController@api_setting')->middleware(['ico', 'super_admin'])->name('settings.api'); // v1.0.6
 
-    Route::get('/entity', 'Admin\EntityController@index')->middleware(['ico', 'super_admin'])->name('entity');
+    Route::get('/entity-types', 'Admin\EntityController@index')->middleware(['ico', 'super_admin'])->name('entity');
     Route::get('/add_entity', 'Admin\EntityController@add_entity')->middleware(['ico', 'super_admin'])->name('addentity');
     Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
@@ -167,13 +167,14 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
 
         Route::post('/jurisdiction/edit', 'Admin\JurisdictionController@editJuris')->middleware(['ico', 'demo_user'])->name('juris.edit');
         Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
-        Route::get('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
+        Route::Post('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
         Route::post('/article/new_add', 'Admin\ArticlesController@newAdd')->middleware(['ico', 'demo_user'])->name('article.new');
         
-        Route::get('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
+        Route::Post('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
         Route::post('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
-        Route::post('/entities/add', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entities.add');
+        Route::post('/add_entity/addfirst', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entype.addfirst');
+        Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
     });
 
     //Clear Cache facade value:

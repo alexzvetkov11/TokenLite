@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', __('Add Entity'))
+@section('title', __('Add Entity Type'))
     @php
     $has_sidebar = false;
     @endphp
@@ -20,7 +20,7 @@
 
             <div class="<!--kyc-form-steps--> card mx-lg-4">
                 <div class="card-head has-aside pd-2x">
-                    <div style="font-size:1.29em; color:#342d6e"> <b>Entities ></b> <span style="font-size:0.8em">Add Entity Type</span></div>
+                    <div style="font-size:1.29em; color:#342d6e"> <b>Entity Types ></b> <span style="font-size:0.8em">Add Entity Type</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entity') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -37,8 +37,8 @@
                             <div class="step-head">
                                 <div class="step-number">01</div>
                                 <div class="step-head-text">
-                                    <h4>{{__('Basic Details')}}</h4>
-                                    <p>{{__('Fill in the basic details of the new Entity Type.')}}</p>
+                                    <h4>{{__('Name Details')}}</h4>
+                                    <p>{{__('Fill in the name details of the new Entity Type.')}}</p>
                                 </div>
                             </div>
                         </div>{{-- .step-head --}}
@@ -50,7 +50,7 @@
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="jurisdiction" id="jurisdiction"  data-dd-class="search-on">
                                                 @foreach( $juris as $jur)
-                                                <option value="{{ $jur->jur_id }}"> {{ $jur->jurisdiction_name }}</option>
+                                                <option value="{{ $jur->id }}"> {{ $jur->jurisdiction_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -101,12 +101,12 @@
 
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="abbformat" class="input-item-label">{{__('Abbreviation Format')}}</label>
+                                        <label for="abbformat" class="input-item-label">{{__('Abbreviation Position')}}</label>
                                         <div class="input-wrap">
                                             {{--  <input class="input-bordered" type="text" name="abbformat" id="format" placeholder="Set Format">  --}}
                                             <select class="select-bordered select-block" name="abbformat" id="abbformat" data-dd-class="search-on">
-                                                <option value="before">Before</option>
-                                                <option default value="after">After</option>
+                                                <option value="before">Behind</option>
+                                                <option default value="after">Before</option>
                                             </select>
                                         </div>
                                     </div>{{-- .input-item --}}

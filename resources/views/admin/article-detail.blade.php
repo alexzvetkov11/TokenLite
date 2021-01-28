@@ -276,6 +276,9 @@
             $('#example_length').hide();
         })(jQuery);
 
+
+        // https://datatables.net/examples/basic_init/scroll_x.html
+        // https://alex-d.github.io/Trumbowyg/documentation/#hide-button-texts
     </script>
 
 

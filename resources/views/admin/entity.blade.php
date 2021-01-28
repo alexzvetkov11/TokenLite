@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page).' Entity Type')
+@section('title', 'Entity Types')
 @section('content')
 
 <div class="page-content">
@@ -9,7 +9,7 @@
         <div class="card content-area content-area-mh">
             <div class="card-innr">
                 <div class="card-head has-aside">
-                    <h4 class="card-title">Entity Type</h4>
+                    <h4 class="card-title">Entity Types</h4>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.addentity') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">Entity Type</span></span>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
 
-                <div class="gaps-1x"></div>
+                <div class="gaps-2x"></div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="float-right position-relative">
@@ -35,13 +35,13 @@
                                     </ul>
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order By</h6></li>
-                                        <li {!! (gmvl('entity_order_by', 'entity_type')=='entity_type') ? ' class="active"' : '' !!}>
-                                            <a href="#" data-meta="orderby=entity_type">Entity Type</a></li>
-                                        {{-- <li{!! (gmvl('user_order_by', 'id')=='name') ? ' class="active"' : '' !!}>
-                                            <a href="#" data-meta="orderby=name">Name</a></li>
-                                        <li{!! (gmvl('user_order_by', 'id')=='token') ? ' class="active"' : '' !!}>
-                                            <a href="#" data-meta="orderby=token">Token</a></li>
-                                    </ul> --}}
+                                        <li {!! (gmvl('entity_order_by', 'entity_type_name')=='entity_type_name') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=entity_type_name">Entity Type</a></li>
+                                        <li {!! (gmvl('entity_order_by', 'label')=='label') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=label">Legal Structure</a></li>
+                                        <li {!! (gmvl('entity_order_by', 'jurisdiction_name')=='jurisdiction_name') ? ' class="active"' : '' !!}>
+                                            <a href="#" data-meta="orderby=jurisdiction_name">Jurisdiction</a></li>
+                                    </ul>
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order</h6></li>
                                         <li {!! (gmvl('entity_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
@@ -60,6 +60,7 @@
                     <thead>
                         <tr class="data-item data-head">
                             <th class="data-col filter-data dt-user ">Entity Type</th>
+                            <th class="data-col filter-data dt-user ">Legal Structure</th>
                             <th class="data-col filter-data dt-email">Jurisdiction</th>
                             <th class="data-col dt-status"> Status</th>
                             <th class="data-col"></th>
@@ -69,28 +70,30 @@
                         @foreach($entity as $en)
                         <tr class="data-item">
                             <td class="data-col dt-user">
-                                <span class="lead user-name text-wrap"><a href="{{ route('admin.entity.typedetail', $en->id) }}"> {{ $en->entity_type }} </a></span>
+                                <span class="lead user-name text-wrap"><a href="{{ route('admin.entity.typedetail', $en->entity_type_id) }}"> {{ $en->entity_type_name }} </a></span>
                             </td>
                             <td class="data-col dt-email">
-                                <span class="user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                <span class="user-name text-wrap">{{ $en->label }}</span>
+                            </td>
+                            <td class="data-col dt-email">
+                                <span class="user-name text-wrap">{{ $en->jurisdiction_name }}</span>
                             </td>
                             <td class="data-col data-col-wd-md dt-status">
-                                <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($en->status,'status') }}">{{ __status($en->status,'text') }}</span>
-                                <span class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($en->status,'status') }}">{{ substr(__status($en->status,'text'), 0, 1) }}</span>
+                                <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($en->jur_status,'status') }}">{{ __status($en->jur_status,'text') }}</span>
+                                <span class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($en->jur_status,'status') }}">{{ substr(__status($en->jur_status,'text'), 0, 1) }}</span>
                             </td>
                             <td class="data-col text-right">
                                 <div class="relative d-inline-block">
                                     <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
-                                        <ul class="dropdown-list more-menu-{{$en->id}}">
+                                        <ul class="dropdown-list more-menu-{{$en->entity_type_id}}">
                                             <li><a href="#"><em class="far fa-eye"></em> View Details</a></li>
                                             {{-- <li><a class="user-email-action" href="#" data-uid="{{ $en->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Statutory Framework</a></li>
                                             <li><a href="javascript:void(0)" data-uid="{{ $en->id }}" data-type="deactivate" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Deactivate</a></li> --}}
                                             <li>
                                                 {{--  <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.entity.delete_users',encrypt($en->id))}}">  --}}
-                                                <a href="#" data-uid="{{ $en->id }}" data-type="delete_user" class="user-action front">
-                                                    <em class="fas fa-ban"></em>
-                                                    Delete
+                                                <a href="#" data-uid="{{ $en->entity_type_id }}" data-url="{{ route('admin.ajax.entype.delete', $en->entity_type_id ) }}" data-type="delete_user" class="user-action front" data-title="Are you sure you want to delete this Entity Type?">
+                                                    <em class="fas fa-ban"></em>Delete
                                                 </a>
                                             </li>
 
@@ -162,13 +165,8 @@
                             <div class="input-item input-with-label">
                                 <label class="input-item-label">User Type</label>
                                 <select name="role" class="select select-bordered select-block" required="required">
-                                    <option value="user">
-                                        Regular
-                                    </option>
-                                    <option value="admin">
-                                        Admin
-                                    </option>
-
+                                    <option value="user">Regular</option>
+                                    <option value="admin">Admin</option>
                                 </select>
                             </div>
                         </div>
@@ -249,3 +247,15 @@
 </div>
 
 @endsection
+
+
+@push('footer')
+    <script type="text/javascript">
+        (function($) {
+            $('.searchbar-color').css('margin-bottom', '30px');
+            $('#DataTables_Table_0_filter').css('background-color', "#fff");
+        })(jQuery);
+
+    </script>
+
+@endpush
