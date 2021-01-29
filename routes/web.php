@@ -179,7 +179,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/add_entity/add-partnerships', 'Admin\EntityController@addEntityPartnerships')->middleware(['ico', 'demo_user'])->name('entype.addPartnerships');
         Route::post('/add_entity/add-trusts', 'Admin\EntityController@addEntityTrusts')->middleware(['ico', 'demo_user'])->name('entype.addTrusts');
 
-        Route::post('/add_entity/add-initial', 'Admin\EntityController@addEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.addinitial');
+        Route::post('/add_entity/add', 'Admin\EntityController@addEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.addinitial');
         Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
         
         

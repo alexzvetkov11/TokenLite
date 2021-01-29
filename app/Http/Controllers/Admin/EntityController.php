@@ -67,16 +67,16 @@ class EntityController extends Controller
         } else {
             $entype = new EntityTypes;
             $entype->entity_type_name = $request->entityname;
-            $entype->abbrev_long = $request->abbrev_long;
-            $entype->abbrev_short = $request->abbrev_short;
-            $entype->abbrev_position = $request->abbrev_position;
-            $entype->legal_structure_id = $request->legalStructure;
-            $entype->jurisdiction_id = $request->jurisdiction;
-            $entype->separate_legal_person = $request->separateLegal;
-            $entype->formation_documents = $request->formationDocuments;
-            $entype->formation_notary_req = $request->notary;
-            $entype->principal_statute = $request->principal_statue;
-            $entype->register_native_name = $request->registername;
+            $entype->abbrev_long = ($request->abbrev_long ? $request->abbrev_long : null);
+            $entype->abbrev_short = $request->abbrev_short ? $request->abbrev_short : null;
+            $entype->abbrev_position = $request->abbrev_position ? $request->abbrev_position : null;
+            $entype->legal_structure_id = $request->legalStructure ? $request->legalStructure : null;
+            $entype->jurisdiction_id = $request->jurisdiction ? $request->jurisdiction : null;
+            $entype->separate_legal_person = $request->separateLegal ? $request->separateLegal : null; 
+            $entype->formation_documents = $request->formationDocuments ? $request->formationDocuments : null;
+            $entype->formation_notary_req = $request->notary ? $request->notary : null;
+            $entype->principal_statute = $request->principal_statue ? $request->principal_statue : null;
+            $entype->register_native_name = $request->registername ? $request->registername : null;
             try {
                 $entype->save();
                 $ret['msg'] = "success";
@@ -106,7 +106,6 @@ class EntityController extends Controller
         
             } catch (\Exception $e) {
                 echo $e->getMessage();
-                exit;
                 $ret['msg'] = 'error';
                 $ret['message'] = __('Jurisdiction Not Found');
                 return redirect()->route('admin.addentity');
@@ -115,33 +114,33 @@ class EntityController extends Controller
     }
     public function addEntityCompanies(Request $request){
 
-        $company = new Entity_types_companies;
+        $company = new EntityTypesCompanies;
         $company->entity_type_id = $request->entypeId;
         $company->members_min = $request->minmember;
         $company->members_max = $request->maxmember;
-        $company->share_transferability =$request->sharetransfer;
+        $company->share_transferability = $request->sharetransfer=="on" ? "Private" : "Public";
         $company->share_cap_issued_min =$request->minissuedcaptial;
         $company->share_cap_paid_up_min =$request->minpaidcaptial;
         $company->share_cap_authorized_paid_up_min_rel =$request->minpaidauth;
         $company->shares_issued_min =$request->minshareissued;
         $company->shares_issued_max =$request->maxshareissued;
-        $company->shares_without_dividend_rights =$request->withoutDR;
-        $company->shares_without_voting_rights =$request->withoutVR;
-        $company->shares_without_dividend_voting_rights =$request->withoutDVR;
-        $company->bearer_shares_permitted =$request->BSP;
-        $company->fractional_shares_permitted =$request->FSP;
+        $company->shares_without_dividend_rights = $request->withoutDR=="on" ? "Y" : "N";
+        $company->shares_without_voting_rights =$request->withoutVR =="on" ? "Y" : "N";
+        $company->shares_without_dividend_voting_rights =$request->withoutDVR =="on" ? "Y" : "N";
+        $company->bearer_shares_permitted =$request->BSP =="on" ? "Y" : "N";
+        $company->fractional_shares_permitted =$request->FSP =="on" ? "Y" : "N";
         $company->directors_min =$request->minNumberDirectors;
         $company->directors_max =$request->maxNumberDirectors;
-        $company->local_dir_req =$request->localDR;
-        $company->local_officer_req =$request->localOR;
-        $company->local_reg_office_req =$request->localROR;
+        $company->local_dir_req =$request->localDR =="on" ? "Y" : "N";
+        $company->local_officer_req =$request->localOR =="on" ? "Y" : "N";
+        $company->local_reg_office_req =$request->localROR =="on" ? "Y" : "N";
         $company->members_annual_meeting_req =$request->annualAAM;
         $company->member_annual_accounts_approval_deadline_days =$request->initailAD;
         $company->member_annual_accounts_approval_deadline_adjusted_days =$request->AdjustedAD;
-        $company->filing_members_req =$request->memberRegister;
-        $company->filing_directors_req =$request->directorRegister;
-        $company->filing_officers_req =$request->officerRegister;
-        $company->filing_ubo_req =$request->UBORegister;
+        $company->filing_members_req =$request->memberRegister =="on" ? "Y" : "N";
+        $company->filing_directors_req =$request->directorRegister =="on" ? "Y" : "N";
+        $company->filing_officers_req =$request->officerRegister =="on" ? "Y" : "N";
+        $company->filing_ubo_req =$request->UBORegister =="on" ? "Y" : "N";
         $company->UBO_threshold_capital_rights =$request->UBOCapital;
         $company->UBO_threshold_voting_interest =$request->UBOVoting;
         $company->filing_annual_accounts_req = $request->annualAFR;
