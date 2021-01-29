@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
-                <form method="POST" action="{{route('admin.ajax.entype.addPartnerships')}}">
+                <form method="POST" action="{{isset($partnerships)? route('admin.ajax.entype.editPartnerships') : route('admin.ajax.entype.addPartnerships')}}">
                     @csrf
                     <div class="form-step form-step1">
                         <div class="form-step-head card-innr">
@@ -39,7 +39,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($partnerships)? $partnerships->members_min : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +48,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($partnerships)? $partnerships->members_max : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -56,6 +58,7 @@
                     </div>
                   
                     <input type="hidden" name="entypeId" value="{{$entype->id}}">
+                    <input type="hidden" name="partnershipId" value="{{isset($partnerships)?$partnerships->id:''}}">
 
                     <div class="form-step form-final">
                         <div class="form-step-fields card-innr">

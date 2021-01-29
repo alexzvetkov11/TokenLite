@@ -28,9 +28,9 @@ class EntityTypes extends Model
      * @var array
      */
     protected $fillable = [
-        "jurisdiction_id", "entity_type_name", "entity_type_abbrev_long", "entity_type_abbrev_short",
-        "entity_type_lang", "entity_type_principal_statute", "entity_type_register", "entity_type_loc-dir_sec",
-        "entity_type_cur", "entity_type_share_transfer", "entity_type_share_cap_min", "entity_type_shareholders_max",
+        "jurisdiction_id", "entity_type_name", "separate_legal_person", "legal_structure_id",
+        "abbrev_long", "abbrev_short", "principal_statute", "register_native_name",
+        "formation_documents", "formation_notary_req", "abbrev_position",
     ];
 
     /**

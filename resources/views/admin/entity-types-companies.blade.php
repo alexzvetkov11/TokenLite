@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
-                <form  method="POST" action="{{route('admin.ajax.entype.addcompanies')}}">
+                <form  method="POST" action="{{isset($companies)? route('admin.ajax.entype.editCompanies') :route('admin.ajax.entype.addcompanies')}}">
                     @csrf
                     <div class="form-step form-step1">
                         <div class="form-step-head card-innr">
@@ -39,7 +39,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->members_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +48,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->members_max : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +58,8 @@
                                         <label class="input-item-label">Share Transferability</label>
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-2">Private</span>
-                                            <input class="input-switch" name="sharetransfer" type="checkbox" checked id="sharetransfer">
+                                            <input class="input-switch" name="sharetransfer" type="checkbox" id="sharetransfer"
+                                             {{ isset($companies)&&$companies->share_transferability=='Private' ? 'checked' : '' }}>
                                             <label for="sharetransfer">Public</label>
                                         </div>
                                     </div>
@@ -81,7 +84,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minissuedcaptial"  class="input-item-label">{{__('Minimum Issued Share Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minissuedcaptial" name="minissuedcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)">
+                                            <input type="number" class="input-bordered" id="minissuedcaptial" name="minissuedcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)"
+                                            value="{{ isset($companies)? $companies->share_cap_issued_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +93,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minpaidcaptial" class="input-item-label">{{__('Minimum Paid-Up Share Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minpaidcaptial" name="minpaidcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)">
+                                            <input type="number" class="input-bordered" id="minpaidcaptial" name="minpaidcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)"
+                                            value="{{ isset($companies)? $companies->share_cap_paid_up_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +102,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minpaidauth" class="input-item-label">{{__('Minimum Paid-Up Share Capital Relative to Authorized Share Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minpaidauth" name="minpaidauth" placeholder='Percentage format: either "20%" or 0.2'>
+                                            <input type="number" class="input-bordered" id="minpaidauth" name="minpaidauth" placeholder='Percentage format: either "20%" or 0.2'
+                                            value="{{ isset($companies)? $companies->share_cap_authorized_paid_up_min_rel : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +111,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minshareissued" class="input-item-label">{{__('Minimum Shares Issued')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minshareissued" name="minshareissued" placeholder='Only whole numbers allowed.'>
+                                            <input type="number" class="input-bordered" id="minshareissued" name="minshareissued" placeholder='Only whole numbers allowed.'
+                                            value="{{ isset($companies)? $companies->shares_issued_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +120,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxshareissued" class="input-item-label">{{__('Maximum Shares Issued')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="maxshareissued" name="maxshareissued" placeholder='Only whole numbers allowed.'>
+                                            <input type="number" class="input-bordered" id="maxshareissued" name="maxshareissued" placeholder='Only whole numbers allowed.'
+                                            value="{{ isset($companies)? $companies->shares_issued_max : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +134,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="withoutDR" type="checkbox" id="withoutDR">
+                                            <input class="input-switch" name="withoutDR" type="checkbox" id="withoutDR"
+                                            {{ isset($companies)&&$companies->shares_without_dividend_rights=='Y' ? 'checked' : '' }}>
                                             <label for="withoutDR">No</label>
                                         </div>
                                     </div>
@@ -138,7 +147,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="withoutVR" type="checkbox" id="withoutVR">
+                                            <input class="input-switch" name="withoutVR" type="checkbox" id="withoutVR"
+                                            {{ isset($companies)&&$companies->shares_without_voting_rights=='Y' ? 'checked' : '' }}>
                                             <label for="withoutVR">No</label>
                                         </div>
                                     </div>
@@ -150,7 +160,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="withoutDVR" type="checkbox" id="withoutDVR">
+                                            <input class="input-switch" name="withoutDVR" type="checkbox" id="withoutDVR"
+                                            {{ isset($companies)&&$companies->shares_without_dividend_voting_rights=='Y' ? 'checked' : '' }}>
                                             <label for="withoutDVR">No</label>
                                         </div>
                                     </div>
@@ -162,7 +173,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="BSP" type="checkbox" id="BSP">
+                                            <input class="input-switch" name="BSP" type="checkbox" id="BSP"
+                                            {{ isset($companies)&&$companies->bearer_shares_permitted=='Y' ? 'checked' : '' }}>
                                             <label for="BSP">No</label>
                                         </div>
                                     </div>
@@ -174,7 +186,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="FSP" type="checkbox" id="FSP">
+                                            <input class="input-switch" name="FSP" type="checkbox" id="FSP"
+                                            {{ isset($companies)&&$companies->fractional_shares_permitted=='Y' ? 'checked' : '' }}>
                                             <label for="FSP">No</label>
                                         </div>
                                     </div>
@@ -199,7 +212,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minNumberDirectors"  class="input-item-label">{{__('Minimum Number of Directors')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minNumberDirectors" name="minNumberDirectors" placeholder="Only whole numbers allowed.">
+                                            <input type="number" class="input-bordered" id="minNumberDirectors" name="minNumberDirectors" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->directors_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +221,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxNumberDirectors" class="input-item-label">{{__('Maximum Number of Directors')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="maxNumberDirectors" name="maxNumberDirectors" placeholder="Only whole numbers allowed.">
+                                            <input type="number" class="input-bordered" id="maxNumberDirectors" name="maxNumberDirectors" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->directors_max : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -218,7 +233,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="localDR" type="checkbox" id="localDR">
+                                            <input class="input-switch" name="localDR" type="checkbox" id="localDR"
+                                            {{ isset($companies)&&$companies->local_dir_req=='Y' ? 'checked' : '' }}>
                                             <label for="localDR">No</label>
                                         </div>
                                     </div>
@@ -230,7 +246,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="localOR" type="checkbox" id="localOR">
+                                            <input class="input-switch" name="localOR" type="checkbox" id="localOR"
+                                            {{ isset($companies)&&$companies->local_officer_req=='Y' ? 'checked' : '' }}>
                                             <label for="localOR">No</label>
                                         </div>
                                     </div>
@@ -257,7 +274,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="localROR" type="checkbox" id="localROR">
+                                            <input class="input-switch" name="localROR" type="checkbox" id="localROR"
+                                            {{ isset($companies)&&$companies->local_reg_office_req=='Y' ? 'checked' : '' }}>
                                             <label for="localROR">No</label>
                                         </div>
                                     </div>
@@ -284,7 +302,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="annualAAM" type="checkbox" id="annualAAM">
+                                            <input class="input-switch" name="annualAAM" type="checkbox" id="annualAAM"
+                                            {{ isset($companies)&&$companies->members_annual_meeting_req=='Y' ? 'checked' : '' }}>
                                             <label for="annualAAM">No</label>
                                         </div>
                                     </div>
@@ -293,7 +312,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="initailAD"  class="input-item-label">{{__('Initial Approval Deadline (Days Following Closing of FY)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="initailAD" name="initailAD" placeholder="Only whole numbers allowed.">
+                                            <input type="number" class="input-bordered" id="initailAD" name="initailAD" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->member_annual_accounts_approval_deadline_days : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -301,7 +321,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="AdjustedAD" class="input-item-label">{{__('Adjusted Approval Deadline (Days Following Closing FY)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="AdjustedAD" name="AdjustedAD" placeholder="Only whole numbers allowed.">
+                                            <input type="number" class="input-bordered" id="AdjustedAD" name="AdjustedAD" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->member_annual_accounts_approval_deadline_adjusted_days : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +348,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="memberRegister" type="checkbox" id="memberRegister">
+                                            <input class="input-switch" name="memberRegister" type="checkbox" id="memberRegister"
+                                            {{ isset($companies)&&$companies->filing_members_req=='Y' ? 'checked' : '' }}>
                                             <label for="memberRegister">No</label>
                                         </div>
                                     </div>
@@ -339,7 +361,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="directorRegister" type="checkbox" id="directorRegister">
+                                            <input class="input-switch" name="directorRegister" type="checkbox" id="directorRegister"
+                                            {{ isset($companies)&&$companies->filing_directors_req=='Y' ? 'checked' : '' }}>
                                             <label for="directorRegister">No</label>
                                         </div>
                                     </div>
@@ -351,7 +374,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="officerRegister" type="checkbox" id="officerRegister">
+                                            <input class="input-switch" name="officerRegister" type="checkbox" id="officerRegister"
+                                            {{ isset($companies)&&$companies->filing_officers_req=='Y' ? 'checked' : '' }}>
                                             <label for="officerRegister">No</label>
                                         </div>
                                     </div>
@@ -363,7 +387,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="annualAFR" type="checkbox" id="annualAFR">
+                                            <input class="input-switch" name="annualAFR" type="checkbox" id="annualAFR"
+                                            {{ isset($companies)&&$companies->filing_annual_accounts_req=='Y' ? 'checked' : '' }}>
                                             <label for="annualAFR">No</label>
                                         </div>
                                     </div>
@@ -375,7 +400,8 @@
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="UBORegister" type="checkbox" id="UBORegister">
+                                            <input class="input-switch" name="UBORegister" type="checkbox" id="UBORegister"
+                                            {{ isset($companies)&&$companies->filing_ubo_req=='Y' ? 'checked' : '' }}>
                                             <label for="UBORegister">No</label>
                                         </div>
                                     </div>
@@ -385,7 +411,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="annualAFD" class="input-item-label">{{__('Annual Accounts Filling Deadline (Days Following Closing)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="annualAFD" name="annualAFD" placeholder="Only whole numbers allowed.">
+                                            <input type="number" class="input-bordered" id="annualAFD" name="annualAFD" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($companies)? $companies->filing_annual_accounts_deadline_days : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -394,7 +421,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="UBOCapital"  class="input-item-label">{{__('UBO Threshold Capital Rights')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="UBOCapital" name="UBOCapital" placeholder='Percentage format: "25%" or "0.25"'>
+                                            <input type="number" class="input-bordered" id="UBOCapital" name="UBOCapital" placeholder='Percentage format: "25%" or "0.25"'
+                                            value="{{ isset($companies)? $companies->UBO_threshold_capital_rights : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -402,7 +430,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="UBOVoting" class="input-item-label">{{__('UBO Threshold Voting Rights')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="UBOVoting" name="UBOVoting" placeholder='Percentage format: "25%" or "0.25"'>
+                                            <input type="number" class="input-bordered" id="UBOVoting" name="UBOVoting" placeholder='Percentage format: "25%" or "0.25"'
+                                            value="{{ isset($companies)? $companies->UBO_threshold_voting_interest : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -411,6 +440,7 @@
                     </div>
 
                     <input type="hidden" name="entypeId" value="{{$entype->id}}">
+                    <input type="hidden" name="companyId" value="{{ isset($companies) ? $companies->id : ''}}">
 
                     <div class="form-step form-step1">
                         <div class="form-step-fields card-innr">

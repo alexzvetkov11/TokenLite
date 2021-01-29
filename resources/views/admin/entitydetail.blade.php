@@ -29,7 +29,7 @@
                 </div>
 
                 {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
-                <form class="<!--validate-modern-->" action="{{ route('admin.ajax.entities.add') }}" method="POST" id="<!--kyc_submit-->">
+                <form class="<!--validate-modern-->" method="POST" id="<!--kyc_submit-->">
                     @csrf
                     <div class="form-step form-step1">
                         <div class="form-step-head card-innr">
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div class="input-item input-with-label">
-                        <label class="input-item-label">Text{{  }}</label>
+                        <label class="input-item-label">Text</label>
                         <div class="input-wrap">
                             <input name="text" class="input-bordered" required="required" type="text" placeholder="">
                         </div>
@@ -181,7 +181,7 @@
                         </div>
                     </div>
                     <div class="input-item input-with-label">
-                        <label class="input-item-label">Text{{  }}</label>
+                        <label class="input-item-label">Text</label>
                         <div class="input-wrap">
                             <input name="text" class="input-bordered" required="required" type="text" placeholder="">
                         </div>
@@ -204,7 +204,7 @@
                     @csrf
                     
                     <div class="input-item input-with-label">
-                        <label class="input-item-label">Statute Type ({{  }})</label>
+                        <label class="input-item-label">Statute Type </label>
                         <div class="input-wrap">
                             <input name="text" class="input-bordered" required="required" type="text" placeholder="">
                         </div>
@@ -227,7 +227,7 @@
                     @csrf
                     
                     <div class="input-item input-with-label">
-                        <label class="input-item-label">Statute Type ({{  }})</label>
+                        <label class="input-item-label">Statute Type </label>
                         <div class="input-wrap">
                             <input name="text" class="input-bordered" required="required" type="text" placeholder="">
                         </div>

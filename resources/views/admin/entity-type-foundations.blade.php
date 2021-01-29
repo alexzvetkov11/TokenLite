@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
-                <form method="POST" action="{{route('admin.ajax.entype.addFoundations')}}">
+                <form method="POST" action="{{ isset($foundations)? route('admin.ajax.entype.editFoundations') : route('admin.ajax.entype.addFoundations')}}">
                     @csrf
                     <div class="form-step form-step1">
                         <div class="form-step-head card-innr">
@@ -39,7 +39,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="minmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($foundations)? $foundations->members_min : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +48,8 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed.">
+                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed."
+                                            value="{{ isset($foundations)? $foundations->members_max : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -56,6 +58,7 @@
                     </div>
                   
                     <input type="hidden" name="entypeId" value="{{$entype->id}}">
+                    <input type="hidden" name="foundationId" value="{{isset($foundations)?$foundations->id:''}}">
 
                     <div class="form-step form-final">
                         <div class="form-step-fields card-innr">

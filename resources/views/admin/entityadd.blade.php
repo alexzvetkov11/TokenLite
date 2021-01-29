@@ -273,7 +273,6 @@
         </div>
     </div>
     <script type="text/javascript">
-        onChange();
 
         function CheckSpace(event) {
             console.log(event.which);
@@ -283,24 +282,6 @@
             }
         }
 
-        function onChange(){
-            var x = document.getElementById("participant-type").value;
-            var y =  document.querySelectorAll('div[name="share"]');
-            console.log(x)
-            if ( x.length > 0 ){
-                if (x=="benificiaries" ){
-                    document.getElementsByName("type").value= "beni";
-                    for ( var i=0; i<y.length; i++)
-                        y[i].style.display='none';
-                } else {
-                    document.getElementsByName("type").value= "shar";
-                    for ( var i=0; i<y.length; i++)
-                        y[i].style.display='block';
-                }
-                    
-            }
-
-        }
 
     </script>
 @endsection

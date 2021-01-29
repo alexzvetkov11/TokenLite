@@ -70,7 +70,7 @@
                         @foreach($entity as $en)
                         <tr class="data-item">
                             <td class="data-col dt-user">
-                                <span class="lead user-name text-wrap"><a href="{{ route('admin.entity.typedetail', $en->entity_type_id) }}"> {{ $en->entity_type_name }} </a></span>
+                                <span class="lead user-name text-wrap"><a href="{{ route('admin.entity.viewDetail', $en->entity_type_id) }}"> {{ $en->entity_type_name }} </a></span>
                             </td>
                             <td class="data-col dt-email">
                                 <span class="user-name text-wrap">{{ $en->label }}</span>
@@ -87,9 +87,13 @@
                                     <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
                                         <ul class="dropdown-list more-menu-{{$en->entity_type_id}}">
-                                            <li><a href="#"><em class="far fa-eye"></em> View Details</a></li>
-                                            {{-- <li><a class="user-email-action" href="#" data-uid="{{ $en->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Statutory Framework</a></li>
-                                            <li><a href="javascript:void(0)" data-uid="{{ $en->id }}" data-type="deactivate" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Deactivate</a></li> --}}
+                                            <li><a href="{{ route('admin.entity.viewDetail', $en->entity_type_id) }}"><em class="far fa-eye"></em> View Details</a></li>
+                                            @if ($en->jur_status=="inactive") 
+                                                <li><a href="{{ route('admin.entity.activation', ['id'=>$en->jurisdiction_id, 'act'=>'active']) }}" ><em class="far fa-check-square"></em>Active</a></li>
+                                            @else
+                                                <li><a href="{{ route('admin.entity.activation', ['id'=>$en->jurisdiction_id, 'act'=>'inactive']) }}" ><em class="fa fa-adjust"></em>Inactive</a></li>
+                                            @endif
+                                            {{--<li><a href="javascript:void(0)" data-uid="{{ $en->id }}" data-type="deactivate" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Deactivate</a></li> --}}
                                             <li>
                                                 {{--  <a href="#" data-uid="{{ $user->id }}" data-type="delete_user" class="user-action front" data-url="{{route('admin.entity.delete_users',encrypt($en->id))}}">  --}}
                                                 <a href="#" data-uid="{{ $en->entity_type_id }}" data-url="{{ route('admin.ajax.entype.delete', $en->entity_type_id ) }}" data-type="delete_user" class="user-action front" data-title="Are you sure you want to delete this Entity Type?">

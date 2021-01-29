@@ -106,6 +106,9 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/entities', 'Admin\EntitiesController@index')->middleware(['ico', 'super_admin'])->name('entities');
     Route::get('/jurisdiction', 'Admin\JurisdictionController@index')->middleware(['ico', 'super_admin'])->name('jurisdiction');
     Route::get('/entity/user-entity-type/{id}', 'Admin\EntityController@typedetail')->middleware(['ico', 'super_admin'])->name('entity.typedetail');
+    Route::get('/entity/view-detail/{id}', 'Admin\EntityController@viewDetail')->middleware(['ico', 'super_admin'])->name('entity.viewDetail');
+    Route::get('/entity/activation/{id}/{act}', 'Admin\EntityController@activation')->middleware(['ico', 'super_admin'])->name('entity.activation');
+    
     Route::get('/articles', 'Admin\ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
     Route::get('/articles/detail/{article_id}', 'Admin\ArticlesController@article_detail')->middleware(['ico', 'super_admin'])->name('articles.detail');
 
@@ -174,12 +177,19 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
         Route::post('/add_entity/add-companies', 'Admin\EntityController@addEntityCompanies')->middleware(['ico', 'demo_user'])->name('entype.addcompanies');
+        Route::post('/edit_entity/edit-companies', 'Admin\EntityController@editEntityCompanies')->middleware(['ico', 'demo_user'])->name('entype.editCompanies');
         Route::post('/add_entity/add-associations', 'Admin\EntityController@addEntityAssociations')->middleware(['ico', 'demo_user'])->name('entype.addAssociations');
+        Route::post('/edit_entity/edit-associations', 'Admin\EntityController@editEntityAssociations')->middleware(['ico', 'demo_user'])->name('entype.editAssociations');
         Route::post('/add_entity/add-foundations', 'Admin\EntityController@addEntityFoundations')->middleware(['ico', 'demo_user'])->name('entype.addFoundations');
+        Route::post('/edit_entity/edit-foundations', 'Admin\EntityController@editEntityFoundations')->middleware(['ico', 'demo_user'])->name('entype.editFoundations');
         Route::post('/add_entity/add-partnerships', 'Admin\EntityController@addEntityPartnerships')->middleware(['ico', 'demo_user'])->name('entype.addPartnerships');
+        Route::post('/edit_entity/edit-partnerships', 'Admin\EntityController@editEntityPartnerships')->middleware(['ico', 'demo_user'])->name('entype.editPartnerships');
         Route::post('/add_entity/add-trusts', 'Admin\EntityController@addEntityTrusts')->middleware(['ico', 'demo_user'])->name('entype.addTrusts');
+        Route::post('/edit_entity/edit-trusts', 'Admin\EntityController@editEntityTrusts')->middleware(['ico', 'demo_user'])->name('entype.editTrusts');
 
         Route::post('/add_entity/add', 'Admin\EntityController@addEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.addinitial');
+        Route::post('/edit_entity/edit', 'Admin\EntityController@editEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.editinitial');
+        
         Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
         
         
