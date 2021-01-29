@@ -29,7 +29,7 @@
                 </div>
 
                 {{-- <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" /> --}}
-                <form class="<!--validate-modern-->" action="{{ route('admin.ajax.entype.addfirst') }}" method="POST" id="<!--kyc_submit-->">
+                <form class="<!--validate-modern-->" action="{{ route('admin.ajax.entype.addinitial') }}" method="POST" id="<!--kyc_submit-->">
                     @csrf
 
                     <div class="form-step form-step1">
@@ -44,7 +44,6 @@
                         </div>{{-- .step-head --}}
                         <div class="form-step-fields card-innr">
                             <div class="row">
-                             
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="entityname" class="input-item-label">{{__('Entity Type: Full Name')}}</label>
@@ -53,12 +52,11 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="longabbreviation" class="input-item-label">{{__('Entity Type: Long Abbreviation')}}  </label>
+                                        <label for="abbrev_long" class="input-item-label">{{__('Entity Type: Long Abbreviation')}}  </label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" placeholder="Long Abbreviation" type="text" id="longabbreviation" name="longabb">
+                                            <input class="input-bordered" placeholder="abbrev_long" type="text" id="abbrev_long" name="longabb">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
@@ -67,22 +65,22 @@
 
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="shortabbreviation" class="input-item-label">{{__('Entity Type: Short Abbreviation')}}  </label>
+                                        <label for="abbrev_short" class="input-item-label">{{__('Entity Type: Short Abbreviation')}}  </label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" placeholder="Short Abbreviation" type="text" id="shortabbreviation" name="shortabb">
+                                            <input class="input-bordered" placeholder="Short Abbreviation" type="text" id="abbrev_short" name="abbrev_short">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
 
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="abbformat" class="input-item-label">{{__('Abbreviation Position')}}</label>
+                                        <label for="abbrev_position" class="input-item-label">{{__('Abbreviation Position')}}</label>
                                         <div class="input-wrap">
                                             {{--  <input class="input-bordered" type="text" name="abbformat" id="format" placeholder="Set Format">  --}}
-                                            <select class="select-bordered select-block" name="abbformat" id="abbformat" data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="abbrev_position" id="abbrev_position" data-dd-class="search-on">
                                                 <option value="" default >-- Select --</option>
-                                                <option value="before">"Behind" =></option>
-                                                <option value="after">"Before" =<</option>
+                                                <option value=">">Behind</option>
+                                                <option value="<">Before</option>
                                             </select>
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -106,9 +104,9 @@
                             <div class="row">
                                 <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
-                                        <label for="LegalStructure" class="input-item-label">{{__('Legal Structure')}}</label>
+                                        <label for="legalStructure" class="input-item-label">{{__('Legal Structure')}}</label>
                                         <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="LegalStructure" id="LegalStructure"  data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="legalStructure" id="legalStructure"  data-dd-class="search-on">
                                                 <option default value="">-- Select --</option>
                                                 @foreach($legals as $legal)
                                                 <option value="{{ $legal->id}}">{{$legal->label}}</option>
@@ -173,9 +171,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="participant-type" class="input-item-label">{{__('Participant Type')}}</label>
+                                        <label for="principal_statue" class="input-item-label">{{__('Participant Type')}}</label>
                                         <div class="input-wrap">
-                                            <select onchange="onChange()" class="select-bordered select-block" name="participant_type" id="participant-type" data-dd-class="search-on">
+                                            <select onchange="onChange()" class="select-bordered select-block" name="principal_statue" id="principal_statue" data-dd-class="search-on">
                                                 <option default value="">-- Select --</option>
                                                 <option value="sharefolders">Shareholders</option>
                                                 <option value="members">Members</option>
@@ -189,17 +187,17 @@
                                 
                                 <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
-                                        <label for="minimum" class="input-item-label">{{__('Registrar Name (written with "-rar")')}}  </label>
+                                        <label for="registername" class="input-item-label">{{__('Registrar Name (written with "-rar")')}}  </label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" placeholder='Registrar Name (written with "-rar")' type="text" id="minimum" name="minimum">
+                                            <input class="input-bordered" placeholder='Registrar Name (written with "-rar")' type="text" id="registername" name="registername">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="type" value="shar">
-                    <div class="form-step form-step1">
+                    {{-- <input type="hidden" name="type" value="shar"> --}}
+                    <div class="form-step form-final">
                         <div class="form-step-fields card-innr">
                             <button class="btn btn-primary"> Next Step</button>
                         </div>

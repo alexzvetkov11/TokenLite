@@ -15,6 +15,13 @@ use Validator;
 use App\Models\Entity;
 use App\Models\EntityTypes;
 use App\Models\Setting;
+use App\Models\LegalStructures;
+use App\Models\EntityTypesCompanies;
+use App\Models\EntityTypesAssociations;
+use App\Models\EntityTypesFoundations;
+use App\Models\EntityTypesPartnerships;
+use App\Models\EntityTypesTrusts;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,7 +45,6 @@ class EntityController extends Controller
             return view('admin.entity', compact('entity', 'pagi', 'is_page'));
         } catch( \Exception $e){
             echo $e->getMessage();
-            exit;
         }
     }
     public function add_entity(Request $request)
@@ -48,49 +54,158 @@ class EntityController extends Controller
         return view('admin.entity-type-add')->with(['juris'=>$juris, 'legals'=>$legals]);
     }
 
-    public function addEntities(Request $request)
+    public function addEntityInitial(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     "entityname" => "required|min:4",
-        // ]);
-        // if ($validator->fails()) {
-        //     $ret['msg'] = "warning";
-        //     $ret['message'] = __('messages.form.wrong');
-        //     return response()->json($ret);
-        // } else {
-        //     $entype = new EntityTypes;
-        //     if ($request->type == "beni") {
-        //         $entype->jurisdiction_id = $request->jurisdiction;
-        //         $entype->principal_statute = $request->participant_type;
-        //         $entype->entity_type_name = $request->entityname;
-        //         $entype->abbrev_long = $request->longabb;
-        //         $entype->abbrev_short = $request->shortabb;
-        //         //    $entype->entity_format = $request->abbformat;        
-        //     } else {
-        //         $entype->jurisdiction_id = $request->jurisdiction;
-        //         $entype->entity_type_name = $request->entityname;
-        //         $entype->abbrev_long = $request->longabb;
-        //         $entype->abbrev_short = $request->shortabb;
-        //         // $entype->abbrev_position = $request->language;
-        //         $entype->principal_statute = $request->participant_type;
-        //         $entype->register_native_name = $request->register;
-        //         $entype->formation_notary_req = $request->transferability;
-               
-        //     }
-        //     try {
-        //         $entype->save();
-        //         $ret['msg'] = "success";
-        //         $ret['message'] = __("message.insert.success");
-        //     } catch (\Exception $e) {
-        //         // echo $e->getMessage();
-        //         $ret['msg'] = 'error';
-        //         $ret['message'] = __('Jurisdiction Not Found');
-        //     }
-        //     return redirect()->route('admin.entity');
-        // }
-        $companies = \DB::table('entity_types_companies')->get();
-        return view('admin.entity-types-companies', compact('companies'));
+        $validator = Validator::make($request->all(), [
+            "entityname" => "required|min:4",
+        ]);
+        
+        if ($validator->fails()) {
+            $ret['msg'] = "warning";
+            $ret['message'] = __('messages.form.wrong');
+            return response()->json($ret);
+        } else {
+            $entype = new EntityTypes;
+            $entype->entity_type_name = $request->entityname;
+            $entype->abbrev_long = $request->abbrev_long;
+            $entype->abbrev_short = $request->abbrev_short;
+            $entype->abbrev_position = $request->abbrev_position;
+            $entype->legal_structure_id = $request->legalStructure;
+            $entype->jurisdiction_id = $request->jurisdiction;
+            $entype->separate_legal_person = $request->separateLegal;
+            $entype->formation_documents = $request->formationDocuments;
+            $entype->formation_notary_req = $request->notary;
+            $entype->principal_statute = $request->principal_statue;
+            $entype->register_native_name = $request->registername;
+            try {
+                $entype->save();
+                $ret['msg'] = "success";
+                $ret['message'] = __("message.insert.success");
+                $next = LegalStructures::select('label')->where('id', $entype->legal_structure_id)->first();
+                
+                if ($next->label=="Association"){
+                    $associations = \DB::table('entity_types_associations')->get();
+                    return view('admin.entity-type-associations', compact('associations', 'entype'));
+                } else if( $next->label =="Company"){
+                    $companies = \DB::table('entity_types_companies')->get();
+                    return view('admin.entity-types-companies', compact('companies', 'entype'));
+                } else if ($next->label =="Foundation"){
+                    $foundations = \DB::table('entity_types_foundations')->get();
+                    return view('admin.entity-type-foundations', compact('foundations', 'entype'));
+                } else if ($next->label=="Partnership"){
+                    $partnerships = \DB::table('entity_types_partnerships')->get();
+                    return view('admin.entity-type-partnerships', compact('partnerships', 'entype'));
+                } else if ( $next->label=="Trust"){
+                    $trusts = \DB::table('entity_type_trusts')->get();
+                    return view('admin.entity-type-trusts', compact('trusts', 'entype'));
+                } else {
+                    $ret['msg'] = 'error';
+                    $ret['message'] = __('Jurisdiction Not Found');
+                    return redirect()->route('admin.addentity');
+                }
+        
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+                exit;
+                $ret['msg'] = 'error';
+                $ret['message'] = __('Jurisdiction Not Found');
+                return redirect()->route('admin.addentity');
+            }
+        }
     }
+    public function addEntityCompanies(Request $request){
+
+        $company = new Entity_types_companies;
+        $company->entity_type_id = $request->entypeId;
+        $company->members_min = $request->minmember;
+        $company->members_max = $request->maxmember;
+        $company->share_transferability =$request->sharetransfer;
+        $company->share_cap_issued_min =$request->minissuedcaptial;
+        $company->share_cap_paid_up_min =$request->minpaidcaptial;
+        $company->share_cap_authorized_paid_up_min_rel =$request->minpaidauth;
+        $company->shares_issued_min =$request->minshareissued;
+        $company->shares_issued_max =$request->maxshareissued;
+        $company->shares_without_dividend_rights =$request->withoutDR;
+        $company->shares_without_voting_rights =$request->withoutVR;
+        $company->shares_without_dividend_voting_rights =$request->withoutDVR;
+        $company->bearer_shares_permitted =$request->BSP;
+        $company->fractional_shares_permitted =$request->FSP;
+        $company->directors_min =$request->minNumberDirectors;
+        $company->directors_max =$request->maxNumberDirectors;
+        $company->local_dir_req =$request->localDR;
+        $company->local_officer_req =$request->localOR;
+        $company->local_reg_office_req =$request->localROR;
+        $company->members_annual_meeting_req =$request->annualAAM;
+        $company->member_annual_accounts_approval_deadline_days =$request->initailAD;
+        $company->member_annual_accounts_approval_deadline_adjusted_days =$request->AdjustedAD;
+        $company->filing_members_req =$request->memberRegister;
+        $company->filing_directors_req =$request->directorRegister;
+        $company->filing_officers_req =$request->officerRegister;
+        $company->filing_ubo_req =$request->UBORegister;
+        $company->UBO_threshold_capital_rights =$request->UBOCapital;
+        $company->UBO_threshold_voting_interest =$request->UBOVoting;
+        $company->filing_annual_accounts_req = $request->annualAFR;
+        $company->filing_annual_accounts_deadline_days =  $request->annualAFD;
+
+        try{
+            $company->save();
+            $ret['msg'] = "success";
+            $ret['message'] = __("message.insert.success");
+        } catch (\Exception $e){
+            echo $e->getMessage();
+            $ret['msg'] = 'error';
+            $ret['message'] = __('Jurisdiction Not Found');
+            return back()->with( [$ret['msg']=> $ret['message'] ]);
+        }
+        return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
+    }
+
+    public function addEntityAssociations(Request $request){
+        $association = new EntityTypesAssociations;
+        $association->entity_type_id = $request->entypeId;
+        $association->members_min = $request->minmember;
+        $association->members_max = $request->maxmember;
+        $association->save();
+        
+        $ret['msg'] = "success";
+        $ret['message'] = __("message.insert.success");
+        return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
+    }
+    public function addEntityFoundations(Request $request){
+        $foundation = new EntityTypesFoundations;
+        $foundation->entity_type_id = $request->entypeId;
+        $foundation->members_min = $request->minmember;
+        $foundation->members_max = $request->maxmember;
+        $foundation->save();
+
+        $ret['msg'] = "success";
+        $ret['message'] = __("message.insert.success");
+        return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
+    }
+    public function addEntityPartnerships(Request $request){
+        $partner = new EntityTypesPartnerships;
+        $partner->entity_type_id = $request->entypeId;
+        $partner->members_min = $request->minmember;
+        $partner->members_max = $request->maxmember;
+        $partner->save();
+
+        $ret['msg'] = "success";
+        $ret['message'] = __("message.insert.success");
+        return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
+    }
+    public function addEntityTrusts(Request $request){
+        $trust = new EntityTypesTrusts;
+        $trust->entity_type_id = $request->entypeId;
+        $trust->members_min = $request->minmember;
+        $trust->members_max = $request->maxmember;
+        $trust->save();
+
+        $ret['msg'] = "success";
+        $ret['message'] = __("message.insert.success");
+        return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
+    }
+
+
 
     public function typedetail(Request $request)
     {

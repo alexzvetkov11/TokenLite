@@ -173,8 +173,16 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::Post('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
         Route::post('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
-        Route::post('/add_entity/addfirst', 'Admin\EntityController@addEntities')->middleware(['ico', 'demo_user'])->name('entype.addfirst');
+        Route::post('/add_entity/add-companies', 'Admin\EntityController@addEntityCompanies')->middleware(['ico', 'demo_user'])->name('entype.addcompanies');
+        Route::post('/add_entity/add-associations', 'Admin\EntityController@addEntityAssociations')->middleware(['ico', 'demo_user'])->name('entype.addAssociations');
+        Route::post('/add_entity/add-foundations', 'Admin\EntityController@addEntityFoundations')->middleware(['ico', 'demo_user'])->name('entype.addFoundations');
+        Route::post('/add_entity/add-partnerships', 'Admin\EntityController@addEntityPartnerships')->middleware(['ico', 'demo_user'])->name('entype.addPartnerships');
+        Route::post('/add_entity/add-trusts', 'Admin\EntityController@addEntityTrusts')->middleware(['ico', 'demo_user'])->name('entype.addTrusts');
+
+        Route::post('/add_entity/add-initial', 'Admin\EntityController@addEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.addinitial');
         Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
+        
+        
     });
 
     //Clear Cache facade value:
