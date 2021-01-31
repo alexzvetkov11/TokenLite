@@ -64,8 +64,8 @@ class JurisdictionController extends Controller
                 exit;
             }
             $ret['msg'] = 'success';
-            $ret['message'] = __('messages.update.success', ['what' => 'Jurisdiction']);
-
+            // $ret['message'] = __('messages.update.success', ['what' => 'Jurisdiction']);
+            $ret['message'] = __("Jurisdiction changed successfully!");
             if ($request->ajax()) {
                 return response()->json($ret);
             }
@@ -95,7 +95,8 @@ class JurisdictionController extends Controller
                 echo $e->getMessage();
             }
             $ret['msg'] = 'success';
-            $ret['message'] = __('messages.insert.success', ['what' => 'Jurisdiction']);
+            // $ret['message'] = __('messages.insert.success', ['what' => 'Jurisdiction']);
+            $ret['message'] = __("Jurisdiction added successfully!");
             if ($request->ajax()) {
                 return response()->json($ret);
             }

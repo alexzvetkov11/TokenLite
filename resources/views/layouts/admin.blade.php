@@ -143,14 +143,14 @@
                                 <li><a href="{{ route('admin.entity') }}">Entity Types</a></li>
                                 <li><a href="{{ route('admin.articles') }}">Articles</a></li>
                                 <li><a href="#"> Statutory Framework</a></li>
-                                <li><a href="{{ route('admin.settings') }}">Website Setting</a></li>
-                                <li><a href="{{ route('admin.settings.email') }}">Mailing Setting</a></li>
+                                <li><a href="{{ route('admin.settings') }}">Website Settings</a></li>
+                                <li><a href="{{ route('admin.settings.email') }}">Mailing Settings</a></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
-                                <li><a href="{{ route('admin.lang.manage') }}">Languages Setting</a></li>
+                                <li><a href="{{ route('admin.lang.manage') }}">Languages Settings</a></li>
                                 <li><a href="{{ route('admin.settings.api') }}">Application API</a></li>
-                                <li><a href="{{ route('admin.settings.referral') }}">Referral Setting</a></li>
+                                <li><a href="{{ route('admin.settings.referral') }}">Referral Settings</a></li>
                                 <li><a href="{{ route('admin.payments.setup') }}">Payment Methods</a></li>
-                                <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Setting</a></li>
+                                <li><a href="{{ route('admin.stages.settings') }}">ICO/STO Settings</a></li>
                                 <li><a href="{{ route('admin.system') }}">System Status</a></li>
 
                                 @if(has_route('manage_access:admin.index'))

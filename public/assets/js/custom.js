@@ -2,9 +2,11 @@ $(document).ready(function() {
     $("[data-type='delete_user']").click(function() {
         $title = $(this).data("title");
         if (!$title) $title = "Are you sure?";
+        $subtitle = $(this).data("subtitle");
+        if (!$subtitle) $subtitle = "Once Delete, You will not get back this log in future!";
         swal({
             title: $title,
-            text: "Once Delete, You will not get back this log in future!",
+            text: $subtitle,
             icon: "warning",
             buttons: !0,
             dangerMode: !0
@@ -26,13 +28,14 @@ $(document).ready(function() {
         $("[name='juris_name']").val($(this).data('juris'));
         $("[name='lang_code']").val($(this).data('langcode')).trigger('change');
         $("[name='cur_code']").val($(this).data('curcode')).trigger('change');
-        console.log($(this).data('statue'));
-        if ($(this).data('statue') == 'active')
-
+        // console.log($(this).data('statue'));
+        if ($(this).data('statue') == 'active') {
             $("[name='statue_switcher']").prop('checked', true);
-        else
+            $("#btnEditJuris").show();
+        } else {
             $("[name='statue_switcher']").prop('checked', false);
-
+            $("#btnEditJuris").hide();
+        }
         $("[name='juris_id']").val($(this).data('id'));
     });
 
@@ -66,4 +69,27 @@ $(document).ready(function() {
             $('[name="column' + value + '"]').show();
         })
     });
+
+
+    //custom datatable search 
+    $("#search_table").on('keyup', function() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = $("#search_table").val() + "";
+        filter = input.toUpperCase();
+        tr = $(".data-table > tbody > tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = $(tr[i]).find("td")[0];
+            console.log(td);
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    $(tr[i]).show();
+                } else {
+                    $(tr[i]).hide();
+                }
+            }
+        }
+
+    })
 })

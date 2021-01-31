@@ -107,7 +107,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="legalStructure" class="input-item-label">{{__('Legal Structure')}}</label>
                                         <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="legalStructure" id="legalStructure"  data-dd-class="search-on">
+                                            <select class="select-bordered select-block" name="legalStructure" id="legalStructure"  data-dd-class="search-on" required>
                                                 <option default value="">-- Select --</option>
                                                 @foreach($legals as $legal)
                                                 <option value="{{ $legal->id}}" {{ isset($entype)&&$entype->legal_structure_id==$legal->id? 'selected' : ''}}>{{$legal->label}}</option>
@@ -198,7 +198,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="entypeId" value="{{$entype->id}}">
+                    <input type="hidden" name="entypeId" value="{{isset($entype)? $entype->id:''}}">
                     <div class="form-step form-final">
                         <div class="form-step-fields card-innr">
                             <button class="btn btn-primary">{{ isset($entype)? "Save": "Next Step" }} </button>

@@ -11,7 +11,8 @@
             <div class="card content-area content-area-mh">
                 <div class="card-innr">
                     <div class="card-head has-aside">
-                        {{-- <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application</h4> --}}
+                        {{-- <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application
+                        </h4> --}}
                         <h4 class="card-title"> KYC Application</h4>
                         <div class="card-opt">
                             <ul class="btn-grp btn-grp-block guttar-20px">
@@ -409,11 +410,11 @@
 
                                         <!--<td class="data-col dt-docs dt-doc-front">-->
                                         <!--    @if ($kyc->document != null) -->
-                                <!--        @if (pathinfo(storage_path('app/' . $kyc->document), PATHINFO_EXTENSION) != 'pdf')-->
-                                <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 1]) }}" class="image-popup">{{ $kyc->documentType == 'nidcard' ? 'Front Side' : 'Document' }}</a>-->
+                                    <!--        @if (pathinfo(storage_path('app/' . $kyc->document), PATHINFO_EXTENSION) != 'pdf')-->
+                                    <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 1]) }}" class="image-popup">{{ $kyc->documentType == 'nidcard' ? 'Front Side' : 'Document' }}</a>-->
                             <!--        @else -->
-                                <!--            {!!  $kyc->documentType == 'nidcard' ? '<a>Front Side</a>' : '<a>Document</a>' !!}-->
-                                <!-- @endif-->
+                                    <!--            {!!  $kyc->documentType == 'nidcard' ? '<a>Front Side</a>' : '<a>Document</a>' !!}-->
+                                    <!-- @endif-->
                                         <!--        &nbsp; <a title="Download" href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 1]) }}" target="_blank"><em class="fas fa-download"></em></a>-->
                                     <!--    @else -->
                                         <!--    &nbsp;-->
@@ -421,11 +422,11 @@
                                         <!--</td>-->
                                         <!--<td class="data-col dt-docs dt-doc-back">-->
                                         <!--    @if ($kyc->document2 != null) -->
-                                <!--        @if (pathinfo(storage_path('app/' . $kyc->document2), PATHINFO_EXTENSION) != 'pdf')-->
-                                <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 2]) }}" class="image-popup">{{ $kyc->documentType == 'nidcard' ? 'Back Side' : 'Proof' }}</a>-->
+                                    <!--        @if (pathinfo(storage_path('app/' . $kyc->document2), PATHINFO_EXTENSION) != 'pdf')-->
+                                    <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 2]) }}" class="image-popup">{{ $kyc->documentType == 'nidcard' ? 'Back Side' : 'Proof' }}</a>-->
                             <!--        @else -->
-                                <!--            {!!  $kyc->documentType == 'nidcard' ? '<a>Back Side</a>' : '<a>Proof</a>' !!}-->
-                                <!-- @endif-->
+                                    <!--            {!!  $kyc->documentType == 'nidcard' ? '<a>Back Side</a>' : '<a>Proof</a>' !!}-->
+                                    <!-- @endif-->
                                         <!--        &nbsp; <a title="Download" href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 2]) }}" target="_blank"><em class="fas fa-download"></em></a>-->
                                     <!--    @else -->
                                         <!--    &nbsp;-->
@@ -433,11 +434,11 @@
                                         <!--</td>-->
                                         <!--<td class="data-col dt-docs dt-doc-proof">-->
                                         <!--    @if ($kyc->document3 != null) -->
-                                <!--        @if (pathinfo(storage_path('app/' . $kyc->document3), PATHINFO_EXTENSION) != 'pdf')-->
-                                <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 3]) }}" class="image-popup">Proof</a>-->
+                                    <!--        @if (pathinfo(storage_path('app/' . $kyc->document3), PATHINFO_EXTENSION) != 'pdf')-->
+                                    <!--            <a href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 3]) }}" class="image-popup">Proof</a>-->
                             <!--        @else -->
-                                <!--            <a>Proof</a>-->
-                                <!-- @endif-->
+                                    <!--            <a>Proof</a>-->
+                                    <!-- @endif-->
                                         <!--        &nbsp; <a title="Download" href="{{ route('admin.kycs.file', ['file' => $kyc->id, 'doc' => 3]) }}" target="_blank"><em class="fas fa-download"></em></a>-->
                                     <!--    @else -->
                                         <!--    &nbsp;-->

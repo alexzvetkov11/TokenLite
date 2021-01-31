@@ -1,3 +1,25 @@
+<div class="row">
+    <div class="col-sm-12 col-md-6"></div>
+    <div class="col-sm-12 col-md-6">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+            <label>Search:
+                <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="DataTables_Table_0">
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-between pdb-1x">
+    <div class="col-9 col-sm-6 text-left">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" style="background-color: rgb(255, 255, 255);"><label><input type="search" class="form-control form-control-sm" placeholder="Type in to Search" aria-controls="DataTables_Table_0"></label></div>
+    </div>
+    <div class="col-3 text-right">
+        <div class="data-table-filter relative d-inline-block"></div>
+    </div>
+</div>
+
+
+
 @extends('layouts.admin')
 @section('title', ucfirst($is_page) . ' Entity Type')
 @section('content')
@@ -20,6 +42,58 @@
                     </div>
 
                     <div class="gaps-1x"></div>
+                    {{-- <div class="row">
+                        <div class="col-md-12">
+                            <div class="float-right position-relative">
+                                <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em
+                                        class="ti ti-settings"></em> </a>
+                                <div
+                                    class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li>
+                                            <h6 class="dropdown-title">{{ __('Types') }}</h6>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-type" id="type-all" checked value="">
+                                            <label for="type-all">{{ __('Any Type') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-type" id="type-purchase" value="Purchase">
+                                            <label for="type-purchase">{{ __('Purchase') }}</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="dropdown-list dropdown-list-s2">
+                                        <li>
+                                            <h6 class="dropdown-title">{{ __('Status') }}</h6>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-status" id="status-all" checked value="">
+                                            <label for="status-all">{{ __('Show All') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-status" id="status-approved" value="approved">
+                                            <label for="status-approved">{{ __('Approved') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-status" value="pending" id="status-pending">
+                                            <label for="status-pending">{{ __('Pending') }}</label>
+                                        </li>
+                                        <li>
+                                            <input class="data-filter input-checkbox input-checkbox-sm" type="radio"
+                                                name="tnx-status" value="canceled" id="status-canceled">
+                                            <label for="status-canceled">{{ __('Canceled') }}</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+
 
                     <div class="row">
                         <div class="col-md-12">
@@ -75,17 +149,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="row justify-content-between pdb-1x" style="background-color: #f9fcff">
-                        <div class="col-9 col-sm-6 text-left">
-                            <div  class="dataTables_filter pt-3">
-                                <input type="search" id="search_table" class="form-control form-control-sm" placeholder="Type in to Search" aria-controls="DataTables_Table_0">
-                            </div>
-                        </div>
-                        <div class="col-3 text-right">
-                            <div class="data-table-filter relative d-inline-block"></div>
-                        </div>
-                    </div>
 
                     @if ($juris->total() > 0)
                         <table class="data-table dt-filter-init user-list pt-3">
@@ -107,13 +170,13 @@
                                         <td class="data-col dt-email">
                                             <span class="lead user-name text-wrap">{{ $jur->jurisdiction_name }}</span>
                                         </td>
-                                        <td class="data-col data-col-wd-md dt-status" style="width:50px">
+                                        <td class="data-col data-col-wd-md dt-status">
                                             <span
                                                 class="dt-status-md badge badge-outline badge-md badge-{{ __status($jur->jur_status, 'status') }}">{{ __status($jur->jur_status, 'text') }}</span>
                                             <span
                                                 class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($jur->jur_status, 'status') }}">{{ substr(__status($jur->jur_status, 'text'), 0, 1) }}</span>
                                         </td>
-                                        <td class="data-col text-right" style="width:70px">
+                                        <td class="data-col text-right">
                                             <div class="relative d-inline-block">
                                                 <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em
                                                         class="ti ti-more-alt"></em></a>
@@ -367,19 +430,8 @@
 @push('footer')
     <script type="text/javascript">
         (function($) {
-            var table = $('.data-table').DataTable({
-                "destroy":          true,
-                'scrollY':          800,
-                "scrollCollapse":   true,
-                "paging":           false,
-                "ordering":         false,
-                "info":             false,
-                "searching":        false,
-                "responsive":       true,
-                "autoWidth":        false,
-            });
-
-
+            $('.searchbar-color').css('margin-bottom', '30px');
+            $('#DataTables_Table_0_filter').css('background-color', "#fff");
         })(jQuery);
 
     </script>

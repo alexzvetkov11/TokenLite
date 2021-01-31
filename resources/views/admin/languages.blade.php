@@ -62,8 +62,6 @@
                                                     <ul class="dropdown-list">
                                                         <li><a href="{{ route('admin.lang.translate', $lang->code) }}" >Translation</a> </li>
                                                         <li><a href="{{ route('admin.generate.translate', $lang->code) }}" >Generate</a> </li>
-{{--                                                        <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-confirm="yes" data-actions="generate">Generate</a> </li>--}}
-                                                        {{-- <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-modal="edit" data-actions="update">Update</a></li> --}}
                                                         @if($lang->code!='en')
                                                             @if($lang->status)
                                                             <li><a href="javascript:void(0)" class="lang-action" data-lang="{{ $lang->code }}" data-confirm="yes" data-actions="disable">Disable</a> </li>
