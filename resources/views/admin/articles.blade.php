@@ -49,7 +49,16 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row justify-content-between pdb-1x" style="background-color: #f9fcff">
+                    <div class="col-9 col-sm-6 text-left">
+                        <div  class="dataTables_filter pt-3">
+                            <input type="search" id="search_table" class="form-control form-control-sm" placeholder="Type in to Search" aria-controls="DataTables_Table_0">
+                        </div>
+                    </div>
+                    <div class="col-3 text-right">
+                        <div class="data-table-filter relative d-inline-block"></div>
+                    </div>
+                </div>
 
                 @if($articles->total() > 0)
                 <table class="data-table dt-filter-init user-list pt-3" >
@@ -239,6 +248,21 @@
 
 @endsection
 @push("footer")
+<script type="text/javascript">
+    (function($) {
+        var table = $('.data-table').DataTable({
+            "destroy":          true,
+            'scrollY':          800,
+            "scrollCollapse":   true,
+            "paging":           false,
+            "ordering":         false,
+            "info":             false,
+            "searching":        false,
+            "responsive":       true,
+            "autoWidth":        false,
+        });
+    })(jQuery);
 
+</script>
 
 @endpush

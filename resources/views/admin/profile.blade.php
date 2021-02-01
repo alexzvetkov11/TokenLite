@@ -140,7 +140,7 @@
                                                 <div class="input-item input-with-label">
                                                     <label for="first-name" class="input-item-label ucap">First Name</label>
                                                     <div class="input-wrap">
-                                                        <input class="input-bordered" type="text" value="{{ $user->first_name }}" placeholder="First Name" id="first-name" name="firstname" required>
+                                                        <input class="input-bordered" type="text" value="{{ $user->name }}" placeholder="First Name" id="first-name" name="firstname" required>
                                                     </div>
                                                 </div>{{-- .input-item --}}
                                             </div>

@@ -54,7 +54,7 @@
                     </div>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative">
-                            <span class="user-welcome d-none d-lg-inline-block">Hello! {{ ucfirst(auth()->user()->first_name) }}</span>
+                            <span class="user-welcome d-none d-lg-inline-block">Hello! {{ ucfirst(auth()->user()->name) }}</span>
                             <a class="toggle-tigger user-thumb" href="#"><em class="ti ti-user"></em></a>
                             <div class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown">
                                 <div class="user-status">

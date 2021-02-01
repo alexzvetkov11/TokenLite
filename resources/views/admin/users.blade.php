@@ -134,9 +134,9 @@
                                                                 : '' !!}>
                                                                 <a href="#" data-meta="orderby=id">User ID</a>
                                                             </li>
-                                                            <li {!! gmvl('user_order_by', 'id' )=='first_name'
+                                                            <li {!! gmvl('user_order_by', 'id' )=='name'
                                                                 ? ' class="active"' : '' !!}>
-                                                                <a href="#" data-meta="orderby=first_name">Name</a>
+                                                                <a href="#" data-meta="orderby=name">Name</a>
                                                             </li>
                                                             {{-- <li{!!  gmvl('user_order_by', 'id') == 'token' ? ' class="active"' : '' !!}>
                                                         <a href="#" data-meta="orderby=token">Token</a></li> --}}
@@ -322,7 +322,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="fake-class">
                                                     <span
-                                                        class="lead user-name text-wrap">{{ $user->first_name . ' ' . $user->last_name }}</span>
+                                                        class="lead user-name text-wrap">{{ $user->name . ' ' . $user->last_name }}</span>
                                                     <span class="sub user-id">{{ set_id($user->id, 'user') }}
                                                         @if ($user->role == 'admin')
                                                             <span

@@ -68,20 +68,20 @@ class EntityController extends Controller
         } else {
             $entype = new EntityTypes;
             $entype->entity_type_name = $request->entityname;
-            $entype->abbrev_long = ($request->abbrev_long ? $request->abbrev_long : null);
-            $entype->abbrev_short = $request->abbrev_short ? $request->abbrev_short : null;
-            $entype->abbrev_position = $request->abbrev_position ? $request->abbrev_position : null;
-            $entype->legal_structure_id = $request->legalStructure ? $request->legalStructure : null;
-            $entype->jurisdiction_id = $request->jurisdiction ? $request->jurisdiction : null;
-            $entype->separate_legal_person = $request->separateLegal ? $request->separateLegal : null; 
-            $entype->formation_documents = $request->formationDocuments ? $request->formationDocuments : null;
-            $entype->formation_notary_req = $request->notary ? $request->notary : null;
-            $entype->principal_statute = $request->principal_statue ? $request->principal_statue : null;
-            $entype->register_native_name = $request->registername ? $request->registername : null;
+            $entype->abbrev_long = $request->abbrev_long ;
+            $entype->abbrev_short = $request->abbrev_short;
+            $entype->abbrev_position = $request->abbrev_position ;
+            $entype->legal_structure_id = $request->legalStructure;
+            $entype->jurisdiction_id = $request->jurisdiction ;
+            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N"; 
+            $entype->formation_documents = $request->formationDocuments ;
+            $entype->formation_notary_req = $request->notary=="on" ?"Y" :"N";
+            $entype->principal_statute = $request->principal_statue ;
+            $entype->register_native_name = $request->registername ;
             try {
                 $entype->save();
                 $ret['msg'] = "success";
-                $ret['message'] = __("message.insert.success");
+                $ret['message'] = __("Successfully activated!");
                 $next = LegalStructures::select('label')->where('id', $entype->legal_structure_id)->first();
                 
                 if ($next->label=="Association"){
@@ -131,15 +131,15 @@ class EntityController extends Controller
             $entype->abbrev_position = $request->abbrev_position;
             $entype->legal_structure_id = $request->legalStructure;
             $entype->jurisdiction_id = $request->jurisdiction ;
-            $entype->separate_legal_person = $request->separateLegal;
+            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N"; 
             $entype->formation_documents = $request->formationDocuments;
-            $entype->formation_notary_req = $request->notary ;
+            $entype->formation_notary_req = $request->notary=="on" ? "Y": "N" ;
             $entype->principal_statute = $request->principal_statue ;
             $entype->register_native_name = $request->registername ;
             try {
                 $entype->save();
                 $ret['msg'] = "success";
-                $ret['message'] = __("message.insert.success");
+                $ret['message'] = __("successfully updated");
                 $next = LegalStructures::select('label')->where('id', $entype->legal_structure_id)->first();
                 
                 if ($next->label=="Association"){
@@ -191,7 +191,6 @@ class EntityController extends Controller
         $company->shares_issued_max =$request->maxshareissued;
         $company->shares_without_dividend_rights = $request->withoutDR=="on" ? "Y" : "N";
         $company->shares_without_voting_rights =$request->withoutVR =="on" ? "Y" : "N";
-        $company->shares_without_dividend_voting_rights =$request->withoutDVR =="on" ? "Y" : "N";
         $company->bearer_shares_permitted =$request->BSP =="on" ? "Y" : "N";
         $company->fractional_shares_permitted =$request->FSP =="on" ? "Y" : "N";
         $company->directors_min =$request->minNumberDirectors;
@@ -205,16 +204,19 @@ class EntityController extends Controller
         $company->filing_members_req =$request->memberRegister =="on" ? "Y" : "N";
         $company->filing_directors_req =$request->directorRegister =="on" ? "Y" : "N";
         $company->filing_officers_req =$request->officerRegister =="on" ? "Y" : "N";
+        $company->filing_paid_up_capital_declaration = $request->paidUCD =="on" ? "Y" : "N";
         $company->filing_annual_accounts_req = $request->annualAFR=="on" ? "Y":"N";
         $company->filing_ubo_req =$request->UBORegister =="on" ? "Y" : "N";
         $company->filing_annual_accounts_deadline_days =  $request->annualAFD;
         $company->UBO_threshold_capital_rights =$request->UBOCapital;
         $company->UBO_threshold_voting_interest =$request->UBOVoting;
         
+        print($company);
+        exit;
         try{
             $company->save();
             $ret['msg'] = "success";
-            $ret['message'] = __("message.insert.success");
+            $ret['message'] = __("Successfully inserted.");
         } catch (\Exception $e){
             echo $e->getMessage();
             $ret['msg'] = 'error';
@@ -235,7 +237,6 @@ class EntityController extends Controller
         $company->shares_issued_max =$request->maxshareissued;
         $company->shares_without_dividend_rights = $request->withoutDR=="on" ? "Y" : "N";
         $company->shares_without_voting_rights =$request->withoutVR =="on" ? "Y" : "N";
-        $company->shares_without_dividend_voting_rights =$request->withoutDVR =="on" ? "Y" : "N";
         $company->bearer_shares_permitted =$request->BSP =="on" ? "Y" : "N";
         $company->fractional_shares_permitted =$request->FSP =="on" ? "Y" : "N";
         $company->directors_min =$request->minNumberDirectors;
@@ -249,6 +250,7 @@ class EntityController extends Controller
         $company->filing_members_req =$request->memberRegister =="on" ? "Y" : "N";
         $company->filing_directors_req =$request->directorRegister =="on" ? "Y" : "N";
         $company->filing_officers_req =$request->officerRegister =="on" ? "Y" : "N";
+        $company->filing_paid_up_capital_declaration = $request->paidUCD =="on" ? "Y" : "N";
         $company->filing_annual_accounts_req = $request->annualAFR=="on" ? "Y":"N";
         $company->filing_ubo_req =$request->UBORegister =="on" ? "Y" : "N";
         $company->filing_annual_accounts_deadline_days =  $request->annualAFD;
@@ -258,7 +260,7 @@ class EntityController extends Controller
         try{
             $company->save();
             $ret['msg'] = "success";
-            $ret['message'] = __("message.insert.success");
+            $ret['message'] = __("Successfully updated.");
         } catch (\Exception $e){
             echo $e->getMessage();
             $ret['msg'] = 'error';
@@ -275,7 +277,7 @@ class EntityController extends Controller
         $association->save();
         
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully inserted.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function editEntityAssociations(Request $request){
@@ -285,7 +287,7 @@ class EntityController extends Controller
         $association->save();
         
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully updated.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function addEntityFoundations(Request $request){
@@ -296,7 +298,7 @@ class EntityController extends Controller
         $foundation->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully inserted.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function editEntityFoundations(Request $request){
@@ -306,7 +308,7 @@ class EntityController extends Controller
         $foundation->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully updated.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function addEntityPartnerships(Request $request){
@@ -317,7 +319,7 @@ class EntityController extends Controller
         $partner->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully inserted.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function editEntityPartnerships(Request $request){
@@ -329,7 +331,7 @@ class EntityController extends Controller
         $partner->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully updated.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function addEntityTrusts(Request $request){
@@ -340,7 +342,7 @@ class EntityController extends Controller
         $trust->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully inserted.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
     public function editEntityTrusts(Request $request){
@@ -350,7 +352,7 @@ class EntityController extends Controller
         $trust->save();
 
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully updated.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
     }
 
@@ -397,7 +399,7 @@ class EntityController extends Controller
         $jur->jur_status = $act;
         $jur->save();
         $ret['msg'] = "success";
-        $ret['message'] = __("message.insert.success");
+        $ret['message'] = __("Successfully ".$act."d.");
         return redirect()->route('admin.entity')->with( [$ret['msg']=> $ret['message'] ]);
     }
     public function deleteData($id){

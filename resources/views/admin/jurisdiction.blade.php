@@ -51,10 +51,9 @@
                                                 ? ' class="active"' : '' !!}>
                                                 <a href="#" data-meta="orderby=jurisdiction_name">Jurisdiction</a>
                                             </li>
-                                            {{-- <li{!! gmvl('user_order_by', 'id' )=='name'
-                                                ? ' class="active"' : '' !!}>
-                                                <a href="#" data-meta="orderby=name">Name</a></li>
-                                                <li{!! gmvl('user_order_by', 'id' )=='token' ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_order_by', 'jur_status' )=='jur_status' ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="orderby=jur_status">Status</a></li>
+                                                {{-- <li{!! gmvl('user_order_by', 'id' )=='token' ? ' class="active"' : '' !!}>
                                                     <a href="#" data-meta="orderby=token">Token</a></li>
                                         </ul> --}}
                                         <ul class="dropdown-list">
@@ -101,9 +100,6 @@
                             <tbody>
                                 @foreach ($juris as $jur)
                                     <tr class="data-item ">
-                                        {{-- <td class="data-col dt-user">
-                                            <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
-                                        </td> --}}
                                         <td class="data-col dt-email">
                                             <span class="lead user-name text-wrap">{{ $jur->jurisdiction_name }}</span>
                                         </td>
@@ -215,10 +211,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Languages</label>
+                                    <label class="input-item-label">Statutory Language</label>
                                     <div class="input-wrap">
                                         <select class="select select-block select-bordered" name="lang_code">
-                                            <option value="" default>-- Select --</option>
+                                            <option value="" default>Select Option</option>
                                             @foreach ($languages as $lang)
                                                 <option value="{{ $lang->id }}">{{ $lang->label }}</option>
                                             @endforeach
@@ -228,10 +224,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Currencies</label>
+                                    <label class="input-item-label">Main Currency</label>
                                     <div class="input-wrap">
                                         <select class="select select-block select-bordered" name="cur_code">
-                                            <option value="" default>-- Select --</option>
+                                            <option value="" default>Select Option</option>
                                             @foreach ($currencies as $cur)
                                                 <option value="{{ $cur->cur_id }}">{{ $cur->cur_label }}</option>
                                             @endforeach
@@ -241,10 +237,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Show Switcher</label>
+                                    <label class="input-item-label">Status</label>
                                     <div class="input-wrap input-wrap-switch">
-                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="statue_switcher">
-                                        <label for="statue_switcher">Enable</label>
+                                        <span class="align-items-center d-flex pr-3">Active</span>
+                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="addstatue_switcher">
+                                        <label for="addstatue_switcher">Inactive</label>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +279,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Languages</label>
+                                    <label class="input-item-label">Statutory Language</label>
                                     <div class="input-wrap">
                                         <select class="select select-block select-bordered" name="lang_code">
                                             @foreach ($languages as $lang)
@@ -294,7 +291,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Currencies</label>
+                                    <label class="input-item-label">Main Currency</label>
                                     <div class="input-wrap">
                                         <select class="select select-block select-bordered" name="cur_code">
                                             @foreach ($currencies as $cur)
@@ -306,10 +303,11 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="input-item input-with-label">
-                                    <label class="input-item-label">Show Switcher</label>
+                                    <label class="input-item-label">Status</label>
                                     <div class="input-wrap input-wrap-switch">
-                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="statue_switcher">
-                                        <label for="statue_switcher">Enable</label>
+                                        <span class="align-items-center d-flex pr-3">Active</span>
+                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="editstatue_switcher">
+                                        <label for="editstatue_switcher">Enable</label>
                                     </div>
                                 </div>
                             </div>

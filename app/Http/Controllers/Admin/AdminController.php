@@ -106,7 +106,7 @@ class AdminController extends Controller
                 return response()->json($ret);
             } else {
                 $user = User::FindOrFail(Auth::id());
-                $user->first_name = $request->input('firstname');
+                $user->name = $request->input('firstname');
                 $user->last_name = $request->input('lastname');
                 //$user->email = $request->input('email');
                 // $user->mobile = $request->input('mobile');

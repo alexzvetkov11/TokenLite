@@ -48,7 +48,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="entityname" class="input-item-label">{{__('Entity Type: Full Name')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="text" class="input-bordered" id="entityname" name="entityname" placeholder="Full Name"
+                                            <input required type="text" class="input-bordered" id="entityname" name="entityname" placeholder="Full Entity Name"
                                                 value="{{ isset($entype)?$entype->entity_type_name : ''}}">
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="abbrev_long" class="input-item-label">{{__('Entity Type: Long Abbreviation')}}  </label>
                                         <div class="input-wrap">
-                                            <input class="input-bordered" placeholder="abbrev_long" type="text" id="abbrev_long" name="longabb"
+                                            <input class="input-bordered" placeholder="Long Abbreviation" type="text" id="abbrev_long" name="longabb"
                                                 value="{{ isset($entype)?$entype->abbrev_long : ''}}">
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -80,7 +80,7 @@
                                         <label for="abbrev_position" class="input-item-label">{{__('Abbreviation Position')}}</label>
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="abbrev_position" id="abbrev_position" data-dd-class="search-on">
-                                                <option value="" default >-- Select --</option>
+                                                <option value="" default >Select Option</option>
                                                 <option value=">" {{ isset($entype)&&$entype->abbrev_position==">"? 'selected' : ''}}>Behind</option>
                                                 <option value="<" {{ isset($entype)&&$entype->abbrev_position=="<"? 'selected' : ''}}>Before</option>
                                             </select>
@@ -129,50 +129,60 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" name="share">
+                                    <div class="pt-2">Separate Legal Personality</div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
                                     <div class="input-item input-with-label">
-                                        <label for="separateLegal" class="input-item-label">{{__('Separate Legal Personality')}}</label>
-                                        <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="separateLegal" id="separateLegal" data-dd-class="search-on">
-                                                <option default value="">-- Select --</option>
-                                                <option value="Y" {{ isset($entype)&&$entype->separate_legal_person=="Y"? 'selected' : ''}}>Yes</option>
-                                                <option value="N" {{ isset($entype)&&$entype->separate_legal_person=="N"? 'selected' : ''}}>No</option>
-                                            </select>
+                                        <div class="input-wrap input-wrap-switch">
+                                            <span class="align-items-center d-flex pr-3">Yes</span>
+                                            <input class="input-switch" name="separateLegal" type="checkbox" id="separateLegal"
+                                            {{ isset($entype)&&$entype->separate_legal_person=="Y"? 'checked' : '' }}>
+                                            <label for="separateLegal">No</label>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-md-6" name="share">
+                                    <div class="pt-2">Notary Requirement for Formation</div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="input-item input-with-label">
+                                        <div class="input-wrap input-wrap-switch">
+                                            <span class="align-items-center d-flex pr-3">Yes</span>
+                                            <input class="input-switch" name="notary" type="checkbox" id="notary"
+                                            {{ isset($entype)&&$entype->formation_notary_req=="Y"? 'checked' : '' }}>
+                                            <label for="separateLegal">No</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="formationDocuments" class="input-item-label">{{__('Formation Documents')}}</label>
                                         <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="formationDocuments" id="formationDocuments"  data-dd-class="search-on" multiple="multiple" data-placeholder="-- Select --">
+                                            <select class="select-bordered select-block" name="formationDocuments" id="formationDocuments"  data-dd-class="search-on" multiple="multiple" data-placeholder="Select Option">
                                                 <option value="Memorandum of Association" {{ isset($entype)&&$entype->formation_documents=="Memorandum of Association"? 'selected' : ''}}>Memorandum of Association</option>
                                                 <option value="Articles of Association" {{ isset($entype)&&$entype->formation_documents=="Articles of Association"? 'selected' : ''}}>Articles of Association</option>
                                                 <option value="Partnership Agreement" {{ isset($entype)&&$entype->formation_documents=="Partnership Agreement"? 'selected' : ''}}>Partnership Agreement</option>
-                                                <option value="Operating Agreement" {{ isset($entype)&&$entype->formation_documents=="Operating Agreement"? 'selected' : ''}}>Operating Agreement</option>
                                                 <option value="Articles of Organization" {{ isset($entype)&&$entype->formation_documents=="Articles of Organization"? 'selected' : ''}}>Articles of Organization</option>
-                                                <option value="Articles of Association" {{ isset($entype)&&$entype->formation_documents=="Articles of Association"? 'selected' : ''}}>Articles of Association</option>
+                                                <option value="Operating Agreement" {{ isset($entype)&&$entype->formation_documents=="Operating Agreement"? 'selected' : ''}}>Operating Agreement</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="notary" class="input-item-label">{{__('Notary Requirement for Formation')}}</label>
+                                        <label  for="principal_statue" class="input-item-label">{{__('Participant Statue')}}</label>
                                         <div class="input-wrap">
-                                            <select class="select-bordered select-block" name="notary" id="notary" data-dd-class="search-on">
-                                                <option default value="">-- Select --</option>
-                                                <option value="Y" {{ isset($entype)&&$entype->formation_notary_req=="Y"? 'selected' : ''}}>Yes</option>
-                                                <option value="N" {{ isset($entype)&&$entype->formation_notary_req=="N"? 'selected' : ''}}>No</option>
-                                            </select>
+                                            <textarea class="input-bordered input-textarea-min" id="principal_statue" name="principal_statue" 
+                                            style="margin-top: 0px; margin-bottom: 0px; height: 100px;" placeholder="Write something...">{{isset($entype)?$entype->principal_statute : ''}}</textarea>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+
+                                {{-- <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="principal_statue" class="input-item-label">{{__('Participant Type')}}</label>
+                                        <label for="principal_statue" class="input-item-label">{{__('Participant Statue')}}</label>
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="principal_statue" id="principal_statue" data-dd-class="search-on">
                                                 <option default value="">-- Select --</option>
@@ -183,7 +193,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 
                                 <div class="col-md-6" name="share">

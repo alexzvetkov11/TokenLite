@@ -39,16 +39,16 @@
                                     <div class="input-item input-with-label">
                                         <label for="minmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Only whole numbers allowed."
+                                            <input required type="number" class="input-bordered" id="minmember" name="minmember" placeholder="Numbers"
                                             value="{{ isset($companies)? $companies->members_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="maxmember"  class="input-item-label">{{__('Minimum Number of Members')}}</label>
+                                        <label for="maxmember"  class="input-item-label">{{__('Maximum Number of Members')}}</label>
                                         <div class="input-wrap">
-                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Only whole numbers allowed."
+                                            <input required type="number" class="input-bordered" id="maxmember" name="maxmember" placeholder="Numbers"
                                             value="{{ isset($companies)? $companies->members_max : '' }}">
                                         </div>
                                     </div>
@@ -84,25 +84,25 @@
                                     <div class="input-item input-with-label">
                                         <label for="minissuedcaptial"  class="input-item-label">{{__('Minimum Issued Share Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minissuedcaptial" name="minissuedcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)"
+                                            <input type="text" class="input-bordered comma" id="minissuedcaptial" name="minissuedcaptial" placeholder="Amount" 
                                             value="{{ isset($companies)? $companies->share_cap_issued_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="minpaidcaptial" class="input-item-label">{{__('Minimum Paid-Up Share Capital')}}</label>
+                                        <label for="minpaidcaptial" class="input-item-label ">{{__('Minimum Paid-Up Share Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minpaidcaptial" name="minpaidcaptial" placeholder="Format 2 decimals: 1,000.00 (thousand)"
+                                            <input type="text" class="input-bordered comma" id="minpaidcaptial" name="minpaidcaptial" placeholder="Amount"
                                             value="{{ isset($companies)? $companies->share_cap_paid_up_min : '' }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
-                                        <label for="minpaidauth" class="input-item-label">{{__('Minimum Paid-Up Share Capital Relative to Authorized Share Capital')}}</label>
+                                        <label for="minpaidauth" class="input-item-label">{{__('Minimum Paid-Up Capital Relative to Authorized Capital')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minpaidauth" name="minpaidauth" placeholder='Percentage format: either "20%" or 0.2'
+                                            <input type="text" class="input-bordered percent" id="minpaidauth" name="minpaidauth" placeholder='Percentage format: either "20%" or 0.2'
                                             value="{{ isset($companies)? $companies->share_cap_authorized_paid_up_min_rel : '' }}">
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="minshareissued" class="input-item-label">{{__('Minimum Shares Issued')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minshareissued" name="minshareissued" placeholder='Only whole numbers allowed.'
+                                            <input type="number" class="input-bordered" id="minshareissued" name="minshareissued" placeholder='Number'
                                             value="{{ isset($companies)? $companies->shares_issued_min : '' }}">
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxshareissued" class="input-item-label">{{__('Maximum Shares Issued')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="maxshareissued" name="maxshareissued" placeholder='Only whole numbers allowed.'
+                                            <input type="number" class="input-bordered" id="maxshareissued" name="maxshareissued" placeholder='Number'
                                             value="{{ isset($companies)? $companies->shares_issued_max : '' }}">
                                         </div>
                                     </div>
@@ -153,19 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" name="share">
-                                    <div class="pt-2"> Shares Without Dividend & Voting Rights Permitted </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="input-item input-with-label">
-                                        <div class="input-wrap input-wrap-switch">
-                                            <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="withoutDVR" type="checkbox" id="withoutDVR"
-                                            {{ isset($companies)&&$companies->shares_without_dividend_voting_rights=='Y' ? 'checked' : '' }}>
-                                            <label for="withoutDVR">No</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-6" name="share">
                                     <div class="pt-2"> Bearer Shares Permitted </div>
                                 </div>
@@ -212,7 +200,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="minNumberDirectors"  class="input-item-label">{{__('Minimum Number of Directors')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="minNumberDirectors" name="minNumberDirectors" placeholder="Only whole numbers allowed."
+                                            <input type="number" class="input-bordered" id="minNumberDirectors" name="minNumberDirectors" placeholder="Decimal" step="0.01"
                                             value="{{ isset($companies)? $companies->directors_min : '' }}">
                                         </div>
                                     </div>
@@ -221,7 +209,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="maxNumberDirectors" class="input-item-label">{{__('Maximum Number of Directors')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="maxNumberDirectors" name="maxNumberDirectors" placeholder="Only whole numbers allowed."
+                                            <input type="number" class="input-bordered" id="maxNumberDirectors" name="maxNumberDirectors" placeholder="Decimal" step="0.01"
                                             value="{{ isset($companies)? $companies->directors_max : '' }}">
                                         </div>
                                     </div>
@@ -312,7 +300,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="initailAD"  class="input-item-label">{{__('Initial Approval Deadline (Days Following Closing of FY)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="initailAD" name="initailAD" placeholder="Only whole numbers allowed."
+                                            <input type="number" class="input-bordered" id="initailAD" name="initailAD" placeholder="Number"
                                             value="{{ isset($companies)? $companies->member_annual_accounts_approval_deadline_days : '' }}">
                                         </div>
                                     </div>
@@ -321,7 +309,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="AdjustedAD" class="input-item-label">{{__('Adjusted Approval Deadline (Days Following Closing FY)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="AdjustedAD" name="AdjustedAD" placeholder="Only whole numbers allowed."
+                                            <input type="number" class="input-bordered" id="AdjustedAD" name="AdjustedAD" placeholder="Number"
                                             value="{{ isset($companies)? $companies->member_annual_accounts_approval_deadline_adjusted_days : '' }}">
                                         </div>
                                     </div>
@@ -329,7 +317,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-step form-final">
+                    <div class="form-step form-step6">
                         <div class="form-step-head card-innr">
                             <div class="step-head">
                                 <div class="step-number">06</div>
@@ -381,6 +369,20 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6" name="share">
+                                    <div class="pt-2">Paid-Up Capital Declaration</div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="input-item input-with-label">
+                                        <div class="input-wrap input-wrap-switch">
+                                            <span class="align-items-center d-flex pr-3">Yes</span>
+                                            <input class="input-switch" name="paidUCD" type="checkbox" id="paidUCD"
+                                            {{ isset($companies)&&$companies->filing_paid_up_capital_declaration=='Y' ? 'checked' : '' }}>
+                                            <label for="paidUCD">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6" name="share">
                                     <div class="pt-2">Annual Accounts Filling Requirements</div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -411,7 +413,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="annualAFD" class="input-item-label">{{__('Annual Accounts Filling Deadline (Days Following Closing)')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="annualAFD" name="annualAFD" placeholder="Only whole numbers allowed."
+                                            <input type="number" class="input-bordered" id="annualAFD" name="annualAFD" placeholder="Number"
                                             value="{{ isset($companies)? $companies->filing_annual_accounts_deadline_days : '' }}">
                                         </div>
                                     </div>
@@ -421,7 +423,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="UBOCapital"  class="input-item-label">{{__('UBO Threshold Capital Rights')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="UBOCapital" name="UBOCapital" placeholder='Percentage format: "25%" or "0.25"'
+                                            <input type="text" class="input-bordered percent" id="UBOCapital" name="UBOCapital" placeholder='Percentage format: "25%" or "0.25"'
                                             value="{{ isset($companies)? $companies->UBO_threshold_capital_rights : '' }}">
                                         </div>
                                     </div>
@@ -430,7 +432,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="UBOVoting" class="input-item-label">{{__('UBO Threshold Voting Rights')}}</label>
                                         <div class="input-wrap">
-                                            <input type="number" class="input-bordered" id="UBOVoting" name="UBOVoting" placeholder='Percentage format: "25%" or "0.25"'
+                                            <input type="text" class="input-bordered percent" id="UBOVoting" name="UBOVoting" placeholder='Percentage format: "25%" or "0.25"'
                                             value="{{ isset($companies)? $companies->UBO_threshold_voting_interest : '' }}">
                                         </div>
                                     </div>
@@ -442,7 +444,7 @@
                     <input type="hidden" name="entypeId" value="{{$entype->id}}">
                     <input type="hidden" name="companyId" value="{{ isset($companies) ? $companies->id : ''}}">
 
-                    <div class="form-step form-step1">
+                    <div class="form-step form-final">
                         <div class="form-step-fields card-innr">
                             <button class="btn btn-primary">Save</button>
                         </div>
