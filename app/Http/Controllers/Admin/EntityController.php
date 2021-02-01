@@ -41,7 +41,6 @@ class EntityController extends Controller
                             ->join('jurisdictions', 'entity_types.jurisdiction_id', '=', 'jurisdictions.id')
                             ->join('legal_structures', 'entity_types.legal_structure_id', '=', 'legal_structures.id')
                             ->orderBy($order_by, $ordered)->paginate($per_page);
-
             $pagi = $entity->appends(request()->all());
             return view('admin.entity', compact('entity', 'pagi', 'is_page'));
         } catch( \Exception $e){

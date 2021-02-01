@@ -33,19 +33,19 @@ class ArticlesController extends Controller
     {
         try {
 
-            $entity_types = \DB::table('entity_types')
+            $entity_types = \DB::table('entity_types')->select(["*", "entity_types.id as entity_type_id"])
                 ->join('jurisdictions', 'entity_types.jurisdiction_id', '=', 'jurisdictions.id')
                 ->orderBy('entity_type_name')->get();
 
             $contents = \DB::table('article_contents')
-                ->join('entity_types', 'article_contents.entity_types', '=', 'entity_types.entity_type_id')
+                ->join('entity_types', 'article_contents.entity_types', '=', 'entity_types.id')
                 ->join('jurisdictions', 'entity_types.jurisdiction_id', '=', 'jurisdictions.id')
                 ->orderBy('section')->orderBy('entity_types')->get();
 
             $section_num = \DB::table('article_contents')->distinct('section')->count('section');
             $articlesAll = Articles::get();
             // print('<pre>');
-            // print_r($articlesAll);
+            // print_r($article);
             // print('</pre');
             // exit;
             $article = Articles::where('id', $article_id)->first();
