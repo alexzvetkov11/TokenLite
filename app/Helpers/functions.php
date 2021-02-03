@@ -2535,3 +2535,4 @@ if (!function_exists('recaptcha')) {
         return false;
     }
 }
+

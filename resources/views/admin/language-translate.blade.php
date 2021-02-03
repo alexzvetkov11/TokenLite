@@ -57,11 +57,11 @@
                                     </div>
                                     <div class="row align-items-baseline">
                                         <div class="col-sm-3 col-md-2">
-                                            <label class="input-item-label">{{ __(':lang Text', ['lang' => $lang->name]) }}</label>
+                                            <label class="input-item-label">{{ __(':lang Text', ['lang' => $lang->name]) }}  Key:  {{ $translate['key']}}</label>
                                         </div>
                                         <div class="col-sm-9 col-md-10">
                                             <div class="input-wrap">
-                                                <textarea class="input-bordered input-textarea-min" rows="1" name="{{ $lang->code }}[{{ $translate['id'] }}]" required>{{ $translate['text'] }}</textarea>
+                                                <textarea class="input-bordered input-textarea-min" rows="1" name="{{ $lang->code }}[{{ $translate['id'] }}]" required>{{$translate['text'] }}</textarea>
                                             </div>
                                         </div>
                                     </div>

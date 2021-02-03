@@ -21,7 +21,12 @@ $language=Setting::where('field',auth()->id())->first();
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
-    
+    <style>
+        label.required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
     @stack('header')
 @if(get_setting('site_header_code', false))
     {{ html_string(get_setting('site_header_code')) }}

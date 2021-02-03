@@ -70,7 +70,8 @@ class User extends Authenticatable // implements MustVerifyEmail
      */
     public function kyc_info()
     {
-        return $this->belongsTo('App\Models\KYC', 'id', 'userId')->orderBy('created_at', 'DESC');
+        // return $this->belongsTo('App\Models\KYC', 'id', 'userId')->orderBy('created_at', 'DESC');
+        return $this->belongsTo('App\Models\KycIdentity', 'id', 'user_id')->orderBy('created_at', 'DESC');
     }
     protected $with = ['kyc_infoSingle'];
     public function kyc_infoSingle()

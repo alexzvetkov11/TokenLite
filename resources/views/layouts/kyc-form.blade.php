@@ -76,11 +76,12 @@
                             <input
                                 {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} 
                                 class="input-bordered" type="text" name="first_name"
-                                value="{{ isset($user_kyc) ? $user_kyc->firstName : ''}}" id="first-name" >
+                                value="{{ isset($user_kyc) ? $user_kyc->first_middle_names : ''}}" id="first-name" >
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
             @endif
+
             @if(field_value('kyc_lastname', 'show' ))
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
@@ -92,7 +93,7 @@
                         </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
-                                class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->lastName : ''}}"
+                                class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->last_name : ''}}"
                                 type="text" id="last-name" name="last_name">
                         </div>
                     </div>{{-- .input-item --}}
@@ -145,9 +146,9 @@
                                 class="select-bordered select-block" name="gender" id="gender">
                                 <option value="">{{__('Select Gender')}}</option>
                                 <option
-                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'male')?"selected":"" }} value="male">{{__('Male')}}</option>
+                                    {{( (isset($user_kyc) ? $user_kyc->gender_id : '') == '1')?"selected":"" }} value="1">{{__('Male')}}</option>
                                 <option
-                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'female')?"selected":"" }} value="female">{{__('Female')}}</option>
+                                    {{( (isset($user_kyc) ? $user_kyc->gender_id : '') != '1')?"selected":"" }} value="2">{{__('Female')}}</option>
                             </select>
                         </div>
                     </div>{{-- .input-item --}}
@@ -225,7 +226,7 @@
                                 <option value="">{{__('Select Country')}}</option>
                                 @foreach($countries as $country)
                                     <option
-                                        {{ (isset($user_kyc) ? $user_kyc->country : '') == $country ? 'selected' : '' }} value="{{ $country }}">{{ $country }}</option>
+                                        {{ (isset($user_kyc) ? $user_kyc->citizenship : '') == $country ? 'selected' : '' }} value="{{ $country }}">{{ $country }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -243,7 +244,7 @@
                         </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
-                                name="National Identification Number">
+                                name="National Identification Number" value="{{isset($user_kyc)?$user_kyc->nationality_id:''}}">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -603,30 +604,30 @@
                             <input type="hidden" name="document_proof_of_address"/>
                         </div>
                     </div>
-                    col --}}
+                    
                 </div>
             </div>
             <div class="gaps-3x"></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="date-of-birth" class="input-item-label">
+                        <label for="issue_date" class="input-item-label">
                             {{__('Issue Birth')}}
                             @if (field_value('kyc_dob', 'req'))
                                 <span class="text-require text-danger">*</span>
                             @endif
                         </label>
+                        
                         <div class="input-wrap">
                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
-                                class="input-bordered " id='tt' type="date" id="date-of-birth" name="dob" 
-                                
-                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
+                                class="input-bordered date-picker" type="text" id="issue_date" name="issue_date"  data-format="alt"
+                                value="{{ isset($user_kyc) ? $user_kyc->issue_date : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
                         </div>
                     </div>{{-- .input-item --}}
                 </div>
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
-                        <label for="date-of-birth" class="input-item-label">
+                        <label for="expire_date" class="input-item-label">
                             {{__('Expiration Date')}}
                             @if (field_value('kyc_dob', 'req'))
                                 <span class="text-require text-danger">*</span>
@@ -634,9 +635,8 @@
                         </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
-                                class="input-bordered" type="date" id="date-of-birth" name="dob" 
-                               
-                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
+                                class="input-bordered date-picker" type="text" id="expire_date" name="expire_date" data-format="alt"
+                                value="{{ isset($user_kyc) ? $user_kyc->expiration_date : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
                         </div>
                     </div>{{-- .input-item --}}
                 </div>

@@ -146,6 +146,19 @@ class KycIdentity extends Model
             return in_array($name, $fields);
         }
     }
+
+    public static function documents($name=null)
+    {
+        $names = [
+            'passport' => __('Passport'),
+            'nidcard' => __('National ID Card'),
+            'driving' => __('Driver’s License'),
+        ];
+        if($name) {
+            return isset($names[$name]) ? $names[$name] : null;
+        }
+        return $names;
+    }
     /**
      * Search/Filter parametter exchnage with database value
      *
@@ -153,6 +166,7 @@ class KycIdentity extends Model
      * @since 1.1.0
      * @return void
      */
+    
     public function getAll($request)
     {
         // $result = [];

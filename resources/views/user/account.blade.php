@@ -3,15 +3,15 @@
 @php($has_sidebar = true)
 
 @section('content')
-{{--@include('layouts.messages')--}}
+@include('layouts.messages')
 <div class="content-area card">
     <div class="card-innr">
         <div class="card-head">
-            <h4 class="card-title">{{__('Account Details')}}</h4>
+            <h4 class="card-title">{{__('dashboard.account_detail')}}</h4>
         </div>
         <ul class="nav nav-tabs nav-tabs-line" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#personal-data">{{__('General')}}</a>
+                <a class="nav-link active" data-toggle="tab" href="#personal-data">{{__('dashboard.general')}}</a>
             </li>
             {{-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#KYC">{{__('KYC')}}</a>
@@ -34,9 +34,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="email-address" class="input-item-label">{{__('Display Name')}}</label>
+                                <label for="name" class="input-item-label">{{__('Display Name')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="text" id="email-address" name="email" required="required" placeholder="{{ __('Enter Email Address') }}" value="{{ $user->email }}" disabled>
+                                    <input class="input-bordered" type="text" id="name" name="name" required="required" placeholder="{{ __('First and Middle Name') }}" value="{{ $user->name }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -52,14 +52,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="old-pass" class="input-item-label">{{__('Email Address')}}</label>
+                                <label for="email" class="input-item-label">{{__('Email Address')}}</label>
                                 <div class="input-wrap">
                                     <div class="row">
                                         <div class="col-md-9">
-                                            <input class="input-bordered" type="password" name="old-password" id="old-pass">
+                                            <input class="input-bordered" type="email" name="email" id="email" value="{{ $user->email}}">
                                         </div>
                                         <div class="col-md-1">
-                                            <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
+
+                                            <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
+                                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -68,26 +71,28 @@
                        
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="email-address" class="input-item-label">{{__('Mobile Phone')}}</label>
+                                <label for="mobile_code" class="input-item-label">{{__('Mobile Phone')}}</label>
                                 <div class="input-wrap">
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="row">
-                                                <div class="col-md-5">
-                                                    <select class="select-bordered select-block" name="jurisdictions" id="jurisdictions" data-dd-class="search-on">
-                                                        <option value="1"> 1</option>
-                                                        <option value="1"> 1</option>
-                                                        <option value="1"> 1</option>
-                                                        <option value="1"> 1</option>
+                                                <div class="col-md-6">
+                                                    <select class="select-bordered select-block" name="mobile_code" id="mobile_code" data-dd-class="search-on">
+                                                        <option value="">Select Code</option>
+                                                        @foreach ($mobileCode as $code)
+                                                        <option value="{{trim($code->phone_code)}}" {{trim($code->phone_code)==trim($user->mobile_code)?'selected':''}}>[{{$code->country_label}}] {{$code->phone_code}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <input class="input-bordered" type="password" name="old-password" id="old-pass">
+                                                <div class="col-md-6">
+                                                    <input class="input-bordered" type="number" name="mobile" id="mobile" value="{{$user->mobile}}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-1">
-                                            <span class="badge badge-auto badge-md badge-success mt-2">Verified</span>
+                                            <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? 'success' : 'danger' }}">
+                                                {{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -113,9 +118,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
+                                <label for="old-pass" class="input-item-label required">{{__('Current Password')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
+                                    <input class="input-bordered" type="password" name="old-password" id="old-pass" required="required">
                                 </div>
                             </div>
                         </div>
@@ -141,11 +146,11 @@
 
                     <div class="note note-plane note-info pdb-1x">
                         <em class="fas fa-info-circle"></em>
-                        <p>{{__('Password should be a minimum of 6 digits and include lower and uppercase letter.')}}</p>
+                        <p>{{__('password.digit',['what'=>6])}}</p>
                     </div>
                     <div class="note note-plane note-danger pdb-2x">
                         <em class="fas fa-info-circle"></em>
-                        <p>{{__('Your password will only change after your confirmation by email.')}}</p>
+                        <p>{{__('password.only.confirm')}}</p>
                     </div>
                     <div class="d-sm-flex justify-content-between align-items-center">
                         <button type="submit" class="btn btn-primary">{{__('Update Password')}}</button>
@@ -157,30 +162,29 @@
                     
                     <div class="content-area card">
                         <div class="card-head">
-                            <h4 class="card-title">{!! __('Private Key') !!}</h4>
+                            <h4 class="card-title">{!! __('Public Key') !!}</h4>
                         </div>
-                        <p>{!! __("The public key is a random 4-digit code that can be refreshed, and is connected to a user. The function of the key is that other Users can identify other Users only when they have the User ID AND the Public Key (for privacy reasons).") !!}</p>
+                        <p>{!! __("public.key.descript") !!}</p>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="input-item input-with-label">
-                                    <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
+                                    <label for="userid" class="input-item-label">{{__('User ID')}}</label>
                                     <div class="input-wrap">
-                                        <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
+                                        <input class="input-bordered" type="text" name="userid" id="userid" disabled value='{{set_id($user->id)}}'>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="input-item input-with-label">
-                                    <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
+                                    <label for="old-pass" class="input-item-label">{{__('Public Key')}}</label>
                                     <div class="input-wrap">
-                                        <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
-
+                                        <input class="input-bordered" type="number" name="public-key" id="public-key">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-wrap">
-                                    <button type="submit" class="btn btn-primary">{{__('Update Name')}}</button>
+                                    <button type="submit" class="btn btn-primary">{{__('Update Key')}}</button>
                                 </div>
                             </div>
                         </div>

@@ -673,3 +673,43 @@
 <div class="hiddenFiles"></div>
 
 
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Compliance', 'base', 'Compliance', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Identity', 'base', 'Identity', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Residency', 'base', 'Residency', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Tax', 'base', 'Tax', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Source of wealth', 'base', 'Source of wealth', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Carrer', 'base', 'Carrer', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Public records', 'base', 'Public records', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Status', 'base', 'Status', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Personal Information', 'base', 'Personal Information', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Gender', 'base', 'Gender', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Date of Birth', 'base', 'Date of Birth', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Citizenship', 'base', 'Citizenship', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'Place of Birth', 'base', 'Place of Birth', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+
+INSERT INTO `translates`(`key`, `name`, `text`, `pages`, `group`, `panel`, `load`) VALUES (
+'National Identification Number', 'base', 'National Identification Number', 'dashboard, global, message, profile, validation, auth, user_profile, kyc, user_transaction','system','any',1);
+

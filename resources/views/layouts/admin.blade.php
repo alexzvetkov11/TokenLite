@@ -11,6 +11,12 @@
     <title>@yield('title') | {{ site_whitelabel('title') }}</title>
     <link rel="stylesheet" href="{{ asset(style_theme('vendor')) }}">
     <link rel="stylesheet" href="{{ asset(style_theme('admin')) }}">
+    <style>
+        label.required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
     @stack('header')
 </head>
 

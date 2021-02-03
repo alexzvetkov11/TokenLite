@@ -11,22 +11,22 @@
         </div>
         <ul class="nav nav-tabs nav-tabs-line" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#identity">{{__('IDENTITY')}}</a>
+                <a class="nav-link active" data-toggle="tab" href="#identity">{{__('Identity')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#KYC">{{__('RESIDENCY')}}</a>
+                <a class="nav-link" data-toggle="tab" href="#KYC">{{__('Residency')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#personalData">{{__('TAX')}}</a>
+                <a class="nav-link" data-toggle="tab" href="#personalData">{{__('Tax')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#settings">{{__('SOURCE OF WEALTH')}}</a>
+                <a class="nav-link" data-toggle="tab" href="#settings">{{__('Source of wealth')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#password">{{__('CAREER')}}</a>
+                <a class="nav-link" data-toggle="tab" href="#password">{{__('Carrer')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#password">{{__('PUBLIC RECORDS')}}</a>
+                <a class="nav-link" data-toggle="tab" href="#password">{{__('Public records')}}</a>
             </li>
         </ul>
         <div class="tab-content" id="identity">
@@ -41,6 +41,9 @@
                             <div class="col-md-6 pt-3">{{__('Status') }}: </div>
                             <div class="col-md-6">
                                 <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
+                                {{-- <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
+                                    {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                </span> --}}
                             </div>
                             </div>
                         </div>
@@ -54,32 +57,32 @@
                     <div class="gaps-1x"></div>
                     <ul class="data-details-list">
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('First and Middle Names')}}</div>
                             <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Last Name')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->last_name ? $kycIdenty->last_name : '&nbsp;' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Gender')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->gender_id ? "male" : 'femal' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Date of Birth')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->country_of_birth ? $kycIdenty->country_of_birth : '&nbsp;' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Place of Birth')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->place_of_birth ? $kycIdenty->place_of_birth : '&nbsp;' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Citizenship')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->citizenship ? $kycIdenty->citizenship : '&nbsp;' !!}</div>
                         </li>
                         <li>
-                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">First Name</div>
-                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->first_middle_names ? $kycIdenty->first_middle_names : '&nbsp;' !!}</div>
+                            <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('National Identification Number')}}</div>
+                            <div class="data-details-des" style="border-left: 0px">{!! $kycIdenty->nationality_id ? $kycIdenty->nationality_id : '&nbsp;' !!}</div>
                         </li>
                     </ul>
                     <hr/>

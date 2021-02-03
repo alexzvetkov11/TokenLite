@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Models\KycIdentity;
 use App\Models\IcoStage;
 use App\Models\UserMeta;
+use App\Models\MobileCode;
 use App\Models\Activity;
 use App\Helpers\NioModule;
 use App\Models\GlobalMeta;
@@ -84,9 +85,9 @@ class UserController extends Controller
             $user->email,
             $google2fa_secret
         );
-//        dd($user_kyc);
 
-        return view('user.account', compact('user_kyc', 'user', 'userMeta','countries', 'google2fa', 'google2fa_secret'));
+        $mobileCode = MobileCode::get();
+        return view('user.account', compact('user_kyc', 'user', 'userMeta','countries', 'google2fa', 'google2fa_secret', 'mobileCode'));
     }
 
     public function compliance(){
@@ -179,15 +180,14 @@ class UserController extends Controller
 
         if ($type == 'personal_data') {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:3',
                 'email' => 'required|email',
-                'dateOfBirth' => 'required|date_format:"m/d/Y"',
-
+                'old-password' =>'required',
+                // 'dateOfBirth' => 'required|date_format:"m/d/Y"',
             ]);
 
             if ($validator->fails()) {
                 $msg = __('messages.form.wrong');
-                if ($validator->errors()->hasAny(['name', 'email', 'dateOfBirth'])) {
+                if ($validator->errors()->hasAny(['name', 'email', 'old-password'])) {
                     $msg = $validator->errors()->first();
                 }
 
@@ -195,23 +195,35 @@ class UserController extends Controller
                 $ret['message'] = $msg;
                 return response()->json($ret);
             } else {
-
                 $user = User::FindOrFail(Auth::id());
-                if($request->input('new-password')){
-                    $user->password = Hash::make($request->input('new-password'));
-                    $user_saved = $user->save();
-                    if ($user_saved) {
-                        $ret['msg'] = 'success';
-                        $ret['message'] = __('messages.update.success', ['what' => 'Account']);
+                if (Hash::check($request->input('old-password'), $user->password) == false ){
+                    $ret['msg'] = 'warning';
+                    $ret['message'] = __('Passwrod Incorrect');
+                } else {
+                    $ret['msg'] = 'success';
+                }
+                
+                if($ret['msg'] == 'success' && $request->input('new-password')){
+                    if ( $request->input('new-password') != $request->input('re-password')){
+                        $ret['msg'] = 'warning';
+                        $ret['message'] = __('Not matched new password');
                     } else {
+                        $user->password = Hash::make($request->input('new-password'));
+                    }
+                }
+                if ($request->input('public-key'))  {
+                    if ( strlen($request->input('public-key'))!= 4){
                         $ret['msg'] = 'warning';
                         $ret['message'] = __('messages.update.warning');
+                    } else{
+                        $user->public_key = $request->input('public-key');
                     }
-                }else{
+                }
+                if ($ret['msg'] == 'success'){
+                    
                     $user->name = strip_tags($request->input('name'));
                     $user->email = $request->input('email');
                     $user->mobile = strip_tags($request->input('mobile'));
-                    $user->dateOfBirth = $request->input('dateOfBirth');
                     $user_saved = $user->save();
                     if ($user_saved) {
                         $ret['msg'] = 'success';
@@ -507,7 +519,9 @@ class UserController extends Controller
             $ret['msg'] = 'warning';
             $ret['message'] = __('messages.password.token');
         }
-
+        
+        print($ret);
+        exit;
         return redirect()->route('user.account')->with([$ret['msg'] => $ret['message']]);
     }
 
