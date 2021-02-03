@@ -83,7 +83,7 @@
                             <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
-                                        <h6 class="kyc-option-subtitle">First Name</h6>
+                                        <h6 class="kyc-option-subtitle">First & Middle Names</h6>
                                     </div>
                                     <div class="col-sm-3 col-6">
                                         <input class="input-switch input-switch-sm" id="fname-show" value="show"name="kyc_firstname[]"{{ field_value('kyc_firstname', 'show' ) ? ' checked' : '' }} type="checkbox" disabled>
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-item">
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Email Address</h6>
@@ -124,8 +124,8 @@
                                         <label for="kyc-email-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Phone Number</h6>
@@ -139,8 +139,8 @@
                                         <label for="phone-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Date of Birth</h6>
@@ -154,11 +154,9 @@
                                         <label for="dob-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            
-                            
-                            <div class="input-item">
+                            </div> --}}
+                      
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Country of Birth</h6>
@@ -172,8 +170,8 @@
                                         <label for="country_birth-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Place of Birth</h6>
@@ -187,11 +185,11 @@
                                         <label for="birthPlace-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
-                                        <h6 class="kyc-option-subtitle">Nationality</h6>
+                                        <h6 class="kyc-option-subtitle">Citizenship</h6>
                                     </div>
                                     <div class="col-sm-3 col-6">
                                         <input class="input-switch input-switch-sm" id="nationality-show" value="show" name="kyc_nationality[]" {{ field_value('kyc_nationality', 'show') ? 'checked' : '' }} type="checkbox">
@@ -219,8 +217,6 @@
                                 </div>
                             </div>
                             
-                            
-                            
                             <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
@@ -236,7 +232,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-item">
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Country</h6>
@@ -250,38 +246,9 @@
                                         <label for="country-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <!--<div class="input-item">-->
-                            <!--    <div class="row align-items-center">-->
-                            <!--        <div class="col-sm-6">-->
-                            <!--            <h6 class="kyc-option-subtitle">Address Line 1</h6>-->
-                            <!--        </div>-->
-                            <!--        <div class="col-sm-3 col-6">-->
-                            <!--            <input class="input-switch input-switch-sm" id="address-l1-show" value="show" name="kyc_address1[]"{{ field_value('kyc_address1', 'show') ? ' checked' : '' }} type="checkbox">-->
-                            <!--            <label for="address-l1-show">Show</label>-->
-                            <!--        </div>-->
-                            <!--        <div class="col-sm-3 col-6">-->
-                            <!--            <input class="input-checkbox input-checkbox-sm" id="address-l1-req" value="req" name="kyc_address1[]"{{ field_value('kyc_address1', 'req') ? ' checked' : '' }} type="checkbox">-->
-                            <!--            <label for="address-l1-req">Required</label>-->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-                            <!--<div class="input-item">-->
-                            <!--    <div class="row align-items-center">-->
-                            <!--        <div class="col-sm-6">-->
-                            <!--            <h6 class="kyc-option-subtitle">Address Line 2</h6>-->
-                            <!--        </div>-->
-                            <!--        <div class="col-sm-3 col-6">-->
-                            <!--            <input class="input-switch input-switch-sm" id="address-l2-show" value="show" name="kyc_address2[]"{{ field_value('kyc_address2', 'show') ? ' checked' : '' }} type="checkbox">-->
-                            <!--            <label for="address-l2-show">Show</label>-->
-                            <!--        </div>-->
-                            <!--        <div class="col-sm-3 col-6">-->
-                            <!--            <input class="input-checkbox input-checkbox-sm" id="address-l2-req" value="req" name="kyc_address2[]"{{ field_value('kyc_address2', 'req') ? ' checked' : '' }} type="checkbox">-->
-                            <!--            <label for="address-l2-req">Required</label>-->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-                            <div class="input-item">
+                            </div> --}}
+                           
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">City / Town</h6>
@@ -295,8 +262,8 @@
                                         <label for="city-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">State / Province</h6>
@@ -310,8 +277,8 @@
                                         <label for="state-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Zip / Postal Code</h6>
@@ -325,8 +292,8 @@
                                         <label for="zip-code-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Street Name</h6>
@@ -340,8 +307,8 @@
                                         <label for="address_1-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Street / Building Number</h6>
@@ -355,8 +322,8 @@
                                         <label for="Building-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="input-item">
+                            </div> --}}
+                            {{-- <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Floor / Unit</h6>
@@ -370,9 +337,9 @@
                                         <label for="Floor-req">Required</label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-                    </div>{{-- .kyc-option --}}
+                    </div>
                     <div class="kyc-option popup-body-innr">
                         <div class="kyc-option-head toggle-content-tigger collapse-icon-right">
                             <h5 class="kyc-option-title">Document Verification Options</h5>

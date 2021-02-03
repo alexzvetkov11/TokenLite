@@ -18,11 +18,13 @@
                         </div>
                         <ul class="sidebar-nav">
                             <li><a href="{{ url()->current() }}"><em class="ikon ikon-dashboard"></em> Instruction</a></li>
+                            <hr class="mt-0 "/>
+                            <li><a href="{{ url()->current() }}"><em class="ikon ikon-dashboard"></em> Database Values</a></li>
+                            <hr class="mt-0 "/>
                             @foreach($tags as $name => $term )
-
-                            <li{!! (url()->full() == qs_url(['category' => $term, 'filter' => true], url()->current())) ? ' class="active"' : '' !!}><a href="{{ qs_url(['category' => $term, 'filter' => true], url()->current()) }}"><em class="ikon ikon-transactions"></em> {{ $name }}</a></li>
+                            <li {!! (url()->full() == qs_url(['category' => $term, 'filter' => true], url()->current())) ? ' class="active"' : '' !!}><a href="{{ qs_url(['category' => $term, 'filter' => true], url()->current()) }}"><em class="ikon ikon-transactions"></em> {{ $name }}</a></li>
                             @endforeach
-                            <li{!! (url()->full() == qs_url(['filter' => true], url()->current())) ? ' class="active"' : '' !!}><a href="{{ qs_url(['filter' => true], url()->current()) }}"><em class="ikon ikon-docs"></em> All Translation</a></li>
+                            <li {!! (url()->full() == qs_url(['filter' => true], url()->current())) ? ' class="active"' : '' !!}><a href="{{ qs_url(['filter' => true], url()->current()) }}"><em class="ikon ikon-docs"></em> All Translation</a></li>
                         </ul>
                     </div>
                 </div>

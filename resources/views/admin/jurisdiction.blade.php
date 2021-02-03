@@ -111,8 +111,8 @@
                                         </td>
                                         <td class="data-col text-right" style="width:70px">
                                             <div class="relative d-inline-block">
-                                                <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em
-                                                        class="ti ti-more-alt"></em></a>
+                                                <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger">
+                                                    <em class="ti ti-more-alt"></em></a>
                                                 <div class="toggle-class dropdown-content dropdown-content-top-left">
                                                     <ul class="dropdown-list more-menu-{{ $jur->jur_id }}">
                                                         <li>

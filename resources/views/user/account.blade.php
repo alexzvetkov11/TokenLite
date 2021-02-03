@@ -11,14 +11,14 @@
         </div>
         <ul class="nav nav-tabs nav-tabs-line" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#personal-data">{{__('LOGIN CREDENTIALS')}}</a>
+                <a class="nav-link active" data-toggle="tab" href="#personal-data">{{__('General')}}</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#KYC">{{__('KYC')}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#personalData">{{__('PERSONAL DATA')}}</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#settings">{{__('Settings')}}</a>
             </li>
@@ -34,23 +34,92 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="email-address" class="input-item-label">{{__('Email Address')}}</label>
+                                <label for="email-address" class="input-item-label">{{__('Display Name')}}</label>
                                 <div class="input-wrap">
                                     <input class="input-bordered" type="text" id="email-address" name="email" required="required" placeholder="{{ __('Enter Email Address') }}" value="{{ $user->email }}" disabled>
                                 </div>
-                            </div>{{-- .input-item --}}
+                            </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-wrap">
+                                <button type="submit" class="btn btn-primary">{{__('Update Name')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-item input-with-label">
+                                <label for="old-pass" class="input-item-label">{{__('Email Address')}}</label>
+                                <div class="input-wrap">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <input class="input-bordered" type="password" name="old-password" id="old-pass">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="input-item input-with-label">
+                                <label for="email-address" class="input-item-label">{{__('Mobile Phone')}}</label>
+                                <div class="input-wrap">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <select class="select-bordered select-block" name="jurisdictions" id="jurisdictions" data-dd-class="search-on">
+                                                        <option value="1"> 1</option>
+                                                        <option value="1"> 1</option>
+                                                        <option value="1"> 1</option>
+                                                        <option value="1"> 1</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input class="input-bordered" type="password" name="old-password" id="old-pass">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <span class="badge badge-auto badge-md badge-success mt-2">Verified</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-item input-with-label">
+                                <div class="input-wrap">
+                                    <button type="submit" class="btn btn-primary">{{__('Update Email')}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-item input-with-label">
+                                <div class="input-wrap">
+                                    <button type="submit" class="btn btn-primary">{{__('Update Mobile Phone')}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
                                 <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
                                 <div class="input-wrap">
                                     <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
                                 </div>
-                            </div>{{-- .input-item --}}
-                        </div>{{-- .col --}}
-                    </div>{{-- .row --}}
-                    <div class="gaps-1x"></div>{{-- 10px gap --}}
-                    
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
@@ -58,17 +127,18 @@
                                 <div class="input-wrap">
                                     <input class="input-bordered" id="new-pass" type="password" name="new-password" {{--required="required"--}} minlength="6">
                                 </div>
-                            </div>{{-- .input-item --}}
-                        </div>{{-- .col --}}
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
                                 <label for="confirm-pass" class="input-item-label">{{__('Confirm New Password')}}</label>
                                 <div class="input-wrap">
                                     <input id="confirm-pass" class="input-bordered" type="password" name="re-password" data-rule-equalTo="#new-pass" data-msg-equalTo="Password not match." {{--required="required"--}} minlength="6">
                                 </div>
-                            </div>{{-- .input-item --}}
-                        </div>{{-- .col --}}
-                    </div>{{-- .row --}}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="note note-plane note-info pdb-1x">
                         <em class="fas fa-info-circle"></em>
                         <p>{{__('Password should be a minimum of 6 digits and include lower and uppercase letter.')}}</p>
@@ -78,9 +148,44 @@
                         <p>{{__('Your password will only change after your confirmation by email.')}}</p>
                     </div>
                     <div class="d-sm-flex justify-content-between align-items-center">
-                        <button type="submit" class="btn btn-primary">{{__('Update Account')}}</button>
+                        <button type="submit" class="btn btn-primary">{{__('Update Password')}}</button>
                         <div class="gaps-2x d-sm-none"></div>
                     </div>
+                    <div class="gaps-1x"></div>
+                    <hr/>
+                    
+                    
+                    <div class="content-area card">
+                        <div class="card-head">
+                            <h4 class="card-title">{!! __('Private Key') !!}</h4>
+                        </div>
+                        <p>{!! __("The public key is a random 4-digit code that can be refreshed, and is connected to a user. The function of the key is that other Users can identify other Users only when they have the User ID AND the Public Key (for privacy reasons).") !!}</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-item input-with-label">
+                                    <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
+                                    <div class="input-wrap">
+                                        <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-item input-with-label">
+                                    <label for="old-pass" class="input-item-label">{{__('Old Password')}}</label>
+                                    <div class="input-wrap">
+                                        <input class="input-bordered" type="password" name="old-password" id="old-pass"{{-- required="required"--}}>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-wrap">
+                                    <button type="submit" class="btn btn-primary">{{__('Update Name')}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>{{-- form --}}
 
             </div>{{-- .tab-pane --}}

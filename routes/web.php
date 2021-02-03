@@ -55,6 +55,8 @@ Route::post('admin/login/2fa', function () {
 Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name('user.')->group(function () {
     Route::get('/', 'User\UserController@index')->name('home');
     Route::get('/account', 'User\UserController@account')->name('account');
+    Route::get('/compliance', 'User\UserController@compliance')->name('compliance');
+    
     Route::get('/account/activity', 'User\UserController@account_activity')->name('account.activity');
     Route::get('/contribute', 'User\TokenController@index')->name('token');
     Route::get('/contribute/cancel/{gateway?}', 'User\TokenController@payment_cancel')->name('payment.cancel');

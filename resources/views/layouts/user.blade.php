@@ -17,6 +17,11 @@ $language=Setting::where('field',auth()->id())->first();
     <title>@yield('title') | {{ site_whitelabel('title') }}</title>
     <link rel="stylesheet" href="{{ asset(style_theme('vendor')) }}">
     <link rel="stylesheet" href="{{ asset(style_theme('user')) }}">
+    
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+    
     @stack('header')
 @if(get_setting('site_header_code', false))
     {{ html_string(get_setting('site_header_code')) }}
@@ -83,7 +88,15 @@ $language=Setting::where('field',auth()->id())->first();
                 <div class="container navbar-innr">
                     <ul class="navbar-menu" id="main-nav">
                         <li style="padding:0 0;"><a href="{{ route('user.home') }}"><em class="ikon ikon-dashboard"></em> {{__('Dashboard')}}</a></li>
-                        <li style="padding:0 0;"><a href="{{ route('user.account') }}"><em class="ikon ikon-user"></em> {{__('Profile')}}</a></li>
+
+                        
+                        <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user"></em> {{__('Profile')}}</a>
+                            <ul class="navbar-dropdown">
+                                <li><a href="{{  route('user.account') }}">{{__("Account Details") }}</a></li>
+                                <li><a href="{{ route('user.compliance') }}">{{__("Compliance") }}</a></li>
+                            </ul>
+                        </li>
+
                         <li style="padding:0 0;"><a href="{{ route('user.entities') }}"><em class="ikon ikon-user"></em> {{__('Entities')}}</a></li>
                         <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('Balances&Holdings')}}</a></li>
                         <li style="padding:0 0;"><a href="#"><em class="ikon ikon-user"></em> {{__('CorporateActions')}}</a></li>
@@ -98,7 +111,7 @@ $language=Setting::where('field',auth()->id())->first();
                         <li><a href="{{ route('public.pages', 'distribution') }}"><em class="ikon ikon-distribution"></em> {{ get_page('distribution', 'title') }}</a></li>
                         @endif--}}
                         @if(nio_module()->has('Withdraw') && has_route('withdraw:user.index'))
-                        <li{!! ((is_page('withdraw'))? ' class="active"' : '') !!}>
+                        <li {!! ((is_page('withdraw'))? ' class="active"' : '') !!}>
                             <a href="{{ route('withdraw:user.index') }}"><em class="ikon ikon-wallet"></em> Withdraw</a>
                         </li>
                         @endif
@@ -223,6 +236,9 @@ $language=Setting::where('field',auth()->id())->first();
     <script src="{{ asset('assets/js/jquery.bundle.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/script.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/app.js').css_js_ver() }}"></script>
+    <script src="{{ asset('assets/js/custom_client.js').css_js_ver() }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+
     @stack('footer')
     <script type="text/javascript">
         @if (session('resent'))

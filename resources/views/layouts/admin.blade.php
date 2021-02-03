@@ -81,21 +81,38 @@
                     <ul class="navbar-menu" id="main-nav">
                         <li><a href="{{ route('admin.home') }}"><em class="ikon ikon-dashboard"></em> Dashboard</a></li>
 
-                                
-
-                        @if(gup('user')||gup('view_user'))
-                        <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user-list"></em> Users</a>
+                        <li {!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
+                            <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a>
+                        </li>
+                        
+                        @if(gup('kyc')||gup('view_kyc'))
+                        <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user-list"></em> {{__('KYC')}}</a>
                             <ul class="navbar-dropdown">
-                                <li {!! ((is_page('users')||is_page('users.user')||is_page('users.admin'))? ' class="active"' : '') !!}>
-                                    {{-- <a href="{{ route('admin.users', 'user') }}"><em class="ikon ikon-user-list"></em> Users</a> --}}
-                                    <a href="{{ route('admin.users', 'user') }}">Users</a>
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs') }}"> {{__('Identity')}}</a>
                                 </li>
-                                @if(gup('kyc')||gup('view_kyc'))
-                                    <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
-                                        {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
-                                        <a href="{{ route('admin.kycs', 'pending') }}"> KYC Applications</a>
-                                    </li>
-                                @endif
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs', 'pending') }}"> {{__('Residency')}}</a>
+                                </li>
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs', 'pending') }}"> {{__('Tax')}}</a>
+                                </li>
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs', 'pending') }}"> {{__('Source of Wealth')}}</a>
+                                </li>
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs', 'pending') }}"> {{__('Career')}}</a>
+                                </li>
+                                <li {!! ((is_page('kyc-list')||is_page('kyc-list.pending')||is_page('kyc-list.approved')||is_page('kyc-list.missing'))? ' class="active"' : '') !!}>
+                                    {{-- <a href="{{ route('admin.kycs', 'pending') }}"><em class="ikon ikon-docs"></em> KYC List</a> --}}
+                                    <a href="{{ route('admin.kycs', 'pending') }}"> {{__('Public Records')}}</a>
+                                </li>
+
                             </ul>
                         </li>
                         @endif

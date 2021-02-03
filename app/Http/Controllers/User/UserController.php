@@ -18,6 +18,7 @@ use IcoHandler;
 use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\User;
+use App\Models\KycIdentity;
 use App\Models\IcoStage;
 use App\Models\UserMeta;
 use App\Models\Activity;
@@ -88,6 +89,11 @@ class UserController extends Controller
         return view('user.account', compact('user_kyc', 'user', 'userMeta','countries', 'google2fa', 'google2fa_secret'));
     }
 
+    public function compliance(){
+        $user = Auth::user();
+        $kycIdenty = KycIdentity::where('user_id', $user->id)->first();
+        return view('user.compliance', compact('kycIdenty'));
+    }
     /**
      * Show the user account activity page.
      * and Delete Activity

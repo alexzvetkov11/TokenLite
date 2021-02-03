@@ -51,7 +51,7 @@
         <div class="step-head">
             <div class="step-number">{{ $step_01 }}</div>
             <div class="step-head-text">
-                <h4>{{__('Personal Details')}}</h4>
+                <h4>{{__('Identity Details')}}</h4>
                 <p>{{__('Your basic personal information is required for identification purposes.')}}</p>
             </div>
         </div>
@@ -75,9 +75,8 @@
                             {{-- style="text-transform:uppercase" --}}
                             <input
                                 {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} 
-                                class="input-bordered" type="text"
-                                value="{{ isset($user_kyc) ? $user_kyc->firstName : ''}}" id="first-name"
-                                name="first_name">
+                                class="input-bordered" type="text" name="first_name"
+                                value="{{ isset($user_kyc) ? $user_kyc->firstName : ''}}" id="first-name" >
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -92,8 +91,7 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input
-                                {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
+                            <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
                                 class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->lastName : ''}}"
                                 type="text" id="last-name" name="last_name">
                         </div>
@@ -143,16 +141,13 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <select
-                                {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }}class="select-bordered select-block"
-                                name="gender" id="gender">
+                            <select {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }} 
+                                class="select-bordered select-block" name="gender" id="gender">
                                 <option value="">{{__('Select Gender')}}</option>
                                 <option
                                     {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'male')?"selected":"" }} value="male">{{__('Male')}}</option>
                                 <option
                                     {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'female')?"selected":"" }} value="female">{{__('Female')}}</option>
-                                <option
-                                    {{( (isset($user_kyc) ? $user_kyc->gender : '') == 'other')?"selected":"" }} value="other">{{__('Other')}}</option>
                             </select>
                         </div>
                     </div>{{-- .input-item --}}
@@ -169,10 +164,9 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input
-                                {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered date-picker-dob"
-                                type="text" value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" id="date-of-birth"
-                                name="dob">
+                            <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
+                                class="input-bordered date-picker-dob" type="text" id="date-of-birth" name="dob" data-format="alt"
+                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -209,8 +203,8 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
-                                   name="place_of_birth">
+                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }} 
+                            class="input-bordered date-picker-dob" type="text" name="place_of_birth" data-format="alt">
                         </div>
                     </div>{{-- .input-item --}}
                 </div>{{-- .col --}}
@@ -220,7 +214,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="Nationality" class="input-item-label">
-                            {{__('Nationality')}} 
+                            {{__('Citizenship')}} 
                             @if (field_value('kyc_nationality', 'req'))
                                 <span class="text-require text-danger">*</span>
                             @endif
@@ -258,7 +252,7 @@
     </div>{{-- .step-fields --}}
 </div>
 
-<div class="form-step form-step2">
+{{-- <div class="form-step form-step2">
     <div class="form-step-head card-innr">
         <div class="step-head">
             <div class="step-number">{{ $step_02 }}</div>
@@ -290,8 +284,8 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_state', 'show' ))
                 <div class="col-md-6">
@@ -308,8 +302,8 @@
                                 type="text" value="{{ isset($user_kyc) ? $user_kyc->state : ''}}" id="state"
                                 name="state">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_city', 'show' ))
                 <div class="col-md-6">
@@ -325,8 +319,8 @@
                                     type="text" value="{{ isset($user_kyc) ? $user_kyc->city : ''}}"
                                     id="city" name="city">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_zip', 'show' ))
                 <div class="col-md-6">
@@ -343,8 +337,8 @@
                                 class="input-bordered" type="text" value="{{ isset($user_kyc) ? $user_kyc->zip : ''}}"
                                 id="zip" name="zip">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_address_1', 'show' ))
                 <div class="col-md-6">
@@ -361,8 +355,8 @@
                                 type="text" value="{{ isset($user_kyc) ? $user_kyc->address1 : ''}}"
                                 id="address_1" name="address_1">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_Building', 'show' ))
                 <div class="col-md-6">
@@ -379,8 +373,8 @@
                                 type="text" value="{{ isset($user_kyc) ? $user_kyc->address2 : ''}}"
                                 id="address_2" name="address_2">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
             @if(field_value('kyc_Floor', 'show' ))
                 <div class="col-md-6">
@@ -396,18 +390,18 @@
                             {{ field_value('kyc_Floor', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text"
                                 name="floor">
                         </div>
-                    </div>{{-- .input-item --}}
-                </div>{{-- .col --}}
+                    </div>
+                </div>
             @endif
-        </div>{{-- .row --}}
+        </div>
     </div>
-</div>
+</div> --}}
 
 @if($has_docs)
-    <div class="form-step form-step3">
+    <div class="form-step form-step2">
         <div class="form-step-head card-innr">
             <div class="step-head">
-                <div class="step-number">{{ $step_03 }}</div>
+                <div class="step-number">{{ $step_02 }}</div>
                 <div class="step-head-text">
                     <h4>{{__('ID Document Upload')}}</h4>
                     <p>{{__('To verify your identity, we ask you to upload high-quality scans or photos of your official identification documents issued by the government.')}}</p>
@@ -609,9 +603,46 @@
                             <input type="hidden" name="document_proof_of_address"/>
                         </div>
                     </div>
+                    col --}}
+                </div>
+            </div>
+            <div class="gaps-3x"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-item input-with-label">
+                        <label for="date-of-birth" class="input-item-label">
+                            {{__('Issue Birth')}}
+                            @if (field_value('kyc_dob', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
+                        <div class="input-wrap">
+                            <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
+                                class="input-bordered " id='tt' type="date" id="date-of-birth" name="dob" 
+                                
+                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
+                        </div>
+                    </div>{{-- .input-item --}}
+                </div>
+                <div class="col-md-6">
+                    <div class="input-item input-with-label">
+                        <label for="date-of-birth" class="input-item-label">
+                            {{__('Expiration Date')}}
+                            @if (field_value('kyc_dob', 'req'))
+                                <span class="text-require text-danger">*</span>
+                            @endif
+                        </label>
+                        <div class="input-wrap">
+                            <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
+                                class="input-bordered" type="date" id="date-of-birth" name="dob" 
+                               
+                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
+                        </div>
+                    </div>{{-- .input-item --}}
                 </div>
             </div>
         </div>
+        
     </div>
 @endif
 
@@ -630,7 +661,7 @@
         <div class="input-item">
             <input class="input-checkbox input-checkbox-md" id="info-currect" name="currect" type="checkbox"
                    required="required" data-msg-required="{{ __("Confirm that all information is correct.") }}">
-            <label for="info-currect">{{__('All the personal information I have entered is correct.')}}</label>
+            <label for="info-currect">{{__('All the information I have entered is correct.')}}</label>
         </div>
 
         <div class="gaps-1x"></div>

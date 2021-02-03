@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 use Auth;
 use Validator;
 use App\Models\KYC;
+use App\Models\KycIdentity;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\KycStatus;
@@ -20,26 +21,50 @@ class KycController extends Controller
 {
     public function index(Request $request, $status = '')
     {
-        $per_page   = gmvl('kyc_per_page', 10);
-        $ordered    = gmvl('kyc_ordered', 'DESC');
+        // $per_page   = gmvl('kyc_per_page', 10);
+        // $ordered    = gmvl('kyc_ordered', 'DESC');
 
-        $kycs = KYC::when($status, function($q) use ($status){
+        // $kycs = KYC::when($status, function($q) use ($status){
+        //     $q->where('status', $status);
+        // })->orderBy('created_at',  $ordered)->paginate($per_page);
+
+        // if($request->s){
+        //     $kycs = KYC::AdvancedFilter($request)
+        //                 ->orderBy('id', $ordered)->paginate($per_page);
+        // }
+
+        // if ($request->filter) {
+        //     $kycs = KYC::AdvancedFilter($request)
+        //                 ->orderBy('id', $ordered)->paginate($per_page);
+        // }
+
+        // $is_page = (empty($status) ? 'all' : $status);
+        // $pagi = $kycs->appends(request()->all());
+        // return view('admin.kycs', compact('kycs', 'is_page', 'pagi'));
+
+
+
+        $per_page   = gmvl('kyci_per_page', 10);
+        $ordered    = gmvl('kyci_ordered', 'DESC');
+        $order_by = gmvl('kyci_order_by', 'id');
+        
+        $per_page =100000;
+        $kyci = KycIdentity::when($status, function($q) use ($status){
             $q->where('status', $status);
-        })->orderBy('created_at',  $ordered)->paginate($per_page);
+        })->orderBy($order_by,  $ordered)->paginate($per_page);
 
         if($request->s){
-            $kycs = KYC::AdvancedFilter($request)
-                        ->orderBy('id', $ordered)->paginate($per_page);
+            $kyci = kycIdentity::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
         }
 
         if ($request->filter) {
-            $kycs = KYC::AdvancedFilter($request)
-                        ->orderBy('id', $ordered)->paginate($per_page);
+            $kyci = kycIdentity::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
         }
 
         $is_page = (empty($status) ? 'all' : $status);
-        $pagi = $kycs->appends(request()->all());
-        return view('admin.kycs', compact('kycs', 'is_page', 'pagi'));
+        $pagi = $kyci->appends(request()->all());
+       
+        return view('admin.kyc-identity', compact('kyci', 'is_page', 'pagi'));
     }
 
     /**
@@ -90,7 +115,7 @@ class KycController extends Controller
             if ($id == '') {
                 return __('messages.wrong');
             } else {
-                $kyc = KYC::where('id', $id)->first();
+                $kyc = KycIdentity::where('id', $id)->first();
                 return view('admin.kyc_details', compact('kyc'))->render();
             }
         }
@@ -137,7 +162,7 @@ class KycController extends Controller
             } else {
                 // Start Work
                 $check = '';
-                foreach (KYC::kyc_fields() as $kyc_field => $option) {
+                foreach (KycIdentity::kyc_fields() as $kyc_field => $option) {
                     $new = $current = '';
                     $is_disable = ($kyc_field == 'kyc_firstname' || $kyc_field == 'kyc_email') ? 1 : 0;
                     $ignore = ['kyc_wallet_custom', 'kyc_wallet_opt'];
@@ -208,7 +233,7 @@ class KycController extends Controller
         if ($type == 'update_kyc_status') {
             $id = $request->input('kyc_id');
             if ($id !== null) {
-                $kyc = KYC::FindOrFail($id);
+                $kyc = KycIdentity::FindOrFail($id);
                 $old_note = $kyc->notes != null ? $kyc->notes : '';
                 $save_note = $request->input('notes') != '' ? str_replace("\n", "<br>", $request->input('notes')) : $old_note;
                 if ($request->input('status') == 'rejected') {
@@ -217,8 +242,8 @@ class KycController extends Controller
                 if ($kyc) {
                     $kyc->status = $request->input('status');
                     $kyc->notes = $save_note;
-                    $kyc->reviewedBy = Auth::id();
-                    $kyc->reviewedAt = date('Y-m-d H:i:s');
+                    $kyc->reviewed_by = Auth::id();
+                    $kyc->reviewed_at = date('Y-m-d H:i:s');
                     $kyc->save();
 
                     if ($request->input('status') == 'approved') {
@@ -252,7 +277,7 @@ class KycController extends Controller
         if ($type == 'delete') {
             $id = $request->input('kyc_id');
             if ($id !== null) {
-                $delete = KYC::find($id);
+                $delete = KycIdentity::find($id);
                 if ($delete != null) {
                     if ($delete->document != null || $delete->document2 != null) {
                         if (starts_with($delete->document, 'kyc-files') && file_exists(storage_path('app/' . $delete->document))) {
