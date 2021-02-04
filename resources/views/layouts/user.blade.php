@@ -26,6 +26,25 @@ $language=Setting::where('field',auth()->id())->first();
             content: " *";
             color: red;
         }
+
+        .clipboard {
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: rgb(255, 255, 255);
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 9px #999;
+        }
+
+        .clipboard:hover {background-color: #3e8e41}
+
+        .clipboard:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px rgb(185, 185, 185);
+            transform: translateY(4px);
+        }
     </style>
     @stack('header')
 @if(get_setting('site_header_code', false))

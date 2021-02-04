@@ -30,11 +30,11 @@
             </li>
         </ul>
         <div class="tab-content" id="tabs">
-            <div class="tab-pane fade" id="identity">
+            <div class="tab-pane fade show active" id="identity">
                 <div class="justify-content-between d-flex">
-                    <div class="col-md-3 pt-2">
+                    <div class="col-md-3">
                         <div class="row">
-                        <div class="col-md-6 pt-3">{{__('Status') }}: </div>
+                        <div class="col-md-6" style="align-self: flex-end;">{{__('Status') }}: </div>
                         <div class="col-md-6">
                             <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
                             {{-- <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
@@ -43,48 +43,51 @@
                         </div>
                         </div>
                     </div>
-                    <div class="pt-2">
-                        <a href="{{route('user.identity.details') }}" class="btn btn-primary">{{__('Update Name')}}</a>
+                    <div class="t-2">
+                        <a href="{{route('user.identity.details') }}" class="btn btn-primary">{{__('Update Detail')}}</a>
                     </div>
                 </div>
                 <hr/>
                 <div class="gaps-3x"></div>
-                <h6 class="card-sub-title">{{__('Personal Information') }}</h6>
+                <h6 class="card-sub-title text-primary">{{__('Personal Information') }}</h6>
                 <div class="gaps-1x"></div>
-                <ul class="data-details-list">
+                <ul class="data-details-list" style="border: 0px solid #d2dde9">
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('First and Middle Names')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->first_middle_names ? $kyci->first_middle_names : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('First and Middle Names')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->first_middle_names ? $kyci->first_middle_names : '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Last Name')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->last_name ? $kyci->last_name : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Last Name')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->last_name ? $kyci->last_name : '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Gender')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->gender_id ? "male" : 'femal' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Gender')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->gender_id ? "male" : 'femal' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Date of Birth')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->country_of_birth ? $kyci->country_of_birth : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Date of Birth')}} (DD/MM/YYYY)</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->dob ? _date($kyci->dob, 'd/m/Y'): '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Place of Birth')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->place_of_birth ? $kyci->place_of_birth : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Country of Birth')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->country_of_birth ? _x($kyci->country_of_birth): '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('Citizenship')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->citizenship ? $kyci->citizenship : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Place of Birth')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->place_of_birth ? $kyci->place_of_birth : '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">{{__('National Identification Number')}}</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! $kyci->nationality_id ? $kyci->nationality_id : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Citizenship')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! $kyci->citizenship ? $kyci->citizenship : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('National Identification Number')}}</div>
+                        <div class="data-details-des col-md-8" style="border-bottom: 1px solid #d2dde9; border-left: 0px">{!! $kyci->nationality_id ? $kyci->nationality_id : '&nbsp;' !!}</div>
                     </li>
                 </ul>
-                <hr/>
                 
             </div>
-            <div class="tab-pane fade show active" id="residency">
+            <div class="tab-pane fade " id="residency">
                 <div class="justify-content-between d-flex">
                     <div class="col-md-3 pt-2">
                         <div class="row">
@@ -217,6 +220,7 @@
                 </ul>
                 <hr/>
             </div>
+            <div class="gaps-2x"></div>
         </div>
     </div>
 </div>

@@ -28,23 +28,8 @@
                     </div>
                     <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
-                            <div class="page-nav w-100 w-lg-auto">
-                                <ul class="nav">
-                                    <li class="nav-item{{ is_page('kyc-list.pending') ? ' active' : '' }}"><a
-                                            class="nav-link" href="{{ route('admin.kycs', 'pending') }}">Pending</a></li>
-
-                                    <li class="nav-item{{ is_page('kyc-list.missing') ? ' active' : '' }}"><a
-                                            class="nav-link" href="{{ route('admin.kycs', 'missing') }}">Missing</a></li>
-
-                                    <li class="nav-item{{ is_page('kyc-list.approved') ? ' active' : '' }}"><a
-                                            class="nav-link" href="{{ route('admin.kycs', 'approved') }}">Approved</a>
-                                    </li>
-
-                                    <li class="nav-item{{ is_page('kyc-list') ? ' active' : '' }}"><a class="nav-link"
-                                            href="{{ route('admin.kycs') }}">All</a></li>
-                                </ul>
-                            </div>
-                            <div class="search flex-grow-1 pl-lg-4 w-100 w-sm-auto">
+                          
+                            <div class="search flex-grow-1 w-100 w-sm-auto">
                                 {{-- <form action="{{ route('admin.kycs') }}" method="GET" autocomplete="off"> --}}
                                 <div class="input-wrap">
                                     <span class="input-icon input-icon-left"><em class="ti ti-search"></em></span>
@@ -222,13 +207,13 @@
                                         <td class="data-col dt-sbdate">
                                             <span class="sub sub-s2 sub-time">{{ _date($kyc->updated_at) }}</span>
                                         </td>
-                                        <td class="data-col dt-status">
+                                        <td class="data-col dt-status" style="width:60px">
                                             <span
                                                 class="dt-status-md badge badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ __status($kyc->status, 'text') }}</span>
                                             <span
                                                 class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ substr(__status($kyc->status, 'text'), 0, 1) }}</span>
                                         </td>
-                                        <td class="data-col text-right" style="width:70px">
+                                        <td class="data-col text-right" style="width:50px">
                                             <div class="relative d-inline-block">
                                                 <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger">
                                                     <em class="ti ti-more-alt"></em></a>

@@ -53,6 +53,15 @@ $(document).ready(function() {
 
     });
 
+    //clipboard
+    $(".clipboard").on("click", function() {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        var copyText = $(".clipboard-value").val();
+        $temp.val(copyText).select();
+        document.execCommand("copy");
+        $temp.remove();
+    });
     // common numerical input
     $(".comma").on("keydown", function(e) {
         var keycode = (event.which) ? event.which : event.keyCode;

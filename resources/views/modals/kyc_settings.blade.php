@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            {{-- <div class="input-item">
+                            <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Date of Birth</h6>
@@ -154,9 +154,9 @@
                                         <label for="dob-req">Required</label>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                       
-                            {{-- <div class="input-item">
+                            <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Country of Birth</h6>
@@ -170,8 +170,8 @@
                                         <label for="country_birth-req">Required</label>
                                     </div>
                                 </div>
-                            </div> --}}
-                            {{-- <div class="input-item">
+                            </div>
+                            <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">
                                         <h6 class="kyc-option-subtitle">Place of Birth</h6>
@@ -185,7 +185,7 @@
                                         <label for="birthPlace-req">Required</label>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="input-item">
                                 <div class="row align-items-center">
                                     <div class="col-sm-6">

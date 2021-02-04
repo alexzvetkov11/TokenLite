@@ -191,7 +191,7 @@ $has_sidebar = false;
                                         <div class="input-wrap">
                                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered date-picker-dob" type="text" id="date-of-birth" name="dob" data-format="alt"
-                                                value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}">
+                                                value="{{ isset($user_kyc) ? _date($user_kyc->dob,'d/m/Y') : ''}}">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
@@ -229,7 +229,8 @@ $has_sidebar = false;
                                         </label>
                                         <div class="input-wrap">
                                             <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }} 
-                                            class="input-bordered date-picker-dob" type="text" name="place_of_birth" data-format="alt">
+                                            class="input-bordered" type="text" name="place_of_birth" 
+                                            value="{{ isset($user_kyc) ? $user_kyc->place_of_birth : ''}}">
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>{{-- .col --}}
@@ -426,66 +427,6 @@ $has_sidebar = false;
                                 </div>
                             </div>
 
-
-
-                        </div>
-                    </div>
-                    <div class="gaps-3x"></div>
-                    <div class="form-step form-step4">
-                        <div class="form-step-head card-innr">
-                            <div class="step-head">
-                                <div class="step-number">{{ $step_04 }}</div>
-                                <div class="step-head-text">
-                                    <h4>{{__('Address Document Upload')}}</h4>
-                                    <p>{{__('To verify your identity, we ask you to upload high-quality scans or photos of your official identification documents issued by the government.')}}</p>
-                                </div>
-                            </div>
-                        </div>{{-- .step-head --}}
-                        <div class="form-step-fields card-innr">
-                            <div >
-                                <p class="text-secondary font-bold">{{__('To avoid delays with verification process, please double-check to ensure the below requirements are fully met:')}}</p>
-                                <ul class="list-check">
-                                    <li>{{__('Document should be in good condition and clearly visible.')}}</li>
-                                    <li>{{__('Document should be less than 90 days old.')}}</li> 
-                                    {{--  <li>{{__('There is no light glare or reflections on the card.')}}</li>
-                                    <li>{{__('File is at least 1 MB in size and has at least 300 dpi resolution.')}}</li>  --}}
-                                </ul>
-                                <div class="gaps-2x"></div>
-                            </div>
-                            <div class="doc-upload doc-upload-d3">
-                                <div class="row align-items-center">
-                                    <div class="col-sm-8">
-                                        <div class="input-item input-with-label">
-                                            <label for="Proof of Address Type"
-                                                class="input-item-label">{{__('Proof of Address Type')}} </label>
-                                            <div class="input-wrap">
-                                                <select class="select-bordered select-block" name="Proof of Address Type" id="proof_of_address-type"
-                                                        data-dd-class="search-on">
-                                                    <option value="">{{__('Select option')}}</option>
-
-                                                    <option >Utility Bill</option>
-                                                    <option >Phone Bill</option>
-                                                    <option >Bank Statement</option>
-                                                    <option >Tax Statement</option>
-                                                </select>
-                                            </div>
-                                        </div>{{-- .input-item --}}
-                                        
-                                        <h6 class="font-mid">Upload Here Your Proof of Address Document</h6>
-                                        <div class="upload-box">
-                                            <div class="upload-zone document_proof_of_address">
-                                                <div class="dz-message" data-dz-message>
-                                                    <span class="dz-message-text">{{__('Drag and drop file')}}</span>
-                                                    <span class="dz-message-or">{{__('or')}}</span>
-                                                    <button type="button" class="btn btn-primary">{{__('Select')}}</button>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="document_proof_of_address"/>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
                             <div class="gaps-3x"></div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -500,7 +441,7 @@ $has_sidebar = false;
                                         <div class="input-wrap">
                                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered date-picker" type="text" id="issue_date" name="issue_date"  data-format="alt"
-                                                value="{{ isset($user_kyc) ? $user_kyc->issue_date : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
+                                                value="{{ isset($user_kyc) ? _date($user_kyc->issue_date, 'd/m/Y') : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>
@@ -515,14 +456,15 @@ $has_sidebar = false;
                                         <div class="input-wrap">
                                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered date-picker" type="text" id="expire_date" name="expire_date" data-format="alt"
-                                                value="{{ isset($user_kyc) ? $user_kyc->expiration_date : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
+                                                value="{{ isset($user_kyc) ? _date($user_kyc->expiration_date,'d/m/Y') : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
                                         </div>
                                     </div>{{-- .input-item --}}
                                 </div>
                             </div>
+
                         </div>
-                        
                     </div>
+                 
                 @endif
 
 

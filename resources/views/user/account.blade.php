@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? 'success' : 'danger' }}">
+                                        <span class="badge badge-auto badge-md mt-2 badge-{{isset($user) && $user->mobile_verified_at != null ? 'success' : 'danger' }}">
                                             {{isset($user) && $user->mobile_verified_at != null ? __('Verified')  : __('Unverified') }} 
                                         </span>
                                     </div>
@@ -178,9 +178,18 @@
                                     <div class="input-wrap">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input class="input-bordered numerical" type="text" name="public-key" id="public-key" disabled value="{{$user->public_key}}">
+                                                <input class="input-bordered numerical clipboard-value" type="text" name="public-key" id="public-key" disabled value="{{$user->public_key}}">
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
+                                                <a href="javascript:void(0)" class="btn btn-auto btn-primary btn-outline clipboard" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                                                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3">
+                                               
                                                 <button type="submit" class="btn btn-primary col-md-2">{{__('Update Key')}}</button>
                                             </div>
                                         </div>
@@ -376,6 +385,7 @@
                     </form>
                 </div>
                 <div class="gaps-3x"></div>
+                <hr/>
                 <div class="gaps-3x"></div>
                 <div class="content-area card">
                     <div class="">
