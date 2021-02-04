@@ -28,97 +28,93 @@
         </ul>{{-- .nav-tabs-line --}}
         <div class="tab-content" id="profile-details">
             <div class="tab-pane fade show active" id="personal-data">
-                <form class="" action="{{ route('user.ajax.account.update') }}" method="POST" id="" autocomplete="off">
+                <form class="" action="{{ route('user.ajax.account.update') }}" method="POST"  autocomplete="off">
                     @csrf
-                    <input type="hidden" name="action_type" value="personal_data">
+                    <input type="hidden" name="action_type" value="update_name">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="input-item input-with-label">
                                 <label for="name" class="input-item-label">{{__('Display Name')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" type="text" id="name" name="name" required="required" placeholder="{{ __('First and Middle Name') }}" value="{{ $user->name }}" disabled>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-wrap">
-                                <button type="submit" class="btn btn-primary">{{__('Update Name')}}</button>
-                            </div>
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <label for="email" class="input-item-label">{{__('Email Address')}}</label>
-                                <div class="input-wrap">
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <input class="input-bordered" type="email" name="email" id="email" value="{{ $user->email}}">
+                                        <div class="col-md-6">
+                                            <input class="input-bordered" type="text" id="name" name="name" required="required" 
+                                            placeholder="{{ __('First and Middle Name') }}" value="{{ $user->name }}">
                                         </div>
-                                        <div class="col-md-1">
-
-                                            <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
-                                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
-                                            </span>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-primary">{{__('Update Name')}}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <label for="mobile_code" class="input-item-label">{{__('Mobile Phone')}}</label>
-                                <div class="input-wrap">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <select class="select-bordered select-block" name="mobile_code" id="mobile_code" data-dd-class="search-on">
-                                                        <option value="">Select Code</option>
-                                                        @foreach ($mobileCode as $code)
-                                                        <option value="{{trim($code->phone_code)}}" {{trim($code->phone_code)==trim($user->mobile_code)?'selected':''}}>[{{$code->country_label}}] {{$code->phone_code}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input class="input-bordered" type="number" name="mobile" id="mobile" value="{{$user->mobile}}">
-                                                </div>
+                    </div>
+                    <hr/>
+                </form>
+                    
+                <div class="row">
+                    <form class="col-md-6" action="{{ route('user.ajax.account.update') }}" method="POST"  autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="action_type" value="update_email">
+                        <div class="input-item input-with-label">
+                            <label for="email" class="input-item-label">{{__('Email Address')}}</label>
+                            <div class="input-wrap">
+                                <div class="row">
+                                    <div class="col-md-9 pr-0">
+                                        <input class="input-bordered" type="email" name="email" id="email" value="{{ $user->email}}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="badge badge-auto badge-md mt-2 badge-{{isset($user) && $user->email_verified_at != null ? 'success' : 'danger' }}">
+                                            {{isset($user) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{__('Update Email')}}</button>
+                    </form>
+                    <form class="col-md-6" action="{{ route('user.ajax.account.update') }}" method="POST"  autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="action_type" value="update_mobile">
+                        <div class="input-item input-with-label">
+                            <label for="mobile_code" class="input-item-label">{{__('Mobile Phone')}}</label>
+                            <div class="input-wrap">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-6 pr-0">
+                                                <select class="select-bordered select-block" name="mobile_code" id="mobile_code" data-dd-class="search-on">
+                                                    <option value="">Select Code</option>
+                                                    @foreach ($mobileCode as $code)
+                                                    <option value="{{trim($code->phone_code)}}" {{trim($code->phone_code)==trim($user->mobile_code)?'selected':''}}>[{{$code->country_label}}] {{$code->phone_code}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 pl-0 pr-0">
+                                                <input class="input-bordered numerical" type="text" name="mobile" id="mobile" value="{{$user->mobile}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                            <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? 'success' : 'danger' }}">
-                                                {{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? __('Verified')  : __('Unverified') }} 
-                                            </span>
-                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->mobile_verified_at) && $user->mobile_verified_at != null ? 'success' : 'danger' }}">
+                                            {{isset($user) && $user->mobile_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <div class="input-wrap">
-                                    <button type="submit" class="btn btn-primary">{{__('Update Email')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-item input-with-label">
-                                <div class="input-wrap">
-                                    <button type="submit" class="btn btn-primary">{{__('Update Mobile Phone')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr/>
+                        <button type="submit" class="btn btn-primary">{{__('Update Mobile Phone')}}</button>
+                    </form>
+                </div>
+                <hr/>
+                
+                <form class="" action="{{ route('user.ajax.account.update') }}" method="POST"  autocomplete="off">
+                    @csrf
+                    <input type="hidden" name="action_type" value="update_password">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-item input-with-label">
-                                <label for="old-pass" class="input-item-label required">{{__('Current Password')}}</label>
+                                <label for="old-pass" class="input-item-label">{{__('Current Password')}}</label>
                                 <div class="input-wrap">
                                     <input class="input-bordered" type="password" name="old-password" id="old-pass" required="required">
                                 </div>
@@ -130,7 +126,7 @@
                             <div class="input-item input-with-label">
                                 <label for="new-pass" class="input-item-label">{{__('New Password')}}</label>
                                 <div class="input-wrap">
-                                    <input class="input-bordered" id="new-pass" type="password" name="new-password" {{--required="required"--}} minlength="6">
+                                    <input class="input-bordered" id="new-pass" type="password" name="new-password" {{--required="required"--}} minlength="6" required>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +134,7 @@
                             <div class="input-item input-with-label">
                                 <label for="confirm-pass" class="input-item-label">{{__('Confirm New Password')}}</label>
                                 <div class="input-wrap">
-                                    <input id="confirm-pass" class="input-bordered" type="password" name="re-password" data-rule-equalTo="#new-pass" data-msg-equalTo="Password not match." {{--required="required"--}} minlength="6">
+                                    <input id="confirm-pass" class="input-bordered" type="password" name="re-password" data-rule-equalTo="#new-pass" data-msg-equalTo="Password not match." {{--required="required"--}} minlength="6" required>
                                 </div>
                             </div>
                         </div>
@@ -158,8 +154,10 @@
                     </div>
                     <div class="gaps-1x"></div>
                     <hr/>
-                    
-                    
+                </form>                    
+                <form class="" action="{{ route('user.ajax.account.update') }}" method="POST"  autocomplete="off">
+                    @csrf
+                    <input type="hidden" name="action_type" value="update_public_key">
                     <div class="content-area card">
                         <div class="card-head">
                             <h4 class="card-title">{!! __('Public Key') !!}</h4>
@@ -174,25 +172,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-9">
                                 <div class="input-item input-with-label">
                                     <label for="old-pass" class="input-item-label">{{__('Public Key')}}</label>
                                     <div class="input-wrap">
-                                        <input class="input-bordered" type="number" name="public-key" id="public-key">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input class="input-bordered numerical" type="text" name="public-key" id="public-key" disabled value="{{$user->public_key}}">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-primary col-md-2">{{__('Update Key')}}</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-wrap">
-                                    <button type="submit" class="btn btn-primary">{{__('Update Key')}}</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </form>
+            </div>
 
-                </form>{{-- form --}}
-
-            </div>{{-- .tab-pane --}}
             <div class="tab-pane fade" id="KYC">
                 {{--@section('title', __('KYC Verification'))--}}
                 <div class="page-header page-header-kyc">

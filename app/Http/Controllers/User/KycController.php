@@ -144,38 +144,7 @@ class KycController extends Controller
         // return view('user.kyc_application', compact('user_kyc', 'countries', 'title', 'setting'));
 
 
-        if (isset(Auth::user()->kyc_info->status)) {
-            if (Auth::user()->kyc_info->status == 'pending') {
-                return redirect()->route('user.kyc')->with(['info' => __('messages.kyc.wait')]);
-            }
-        }
-        $countries = \IcoHandler::getCountries();
-        $user_kyc = Auth::user()->kyc_info;
-        if ($user_kyc == null) {
-            $user_kyc = new KycIdentity();
-        }
-        $title = KycIdentity::documents();
-        $setting = [
-            "kyc_firstname"=>"",
-            "kyc_lastname" =>"",
-            "kyc_gender"=>"",
-            "kyc_country_birth"=>"",
-            "kyc_birthPlace"=>"",
-            "kyc_nationality"=>"",
-            "kyc_nationalityId"=>"",
-            "kyc_country"=>"",
-            "kyc_state"=>"",
-            "kyc_city"=>"",
-            "kyc_zip"=>"",
-            "kyc_address1"=>"",
-            "kyc_address2"=>"",
-            "kyc_Floor"=>"",
-        ];
-        foreach ($setting as $key=>$val){
-            $setting[$key] = json_decode(Setting::getValue($key));
-        }
-        
-        return view('user.kyc_application', compact('user_kyc', 'countries', 'title', 'setting'));
+       
     }
 
     /**

@@ -91,6 +91,18 @@ $(document).ready(function() {
         if (this.value == "NaN" || this.value == "") this.value = 0;
     });
 
+    $(".numerical").on("keydown", function(e) {
+        var keycode = (event.which) ? event.which : event.keyCode;
+        if (e.shiftKey == true || e.ctrlKey == true) return false;
+        if ([8, 39, 37, 46].indexOf(keycode) >= 0 || // allow tab, dot, left and right arrows, delete keys
+            (keycode >= 48 && keycode <= 57) || // allow numbers
+            (keycode >= 96 && keycode <= 105)) { // allow numpad numbers
+            return true;
+        } else {
+            return false;
+        }
+    });
+
     // percent numerical input
     $('.percent').on("keydown", function(e) {
         var keycode = (event.which) ? event.which : event.keyCode;

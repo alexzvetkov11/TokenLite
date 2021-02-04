@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\KycIdentity;
+use App\Models\KycResidency;
 use App\Models\IcoStage;
 use App\Models\UserMeta;
 use App\Models\MobileCode;
@@ -31,6 +32,9 @@ use PragmaRX\Google2FA\Google2FA;
 use App\Notifications\PasswordChange;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+
+use App\Models\Setting;
+use App\Notifications\KycStatus;
 
 class UserController extends Controller
 {
@@ -76,6 +80,12 @@ class UserController extends Controller
 
         $countries = $this->handler->getCountries();
         $user = Auth::user();
+        
+        if (!isset($user->public_key) || strlen($user->public_key)!=4 ){
+            $key = strval(rand(0,9)).strval(rand(0,999));
+            $user->public_key = $key;
+            $user->save();
+        }
         $userMeta = UserMeta::getMeta($user->id);
 
         $g2fa = new Google2FA();
@@ -92,8 +102,48 @@ class UserController extends Controller
 
     public function compliance(){
         $user = Auth::user();
-        $kycIdenty = KycIdentity::where('user_id', $user->id)->first();
-        return view('user.compliance', compact('kycIdenty'));
+        $kyci = KycIdentity::where('user_id', $user->id)->first();
+        $kycr = KycResidency::where('user_id', $user->id)->first();
+        $countries = $this->handler->getCountries();
+        return view('user.compliance', compact('kyci', 'kycr', 'countries'));
+    }
+    public function user_identity(){
+        if (isset(Auth::user()->kyc_info->status)) {
+            if (Auth::user()->kyc_info->status == 'pending') {
+                return redirect()->route('user.kyc')->with(['info' => __('messages.kyc.wait')]);
+            }
+        }
+        $countries = \IcoHandler::getCountries();
+        $user_kyc = Auth::user()->kyc_info;
+        if ($user_kyc == null) {
+            $user_kyc = new KycIdentity();
+        }
+        $title = KycIdentity::documents();
+        $setting = [
+            "kyc_firstname"=>"",
+            "kyc_lastname" =>"",
+            "kyc_gender"=>"",
+            "kyc_country_birth"=>"",
+            "kyc_birthPlace"=>"",
+            "kyc_nationality"=>"",
+            "kyc_nationalityId"=>"",
+            "kyc_country"=>"",
+            "kyc_state"=>"",
+            "kyc_city"=>"",
+            "kyc_zip"=>"",
+            "kyc_address1"=>"",
+            "kyc_address2"=>"",
+            "kyc_Floor"=>"",
+        ];
+        foreach ($setting as $key=>$val){
+            $setting[$key] = json_decode(Setting::getValue($key));
+        }
+        return view('user.user_identity', compact('user_kyc', 'countries', 'title', 'setting'));
+    }
+    public function user_residency(){
+        $user = Auth::user();
+        $kycr = KycResidency::where('user_id', $user->id)->first();
+        return view('user.user_residency', compact('kycr'));
     }
     /**
      * Show the user account activity page.
@@ -173,7 +223,6 @@ class UserController extends Controller
      */
     public function account_update(Request $request)
     {
-//        dd($request->all());
         $type = $request->input('action_type');
         $ret['msg'] = 'info';
         $ret['message'] = __('messages.nothing');
@@ -410,8 +459,8 @@ class UserController extends Controller
                 $ret['message'] = __('messages.update.warning');
             }
         }
-        if ($type == 'pwd_change') {
-            dd($request->all());
+        if ($type == 'update_password') {
+            
             //validate data
             $validator = Validator::make($request->all(), [
                 'old-password' => 'required|min:6',
@@ -487,6 +536,86 @@ class UserController extends Controller
                     $ret['msg'] = 'warning';
                     $ret['message'] = __('Please enter a valid authentication code!');
                 }
+            }
+        }
+
+        if ( $type=='update_name'){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+            ]);
+            if ($validator->fails()) {
+                
+                $ret['msg'] = 'warning';
+                $ret['message'] = __('messages.form.wrong');
+                return response()->json($ret);
+            } else {
+                $user = User::FindOrFail(Auth::id());
+                $user->name = $request->input('name');
+                $user_saved = $user->save();
+                if ($user_saved) {
+                    $ret['msg'] = 'success';
+                    $ret['message'] = __('messages.update.success', ['what' => 'Name']);
+                } else {
+                    $ret['msg'] = 'warning';
+                    $ret['message'] = __('messages.update.warning');
+                }
+            }
+        }
+        if ( $type=='update_email'){
+            // $validator = Validator::make($request->all(), [
+            //     'email' => 'required',
+            // ]);
+            // if ($validator->fails()) {
+            //     $ret['msg'] = 'warning';
+            //     $ret['message'] = __('messages.form.wrong');
+            //     return response()->json($ret);
+            // } else {
+                $user = User::FindOrFail(Auth::id());
+                $user->email = $request->input('email');
+                $user_saved = $user->save();
+                if ($user_saved) {
+                    $ret['msg'] = 'success';
+                    $ret['message'] = __('messages.update.success', ['what' => 'Email']);
+                } else {
+                    $ret['msg'] = 'warning';
+                    $ret['message'] = __('messages.update.warning');
+                }
+            // }
+        }
+        if ($type=='update_mobile'){
+            // $validator = Validator::make($request->all(), [
+            //     'mobile' => 'required',
+            //     'mobile_code' => 'required',
+            // ]);
+            // if ($validator->fails()) {
+            //     $ret['msg'] = 'warning';
+            //     $ret['message'] = __('messages.form.wrong');
+            //     return response()->json($ret);
+            // } else {
+                $user = User::FindOrFail(Auth::id());
+                $user->mobile_code = $request->input('mobile_code');
+                $user->mobile= $request->input('mobile');
+                $user_saved = $user->save();
+                if ($user_saved) {
+                    $ret['msg'] = 'success';
+                    $ret['message'] = __('messages.update.success', ['what' => 'Phone']);
+                } else {
+                    $ret['msg'] = 'warning';
+                    $ret['message'] = __('messages.update.warning');
+                }
+            // }
+        }
+        if ( $type=='update_public_key'){
+            $user = User::FindOrFail(Auth::id());
+            $key = strval(rand(0,9)) . strval(rand(0,999));
+            $user->public_key = $key;
+            $user_saved = $user->save();
+            if ($user_saved) {
+                $ret['msg'] = 'success';
+                $ret['message'] = __('messages.update.success', ['what' => 'Public Key']);
+            } else {
+                $ret['msg'] = 'warning';
+                $ret['message'] = __('messages.update.warning');
             }
         }
 

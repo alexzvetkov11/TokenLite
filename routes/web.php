@@ -56,6 +56,8 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/', 'User\UserController@index')->name('home');
     Route::get('/account', 'User\UserController@account')->name('account');
     Route::get('/compliance', 'User\UserController@compliance')->name('compliance');
+    Route::get('/compliance/identity/details', 'User\UserController@user_identity')->name('identity.details');
+    Route::get('/compliance/residency/details', 'User\UserController@user_residency')->name('residency.details');
     
     Route::get('/account/activity', 'User\UserController@account_activity')->name('account.activity');
     Route::get('/contribute', 'User\TokenController@index')->name('token');
@@ -74,6 +76,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
     Route::get('/addentities', 'User\EntitiesController@add_entities')->name('addentities');
 
+    
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
