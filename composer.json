@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3|^8.0",
         "ext-json": "*",
+        "aws/aws-sdk-php": "^3.173",
         "coinbase/coinbase-commerce": "^1.0",
         "coingate/coingate-php": "^3.0",
         "fideloper/proxy": "^4.0",
@@ -34,7 +35,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": ["laravel/dusk"]
         }
     },
     "autoload": {
@@ -50,7 +51,7 @@
         "psr-4": {
             "Tests\\": "tests/"
         },
-        "files" : ["app/Helpers/functions.php"]
+        "files": ["app/Helpers/functions.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

@@ -81,9 +81,7 @@ $space = "&nbsp;";
                                                 {{ $kyc->notes }}
                                                 {{-- <textarea class="input-bordered " type="text">{{ $kyc->notes }}</textarea> --}}
                                             </div>
-                                            <div class="col-md-4">
-                                                <button class="col-md-4 btn btn-primary">{{__('CHange')}}</button>
-                                            </div>
+                                          
                                         </div>
                                     </div>
                                 </div>
