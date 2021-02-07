@@ -19,9 +19,9 @@ $has_sidebar = false;
         @include('layouts.messages')
         <div class="<!--kyc-form-steps--> card mx-lg-4">
             <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
-            <form class="<!--validate-modern-->" action="{{ route('user.ajax.kyc.submit') }}" method="POST" id="<!--kyc_submit-->">
+            <form action="{{ route('user.ajax.kyc.submit') }}" method="POST" >
+                <input type="hidden" name="type" value="identity">
                 @csrf
-                
                 @php
                     $option =  $defaultDoc = $defaultImg = ''; $wallets = array();
                     $wallet = field_value_text('kyc_wallet_opt', 'wallet_opt');
@@ -375,52 +375,6 @@ $has_sidebar = false;
                                             <div class="mx-md-4">
                                                 <img width="160" class="_image"
                                                     src="{{ asset('assets/images/vector-'.$defaultImg.'.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-upload doc-upload-d2{{ (isset($default_docs['doc']) && $default_docs['doc'] == 'nidcard') ? '' : ' hide' }}">
-                                    <h6 class="font-mid">{{ __('Upload Here Your National ID Back Side') }}</h6>
-                                    <div class="row align-items-center">
-                                        <div class="col-sm-8">
-
-                                            <div class="upload-box">
-                                                <div class="upload-zone document_two">
-                                                    <div class="dz-message" data-dz-message>
-                                                        <span class="dz-message-text">{{__('Drag and drop file')}}</span>
-                                                        <span class="dz-message-or">{{__('or')}}</span>
-                                                        <button type="button" class="btn btn-primary">{{__('Select')}}</button>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="document_two"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 d-none d-sm-block">
-                                            <div class="mx-md-4">
-                                                <img width="160" src="{{  asset('assets/images/vector-id-back.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sap sap-gap"></div>
-                                <div class="doc-upload doc-upload-d3">
-                                    <h6 class="font-mid">{{__('Upload a selfie as a Photo Proof while holding document in your hand')}}</h6>
-                                    <div class="row align-items-center">
-                                        <div class="col-sm-8">
-                                            <div class="upload-box">
-                                                <div class="upload-zone document_upload_hand">
-                                                    <div class="dz-message" data-dz-message>
-                                                        <span class="dz-message-text">{{__('Drag and drop file')}}</span>
-                                                        <span class="dz-message-or">{{__('or')}}</span>
-                                                        <button type="button" class="btn btn-primary">{{__('Select')}}</button>
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="document_image_hand"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4 d-none d-sm-block">
-                                            <div class="mx-md-4">
-                                                <img width="160" src="{{ asset('assets/images/vector-hand.png') }}" alt="">
                                             </div>
                                         </div>
                                     </div>

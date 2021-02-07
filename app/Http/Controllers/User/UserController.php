@@ -141,9 +141,17 @@ class UserController extends Controller
         return view('user.user_identity', compact('user_kyc', 'countries', 'title', 'setting'));
     }
     public function user_residency(){
+        if (isset(Auth::user()->kyc_info->status)) {
+            if (Auth::user()->kyc_info->status == 'pending') {
+                return redirect()->route('user.kyc')->with(['info' => __('messages.kyc.wait')]);
+            }
+        }
         $user = Auth::user();
+        $countries = $this->handler->getCountries();
+        $title = KycResidency::documents();
         $kycr = KycResidency::where('user_id', $user->id)->first();
-        return view('user.user_residency', compact('kycr'));
+
+        return view('user.user_residency', compact('kycr', 'countries', 'title'));
     }
     /**
      * Show the user account activity page.

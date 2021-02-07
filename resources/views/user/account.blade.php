@@ -90,7 +90,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 pl-0 pr-0">
+                                            <div class="col-md-6 pl-1 pr-0">
                                                 <input class="input-bordered numerical" type="text" name="mobile" id="mobile" value="{{$user->mobile}}">
                                             </div>
                                         </div>

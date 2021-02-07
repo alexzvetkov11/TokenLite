@@ -12,6 +12,7 @@ use Auth;
 use Validator;
 use App\Models\KYC;
 use App\Models\KycIdentity;
+use App\Models\KycResidency;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\KycStatus;
@@ -21,33 +22,19 @@ class KycController extends Controller
 {
     public function index(Request $request, $status = '')
     {
-        // $per_page   = gmvl('kyc_per_page', 10);
-        // $ordered    = gmvl('kyc_ordered', 'DESC');
+        if ( $status == "identity"){
 
-        // $kycs = KYC::when($status, function($q) use ($status){
-        //     $q->where('status', $status);
-        // })->orderBy('created_at',  $ordered)->paginate($per_page);
+        } else if ( $status == "residency"){
 
-        // if($request->s){
-        //     $kycs = KYC::AdvancedFilter($request)
-        //                 ->orderBy('id', $ordered)->paginate($per_page);
-        // }
+        }
+    }
 
-        // if ($request->filter) {
-        //     $kycs = KYC::AdvancedFilter($request)
-        //                 ->orderBy('id', $ordered)->paginate($per_page);
-        // }
-
-        // $is_page = (empty($status) ? 'all' : $status);
-        // $pagi = $kycs->appends(request()->all());
-        // return view('admin.kycs', compact('kycs', 'is_page', 'pagi'));
-
-
-
+    public function identity(Request $request, $status='')
+    {
         $per_page   = gmvl('kyci_per_page', 10);
         $ordered    = gmvl('kyci_ordered', 'DESC');
         $order_by = gmvl('kyci_order_by', 'id');
-        
+
         $per_page =100000;
         $kyci = KycIdentity::when($status, function($q) use ($status){
             $q->where('status', $status);
@@ -63,9 +50,36 @@ class KycController extends Controller
 
         $is_page = (empty($status) ? 'all' : $status);
         $pagi = $kyci->appends(request()->all());
-       
+
         return view('admin.kyc-identity', compact('kyci', 'is_page', 'pagi'));
     }
+
+
+    public function residency(Request $request, $status='')
+    {
+        $per_page   = gmvl('kycr_per_page', 10);
+        $ordered    = gmvl('kycr_ordered', 'DESC');
+        $order_by = gmvl('kycr_order_by', 'id');
+
+        $per_page =100000;
+        $kycr = KycResidency::when($status, function($q) use ($status){
+            $q->where('status', $status);
+        })->orderBy($order_by,  $ordered)->paginate($per_page);
+
+        if($request->s){
+            $kycr = KycResidency::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
+        }
+
+        if ($request->filter) {
+            $kycr = KycResidency::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
+        }
+
+        $is_page = (empty($status) ? 'all' : $status);
+        $pagi = $kycr->appends(request()->all());
+
+        return view('admin.kyc-residency', compact('kycr', 'is_page', 'pagi'));
+    }
+
 
     /**
      * Show the KYC Images
@@ -111,13 +125,15 @@ class KycController extends Controller
      */
     public function show($id = '', $type = '')
     {
-        if ($type == 'kyc_details') {
+        if ($type == 'identity') {
             if ($id == '') {
                 return __('messages.wrong');
             } else {
                 $kyc = KycIdentity::where('id', $id)->first();
                 return view('admin.kyc_details', compact('kyc'))->render();
             }
+        } else if ( $type=='residency'){
+            print("here");
         }
     }
 
@@ -237,7 +253,7 @@ class KycController extends Controller
                 $old_note = $kyc->notes != null ? $kyc->notes : '';
                 $save_note = $request->input('notes') != '' ? str_replace("\n", "<br>", $request->input('notes')) : $old_note;
                 if ($request->input('status') == 'rejected') {
-                    $save_note = !isset($request->notes) ? 'In our verification process, we found information incorrect. It would great if you resubmit the form. If face problem in submission please contact us with support team' : strip_tags($save_note);
+                    $save_note = !isset($request->notes) ? 'In our verification process, we found information incorrect. It would great if you re    the form. If face problem in submission please contact us with support team' : strip_tags($save_note);
                 }
                 if ($kyc) {
                     $kyc->status = $request->input('status');

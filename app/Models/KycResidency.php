@@ -113,18 +113,18 @@ class KycResidency extends Model
     //     }
     // }
 
-    // public static function documents($name=null)
-    // {
-    //     $names = [
-    //         'passport' => __('Passport'),
-    //         'nidcard' => __('National ID Card'),
-    //         'driving' => __('Driver’s License'),
-    //     ];
-    //     if($name) {
-    //         return isset($names[$name]) ? $names[$name] : null;
-    //     }
-    //     return $names;
-    // }
+    public static function documents($name=null)
+    {
+        $names = [
+            'passport' => __('Passport'),
+            'nidcard' => __('National ID Card'),
+            'driving' => __('Driver’s License'),
+        ];
+        if($name) {
+            return isset($names[$name]) ? $names[$name] : null;
+        }
+        return $names;
+    }
     /**
      * Search/Filter parametter exchnage with database value
      *

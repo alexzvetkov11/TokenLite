@@ -157,6 +157,15 @@ class KycController extends Controller
      */
     public function submit(Request $request)
     {
+        dd($request->all());
+        if ( $request->type=="identity"){
+
+        } else if ( $request->type=="residency"){
+
+        } else{
+            
+        }
+        
 //        dd($request->all());
         $type = $request->documentType;
         $validator = Validator::make($request->all(), KYC::rules(), [

@@ -58,7 +58,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/compliance', 'User\UserController@compliance')->name('compliance');
     Route::get('/compliance/identity/details', 'User\UserController@user_identity')->name('identity.details');
     Route::get('/compliance/residency/details', 'User\UserController@user_residency')->name('residency.details');
-    
+
     Route::get('/account/activity', 'User\UserController@account_activity')->name('account.activity');
     Route::get('/contribute', 'User\TokenController@index')->name('token');
     Route::get('/contribute/cancel/{gateway?}', 'User\TokenController@payment_cancel')->name('payment.cancel');
@@ -76,7 +76,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
     Route::get('/addentities', 'User\EntitiesController@add_entities')->name('addentities');
 
-    
+
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
         Route::post('/account/wallet-form', 'User\UserController@get_wallet_form')->name('account.wallet');
@@ -113,7 +113,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/entity/user-entity-type/{id}', 'Admin\EntityController@typedetail')->middleware(['ico', 'super_admin'])->name('entity.typedetail');
     Route::get('/entity/view-detail/{id}', 'Admin\EntityController@viewDetail')->middleware(['ico', 'super_admin'])->name('entity.viewDetail');
     Route::get('/entity/activation/{id}/{act}', 'Admin\EntityController@activation')->middleware(['ico', 'super_admin'])->name('entity.activation');
-    
+
     Route::get('/articles', 'Admin\ArticlesController@index')->middleware(['ico', 'super_admin'])->name('articles');
     Route::get('/articles/detail/{article_id}', 'Admin\ArticlesController@article_detail')->middleware(['ico', 'super_admin'])->name('articles.detail');
 
@@ -124,11 +124,22 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     Route::get('/users/{role?}', 'Admin\UsersController@index')->middleware('ico')->name('users'); //v1.1.0
     Route::get('/users/delete/{user_id}', 'Admin\UsersController@delete_users')->name('delete_users'); //v1.1.0
     Route::get('/users/wallet/change-request', 'Admin\UsersController@wallet_change_request')->middleware('ico')->name('users.wallet.change');
-    Route::get('/kyc-list/{status?}', 'Admin\KycController@index')->middleware('ico')->name('kycs'); //v1.1.0
+
+    Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
+    Route::get('/kyc-residency/{status?}', 'Admin\KycController@residency')->middleware('ico')->name('kycs.residency');
+    // Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
+    // Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
+
+    Route::get('/kyc/view/identity/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.identity');
+    Route::get('/kyc/view/residency/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.residency');
+
+
     Route::get('/kyc-list/documents/{file}/{doc}', 'Admin\KycController@get_documents')->middleware('ico')->name('kycs.file');
     Route::get('/transactions/view/{id}', 'Admin\TransactionController@show')->name('transactions.view');
     Route::get('/users/{id?}/{type?}', 'Admin\UsersController@show')->name('users.view');
-    Route::get('/kyc/view/{id}/{type}', 'Admin\KycController@show')->name('kyc.view');
+
+
+
     Route::get('/pages/{slug}', 'Admin\PageController@edit')->middleware('ico')->name('pages.edit');
     Route::get('/export/{table?}/{format?}', 'ExportController@export')->middleware(['ico', 'demo_user', 'super_admin'])->name('export'); // v1.1.0
     Route::get('/languages', 'Admin\LanguageController@index')->middleware(['ico'])->name('lang.manage'); // v1.1.3
@@ -177,7 +188,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
         Route::Post('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
         Route::post('/article/new_add', 'Admin\ArticlesController@newAdd')->middleware(['ico', 'demo_user'])->name('article.new');
-        
+
         Route::Post('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
         Route::post('/article/edit', 'Admin\ArticlesController@editArticle')->middleware(['ico', 'demo_user'])->name('article.edit');
 
@@ -194,10 +205,10 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
 
         Route::post('/add_entity/add', 'Admin\EntityController@addEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.addinitial');
         Route::post('/edit_entity/edit', 'Admin\EntityController@editEntityInitial')->middleware(['ico', 'demo_user'])->name('entype.editinitial');
-        
+
         Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
-        
-        
+
+
     });
 
     //Clear Cache facade value:

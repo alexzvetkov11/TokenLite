@@ -30,7 +30,7 @@
             </li>
         </ul>
         <div class="tab-content" id="tabs">
-            <div class="tab-pane fade show active" id="identity">
+            <div class="tab-pane fade " id="identity">
                 <div class="justify-content-between d-flex">
                     <div class="col-md-3">
                         <div class="row">
@@ -87,7 +87,7 @@
                 </ul>
                 
             </div>
-            <div class="tab-pane fade " id="residency">
+            <div class="tab-pane fade show active" id="residency">
                 <div class="justify-content-between d-flex">
                     <div class="col-md-3 pt-2">
                         <div class="row">
@@ -108,7 +108,7 @@
                 <div class="gaps-3x"></div>
                 <h6 class="card-sub-title">{{__('Residency Detail') }}</h6>
                 <div class="gaps-1x"></div>
-                <ul class="data-details-list">
+                <ul class="data-details-list" style="border: 0px solid #d2dde9">
                     <li>
                         <div class="data-details-head text-primary col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Current Residency')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">&nbsp; </div>
@@ -163,7 +163,7 @@
                     </li>
                     <li>
                         <div class="data-details-head col-md-4"  style="border-bottom: 1px solid #d2dde9">{{__('Date of De-registration')}}</div>
-                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kycr) ? _date($kycr->country_residence_previous_deregistration_date, 'm-Y')  : '&nbsp;' !!}</div>
+                        <div class="data-details-des col-md-8" style="border-bottom: 1px solid #d2dde9; border-left: 0px">{!! isset($kycr) ? _date($kycr->country_residence_previous_deregistration_date, 'm-Y')  : '&nbsp;' !!}</div>
                     </li>
                 </ul>
                 <div class="gaps-3x"></div>
@@ -208,14 +208,15 @@
                         @endif
                     </li>
                 </ul>
-                <ul class="data-details-list">
+                <ul class="data-details-list" style="border: 0px solid #d2dde9">
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9;">{{__('Residency Verification Document – Type')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kycr) ? _x($kycr->document_type) : '&nbsp;' !!}</div>
                     </li>
                     <li>
-                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Residency Verification Document – Date of Issuance')}}</div>
-                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kycr) ? _date($kycr->document_issue_date, 'd-m-Y') : '&nbsp;' !!}</div>
+                        <div class="data-details-head col-md-4" style="border-bottom: 0px solid #d2dde9">{{__('Residency Verification Document – Date of Issuance')}}</div>
+                        <div class="data-details-des col-md-8" style="border-bottom: 0px solid #d2dde9; border-left: 0px">{!! isset($kycr) ? _date($kycr->document_issue_date, 'd-m-Y') : '&nbsp;' !!}</div>
+                        {{-- <div class="data-details-des col-md-8" style="border-bottom: 1px solid #d2dde9; border-left: 0px">{!! $kyci->nationality_id ? $kyci->nationality_id : '&nbsp;' !!}</div> --}}
                     </li>
                 </ul>
                 <hr/>

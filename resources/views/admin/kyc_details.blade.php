@@ -12,10 +12,10 @@ $space = "&nbsp;";
                     <h4 class="card-title mb-0">KYC Information > Identity > <span>{{ _x($kyc->first_middle_names).' '._x($kyc->last_name) }}</h4>
                     <div class="d-flex align-items-center guttar-20px">
                         <div class="flex-col d-sm-block d-none">
-                            <a href="{{ route('admin.kycs') }}" class="btn btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left mr-3"></em>Back</a>
+                            <a href="{{ route('admin.kycs.identity') }}" class="btn btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left mr-3"></em>Back</a>
                         </div>
                         <div class="flex-col d-sm-none">
-                            <a href="{{ route('admin.kycs') }}" class="btn btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
+                            <a href="{{ route('admin.kycs.identity') }}" class="btn btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
                         </div>
                         <div class="relative d-inline-block">
                             <a href="#" class="btn btn-dark btn-sm btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
@@ -65,7 +65,7 @@ $space = "&nbsp;";
                     </div>
                     @endif
                     <div class="fake-class">
-                        <span class="badge badge-md badge-{{ __status($kyc->status,'status')}} ucap">{{ __status($kyc->status,'text') }}</span>
+                        <span class="badge badge-md badge-{{ __status($kyc->status,'status')}} ucap">{{ __status($kyc->status, 'text') }}</span>
                     </div>
                     @if($kyc->notes !== NULL)
                     <div class="gaps-2x w-100 d-none d-md-block"></div>

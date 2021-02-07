@@ -71,7 +71,8 @@ $base_cur = base_currency();
                                         <span class="tile-recent-text">since last week</span>
                                     </div>
                                     <div class="tile-link">
-                                        <a href="{{ route('admin.kycs') }}" class="link link-thin link-ucap link-dim">View</a>
+                                        {{-- <a href="{{ route('admin.kycs') }}" class="link link-thin link-ucap link-dim">View</a> --}}
+                                        <a href="#" class="link link-thin link-ucap link-dim">View</a>
                                     </div>
                                 </div>
                             </div>

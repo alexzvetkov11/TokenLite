@@ -8,9 +8,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3|^8.0",
+        "php": "^7.1.3",
         "ext-json": "*",
-        "aws/aws-sdk-php": "^3.173",
         "coinbase/coinbase-commerce": "^1.0",
         "coingate/coingate-php": "^3.0",
         "fideloper/proxy": "^4.0",
@@ -18,7 +17,12 @@
         "laravel/browser-kit-testing": "^5.1",
         "laravel/framework": "5.7.*",
         "laravel/socialite": "^4.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "paypal/rest-api-sdk-php": "*",
+        "pragmarx/google2fa": "^5.0",
+        "softnio/laravel-installer": "^1.0",
+        "softnio/qr-code-generator": "^1.0",
+        "stripe/stripe-php": "^6.40"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -35,7 +39,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": ["laravel/dusk"]
+            "dont-discover": []
         }
     },
     "autoload": {
@@ -51,7 +55,7 @@
         "psr-4": {
             "Tests\\": "tests/"
         },
-        "files": ["app/Helpers/functions.php"]
+        "files" : ["app/Helpers/functions.php"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

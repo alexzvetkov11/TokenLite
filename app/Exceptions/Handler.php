@@ -9,7 +9,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
-    //use \Softnio\LaravelInstaller\Helpers\MigrationsHelper;
+    use \Softnio\LaravelInstaller\Helpers\MigrationsHelper;
     /**
      * A list of the exception types that are not reported.
      *

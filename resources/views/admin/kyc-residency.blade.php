@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page) . ' KYC Identity')
+@section('title', ucfirst($is_page) . ' KYC Residency')
 
 
 @section('content')
@@ -13,14 +13,13 @@
                     <div class="card-head has-aside">
                         {{-- <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application
                         </h4> --}}
-                        <h4 class="card-title"> {{ __('KYC Applications: Identity') }}</h4>
+                        <h4 class="card-title"> {{ __('KYC Applications: Residency') }}</h4>
                         <div class="card-opt">
                             <ul class="btn-grp btn-grp-block guttar-20px">
                                 <li>
                                     <a href="javascript:void(0)" data-type="kyc_settings"
                                         class="btn btn-auto btn-sm btn-primary get_kyc">
-                                        <em class="ti ti-settings"></em><span>KYC <span
-                                                class="d-none d-md-inline-block">Form</span> Settings</span>
+                                        <em class="ti ti-settings"></em><span>KYC <span class="d-none d-md-inline-block">Form</span> Settings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -28,7 +27,6 @@
                     </div>
                     <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
-                          
                             <div class="search flex-grow-1 w-100 w-sm-auto">
                                 {{-- <form action="{{ route('admin.kycs') }}" method="GET" autocomplete="off"> --}}
                                 <div class="input-wrap">
@@ -57,10 +55,10 @@
                                                         <h6 class="dropdown-title">Export</h6>
                                                     </li>
                                                     <li><a
-                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_identity', 'format' => 'entire'], request()->all())) }}">Entire</a>
+                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_residency', 'format' => 'entire'], request()->all())) }}">Entire</a>
                                                     </li>
                                                     <li><a
-                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_identity', 'format' => 'minimal'], request()->all())) }}">Minimal</a>
+                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_residency', 'format' => 'minimal'], request()->all())) }}">Minimal</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -73,18 +71,15 @@
                                                     class="ti ti-settings"></em> </a>
                                             <div
                                                 class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
-                                                <form class="update-meta" action="#" data-type="kyci_page_meta">
-                                                   
+                                                <form class="update-meta" action="#" data-type="kycr_page_meta">
                                                     <ul class="dropdown-list">
                                                         <li>
                                                             <h6 class="dropdown-title">Order By</h6>
                                                         </li>
-                                                        <li {!! gmvl('kyci_order_by', 'created_at' )=='created_at'
-                                                            ? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kycr_order_by', 'created_at' )=='created_at' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="orderby=created_at">Submitted</a>
                                                         </li>
-                                                        <li {!! gmvl('kyci_order_by', 'updated_at' )=='updated_at'
-                                                            ? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kycr_order_by', 'updated_at' )=='updated_at'? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="orderby=updated_at">Updated</a>
                                                         </li>
                                                     </ul>
@@ -92,12 +87,10 @@
                                                         <li>
                                                             <h6 class="dropdown-title">Order</h6>
                                                         </li>
-                                                        <li {!! gmvl('kyci_ordered', 'DESC' )=='DESC' ? ' class="active"'
-                                                            : '' !!}>
+                                                        <li {!! gmvl('kycr_ordered', 'DESC' )=='DESC' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="ordered=DESC">DESC</a>
                                                         </li>
-                                                        <li {!! gmvl('kyci_ordered', 'DESC' )=='ASC' ? ' class="active"'
-                                                            : '' !!}>
+                                                        <li {!! gmvl('kycr_ordered', 'DESC' )=='ASC' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="ordered=ASC">ASC</a>
                                                         </li>
                                                     </ul>
@@ -111,8 +104,7 @@
                         </div>
 
                         <div class="search-adv-wrap hide">
-                            <form class="adv-search" id="adv-search" action="{{ route('admin.kycs.identity') }}" method="GET"
-                                autocomplete="off">
+                            <form class="adv-search" id="adv-search" action="{{ route('admin.kycs.residency') }}" method="GET" autocomplete="off">
                                 <div class="adv-search">
                                     <div class="row align-items-end guttar-20px guttar-vr-15px">
                                         <div class="col-sm-4 col-lg-2 col-mb-6">
@@ -149,7 +141,7 @@
 
                         @if (request()->get('filter') || request()->s)
                             <div class="search-adv-result">
-                                <div class="search-info">Found <span class="search-count">{{ $kyci->total() }}</span>
+                                <div class="search-info">Found <span class="search-count">{{ $kycr->total() }}</span>
                                     Applications.</div>
                                 <ul class="search-opt">
                                     @if (request()->get('search'))
@@ -172,7 +164,7 @@
                         @endif
                     </div>
 
-                    @if ($kyci->total() > 0)
+                    @if ($kycr->total() > 0)
                         <table class="data-table kyc-list">
                             <thead>
                                 <tr class="data-item data-head">
@@ -187,7 +179,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kyci as $kyc)
+                                @foreach ($kycr as $kyc)
                                     <tr class="data-item data-item-{{ $kyc->id }}">
                                         <td class="data-col dt-user">
                                             <span class="d-none">{{ $kyc->status }}</span>
@@ -195,12 +187,9 @@
                                                 class="lead user-name">{{ _x($kyc->first_middle_names) . ' ' . _x($kyc->last_name) }}</span>
                                             <span class="sub user-id">{{ set_id($kyc->user_id) }}</span>
                                         </td>
-
-
                                         <td class="data-col dt-email">
                                             <span class="sub sub-s2 sub-email">{{ $kyc->citizenship }}</span>
                                         </td>
-
                                         <td class="data-col dt-sbdate">
                                             <span class="sub sub-s2 sub-time">{{ _date($kyc->updated_at) }}</span>
                                         </td>
@@ -220,21 +209,21 @@
                                                 <div class="toggle-class dropdown-content dropdown-content-top-left">
                                                     <ul class="dropdown-list more-menu more-menu-{{ $kyc->id }}">
                                                         <li>
-                                                            <a href="{{route('admin.kyc.view.identity', [$kyc->id, 'identity'] ) }}">
+                                                            <a href="{{route('admin.kyc.view.residency', [$kyc->id, 'identity'] ) }}">
                                                                 <em class="ti ti-eye"></em> View Details
                                                             </a>
                                                         @if ($kyc->status != 'approved')
                                                             <a class="kyc_action kyc_approve" href="#"
                                                                     data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc">
                                                                     <em class="far fa-check-square"></em>Approve</a>
-                                                            
+
                                                         @endif
                                                         @if ($kyc->status != 'rejected')
                                                             <a href="javascript:void(0)"
                                                                     data-current="{{ __status($kyc->status, 'status') }}"
                                                                     data-id="{{ $kyc->id }}" class="kyc_reject">
                                                                     <em class="fas fa-ban"></em>Reject</a>
-                                                            
+
                                                         @endif
                                                         @if ($kyc->status == 'missing' || $kyc->status == 'rejected')
                                                             <a href="javascript:void(0)" data-id="{{ $kyc->id }}" class="kyc_delete">
