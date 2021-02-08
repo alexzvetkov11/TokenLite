@@ -17,6 +17,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\KycStatus;
 use App\Http\Controllers\Controller;
+use App\Models\KycTax;
 
 class KycController extends Controller
 {
@@ -60,7 +61,6 @@ class KycController extends Controller
         $per_page   = gmvl('kycr_per_page', 10);
         $ordered    = gmvl('kycr_ordered', 'DESC');
         $order_by = gmvl('kycr_order_by', 'id');
-
         $per_page =100000;
         $kycr = KycResidency::when($status, function($q) use ($status){
             $q->where('status', $status);
@@ -76,10 +76,29 @@ class KycController extends Controller
 
         $is_page = (empty($status) ? 'all' : $status);
         $pagi = $kycr->appends(request()->all());
-
         return view('admin.kyc-residency', compact('kycr', 'is_page', 'pagi'));
     }
+    public function tax(Request $request, $status='')
+    {
+        $per_page   = gmvl('kyct_per_page', 10);
+        $ordered    = gmvl('kyct_ordered', 'DESC');
+        $order_by = gmvl('kyct_order_by', 'id');
+        $per_page =100000;
+        $kyct = KycTax::when($status, function($q) use ($status){
+            $q->where('status', $status);
+        })->orderBy($order_by,  $ordered)->paginate($per_page);
 
+        if($request->s){
+            $kyct = KycTax::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
+        }
+
+        if ($request->filter) {
+            $kyct = KycTax::AdvancedFilter($request)->orderBy($order_by, $ordered)->paginate($per_page);
+        }
+        $is_page = (empty($status) ? 'all' : $status);
+        $pagi = $kyct->appends(request()->all());
+        return view('admin.kyc-tax', compact('kyct', 'is_page', 'pagi'));
+    }
 
     /**
      * Show the KYC Images
@@ -130,10 +149,22 @@ class KycController extends Controller
                 return __('messages.wrong');
             } else {
                 $kyc = KycIdentity::where('id', $id)->first();
-                return view('admin.kyc_details', compact('kyc'))->render();
+                return view('admin.kyci_details', compact('kyc'))->render();
             }
         } else if ( $type=='residency'){
-            print("here");
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycResidency::where('id', $id)->first();
+                return view('admin.kycr_details', compact('kyc'))->render();
+            }
+        } else if ( $type=='tax'){
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycTax::where('id', $id)->first();
+                return view('admin.kyct_details', compact('kyc'))->render();
+            }
         }
     }
 

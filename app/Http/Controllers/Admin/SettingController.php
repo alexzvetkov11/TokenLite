@@ -241,7 +241,7 @@ class SettingController extends Controller
         $is_saved = false;
 
         $type_key = 'default'; $is_page_meta = false;
-        if($type == 'tnx_page_meta' || $type == 'kyc_page_meta' || $type == 'user_page_meta' || $type == 'jurisdiction_page_meta' || 'entity_page_meta' || 'kyci_page_meta') {
+        if($type == 'tnx_page_meta' || $type == 'kyc_page_meta' || $type == 'user_page_meta' || $type == 'jurisdiction_page_meta' || 'entity_page_meta' || 'kyci_page_meta' || 'kycr_page_meta' || 'kyct_page_meta') {
             $type_key = str_replace('_page_meta', '', $type);
             $is_page_meta = true;
         }

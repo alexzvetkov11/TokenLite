@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', ucfirst($is_page) . ' KYC Residency')
+@section('title', ucfirst($is_page) . ' KYC Tax')
 
 
 @section('content')
@@ -13,7 +13,7 @@
                     <div class="card-head has-aside">
                         {{-- <h4 class="card-title">{{ ucfirst($is_page) }} KYC Application
                         </h4> --}}
-                        <h4 class="card-title"> {{ __('KYC Applications: Residency') }}</h4>
+                        <h4 class="card-title"> {{ __('KYC Applications: Tax') }}</h4>
                         <div class="card-opt">
                             <ul class="btn-grp btn-grp-block guttar-20px">
                                 <li>
@@ -32,8 +32,7 @@
                                 <div class="input-wrap">
                                     <span class="input-icon input-icon-left"><em class="ti ti-search"></em></span>
                                     <input type="search" class="input-solid input-transparent"
-                                        placeholder="Quick search with name/id" value="{{ request()->get('s', '') }}"
-                                        name="s" id="search_table">
+                                        placeholder="Quick search with name/id" name="s" id="search_table">
                                 </div>
                                 {{-- </form> --}}
                             </div>
@@ -55,10 +54,10 @@
                                                         <h6 class="dropdown-title">Export</h6>
                                                     </li>
                                                     <li><a
-                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_residency', 'format' => 'entire'], request()->all())) }}">Entire</a>
+                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_tax', 'format' => 'entire'], request()->all())) }}">Entire</a>
                                                     </li>
                                                     <li><a
-                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_residency', 'format' => 'minimal'], request()->all())) }}">Minimal</a>
+                                                            href="{{ route('admin.export', array_merge(['table' => 'kyc_tax', 'format' => 'minimal'], request()->all())) }}">Minimal</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -71,15 +70,15 @@
                                                     class="ti ti-settings"></em> </a>
                                             <div
                                                 class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
-                                                <form class="update-meta" action="#" data-type="kycr_page_meta">
+                                                <form class="update-meta" action="#" data-type="kyct_page_meta">
                                                     <ul class="dropdown-list">
                                                         <li>
                                                             <h6 class="dropdown-title">Order By</h6>
                                                         </li>
-                                                        <li {!! gmvl('kycr_order_by', 'created_at' )=='created_at' ? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kyct_order_by', 'created_at' )=='created_at' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="orderby=created_at">Submitted</a>
                                                         </li>
-                                                        <li {!! gmvl('kycr_order_by', 'updated_at' )=='updated_at'? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kyct_order_by', 'updated_at' )=='updated_at'? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="orderby=updated_at">Updated</a>
                                                         </li>
                                                     </ul>
@@ -87,10 +86,10 @@
                                                         <li>
                                                             <h6 class="dropdown-title">Order</h6>
                                                         </li>
-                                                        <li {!! gmvl('kycr_ordered', 'DESC' )=='DESC' ? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kyct_ordered', 'DESC' )=='DESC' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="ordered=DESC">DESC</a>
                                                         </li>
-                                                        <li {!! gmvl('kycr_ordered', 'DESC' )=='ASC' ? ' class="active"' : '' !!}>
+                                                        <li {!! gmvl('kyct_ordered', 'DESC' )=='ASC' ? ' class="active"' : '' !!}>
                                                             <a href="#" data-meta="ordered=ASC">ASC</a>
                                                         </li>
                                                     </ul>
@@ -104,7 +103,7 @@
                         </div>
 
                         <div class="search-adv-wrap hide">
-                            <form class="adv-search" id="adv-search" action="{{ route('admin.kycs.residency') }}" method="GET" autocomplete="off">
+                            <form class="adv-search" id="adv-search" action="{{ route('admin.kycs.tax') }}" method="GET" autocomplete="off">
                                 <div class="adv-search">
                                     <div class="row align-items-end guttar-20px guttar-vr-15px">
                                         <div class="col-sm-4 col-lg-2 col-mb-6">
@@ -141,7 +140,7 @@
 
                         @if (request()->get('filter') || request()->s)
                             <div class="search-adv-result">
-                                <div class="search-info">Found <span class="search-count">{{ $kycr->total() }}</span>
+                                <div class="search-info">Found <span class="search-count">{{ $kyct->total() }}</span>
                                     Applications.</div>
                                 <ul class="search-opt">
                                     @if (request()->get('search'))
@@ -164,14 +163,14 @@
                         @endif
                     </div>
 
-                    @if ($kycr->total() > 0)
+                    @if ($kyct->total() > 0)
                         <table class="data-table kyc-list">
                             <thead>
                                 <tr class="data-item data-head">
                                     <th class="data-col filter-data dt-user">{{ __('User') }}</th>
                                     {{-- <th class="data-col dt-doc-type">{{__('First & Middle Names')}}</th>
                                     <th class="data-col dt-doc-front">{{__('Last Name')}}</th> --}}
-                                    <th class="data-col filter-data dt-doc-back">{{ __('Current Residency') }}</th>
+                                    <th class="data-col filter-data dt-doc-back">{{ __('Primary Tax Residence') }}</th>
                                     <th class="data-col dt-sbdate">{{ __('Submitted') }}</th>
                                     <th class="data-col dt-sbdate">{{ __('Updated') }}</th>
                                     <th class="data-col dt-status">{{ __('Status') }}</th>
@@ -179,7 +178,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kycr as $kyc)
+                                @foreach ($kyct as $kyc)
                                     <tr class="data-item data-item-{{ $kyc->id }}">
                                         <td class="data-col dt-user">
                                             <span class="d-none">{{ $kyc->status }}</span>
@@ -188,7 +187,7 @@
                                             <span class="sub user-id">{{ set_id($kyc->user_id) }}</span>
                                         </td>
                                         <td class="data-col dt-email">
-                                            <span class="sub sub-s2 sub-email">{{ $kyc->country_residence_current }}</span>
+                                            <span class="sub sub-s2 sub-email">{{ $kyc->primary_residence }}</span>
                                         </td>
                                         <td class="data-col dt-sbdate">
                                             <span class="sub sub-s2 sub-time">{{ _date($kyc->created_at) }}</span>
@@ -197,10 +196,8 @@
                                             <span class="sub sub-s2 sub-time">{{ _date($kyc->updated_at) }}</span>
                                         </td>
                                         <td class="data-col dt-status" style="width:60px">
-                                            <span
-                                                class="dt-status-md badge badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ __status($kyc->status, 'text') }}</span>
-                                            <span
-                                                class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ substr(__status($kyc->status, 'text'), 0, 1) }}</span>
+                                            <span class="dt-status-md badge badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ __status($kyc->status, 'text') }}</span>
+                                            <span class="dt-status-sm badge badge-sq badge-outline badge-md badge-{{ __status($kyc->status, 'status') }}">{{ substr(__status($kyc->status, 'text'), 0, 1) }}</span>
                                         </td>
                                         <td class="data-col text-right" style="width:50px">
                                             <div class="relative d-inline-block">
@@ -209,28 +206,21 @@
                                                 <div class="toggle-class dropdown-content dropdown-content-top-left">
                                                     <ul class="dropdown-list more-menu more-menu-{{ $kyc->id }}">
                                                         <li>
-                                                            <a href="{{route('admin.kyc.view.residency', [$kyc->id, 'residency'] ) }}">
-                                                                <em class="ti ti-eye"></em> View Details
-                                                            </a>
-                                                        @if ($kyc->status != 'approved')
-                                                            <a class="kyc_action kyc_approve" href="#"
-                                                                    data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc">
+                                                            <a href="{{route('admin.kyc.view.tax', [$kyc->id, 'tax'] ) }}">
+                                                                <em class="ti ti-eye"></em> View Details</a>
+                                                            @if ($kyc->status != 'approved')
+                                                                <a class="kyc_action kyc_approve" href="#" data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc">
                                                                     <em class="far fa-check-square"></em>Approve</a>
-
-                                                        @endif
-                                                        @if ($kyc->status != 'rejected')
-                                                            <a href="javascript:void(0)"
-                                                                    data-current="{{ __status($kyc->status, 'status') }}"
-                                                                    data-id="{{ $kyc->id }}" class="kyc_reject">
+                                                            @endif
+                                                            @if ($kyc->status != 'rejected')
+                                                                <a href="javascript:void(0)" data-current="{{ __status($kyc->status, 'status') }}" data-id="{{ $kyc->id }}" class="kyc_reject">
                                                                     <em class="fas fa-ban"></em>Reject</a>
-
-                                                        @endif
-                                                        @if ($kyc->status == 'missing' || $kyc->status == 'rejected')
-                                                            <a href="javascript:void(0)" data-id="{{ $kyc->id }}" class="kyc_delete">
+                                                            @endif
+                                                            @if ($kyc->status == 'missing' || $kyc->status == 'rejected')
+                                                                <a href="javascript:void(0)" data-id="{{ $kyc->id }}" class="kyc_delete">
                                                                     <em class="fas fa-trash-alt"></em>Delete</a>
-                                                        @endif
-                                                    </li>
-
+                                                            @endif
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>

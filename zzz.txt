@@ -74,7 +74,7 @@
                         <div class="input-wrap">
                             {{-- style="text-transform:uppercase" --}}
                             <input
-                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} 
+                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }}
                                 class="input-bordered" type="text" name="first_name"
                                 value="{{ isset($user_kyc) ? $user_kyc->firstName : ''}}" id="first-name" >
                         </div>
@@ -91,7 +91,7 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
+                            <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}
                                 class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->lastName : ''}}"
                                 type="text" id="last-name" name="last_name">
                         </div>
@@ -141,7 +141,7 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <select {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }} 
+                            <select {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }}
                                 class="select-bordered select-block" name="gender" id="gender">
                                 <option value="">{{__('Select Gender')}}</option>
                                 <option
@@ -203,7 +203,7 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }} 
+                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }}
                             class="input-bordered date-picker-dob" type="text" name="place_of_birth" data-format="alt">
                         </div>
                     </div>{{-- .input-item --}}
@@ -214,7 +214,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="Nationality" class="input-item-label">
-                            {{__('Citizenship')}} 
+                            {{__('Citizenship')}}
                             @if (field_value('kyc_nationality', 'req'))
                                 <span class="text-require text-danger">*</span>
                             @endif
@@ -242,7 +242,7 @@
                             @endif
                         </label>
                         <div class="input-wrap">
-                            <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
+                            <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text"
                                 name="National Identification Number">
                         </div>
                     </div>{{-- .input-item --}}
@@ -291,7 +291,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="state" class="input-item-label">
-                            {{__('State / Province')}} 
+                            {{__('State / Province')}}
                             @if (field_value('kyc_state', 'req'))
                                 <span class="text-require text-danger">*</span>
                             @endif
@@ -326,7 +326,7 @@
                 <div class="col-md-6">
                     <div class="input-item input-with-label">
                         <label for="zip" class="input-item-label">
-                            {{__('Zip / Postal Code')}} 
+                            {{__('Zip / Postal Code')}}
                             @if (field_value('kyc_zip', 'req'))
                                 <span class="text-require text-danger">*</span>
                             @endif
@@ -566,7 +566,7 @@
                 <p class="text-secondary font-bold">{{__('To avoid delays with verification process, please double-check to ensure the below requirements are fully met:')}}</p>
                 <ul class="list-check">
                     <li>{{__('Document should be in good condition and clearly visible.')}}</li>
-                    <li>{{__('Document should be less than 90 days old.')}}</li> 
+                    <li>{{__('Document should be less than 90 days old.')}}</li>
                     {{--  <li>{{__('There is no light glare or reflections on the card.')}}</li>
                     <li>{{__('File is at least 1 MB in size and has at least 300 dpi resolution.')}}</li>  --}}
                 </ul>
@@ -590,7 +590,7 @@
                                 </select>
                             </div>
                         </div>{{-- .input-item --}}
-                        
+
                         <h6 class="font-mid">Upload Here Your Proof of Address Document</h6>
                         <div class="upload-box">
                             <div class="upload-zone document_proof_of_address">
@@ -618,8 +618,8 @@
                         </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
-                                class="input-bordered " id='tt' type="date" id="date-of-birth" name="dob" 
-                                
+                                class="input-bordered " id='tt' type="date" id="date-of-birth" name="dob"
+
                                 value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" max="{{ now()->toDateString('d-m-Y') }}" >
                         </div>
                     </div>{{-- .input-item --}}
@@ -634,15 +634,15 @@
                         </label>
                         <div class="input-wrap">
                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
-                                class="input-bordered" type="date" id="date-of-birth" name="dob" 
-                               
+                                class="input-bordered" type="date" id="date-of-birth" name="dob"
+
                                 value="{{ isset($user_kyc) ? $user_kyc->dob : ''}}" min="{{ now()->toDateString('d-m-Y') }}"  >
                         </div>
                     </div>{{-- .input-item --}}
                 </div>
             </div>
         </div>
-        
+
     </div>
 @endif
 
@@ -722,6 +722,20 @@ Previous Country of Residence
 Date of Registration
 Date of De-registration
 No document uploaded.
-Residency Verification Document
-Residency Verification Document – Type
-Residency Verification Document – Date of Issuance
+Verification Document
+Verification Document – Type
+Verification Document – Date of Issuance
+Primary Tax Residence
+Tax Details
+Taxpayer Identification Number (TIN)
+Secondary Tax Residence
+Tax Residence Jurisdiction
+Number of Dependents
+Marital Status
+Other
+U.S. Tax Residence – Certification
+U.S. Tax Residence
+Primary Tax Residence
+Tax Verification Document
+Tax Verification Document – Type
+Tax Verification Document – Date of Issuance

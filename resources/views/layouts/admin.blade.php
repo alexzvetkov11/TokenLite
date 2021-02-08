@@ -73,7 +73,7 @@
                                     <li><a href="{{ route('log-out') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="ti ti-power-off"></i>Logout</a></li>
                                 </ul>
                                 {{-- <ul class="user-links bg-light">
-                                    
+
                                 </ul> --}}
                             </div>
                         </li>{{-- .topbar-nav-item --}}
@@ -99,7 +99,7 @@
                                     <a href="{{ route('admin.kycs.residency') }}"> {{__('Residency')}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.kycs.identity') }}"> {{__('Tax')}}</a>
+                                    <a href="{{ route('admin.kycs.tax') }}"> {{__('Tax')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.kycs.identity', 'pending') }}"> {{__('Source of Wealth')}}</a>

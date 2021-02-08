@@ -127,11 +127,13 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
 
     Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
     Route::get('/kyc-residency/{status?}', 'Admin\KycController@residency')->middleware('ico')->name('kycs.residency');
+    Route::get('/kyc-tax/{status?}', 'Admin\KycController@tax')->middleware('ico')->name('kycs.tax');
     // Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
     // Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
 
     Route::get('/kyc/view/identity/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.identity');
     Route::get('/kyc/view/residency/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.residency');
+    Route::get('/kyc/view/tax/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.tax');
 
 
     Route::get('/kyc-list/documents/{file}/{doc}', 'Admin\KycController@get_documents')->middleware('ico')->name('kycs.file');

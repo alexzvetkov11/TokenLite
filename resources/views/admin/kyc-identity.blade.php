@@ -28,7 +28,7 @@
                     </div>
                     <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
-                          
+
                             <div class="search flex-grow-1 w-100 w-sm-auto">
                                 {{-- <form action="{{ route('admin.kycs') }}" method="GET" autocomplete="off"> --}}
                                 <div class="input-wrap">
@@ -74,7 +74,7 @@
                                             <div
                                                 class="toggle-class dropdown-content dropdown-content-sm dropdown-content-center shadow-soft">
                                                 <form class="update-meta" action="#" data-type="kyci_page_meta">
-                                                   
+
                                                     <ul class="dropdown-list">
                                                         <li>
                                                             <h6 class="dropdown-title">Order By</h6>
@@ -202,7 +202,7 @@
                                         </td>
 
                                         <td class="data-col dt-sbdate">
-                                            <span class="sub sub-s2 sub-time">{{ _date($kyc->updated_at) }}</span>
+                                            <span class="sub sub-s2 sub-time">{{ _date($kyc->created_at) }}</span>
                                         </td>
                                         <td class="data-col dt-sbdate">
                                             <span class="sub sub-s2 sub-time">{{ _date($kyc->updated_at) }}</span>
@@ -227,14 +227,14 @@
                                                             <a class="kyc_action kyc_approve" href="#"
                                                                     data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc">
                                                                     <em class="far fa-check-square"></em>Approve</a>
-                                                            
+
                                                         @endif
                                                         @if ($kyc->status != 'rejected')
                                                             <a href="javascript:void(0)"
                                                                     data-current="{{ __status($kyc->status, 'status') }}"
                                                                     data-id="{{ $kyc->id }}" class="kyc_reject">
                                                                     <em class="fas fa-ban"></em>Reject</a>
-                                                            
+
                                                         @endif
                                                         @if ($kyc->status == 'missing' || $kyc->status == 'rejected')
                                                             <a href="javascript:void(0)" data-id="{{ $kyc->id }}" class="kyc_delete">

@@ -22,15 +22,15 @@ class KycResidency extends Model
      */
     protected $table = 'kyc_residency';
 
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    
+
     protected $fillable = [
-        
+
     ];
     /**
      * Create a new controller instance.
@@ -94,13 +94,13 @@ class KycResidency extends Model
     //         'kyc_wallet_custom' => array('cw_name' => null, 'cw_text' => null),
     //         'kyc_wallet_note' => __('Address should be ERC20-compliant.'),
     //         'kyc_wallet_opt' => array('wallet_opt' => ['ethereum', 'bitcoin', 'litecoin']),
-            
-            
+
+
     //         "kyc_country_birth" => array('show' => 1, 'req' => 1),
     //         "kyc_birthPlace" => array('show' => 1, 'req' => 1),
     //         "kyc_nationality" =>array('show' => 1, 'req' => 1),
     //         "kyc_nationalityId" =>array('show' => 1, 'req' => 1),
-            
+
     //         "kyc_address_1" => array('show' => 1, 'req' => 1),
     //         "kyc_Building" => array('show' => 1, 'req' => 1),
     //         "kyc_Floor" =>array('show' => 1, 'req' => 1),
@@ -132,7 +132,7 @@ class KycResidency extends Model
      * @since 1.1.0
      * @return void
      */
-    
+
     public function getAll($request)
     {
         // $result = [];
