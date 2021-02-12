@@ -14,14 +14,11 @@ $space = "&nbsp;";
                         <div class="flex-col d-sm-block d-none">
                             <a href="{{ route('admin.kycs.identity') }}" class="btn btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left mr-3"></em>Back</a>
                         </div>
-                        <div class="flex-col d-sm-none">
-                            <a href="{{ route('admin.kycs.identity') }}" class="btn btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
-                        </div>
                         <div class="relative d-inline-block">
                             <a href="#" class="btn btn-dark btn-sm btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                             <div class="toggle-class dropdown-content dropdown-content-top-left">
                                 <ul class="dropdown-list">
-                                    <li><a class="kyc_action" href="#" data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc"><em class="far fa-edit"></em>{{__('Edit')}}</a></li>
+                                    <li><a class="kyc_action" href="{{ route('admin.kyc.edit.residency', [$kyc->id, 'residency' ]) }}"><em class="far fa-edit"></em>{{__('Edit')}}</a></li>
                                     @if($kyc->status != 'approved')
                                     <li><a class="kyc_action" href="#" data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc"><em class="far fa-check-square"></em>{{__('Approve')}}</a></li>
                                     @endif
@@ -72,12 +69,12 @@ $space = "&nbsp;";
                     <div class="w-100">
                         <form >
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="input-item input-with-label">
                                     <label for="first-name" class="input-item-label">{{__('Admin Note')}}</label>
                                     <div class="input-wrap">
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            <div class="col-md-12">
                                                 {{ $kyc->notes }}
                                                 {{-- <textarea class="input-bordered " type="text">{{ $kyc->notes }}</textarea> --}}
                                             </div>
@@ -137,36 +134,6 @@ $space = "&nbsp;";
                 </ul>
                 <div class="gaps-3x"></div>
 
-                {{-- <ul class="data-details-list">
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->country) ? _x($kyc->country) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">State / Province</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->state) ? _x($kyc->state) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">City / Town</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->city) ? _x($kyc->city) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Zip / Postal Code</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->zip) ? _x($kyc->zip) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street Name</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address1) ? _x($kyc->address1) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street / Building</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address2) ? _x($kyc->address2) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Floor / Unit</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->floor) ? _x($kyc->floor) : $space !!}</div>
-                    </li>
-                </ul> --}}
                 <div class="gaps-3x"></div>
                 <h5 style="color: #342d6e">{{__('Documents')}}</h5>
                 <ul class="data-details-list">
@@ -255,32 +222,6 @@ $space = "&nbsp;";
                     </li>
 
                 </ul>
-                {{-- <ul class="data-details-list">
-                    <li>
-                        <div class="data-details-head">
-                            Address
-                        </div>
-                        <ul class="data-details-docs">
-                            @if($kyc->document4 != NULL)
-                                <li>
-                                    <span class="data-details-docs-title">Document</span>
-                                    <div class="data-doc-item data-doc-item-lg">
-                                        <div class="data-doc-image">
-                                            @if(pathinfo(storage_path('app/'.$kyc->document4), PATHINFO_EXTENSION) == 'pdf')
-                                                <em class="kyc-file fas fa-file-pdf"></em>
-                                            @else
-                                                <img src="{{ route('admin.kycs.file', ['file'=>$kyc->id, 'doc'=>4]) }}" src="">
-                                            @endif
-                                        </div>
-                                        <ul class="data-doc-actions">
-                                            <li><a href="{{ route('admin.kycs.file', ['file'=>$kyc->id, 'doc'=>4]) }}" target="_blank" ><em class="ti ti-import"></em></a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            @endif
-                        </ul>
-                    </li>
-                </ul> --}}
                 <div class="gaps-3x"></div>
             </div>
         </div>

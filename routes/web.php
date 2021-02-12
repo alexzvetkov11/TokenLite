@@ -58,6 +58,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/compliance', 'User\UserController@compliance')->name('compliance');
     Route::get('/compliance/identity/details', 'User\UserController@user_identity')->name('identity.details');
     Route::get('/compliance/residency/details', 'User\UserController@user_residency')->name('residency.details');
+    Route::get('/compliance/tax/details', 'User\UserController@user_tax')->name('tax.details');
 
     Route::get('/account/activity', 'User\UserController@account_activity')->name('account.activity');
     Route::get('/contribute', 'User\TokenController@index')->name('token');
@@ -132,8 +133,11 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
     // Route::get('/kyc-identity/{status?}', 'Admin\KycController@identity')->middleware('ico')->name('kycs.identity');
 
     Route::get('/kyc/view/identity/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.identity');
+    Route::get('/kyc/edit/identity/{id}/{type}', 'Admin\KycController@edit_details')->name('kyc.edit.identity');
     Route::get('/kyc/view/residency/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.residency');
+    Route::get('/kyc/edit/residency/{id}/{type}', 'Admin\KycController@edit_details')->name('kyc.edit.residency');
     Route::get('/kyc/view/tax/{id}/{type}', 'Admin\KycController@show')->name('kyc.view.tax');
+    Route::get('/kyc/edit/tax/{id}/{type}', 'Admin\KycController@edit_details')->name('kyc.edit.tax');
 
 
     Route::get('/kyc-list/documents/{file}/{doc}', 'Admin\KycController@get_documents')->middleware('ico')->name('kycs.file');
@@ -169,6 +173,11 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/stages/settings/update', 'Admin\IcoController@update_settings')->name('stages.settings.update')->middleware('demo_user');
         Route::post('/stages/actions', 'Admin\IcoController@stages_action')->middleware('ico')->name('stages.actions'); //v1.1.2
         Route::post('/kyc/update', 'Admin\KycController@update')->name('kyc.update')->middleware('demo_user');
+
+        Route::post('/kyc/edit/identity/{id}/{type}', 'Admin\KycController@save_detail')->name('kyc.edit.identity')->middleware('demo_user');
+        Route::post('/kyc/edit/residency/{id}/{type}', 'Admin\KycController@save_detail')->name('kyc.edit.residency')->middleware('demo_user');
+        Route::post('/kyc/edit/tax/{id}/{type}', 'Admin\KycController@save_detail')->name('kyc.edit.tax')->middleware('demo_user');
+
         Route::post('/transactions/update', 'Admin\TransactionController@update')->name('transactions.update')->middleware('demo_user');
 
         Route::post('/transactions/adjust', 'Admin\TransactionController@adjustment')->name('transactions.adjustement');

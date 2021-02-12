@@ -18,6 +18,14 @@ $has_sidebar = false;
 
         @include('layouts.messages')
         <div class="<!--kyc-form-steps--> card mx-lg-4">
+            <div class="card-head has-aside pd-2x">
+                <h4 ><b>{{ __('Verification') }} </b> > {{ __('Identity') }}</h4>
+                <div class="card-opt data-action-list d-md-inline-flex">
+                    <a href="{{ route('user.compliance') }}" class="btn btn-auto btn-sm btn-primary" >
+                        <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
+                    </a>
+                </div>
+            </div>
             <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
             <form action="{{ route('user.ajax.kyc.submit') }}" method="POST" >
                 <input type="hidden" name="type" value="identity">
@@ -98,7 +106,7 @@ $has_sidebar = false;
                                         <div class="input-wrap">
                                             {{-- style="text-transform:uppercase" --}}
                                             <input
-                                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }} 
+                                                {{ field_value('kyc_firstname', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered" type="text" name="first_name"
                                                 value="{{ isset($user_kyc) ? $user_kyc->first_middle_names : ''}}" id="first-name" >
                                         </div>
@@ -116,7 +124,7 @@ $has_sidebar = false;
                                             @endif
                                         </label>
                                         <div class="input-wrap">
-                                            <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}   
+                                            <input {{ field_value('kyc_lastname', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered" value="{{ isset($user_kyc) ? $user_kyc->last_name : ''}}"
                                                 type="text" id="last-name" name="last_name">
                                         </div>
@@ -166,7 +174,7 @@ $has_sidebar = false;
                                             @endif
                                         </label>
                                         <div class="input-wrap">
-                                            <select {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }} 
+                                            <select {{ field_value('kyc_gender', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="select-bordered select-block" name="gender" id="gender">
                                                 <option value="">{{__('Select Gender')}}</option>
                                                 <option
@@ -228,8 +236,8 @@ $has_sidebar = false;
                                             @endif
                                         </label>
                                         <div class="input-wrap">
-                                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }} 
-                                            class="input-bordered" type="text" name="place_of_birth" 
+                                            <input {{ field_value('kyc_birthPlace', 'req' ) == '1' ? 'required ' : '' }}
+                                            class="input-bordered" type="text" name="place_of_birth"
                                             value="{{ isset($user_kyc) ? $user_kyc->place_of_birth : ''}}">
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -240,7 +248,7 @@ $has_sidebar = false;
                                 <div class="col-md-6">
                                     <div class="input-item input-with-label">
                                         <label for="Nationality" class="input-item-label">
-                                            {{__('Citizenship')}} 
+                                            {{__('Citizenship')}}
                                             @if (field_value('kyc_nationality', 'req'))
                                                 <span class="text-require text-danger">*</span>
                                             @endif
@@ -268,7 +276,7 @@ $has_sidebar = false;
                                             @endif
                                         </label>
                                         <div class="input-wrap">
-                                            <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text" 
+                                            <input {{ field_value('kyc_nationalityId', 'req' ) == '1' ? 'required ' : '' }}class="input-bordered" type="text"
                                                 name="National Identification Number" value="{{isset($user_kyc)?$user_kyc->nationality_id:''}}">
                                         </div>
                                     </div>{{-- .input-item --}}
@@ -391,7 +399,7 @@ $has_sidebar = false;
                                                 <span class="text-require text-danger">*</span>
                                             @endif
                                         </label>
-                                        
+
                                         <div class="input-wrap">
                                             <input {{ field_value('kyc_dob', 'req' ) == '1' ? 'required ' : '' }}
                                                 class="input-bordered date-picker" type="text" id="issue_date" name="issue_date"  data-format="alt"
@@ -418,7 +426,7 @@ $has_sidebar = false;
 
                         </div>
                     </div>
-                 
+
                 @endif
 
 

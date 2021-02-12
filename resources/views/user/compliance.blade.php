@@ -30,7 +30,7 @@
             </li>
         </ul>
         <div class="tab-content" id="tabs">
-            <div class="tab-pane fade " id="identity">
+            <div class="tab-pane fade show active" id="identity">
                 <div class="justify-content-between d-flex">
                     <div class="col-md-3">
                         <div class="row">
@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
                             {{-- <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
-                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }}
                             </span> --}}
                         </div>
                         </div>
@@ -49,7 +49,7 @@
                 </div>
                 <hr/>
                 <div class="gaps-3x"></div>
-                <h6 class="card-sub-title text-primary">{{__('Personal Information') }}</h6>
+                <h6 class="card-sub-title ">{{__('Personal Information') }}</h6>
                 <div class="gaps-1x"></div>
                 <ul class="data-details-list" style="border: 0px solid #d2dde9">
                     <li>
@@ -85,9 +85,9 @@
                         <div class="data-details-des col-md-8" style="border-bottom: 1px solid #d2dde9; border-left: 0px">{!! $kyci->nationality_id ? $kyci->nationality_id : '&nbsp;' !!}</div>
                     </li>
                 </ul>
-                
+
             </div>
-            <div class="tab-pane fade show active" id="residency">
+            <div class="tab-pane fade" id="residency">
                 <div class="justify-content-between d-flex">
                     <div class="col-md-3 pt-2">
                         <div class="row">
@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                             <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
                             {{-- <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
-                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }} 
+                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }}
                             </span> --}}
                         </div>
                         </div>
@@ -201,7 +201,7 @@
                                 </div>
                             </li>{{-- li --}}
                             @endif
-                            
+
                         </ul>
                         @else
                         {{__('No document uploaded.') }}
@@ -220,6 +220,75 @@
                     </li>
                 </ul>
                 <hr/>
+            </div>
+            <div class="tab-pane fade " id="tax">
+                <div class="justify-content-between d-flex">
+                    <div class="col-md-3 pt-2">
+                        <div class="row">
+                        <div class="col-md-6 pt-3">{{__('Status') }}: </div>
+                        <div class="col-md-6">
+                            <span class="badge badge-auto badge-md badge-success mt-2">{{__('Verified') }}</span>
+                            {{-- <span class="badge badge-auto badge-md mt-2 badge-{{isset($user->email_verified_at) && $user->email_verified_at != null ? 'success' : 'danger' }}">
+                                {{isset($user->email_verified_at) && $user->email_verified_at != null ? __('Verified')  : __('Unverified') }}
+                            </span> --}}
+                        </div>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <a href="{{route('user.tax.details') }}" class="btn btn-primary">{{__('Update Detail')}}</a>
+                    </div>
+                </div>
+                <hr/>
+                <div class="gaps-3x"></div>
+                <h6 class="card-sub-title">{{__('Tax Detail') }}</h6>
+                <div class="gaps-1x"></div>
+                <ul class="data-details-list" style="border: 0px solid #d2dde9">
+                    <li>
+                        <div class="data-details-head text-primary col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Primary Tax Residence')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">&nbsp; </div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Tax Residence Jurisdiction')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->primary_residence) ? $kyct->primary_residence : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Taxpayer Identification Number (TIN)')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->primary_tin) ? $kyct->primary_tin  : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head text-primary col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Secondary Tax Residence')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">&nbsp; </div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Tax Residence Jurisdiction')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->secondary_residence) ? $kyct->secondary_residence : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Taxpayer Identification Number (TIN)')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->secondary_tin) ? $kyct->secondary_tin : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head text-primary col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('U.S. Tax Residence')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">&nbsp; </div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4"  style="border-bottom: 1px solid #d2dde9">{{__('U.S. Tax Residence – Certification')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->us_tax_residency) ? $kyct->us_tax_residency : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head text-primary col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Other')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">&nbsp; </div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4"  style="border-bottom: 1px solid #d2dde9">{{__('Marital Status')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px">{!! isset($kyct->marital_status) ? $kyct->marital_status : '&nbsp;' !!}</div>
+                    </li>
+                    <li>
+                        <div class="data-details-head col-md-4"  style="border-bottom: 1px solid #d2dde9">{{__('Number of Dependents')}}</div>
+                        <div class="data-details-des col-md-8" style="border-left: 0px; border-bottom: 1px solid #d2dde9">{!! isset($kyct->dependents_number) ? $kyct->dependents_number : '&nbsp;' !!}</div>
+                    </li>
+                </ul>
+                <div class="gaps-3x"></div>
             </div>
             <div class="gaps-2x"></div>
         </div>

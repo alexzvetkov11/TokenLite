@@ -168,6 +168,56 @@ class KycController extends Controller
         }
     }
 
+    public function edit_details($id='', $type='')
+    {
+        if ($type == 'identity') {
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycIdentity::where('id', $id)->first();
+                return view('admin.kyci_details_edit', compact('kyc'))->render();
+            }
+        } else if ( $type=='residency'){
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycResidency::where('id', $id)->first();
+                return view('admin.kycr_details_edit', compact('kyc'))->render();
+            }
+        } else if ( $type=='tax'){
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycTax::where('id', $id)->first();
+                return view('admin.kyct_details_edit', compact('kyc'))->render();
+            }
+        }
+    }
+
+    public function save_detail($id="", $type=''){
+        if ($type == 'identity') {
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycIdentity::where('id', $id)->first();
+                return view('admin.kyci_details', compact('kyc'))->render();
+            }
+        } else if ( $type=='residency'){
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycResidency::where('id', $id)->first();
+                return view('admin.kycr_details', compact('kyc'))->render();
+            }
+        } else if ( $type=='tax'){
+            if ($id == '') {
+                return __('messages.wrong');
+            } else {
+                $kyc = KycTax::where('id', $id)->first();
+                return view('admin.kyct_details', compact('kyc'))->render();
+            }
+        }
+    }
     public function ajax_show(Request $request)
     {
         $type = $request->input('req_type');

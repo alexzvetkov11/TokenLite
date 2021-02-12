@@ -31,6 +31,7 @@ use Illuminate\Http\Request;
 use PragmaRX\Google2FA\Google2FA;
 use App\Notifications\PasswordChange;
 use App\Http\Controllers\Controller;
+use App\Models\KycTax;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Setting;
@@ -55,13 +56,11 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $user = Auth::user();
         $stage = active_stage();
         $contribution = Transaction::user_contribution();
         $tc = new \App\Helpers\TokenCalculate();
         $active_bonus = $tc->get_current_bonus('active');
-
         return view('user.dashboard', compact('user', 'stage', 'active_bonus', 'contribution'));
     }
 
@@ -76,11 +75,12 @@ class UserController extends Controller
      */
     public function account()
     {
+
         $user_kyc = Auth::user()->kyc_info;
 
         $countries = $this->handler->getCountries();
         $user = Auth::user();
-        
+
         if (!isset($user->public_key) || strlen($user->public_key)!=4 ){
             $key = strval(rand(0,9)).strval(rand(0,999));
             $user->public_key = $key;
@@ -90,6 +90,7 @@ class UserController extends Controller
 
         $g2fa = new Google2FA();
         $google2fa_secret = $g2fa->generateSecretKey();
+
         $google2fa = $g2fa->getQRCodeUrl(
             site_info().'-'.$user->name,
             $user->email,
@@ -104,8 +105,9 @@ class UserController extends Controller
         $user = Auth::user();
         $kyci = KycIdentity::where('user_id', $user->id)->first();
         $kycr = KycResidency::where('user_id', $user->id)->first();
+        $kyct = KycTax::where('user_id', $user->id)->first();
         $countries = $this->handler->getCountries();
-        return view('user.compliance', compact('kyci', 'kycr', 'countries'));
+        return view('user.compliance', compact('kyci', 'kycr', 'kyct', 'countries'));
     }
     public function user_identity(){
         if (isset(Auth::user()->kyc_info->status)) {
@@ -153,6 +155,20 @@ class UserController extends Controller
 
         return view('user.user_residency', compact('kycr', 'countries', 'title'));
     }
+    public function user_tax(){
+        if (isset(Auth::user()->kyc_info->status)) {
+            if (Auth::user()->kyc_info->status == 'pending') {
+                return redirect()->route('user.kyc')->with(['info' => __('messages.kyc.wait')]);
+            }
+        }
+        $user = Auth::user();
+        $countries = $this->handler->getCountries();
+        $title = KycTax::documents();
+        $kyct = KycTax::where('user_id', $user->id)->first();
+
+        return view('user.user_tax', compact('kyct', 'countries', 'title'));
+    }
+
     /**
      * Show the user account activity page.
      * and Delete Activity
@@ -259,7 +275,7 @@ class UserController extends Controller
                 } else {
                     $ret['msg'] = 'success';
                 }
-                
+
                 if($ret['msg'] == 'success' && $request->input('new-password')){
                     if ( $request->input('new-password') != $request->input('re-password')){
                         $ret['msg'] = 'warning';
@@ -277,7 +293,7 @@ class UserController extends Controller
                     }
                 }
                 if ($ret['msg'] == 'success'){
-                    
+
                     $user->name = strip_tags($request->input('name'));
                     $user->email = $request->input('email');
                     $user->mobile = strip_tags($request->input('mobile'));
@@ -468,7 +484,7 @@ class UserController extends Controller
             }
         }
         if ($type == 'update_password') {
-            
+
             //validate data
             $validator = Validator::make($request->all(), [
                 'old-password' => 'required|min:6',
@@ -552,7 +568,7 @@ class UserController extends Controller
                 'name' => 'required',
             ]);
             if ($validator->fails()) {
-                
+
                 $ret['msg'] = 'warning';
                 $ret['message'] = __('messages.form.wrong');
                 return response()->json($ret);
@@ -656,7 +672,7 @@ class UserController extends Controller
             $ret['msg'] = 'warning';
             $ret['message'] = __('messages.password.token');
         }
-        
+
         print($ret);
         exit;
         return redirect()->route('user.account')->with([$ret['msg'] => $ret['message']]);

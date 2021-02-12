@@ -11,6 +11,14 @@
 
             @include('layouts.messages')
             <div class=" card mx-lg-4">
+                <div class="card-head has-aside pd-2x">
+                    <h4 ><b>{{ __('Verification') }} </b> > {{ __('Residency') }}</h4>
+                    <div class="card-opt data-action-list d-md-inline-flex">
+                        <a href="{{ route('user.compliance') }}" class="btn btn-auto btn-sm btn-primary" >
+                            <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
+                        </a>
+                    </div>
+                </div>
                 <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
                 <form action="{{ route('user.ajax.kyc.submit') }}" method="POST">
                     <input type="hidden" name="type" value="identity">
@@ -89,8 +97,7 @@
                                         </label>
                                         <div class="input-wrap">
                                             <select class="select-bordered select-block" name="current_country"
-                                                id="current_country" data-dd-class="search-on"
-                                                aria-placeholder="Choose Country">
+                                                id="current_country" data-dd-class="search-on" aria-placeholder="Choose Country">
                                                 <option value="">{{ __('Choose Country') }}</option>
                                                 @foreach ($countries as $country)
                                                     <option
@@ -403,7 +410,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
 
                                 <div class="gaps-3x"></div>
@@ -427,7 +434,7 @@
 
                             </div>
                         </div>
-                    
+
                     @endif
 
                     <div class="form-step form-step-final">

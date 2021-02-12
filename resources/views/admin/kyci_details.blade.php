@@ -21,7 +21,7 @@ $space = "&nbsp;";
                             <a href="#" class="btn btn-dark btn-sm btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                             <div class="toggle-class dropdown-content dropdown-content-top-left">
                                 <ul class="dropdown-list">
-                                    <li><a class="kyc_action" href="#" data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc"><em class="far fa-edit"></em>{{__('Edit')}}</a></li>
+                                    <li><a class="kyc_action_edit" href="{{ route('admin.kyc.edit.identity', [$kyc->id, 'identity']  ) }}"><em class="far fa-edit"></em>{{__('Edit')}}</a></li>
                                     @if($kyc->status != 'approved')
                                     <li><a class="kyc_action" href="#" data-id="{{ $kyc->id }}" data-toggle="modal" data-target="#actionkyc"><em class="far fa-check-square"></em>{{__('Approve')}}</a></li>
                                     @endif
@@ -70,14 +70,13 @@ $space = "&nbsp;";
                     @if($kyc->notes !== NULL)
                     <div class="gaps-2x w-100 d-none d-md-block"></div>
                     <div class="w-100">
-                        <form method="POST">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="input-item input-with-label">
                                     <label for="first-name" class="input-item-label">{{__('Admin Note')}}</label>
                                     <div class="input-wrap">
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            <div class="col-md-12">
                                                 {{ $kyc->notes }}
                                                 {{-- <textarea class="input-bordered " type="text">{{ $kyc->notes }}</textarea> --}}
                                             </div>
@@ -87,29 +86,31 @@ $space = "&nbsp;";
                                 </div>
                             </div>
                         </div>
-                        </form>
                     </div>
                     @endif
                 </div>
+
                 <div class="gaps-3x"></div>
                 <h6 class="card-sub-title"><span>{{__('Identity Details')}}</span></h6>
                 <ul class="data-details-list" style="border: 0px">
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('First and Middle Names')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! ($kyc->first_middle_names) ? _x($kyc->first_middle_names) : $space !!}</div>
-                    </li>{{-- li --}}
+                        {{-- <input class="input-bordered col-md-8 " id="send-email" type="text" value="{!! ($kyc->first_middle_names) ? _x($kyc->first_middle_names) : $space !!}"> --}}
+                    </li>
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">Last Name</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! ($kyc->last_name) ? _x($kyc->last_name) : $space !!}</div>
-                    </li>{{-- li --}}
+                        {{-- <input class="input-bordered col-md-8 " id="send-email" type="text" value='{!! ($kyc->last_name) ? _x($kyc->last_name) : $space !!}'> --}}
+                    </li>
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9" >{{__('Gender')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! ($kyc->gender_id&& $kyc->gender_id=='1') ? 'Male' : "Female" !!}</div>
-                    </li>{{-- li --}}
+                    </li>
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Date of Birth')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! ($kyc->dob) ? _date($kyc->dob, get_setting('site_date_format')) : $space !!}</div>
-                    </li>{{-- li --}}
+                    </li>
                     <li>
                         <div class="data-details-head col-md-4" style="border-bottom: 1px solid #d2dde9">{{__('Country of Birth')}}</div>
                         <div class="data-details-des col-md-8" style="border-left: 0px">{!! ($kyc->country_of_birth) ? _x($kyc->country_of_birth) : $space !!}</div>
@@ -129,38 +130,7 @@ $space = "&nbsp;";
 
                 </ul>
                 <div class="gaps-3x"></div>
-                {{-- <h6 class="card-sub-title">Address Information</h6> --}}
 
-                {{-- <ul class="data-details-list">
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Country</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->country) ? _x($kyc->country) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">State / Province</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->state) ? _x($kyc->state) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">City / Town</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->city) ? _x($kyc->city) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Zip / Postal Code</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->zip) ? _x($kyc->zip) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street Name</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address1) ? _x($kyc->address1) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Street / Building</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->address2) ? _x($kyc->address2) : $space !!}</div>
-                    </li>
-                    <li>
-                        <div class="data-details-head" style="border-bottom: 1px solid #d2dde9">Floor / Unit</div>
-                        <div class="data-details-des" style="border-left: 0px">{!! ($kyc->floor) ? _x($kyc->floor) : $space !!}</div>
-                    </li>
-                </ul> --}}
                 <div class="gaps-3x"></div>
                 <h6 class="card-sub-title"><span>{{__('Uploaded Documents')}}</span></h6>
                 <ul class="data-details-list">
@@ -252,6 +222,7 @@ $space = "&nbsp;";
                         <div class="data-details-des col-md-8" style="border-left: 0px; border-bottom: 1px solid #d2dde9">{!! ($kyc->expiration_date) ? _date($kyc->expiration_date, 'd/m/Y') : $space !!}</div>
                     </li>
                 </ul>
+
                 {{-- <ul class="data-details-list">
                     <li>
                         <div class="data-details-head">

@@ -23,61 +23,21 @@ $(document).ready(function() {
         })
     });
 
-    //admin jurisdition.blade.php edit modal
-    $(".editJurisdiction").click(function() {
-        $("[name='juris_name']").val($(this).data('juris'));
-        $("[name='lang_code']").val($(this).data('langcode')).trigger('change');
-        $("[name='cur_code']").val($(this).data('curcode')).trigger('change');
-        // console.log($(this).data('statue'));
-        if ($(this).data('statue') == 'active') {
-            $("[name='statue_switcher']").prop('checked', true);
-            $("#btnEditJuris").show();
-        } else {
-            $("[name='statue_switcher']").prop('checked', false);
-            $("#btnEditJuris").hide();
-        }
-        $("[name='juris_id']").val($(this).data('id'));
-    });
 
-    //admin article_detail.blade.php edit modal
-    $("[data-target='#editArticle']").on("click", function() {
-        $name = $(this).data('selector');
-        if ($name == "empty") {
-            $("#type").val('insert');
-            $("#entityAll").show();
-            $val = "";
-        } else {
-            $("#entityAll").hide();
-            $('#textEditHide').val($name);
-            $val = $('#' + $name).val();
-            if ($val == 'null') {
-                $val = "";
-                $("#articleAll").show();
-                $("#type").val('create');
-            } else {
-                $("#articleAll").hide();
-                $("#type").val('update');
-            }
-        }
-        $('#textEdit').trumbowyg('html', $val);
-    });
-
-    $("[name='selectionEntity']").on('change', function() {
-        $val = $(this).val();
-        $('[name^="column"]').hide();
-        $.each($val, function(index, value) {
-            $('[name="column' + value + '"]').show();
-        })
-    });
+    $("#tt").datepicker({ dateFormat: 'dd/mm/yy', minDate: 0 });
 
 
-    //custom datatable search
+    // $("input[type='date'].alt-date").on("change", function(e) {
+    //     $('#date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    // }).trigger("change")
+
+    //custom datatable search 
     $("#search_table").on('keyup', function() {
         var input, filter, table, tr, td, i, txtValue;
         input = $("#search_table").val() + "";
         filter = input.toUpperCase();
         tr = $(".data-table > tbody > tr");
-
+        console.log("here");
         for (i = 0; i < tr.length; i++) {
             td = $(tr[i]).find("td")[0];
             console.log(td);
@@ -93,6 +53,15 @@ $(document).ready(function() {
 
     });
 
+    //clipboard
+    $(".clipboard").on("click", function() {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        var copyText = $(".clipboard-value").val();
+        $temp.val(copyText).select();
+        document.execCommand("copy");
+        $temp.remove();
+    });
     // common numerical input
     $(".comma").on("keydown", function(e) {
         var keycode = (event.which) ? event.which : event.keyCode;
@@ -131,6 +100,17 @@ $(document).ready(function() {
         if (this.value == "NaN" || this.value == "") this.value = 0;
     });
 
+    $(".numerical").on("keydown", function(e) {
+        var keycode = (event.which) ? event.which : event.keyCode;
+        if (e.shiftKey == true || e.ctrlKey == true) return false;
+        if ([8, 39, 37, 46].indexOf(keycode) >= 0 || // allow tab, dot, left and right arrows, delete keys
+            (keycode >= 48 && keycode <= 57) || // allow numbers
+            (keycode >= 96 && keycode <= 105)) { // allow numpad numbers
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     // percent numerical input
     $('.percent').on("keydown", function(e) {
@@ -170,6 +150,4 @@ $(document).ready(function() {
         if (this.value == "NaN" || this.value == "") this.value = "0";
         if (this.value[this.value.length - 1] != '%') this.value = this.value + '%';
     })
-
-
 })

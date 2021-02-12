@@ -350,7 +350,8 @@
                                                     if (isset($user->kyc_info->status)) {
                                                         $user->kyc_info->status = str_replace('rejected', 'canceled', $user->kyc_info->status);
                                                     }
-                                                    $kyc_a_bf = isset($user->kyc_info->id) ? '<a href="' . route('admin.kyc.view', [$user->kyc_info->id, 'kyc_details']) . '" target="_blank">' : '';
+                                                    // $kyc_a_bf = isset($user->kyc_info->id) ? '<a href="' . route('admin.kyc.view', [$user->kyc_info->id, 'kyc_details']) . '" target="_blank">' : '';
+                                                    $kyc_a_bf = '';
                                                     $kyc_a_af = isset($user->kyc_info->id) ? '</a>' : '';
                                                 @endphp
                                                 @if ($user->role != 'admin')

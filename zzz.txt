@@ -739,3 +739,20 @@ Primary Tax Residence
 Tax Verification Document
 Tax Verification Document – Type
 Tax Verification Document – Date of Issuance
+Kyc Tax
+Primary Tax Residence
+Tax Detail
+Taxpayer Identification Number (TIN)
+Secondary Tax Residence
+Tax Residence Jurisdiction
+U.S. Tax Residence
+U.S. Tax Residence – Certification
+For purposes, we are required to obtain information about your tax status.
+Primary Tax Residence
+Tax Residence Country
+I hereby certify that I am:
+Married
+Divorced
+Tax Document Upload
+Upload Here a Tax Statement of your Primary Tax Residence
+Upload Here a Tax Statement of your Secondary Tax Residence

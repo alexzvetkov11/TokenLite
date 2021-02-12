@@ -71,7 +71,7 @@ $(document).ready(function() {
     });
 
 
-    //custom datatable search
+    //custom datatable search 
     $("#search_table").on('keyup', function() {
         var input, filter, table, tr, td, i, txtValue;
         input = $("#search_table").val() + "";
