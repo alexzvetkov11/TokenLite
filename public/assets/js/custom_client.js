@@ -31,26 +31,25 @@ $(document).ready(function() {
     //     $('#date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
     // }).trigger("change")
 
-    //custom datatable search 
+    //custom datatable search
     $("#search_table").on('keyup', function() {
         var input, filter, table, tr, td, i, txtValue;
         input = $("#search_table").val() + "";
         filter = input.toUpperCase();
         tr = $(".data-table > tbody > tr");
-        console.log("here");
         for (i = 0; i < tr.length; i++) {
-            td = $(tr[i]).find("td")[0];
-            console.log(td);
-            if (td) {
-                txtValue = td.textContent || td.innerText;
+            td = $(tr[i]).find("td");
+            var flag=false;
+            for( var j=0; j<td.length; j++){
+                txtValue = td[j].textContent || td[j].innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    $(tr[i]).show();
-                } else {
-                    $(tr[i]).hide();
+                    flag=true;
+                    break;
                 }
             }
+            if ( flag ) $(tr[i]).show();
+            else $(tr[i]).hide();
         }
-
     });
 
     //clipboard

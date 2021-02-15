@@ -242,6 +242,8 @@
     <script src="{{ asset('assets/js/script.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/admin.app.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/custom.js').css_js_ver() }}"></script>
+    <script src="{{ asset('assets/js/app.js').css_js_ver() }}"></script>
+
     @stack('footer')
     @if(session()->has('global'))
     <script type="text/javascript">

@@ -23,30 +23,30 @@
                         <div class="float-right position-relative">
                             <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em class="ti ti-settings"></em> </a>
                             <div class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
-                                <form class="update-meta" action="#" data-type="entity_page_meta">
+                                <form class="update-meta" action="#" data-type="entity_types_page_meta">
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Show</h6></li>
-                                        <li {!! (gmvl('entity_per_page', 10)==10) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_per_page', 10)==10) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=10">10</a></li>
-                                        <li {!! (gmvl('entity_per_page', 10)==20) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_per_page', 10)==20) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=20">20</a></li>
-                                        <li {!! (gmvl('entity_per_page', 10)==50) ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_per_page', 10)==50) ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="perpage=50">50</a></li>
                                     </ul>
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order By</h6></li>
-                                        <li {!! (gmvl('entity_order_by', 'entity_type_name')=='entity_type_name') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_order_by', 'entity_type_name')=='entity_type_name') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="orderby=entity_type_name">Entity Type</a></li>
-                                        <li {!! (gmvl('entity_order_by', 'label')=='label') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_order_by', 'label')=='label') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="orderby=label">Legal Structure</a></li>
-                                        <li {!! (gmvl('entity_order_by', 'jurisdiction_name')=='jurisdiction_name') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_order_by', 'jurisdiction_name')=='jurisdiction_name') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="orderby=jurisdiction_name">Jurisdiction</a></li>
                                     </ul>
                                     <ul class="dropdown-list">
                                         <li><h6 class="dropdown-title">Order</h6></li>
-                                        <li {!! (gmvl('entity_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_ordered', 'DESC')=='DESC') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="ordered=DESC">DESC</a></li>
-                                        <li {!! (gmvl('entity_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
+                                        <li {!! (gmvl('entity_types_ordered', 'DESC')=='ASC') ? ' class="active"' : '' !!}>
                                             <a href="#" data-meta="ordered=ASC">ASC</a></li>
                                     </ul>
                                 </form>
@@ -65,7 +65,7 @@
                         <div class="data-table-filter relative d-inline-block"></div>
                     </div>
                 </div>
-                
+
                 @if($entity->total() > 0)
                 <table class="data-table dt-filter-init user-list pt-3">
                     <thead>
@@ -99,7 +99,7 @@
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
                                         <ul class="dropdown-list more-menu-{{$en->entity_type_id}}">
                                             <li><a href="{{ route('admin.entity.viewDetail', $en->entity_type_id) }}"><em class="far fa-eye"></em> View Details</a></li>
-                                            @if ($en->jur_status=="inactive") 
+                                            @if ($en->jur_status=="inactive")
                                                 <li><a href="{{ route('admin.entity.activation', ['id'=>$en->jurisdiction_id, 'act'=>'active']) }}" ><em class="far fa-check-square"></em>Active</a></li>
                                             @else
                                                 <li><a href="{{ route('admin.entity.activation', ['id'=>$en->jurisdiction_id, 'act'=>'inactive']) }}" ><em class="fa fa-adjust"></em>Inactive</a></li>

@@ -381,8 +381,7 @@ $has_sidebar = false;
                                         </div>
                                         <div class="col-sm-4 d-none d-sm-block">
                                             <div class="mx-md-4">
-                                                <img width="160" class="_image"
-                                                    src="{{ asset('assets/images/vector-'.$defaultImg.'.png') }}" alt="">
+                                                <img width="160" class="_image" src="{{ asset('assets/images/vector-'.$defaultImg.'.png') }}" alt="">
                                             </div>
                                         </div>
                                     </div>

@@ -10,17 +10,17 @@
                 <div class="card-innr">
 
                     <div class="card-head has-aside">
-                        <h4 class="card-title">Entities</h4>
+                        <h4 class="card-title">Your Entities</h4>
                         <div class="card-opt data-action-list d-md-inline-flex">
-                            <a href="{{ route('admin.addentity') }}" class="btn btn-auto btn-sm btn-primary">
-                                <em class="fas fa-plus-circle"> </em><span>Add <span
-                                        class="d-none d-md-inline-block">Entity</span></span>
+                            <a href="{{ route('admin.addentities') }}" class="btn btn-auto btn-sm btn-primary">
+                                <em class="fas fa-plus-circle"> </em><span>Add <span class="d-none d-md-inline-block">Entity</span></span>
                             </a>
                         </div>
                     </div>
 
                     <div class="gaps-1x"></div>
-                    <div class="page-nav-wrap">
+
+                    {{-- <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
                             <div class="search flex-grow-1 pl-lg-4 w-100 w-sm-auto">
                                 <form action="{{ route('admin.users') }}" method="GET" autocomplete="off">
@@ -111,7 +111,7 @@
 
                         <div class="search-adv-wrap hide">
                             <form class="adv-search" id="adv-search"  method="GET" autocomplete="off">
-                                {{-- action="{{ route('admin.users') }}" --}}
+
                                 <div class="adv-search">
                                     <div class="row align-items-end guttar-20px guttar-vr-15px">
                                         <div class="col-lg-6">
@@ -198,27 +198,94 @@
                                 <li><a href="{{ route('admin.users') }}" class="link link-underline">Clear All</a></li>
                             </ul>
                         </div>
+                    </div> --}}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="float-right position-relative">
+                                <a href="#" class="btn btn-light-alt btn-xs dt-filter-text btn-icon toggle-tigger"> <em
+                                        class="ti ti-settings"></em> </a>
+                                <div
+                                    class="toggle-class toggle-datatable-filter dropdown-content dropdown-dt-filter-text dropdown-content-top-left text-left">
+                                    <form class="update-meta" action="#" data-type="entity_page_meta">
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <h6 class="dropdown-title">Show</h6>
+                                            </li>
+                                            <li {!! gmvl('entity_per_page', 10)==10 ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="perpage=10">10</a>
+                                            </li>
+                                            <li {!! gmvl('entity_per_page', 10)==20 ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="perpage=20">20</a>
+                                            </li>
+                                            <li {!! gmvl('entity_per_page', 10)==50 ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="perpage=50">50</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <h6 class="dropdown-title">Order By</h6>
+                                            </li>
+                                            <li {!! gmvl('entity_order_by', 'entity_name' )=='entity_name'
+                                                ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="orderby=entity_name">Entity_Name</a>
+                                            </li>
+                                            <li {!! gmvl('entity_order_by', 'status' )=='status' ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="orderby=status">Status</a></li>
+                                                {{-- <li{!! gmvl('user_order_by', 'id' )=='token' ? ' class="active"' : '' !!}>
+                                                    <a href="#" data-meta="orderby=token">Token</a></li>
+                                        </ul> --}}
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <h6 class="dropdown-title">Order</h6>
+                                            </li>
+                                            <li {!! gmvl('entity_ordered', 'DESC' )=='DESC' ? ' class="active"' : ''
+                                                !!}>
+                                                <a href="#" data-meta="ordered=DESC">DESC</a>
+                                            </li>
+                                            <li {!! gmvl('entity_ordered', 'DESC' )=='ASC' ? ' class="active"' : ''
+                                                !!}>
+                                                <a href="#" data-meta="ordered=ASC">ASC</a>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-
+                    <div class="row justify-content-between pdb-1x" style="background-color: #f9fcff">
+                        <div class="col-9 col-sm-6 text-left">
+                            <div  class="dataTables_filter pt-3">
+                                <input type="search" id="search_table" class="form-control form-control-sm" placeholder="Type in to Search" aria-controls="DataTables_Table_0">
+                            </div>
+                        </div>
+                        <div class="col-3 text-right">
+                            <div class="data-table-filter relative d-inline-block"></div>
+                        </div>
+                    </div>
                     @if ($entity->total() > 0)
-                        <table class="data-table dt-filter-init user-list">
+                        <table class="data-table dt-filter-init user-list pt-3">
                             <thead>
                                 <tr class="data-item data-head">
-                                    <th class="data-col filter-data dt-user ">Entity Type</th>
-                                    <th class="data-col filter-data dt-email">Jurisdiction</th>
-                                    <th class="data-col dt-status"> Status</th>
+                                    <th class="data-col filter-data dt-jur ">Entity Name</th>
+                                    <th class="data-col filter-data dt-jur">Jurisdiction</th>
+                                    <th class="data-col filter-data dt-type ">Entity Type</th>
+                                    <th class="data-col filter-data dt-status"> Status</th>
                                     <th class="data-col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($entity as $en)
                                     <tr class="data-item">
-                                        <td class="data-col dt-user">
-                                            <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
+                                        <td class="data-col dt-jur">
+                                            <span class="lead user-name text-wrap">{{ $en->entity_name }}</span>
                                         </td>
-                                        <td class="data-col dt-email">
-                                            <span class="user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                        <td class="data-col dt-jur">
+                                            <span class="lead user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                        </td>
+                                        <td class="data-col dt-type">
+                                            <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
                                         </td>
                                         <td class="data-col data-col-wd-md dt-status">
                                             <span
@@ -232,25 +299,21 @@
                                                         class="ti ti-more-alt"></em></a>
                                                 <div class="toggle-class dropdown-content dropdown-content-top-left">
                                                     <ul class="dropdown-list more-menu-{{ $en->id }}">
-                                                        <li><a href="#"><em class="far fa-eye"></em> View Details</a></li>
+                                                        {{-- <li><a href="#"><em class="far fa-eye"></em> View Details</a></li> --}}
                                                         <li><a class="user-email-action" href="#" data-uid="{{ $en->id }}"
-                                                                data-toggle="modal"><em
-                                                                    class="far fa-envelope"></em>Statutory Framework</a>
+                                                                data-toggle="modal"><em class="far fa-envelope"></em>Management Portal</a>
                                                         </li>
                                                         <li><a href="javascript:void(0)" data-uid="{{ $en->id }}"
-                                                                data-type="deactivate"
-                                                                class="user-form-action user-action"><em
-                                                                    class="fas fa-sign-out-alt"></em>Deactivate</a></li>
+                                                                data-type="deactivate" class="user-form-action user-action"><em
+                                                                    class="fas fa-sign-out-alt"></em>Complete Formation </a></li>
                                                         <li>
                                                             {{-- <a href="#"
                                                                 data-uid="{{ $user->id }}" data-type="delete_user"
                                                                 class="user-action front"
                                                                 data-url="{{ route('admin.entity.delete_users', encrypt($en->id)) }}">
                                                                 --}}
-                                                                <a href="#" data-uid="{{ $en->id }}" data-type="delete_user"
-                                                                    class="user-action front">
-                                                                    <em class="fas fa-ban"></em>
-                                                                    Delete
+                                                                <a href="#" data-uid="{{ $en->id }}" data-type="delete_user" class="user-action front">
+                                                                    <em class="fas fa-ban"></em>Delete
                                                                 </a>
                                                         </li>
 
@@ -307,8 +370,8 @@
                             </div>
                         </div>
                     @endif
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -426,3 +489,26 @@
     </div>
 
 @endsection
+
+
+@push('footer')
+    <script type="text/javascript">
+        (function($) {
+            var table = $('.data-table').DataTable({
+                "destroy":          true,
+                'scrollY':          500,
+                // "scrollCollapse":   true,
+                "paging":           false,
+                "ordering":         false,
+                "info":             false,
+                "searching":        false,
+                "responsive":       true,
+                "autoWidth":        false,
+            });
+
+
+        })(jQuery);
+
+    </script>
+
+@endpush

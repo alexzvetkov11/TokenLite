@@ -32,10 +32,10 @@ class EntityController extends Controller
     {
         try{
             $role_data  = '';
-            $per_page   = gmvl('entity_per_page', 10);
-            $order_by   = gmvl('entity_order_by', 'entity_type_name');
+            $per_page   = gmvl('entity_types_per_page', 10);
+            $order_by   = gmvl('entity_types_order_by', 'entity_type_name');
             // $order_by= 'entity_type_name';
-            $ordered    = gmvl('entity_ordered', 'DESC');
+            $ordered    = gmvl('entity_types_ordered', 'DESC');
             $is_page    = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
             $entity = \DB::table('entity_types')->select(['*', 'entity_types.id as entity_type_id'])
                             ->join('jurisdictions', 'entity_types.jurisdiction_id', '=', 'jurisdictions.id')
@@ -59,7 +59,7 @@ class EntityController extends Controller
         $validator = Validator::make($request->all(), [
             "entityname" => "required|min:4",
         ]);
-        
+
         if ($validator->fails()) {
             $ret['msg'] = "warning";
             $ret['message'] = __('messages.form.wrong');
@@ -72,7 +72,7 @@ class EntityController extends Controller
             $entype->abbrev_position = $request->abbrev_position ;
             $entype->legal_structure_id = $request->legalStructure;
             $entype->jurisdiction_id = $request->jurisdiction ;
-            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N"; 
+            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N";
             $entype->formation_documents = $request->formationDocuments ;
             $entype->formation_notary_req = $request->notary=="on" ?"Y" :"N";
             $entype->principal_statute = $request->principal_statue ;
@@ -82,7 +82,7 @@ class EntityController extends Controller
                 $ret['msg'] = "success";
                 $ret['message'] = __("Successfully activated!");
                 $next = LegalStructures::select('label')->where('id', $entype->legal_structure_id)->first();
-                
+
                 if ($next->label=="Association"){
                     $associations = \DB::table('entity_types_associations')->get();
                     return view('admin.entity-type-associations', compact( 'entype'));
@@ -103,7 +103,7 @@ class EntityController extends Controller
                     $ret['message'] =  __('messages.form.wrong');
                     return redirect()->route('admin.addentity');
                 }
-        
+
             } catch (\Exception $e) {
                 echo $e->getMessage();
                 $ret['msg'] = 'error';
@@ -117,7 +117,7 @@ class EntityController extends Controller
         $validator = Validator::make($request->all(), [
             "entityname" => "required|min:4",
         ]);
-        
+
         if ($validator->fails()) {
             $ret['msg'] = "warning";
             $ret['message'] = __('messages.form.wrong');
@@ -130,7 +130,7 @@ class EntityController extends Controller
             $entype->abbrev_position = $request->abbrev_position;
             $entype->legal_structure_id = $request->legalStructure;
             $entype->jurisdiction_id = $request->jurisdiction ;
-            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N"; 
+            $entype->separate_legal_person = $request->separateLegal=="on" ? "Y" :"N";
             $entype->formation_documents = $request->formationDocuments;
             $entype->formation_notary_req = $request->notary=="on" ? "Y": "N" ;
             $entype->principal_statute = $request->principal_statue ;
@@ -140,7 +140,7 @@ class EntityController extends Controller
                 $ret['msg'] = "success";
                 $ret['message'] = __("successfully updated");
                 $next = LegalStructures::select('label')->where('id', $entype->legal_structure_id)->first();
-                
+
                 if ($next->label=="Association"){
                     $associations = EntityTypesAssociations::where('entity_type_id', $entype->id)->first();
                     if (!isset($associations))  $this->deleteData($entype->id);
@@ -209,7 +209,7 @@ class EntityController extends Controller
         $company->filing_annual_accounts_deadline_days =  $request->annualAFD;
         $company->UBO_threshold_capital_rights =$request->UBOCapital;
         $company->UBO_threshold_voting_interest =$request->UBOVoting;
-        
+
         print($company);
         exit;
         try{
@@ -255,7 +255,7 @@ class EntityController extends Controller
         $company->filing_annual_accounts_deadline_days =  $request->annualAFD;
         $company->UBO_threshold_capital_rights =$request->UBOCapital;
         $company->UBO_threshold_voting_interest =$request->UBOVoting;
-        
+
         try{
             $company->save();
             $ret['msg'] = "success";
@@ -274,7 +274,7 @@ class EntityController extends Controller
         $association->members_min = $request->minmember;
         $association->members_max = $request->maxmember;
         $association->save();
-        
+
         $ret['msg'] = "success";
         $ret['message'] = __("Successfully inserted.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);
@@ -284,7 +284,7 @@ class EntityController extends Controller
         $association->members_min = $request->minmember;
         $association->members_max = $request->maxmember;
         $association->save();
-        
+
         $ret['msg'] = "success";
         $ret['message'] = __("Successfully updated.");
         return redirect()->route('admin.entity')->with([$ret['msg'] => $ret['message']]);

@@ -129,8 +129,7 @@
                                     <div class="input-wrap">
                                         <input class="document-type" type="checkbox" name="documentType"
                                             data-change=".doc-upload-d2" value="nidcard" id="docType-nidcard"
-                                            data-title="National ID Card"
-                                            data-img="{{ asset('assets/images/vector-nidcard.png') }}">
+                                            data-title="National ID Card" data-img="{{ asset('assets/images/vector-nidcard.png') }}">
                                         <label for="docType-nidcard">
                                             <div class="document-type-icon">
                                                 <img src="{{ asset('assets/images/icon-national-id.png') }}" alt="">

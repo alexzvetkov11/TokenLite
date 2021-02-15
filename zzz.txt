@@ -756,3 +756,18 @@ Divorced
 Tax Document Upload
 Upload Here a Tax Statement of your Primary Tax Residence
 Upload Here a Tax Statement of your Secondary Tax Residence
+Choose the type of Entity adding functionality that you wish to perform.
+Supported Jurisdictions
+Supported Entity Types
+Create Entity
+Please type the Entity Name carefully, it is case-sensitive and sensitive to special characters.
+Do not include the abbreviation of the Entity Type (for example: Limited or Ltd.).
+You can still change the name later, up until the point that the Entity is formally registered.
+Registration Details
+Registration Number at Registrar:
+Upload the Statutory Documents and Extracts of the existing Entity so we can most of the work for you.
+Upload all Statutory Documents and Extracts that are related to: incorporation, statutory agreements, members, directors, officers,
+Onboarding Type
+"Full Functionality" means that the Entity can make full use of all the functionalities of the Apollo Platform. This option is only available for supported Entity Types.
+Listing Only
+Full Functionality

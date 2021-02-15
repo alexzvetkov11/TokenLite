@@ -23,7 +23,32 @@ $(document).ready(function() {
         })
     });
 
-    //admin jurisdition.blade.php edit modal
+
+
+
+    /// admin add entities page
+    add_entities_page(1);
+    $('#entities_option_inco').on("click", function(){
+        add_entities_page(1);
+
+    });
+    $('#entities_option_exist').on("click", function(){
+        add_entities_page(2);
+    })
+
+    function add_entities_page( t){
+        if (t==1){
+            $('#incorporate').show();
+            $('#existing').hide();
+            console.log("$('#existing').hide();");
+        } else{
+            $('#incorporate').hide();
+            $('#existing').show();
+            console.log("$('#existing').show();");
+        }
+    }
+
+    /// admin jurisdition.blade.php edit modal
     $(".editJurisdiction").click(function() {
         $("[name='juris_name']").val($(this).data('juris'));
         $("[name='lang_code']").val($(this).data('langcode')).trigger('change');
@@ -39,7 +64,7 @@ $(document).ready(function() {
         $("[name='juris_id']").val($(this).data('id'));
     });
 
-    //admin article_detail.blade.php edit modal
+    /// admin article_detail.blade.php edit modal
     $("[data-target='#editArticle']").on("click", function() {
         $name = $(this).data('selector');
         if ($name == "empty") {
@@ -71,29 +96,28 @@ $(document).ready(function() {
     });
 
 
-    //custom datatable search
+    /// custom datatable search
     $("#search_table").on('keyup', function() {
         var input, filter, table, tr, td, i, txtValue;
         input = $("#search_table").val() + "";
         filter = input.toUpperCase();
         tr = $(".data-table > tbody > tr");
-
         for (i = 0; i < tr.length; i++) {
-            td = $(tr[i]).find("td")[0];
-            console.log(td);
-            if (td) {
-                txtValue = td.textContent || td.innerText;
+            td = $(tr[i]).find("td");
+            var flag=false;
+            for( var j=0; j<td.length; j++){
+                txtValue = td[j].textContent || td[j].innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    $(tr[i]).show();
-                } else {
-                    $(tr[i]).hide();
+                    flag=true;
+                    break;
                 }
             }
+            if ( flag ) $(tr[i]).show();
+            else $(tr[i]).hide();
         }
-
     });
 
-    // common numerical input
+    /// common numerical input
     $(".comma").on("keydown", function(e) {
         var keycode = (event.which) ? event.which : event.keyCode;
         if (e.shiftKey == true || e.ctrlKey == true) return false;
@@ -132,7 +156,7 @@ $(document).ready(function() {
     });
 
 
-    // percent numerical input
+    /// percent numerical input
     $('.percent').on("keydown", function(e) {
         var keycode = (event.which) ? event.which : event.keyCode;
         if (e.shiftKey == true || e.ctrlKey == true) return false;

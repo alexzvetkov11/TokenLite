@@ -1021,6 +1021,26 @@ if (!function_exists('__status')) {
                 'status' => 'danger',
                 'null' => null,
             ],
+            'information' => (object) [
+                'icon' => 'canceled',
+                'text' => 'In Formattion',
+                'status' => 'info',
+                'null' => null,
+            ],
+            'indissolution' => (object) [
+                'icon' => 'canceled',
+                'text' => 'In Dissolution',
+                'status' => 'warning',
+                'null' => null,
+            ],
+            'dissolved' => (object) [
+                'icon' => 'canceled',
+                'text' => 'Dissolved',
+                'status' => 'danger',
+                'null' => null,
+            ],
+
+
             'default' => (object) [
                 'icon' => 'pending',
                 'text' => 'Pending',
