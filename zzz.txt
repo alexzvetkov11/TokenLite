@@ -771,3 +771,44 @@ Onboarding Type
 "Full Functionality" means that the Entity can make full use of all the functionalities of the Apollo Platform. This option is only available for supported Entity Types.
 Listing Only
 Full Functionality
+Purpose & Activities
+Trading Names
+Purpose Type
+Personal Holding Company
+Import (including parts, from one Custom Union to another)
+Manufacture
+Export (including parts, from one Custom Union to another)
+Service
+Products
+Domestic Trade (within Custom Union)
+In a physical Retail Outlet (example: shop or kiosk)
+Via Street Trade or Door-to-Door Sales
+Via the Internet
+From Home
+By Mail Order
+Other, namely
+Customer Descriptions
+Will the Company be providing any kind of Financial (Advisory) Services to Third-Parties?
+Will the Company be active as an Employment-, Secondment-, or Placement Agency?
+Regulatory Approvals
+Current Office Situation
+This Entity wishes to obtain physical office space in this Jurisdiction which it currently does not have yet
+This Entity will then register itself at the physical office space that it wishes to obtain.
+Registered Address
+Registered Office Selection
+Country
+Municipality, Province
+Number
+Unit
+This is a Residential Address.
+The Registered Address is also the preferred Correspondence Address.
+The Registered Address is also the address of the physical Local Head Office of this Entity.
+Electronic Correspondence
+Phone Number
+Email Address
+Website
+Local Head Office
+The Local Head Office address is also the preferred Correspondence Address.
+Branches
+This Entity will, in addition to its Local Head Office, have one or more branches in this Jurisdiction.
+Correspondence Address

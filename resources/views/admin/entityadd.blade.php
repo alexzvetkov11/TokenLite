@@ -41,7 +41,7 @@
                                     <p>{{__('Fill in the name details of the new Entity Type.')}}</p>
                                 </div>
                             </div>
-                        </div>{{-- .step-head --}}
+                        </div>
                         <div class="form-step-fields card-innr">
                             <div class="row">
                                 <div class="col-md-6">
@@ -268,8 +268,6 @@
                     <div class="gaps-1x"></div>
                 </form>
             </div>
-
-
         </div>
     </div>
     <script type="text/javascript">

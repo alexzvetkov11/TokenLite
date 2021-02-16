@@ -174,7 +174,7 @@
                                     <div class="input-item input-with-label">
                                         <label  for="principal_statue" class="input-item-label">{{__('Participant Statue')}}</label>
                                         <div class="input-wrap">
-                                            <textarea class="input-bordered input-textarea-min" id="principal_statue" name="principal_statue" 
+                                            <textarea class="input-bordered input-textarea-min" id="principal_statue" name="principal_statue"
                                             style="margin-top: 0px; margin-bottom: 0px; height: 100px;" placeholder="Write something...">{{isset($entype)?$entype->principal_statute : ''}}</textarea>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                     </div>
                                 </div> --}}
 
-                                
+
                                 <div class="col-md-6" name="share">
                                     <div class="input-item input-with-label">
                                         <label for="registername" class="input-item-label">{{__('Registrar Name (written with "-rar")')}}  </label>

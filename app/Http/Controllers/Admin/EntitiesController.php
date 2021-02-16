@@ -6,6 +6,7 @@ use Auth;
 use Validator;
 use App\Models\Setting;
 use App\Models\Entity;
+use App\Models\OfficeServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,7 +28,16 @@ class EntitiesController extends Controller
         return view('admin.entities-add');
     }
 
-    public function add_entities_post( Request $request){
-        return view('admin.entities-template');
+    public function add_entities_post( Request $request)
+    {
+        $offices = OfficeServices::get();
+        return view('admin.entities-template1', compact('offices'));
     }
+
+    public function add_entities_post_next( Request $request)
+    {
+        $offices = OfficeServices::get();
+        return view('admin.entities-template2', compact('offices'));
+    }
+
 }

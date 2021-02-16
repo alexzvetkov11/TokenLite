@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row justify-content-between pdb-1x" style="background-color: #f9fcff">
                         <div class="col-9 col-sm-6 text-left">
                             <div  class="dataTables_filter pt-3">
@@ -138,11 +138,11 @@
                         </table>
                     @else
                         <div class="bg-light text-center rounded pdt-5x pdb-5x">
-                            <p><em
-                                    class="ti ti-server fs-24"></em><br>{{ $is_page == 'all' ? 'No investor / user found!' : 'No ' . $is_page . ' user here!' }}
+                            <p><em class="ti ti-server fs-24"></em><br>
+                                {{ $is_page == 'all' ? 'No investor / user found!' : 'No ' . $is_page . ' user here!' }}
                             </p>
-                            <p><a class="btn btn-primary btn-auto" href="{{ route('admin.users', 'user') }}">View All
-                                    Users</a></p>
+                            <p><a class="btn btn-primary btn-auto" href="{{ route('admin.users', 'user') }}">
+                                View All Users</a></p>
                         </div>
                     @endif
 

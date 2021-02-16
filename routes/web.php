@@ -223,7 +223,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
         Route::post('/entype/delete/{id}', 'Admin\EntityController@deleteEntitytype')->middleware(['ico', 'demo_user'])->name('entype.delete');
 
         Route::post('/entities/add', 'Admin\EntitiesController@add_entities_post')->middleware(['ico', 'demo_user'])->name('entities.add');
-
+        Route::post('/entities/add_next', 'Admin\EntitiesController@add_entities_post_next')->middleware(['ico', 'demo_user'])->name('entities.template1');
 
     });
 

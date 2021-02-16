@@ -16,6 +16,13 @@
             content: " *";
             color: red;
         }
+        .trumbowyg-box.trumbowyg-editor-visible {
+            min-height: 150px !important;
+        }
+        .trumbowyg-editor {
+            min-height: 150px !important;
+        }
+
     </style>
     @stack('header')
 </head>
