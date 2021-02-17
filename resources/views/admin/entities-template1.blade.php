@@ -13,7 +13,7 @@
                 <div class="card-head has-aside pd-2x">
                     <div style="font-size:1.29em; color:#342d6e"> <b>Entities > [ENTITY_NAME] ></b> <span style="font-size:0.8em"> Complete Formation/Onboarding</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
-                        <a href="javascript:void(0)" class="btn btn-auto btn-sm btn-primary" >
+                        <a href="{{ route('admin.entities') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
                         </a>
                     </div>
@@ -64,7 +64,7 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between pdt-1x">
                                         <p> {{ __('Main Business Activities') }}</p>
-                                        <button class="btn btn-primary btn-sm"> {{ __('Add Business Activity') }}</button>
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addBusiness"> {{ __('Add Business Activity') }}</a>
                                     </div>
 
                                     <table class="data-table dt-filter-init user-list pt-3">
@@ -173,83 +173,87 @@
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='products' >
+                                            <input class="input-checkbox input-checkbox-sm switch-toggle" data-switch="switch-to-product" type="checkbox" id='products' >
                                             <label for="products">{{ __('Products') }}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="input-item text-left">
-                                            <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='manufacture' >
-                                                <label for="manufacture">{{ __('Manufacture') }}</label>
+                                        <div class="switch-content switch-to-product">
+                                            <div class="input-item text-left">
+                                                <div class="input-wrap">
+                                                    <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='manufacture' >
+                                                    <label for="manufacture">{{ __('Manufacture') }}</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="input-item text-left">
-                                            <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='import' >
-                                                <label for="import">{{ __('Import (including parts, from one Custom Union to another)') }}</label>
+                                            <div class="input-item text-left">
+                                                <div class="input-wrap">
+                                                    <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='import' >
+                                                    <label for="import">{{ __('Import (including parts, from one Custom Union to another)') }}</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="input-item text-left">
-                                            <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='export' >
-                                                <label for="export">{{ __('Export (including parts, from one Custom Union to another)') }}</label>
+                                            <div class="input-item text-left">
+                                                <div class="input-wrap">
+                                                    <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='export' >
+                                                    <label for="export">{{ __('Export (including parts, from one Custom Union to another)') }}</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="input-item text-left">
-                                            <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='domestic' >
-                                                <label for="domestic">{{ __('Domestic Trade (within Custom Union)') }}</label>
+                                            <div class="input-item text-left">
+                                                <div class="input-wrap">
+                                                    <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='domestic' >
+                                                    <label for="domestic">{{ __('Domestic Trade (within Custom Union)') }}</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <p> {{ __('Places of Product Offering') }}</p>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='outlet' name="product_offering" >
-                                            <label for="outlet">{{ __('In a physical Retail Outlet (example: shop or kiosk)') }}</label>
+                                    <div class="switch-content switch-to-product">
+                                        <p> {{ __('Places of Product Offering') }}</p>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" id='outlet' value='outlet' name="product_offering" >
+                                                <label for="outlet">{{ __('In a physical Retail Outlet (example: shop or kiosk)') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='market' name="product_offering">
-                                            <label for="market">{{ __('On an Organized Market or Fair.') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" id='market' value='market' name="product_offering">
+                                                <label for="market">{{ __('On an Organized Market or Fair.') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='street' name="product_offering">
-                                            <label for="street">{{ __('Via Street Trade or Door-to-Door Sales') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" id='street' value='street' name="product_offering">
+                                                <label for="street">{{ __('Via Street Trade or Door-to-Door Sales') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='internet' name="product_offering" >
-                                            <label for="internet">{{ __('Via the Internet') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" id='internet' value='internet' name="product_offering" >
+                                                <label for="internet">{{ __('Via the Internet') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='home' name="product_offering">
-                                            <label for="home">{{ __('From Home') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" id='home' value='home' name="product_offering">
+                                                <label for="home">{{ __('From Home') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='mail' name="product_offering">
-                                            <label for="mail">{{ __('By Mail Order') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm all_methods" type="radio" value='mail' id='mail' name="product_offering">
+                                                <label for="mail">{{ __('By Mail Order') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="input-item text-left">
-                                        <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='namely' name="product_offering">
-                                            <label for="namely">{{ __('Other, namely') }}</label>
+                                        <div class="input-item text-left">
+                                            <div class="input-wrap">
+                                                <input class="input-radio input-radio-sm" type="radio" id='namely' value='namely' name="product_offering">
+                                                <label for="namely">{{ __('Other, namely') }}</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input class="input-bordered" type="text" placeholder="Input text" >
+                                        <div class="col-md-12">
+                                            <input class="input-bordered" type="text" name="othername" placeholder="Input text" >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +301,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="switch-content switch-to-yes">
-                                        <div class="input-item input-with-label switch-to-yes">
+                                        <div class="input-item input-with-label">
                                             <input type="text" class="input-bordered" placeholder="Input text" name="txt_namely">
                                         </div>
                                     </div>
@@ -333,6 +337,72 @@
     </script>
 @endsection
 
+@section('modals')
+
+    <div class="modal fade" id="addBusiness" tabindex="-1">
+        <div class="modal-dialog modal-dialog-md modal-dialog-centered">
+            <div class="modal-content">
+                <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
+                <div class="popup-body popup-body-md">
+                    <h3 class="popup-title">{{ __('Add Business Activity') }}</h3>
+                    <form method="POST" class="adduser-form validate-modern" id="addUserForm" autocomplete="false">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-item input-with-label">
+                                    <label for="section" class="input-item-label">{{ __('Section') }}</label>
+                                    <select name="section" id="section" class="select select-bordered select-block" required="required">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-item input-with-label">
+                                    <label for="division" class="input-item-label">{{ __('Division') }}</label>
+                                    <select name="division" id="division" class="select select-bordered select-block" required="required">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-item input-with-label">
+                                    <label for="class" class="input-item-label">{{ __('Class') }}</label>
+                                    <select name="class" id="class" class="select select-bordered select-block" required="required">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-item input-with-label">
+                                    <label for="group" class="input-item-label">{{ __('Group') }}</label>
+                                    <select name="group" id="group" class="select select-bordered select-block" required="required">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-item input-with-label">
+                                    <label for="subdivision" class="input-item-label">{{ __('Sub-Division') }}</label>
+                                    <select name="subdivision" id="subdivision" class="select select-bordered select-block" required="required">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <div class="input-item input-with-label">
+                            <label class="input-item-label">{{ __('Relative Portion') }}</label>
+                            <div class="input-wrap">
+                                <input name="percent" class="input-bordered percent" required="required" type="text" placeholder="Percentage">
+                            </div>
+                        </div>
+
+                        <div class="gaps-1x"></div>
+                        <button class="btn btn-md btn-primary" type="submit">{{ __('Add Business Activity') }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+
 @push('footer')
     <link rel="stylesheet" href="{{ asset('assets/plugins/trumbowyg/ui/trumbowyg.min.css')}}?ver=1.0">
     <script src="{{ asset('assets/plugins/trumbowyg/trumbowyg.min.js') }}?ver=101"></script>
@@ -358,6 +428,16 @@
             if ($_form.length > 0) {
                 ajax_form_submit($_form, false);
             }
+
+            $('[name="othername"]').hide();
+            $('input[name="product_offering"]').on('click', function(){
+                console.log($(this).val());
+                if ($(this).val()=='namely'){
+                    $('[name="othername"]').show();
+                } else {
+                    $('[name="othername"]').hide();
+                }
+            })
         })(jQuery);
     </script>
 

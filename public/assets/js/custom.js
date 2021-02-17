@@ -40,7 +40,6 @@ $(document).ready(function() {
         if (t==1){
             $('#incorporate').show();
             $('#existing').hide();
-            console.log("$('#existing').hide();");
         } else{
             $('#incorporate').hide();
             $('#existing').show();

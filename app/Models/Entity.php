@@ -38,30 +38,14 @@ class Entity extends Model
      */
     public function __construct()
     {
-        //
+
     }
 
-    /**
-     * Search/Filter parametter exchnage with database value
-     *
-     * @version 1.0.0
-     * @since 1.1.0
-     * @return void
-     */
-    public function getAll($request)
-    {
-        // $result = [];
-        // $find = ['state', 'doc'];
-        // $replace = ['status', 'documentType'];
-        // foreach($request as $key => $value) {
-        //     $set_key = str_replace($find, $replace, $key);
-        //     $val = trim($value);
-
-        //     if(!empty($val)) {
-        //         $result[] = array($set_key, '=', $val);
-        //     }
-        // }
-        return $this;
+    public function check_entype(){
+        return $this->belongsTo('App\Models\EntityTypes', 'entity_type', 'id');
+    }
+    public function check_juris(){
+        return $this->belongsTo('App\Models\Jurisdictions', 'jurisdiction', 'id');
     }
 
 }

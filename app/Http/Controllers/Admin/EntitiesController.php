@@ -9,6 +9,8 @@ use App\Models\Entity;
 use App\Models\OfficeServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\EntityTypes;
+use App\Models\Jurisdictions;
 
 class EntitiesController extends Controller
 {
@@ -24,17 +26,23 @@ class EntitiesController extends Controller
         return view('admin.entities', compact('entity', 'pagi', 'is_page'));
     }
 
-    public function addentities(Request $request){
-        return view('admin.entities-add');
+    public function addentities()
+    {
+
+        $juris_actived = Jurisdictions::where('jur_status', 'active')->orderby('jurisdiction_name', 'ASC')->get();
+        $juris = Jurisdictions::orderby('jur_status', 'ASC')->orderby('jurisdiction_name', 'ASC')->get();
+        $entype = EntityTypes::orderby('entity_type_name', 'ASC')->get();
+
+        return view('admin.entities-add', compact('juris_actived', 'juris', 'entype' ));
     }
 
-    public function add_entities_post( Request $request)
+    public function add_entities_post( Request $request )
     {
         $offices = OfficeServices::get();
         return view('admin.entities-template1', compact('offices'));
     }
 
-    public function add_entities_post_next( Request $request)
+    public function add_entities_post_next( Request $request )
     {
         $offices = OfficeServices::get();
         return view('admin.entities-template2', compact('offices'));

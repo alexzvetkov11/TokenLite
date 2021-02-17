@@ -23,6 +23,10 @@
             min-height: 150px !important;
         }
 
+        li.select2-results__option:empty {
+            display: none;
+        }
+
     </style>
     @stack('header')
 </head>

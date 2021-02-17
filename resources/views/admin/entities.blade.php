@@ -271,6 +271,7 @@
                                     <th class="data-col filter-data dt-jur ">Entity Name</th>
                                     <th class="data-col filter-data dt-jur">Jurisdiction</th>
                                     <th class="data-col filter-data dt-type ">Entity Type</th>
+                                    <th class="data-col filter-data dt-role ">Role</th>
                                     <th class="data-col filter-data dt-status"> Status</th>
                                     <th class="data-col"></th>
                                 </tr>
@@ -278,14 +279,26 @@
                             <tbody>
                                 @foreach ($entity as $en)
                                     <tr class="data-item">
-                                        <td class="data-col dt-jur">
-                                            <span class="lead user-name text-wrap">{{ $en->entity_name }}</span>
+                                        <td class="data-col data-col-wd-ld dt-user">
+                                            <div class="d-flex align-items-center">
+                                                <div class="fake-class">
+                                                    <span class="lead user-name text-wrap"> {{ $en->entity_name .' '. $en->check_entype->abbrev_short }} </span>
+                                                    <span class="sub user-id">{{ set_id($en->id, 'entities') }}
+                                                        {{-- @if ($user->role == 'admin')
+                                                            <span class="badge badge-xs badge-dim badge-{{ $user->type != 'demo' ? 'success' : 'danger' }}">ADMIN</span>
+                                                        @endif --}}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="data-col dt-jur">
-                                            <span class="lead user-name text-wrap">{{ $en->jurisdiction }}</span>
+                                            <span class="lead user-name text-wrap">{{ $en->check_juris->jurisdiction_name }}</span>
                                         </td>
                                         <td class="data-col dt-type">
-                                            <span class="lead user-name text-wrap">{{ $en->entity_type }}</span>
+                                            <span class="lead user-name text-wrap">{{ $en->check_entype->entity_type_name }}</span>
+                                        </td>
+                                        <td class="data-col dt-type">
+                                            <span class="lead user-name text-wrap">{{ get_role($en->entity_type, Auth::id()) }}</span>
                                         </td>
                                         <td class="data-col data-col-wd-md dt-status">
                                             <span

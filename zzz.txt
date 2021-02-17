@@ -812,3 +812,9 @@ The Local Head Office address is also the preferred Correspondence Address.
 Branches
 This Entity will, in addition to its Local Head Office, have one or more branches in this Jurisdiction.
 Correspondence Address
+Incorporate New Entity
+Add Existing Entity
+Add Business Activity
+Division
+Relative Portion
+Add Business Activity

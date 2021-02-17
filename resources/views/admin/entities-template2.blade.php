@@ -13,7 +13,7 @@
                 <div class="card-head has-aside pd-2x">
                     <div style="font-size:1.29em; color:#342d6e"> <b>Entities > [ENTITY_NAME] ></b> <span style="font-size:0.8em"> Complete Formation/Onboarding</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
-                        <a href="javascript:void(0)" class="btn btn-auto btn-sm btn-primary" >
+                        <a href="{{ route('admin.entities') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
                         </a>
                     </div>
@@ -33,47 +33,47 @@
                         <div class="form-step-fields card-innr">
                             <p>{{ __('Current Office Situation') }}</p>
                             <div class="row">
-                                <div class="col-md-6" name="share">
+                                <div class="col-md-6" >
                                     <div class="pt-2">{{ __('This Entity wishes to obtain physical office space in this Jurisdiction which it currently does not have yet.') }}</div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="separateLegal" type="checkbox" id="separateLegal">
-                                            <label for="separateLegal">No</label>
+                                            <input class="input-switch" name="physical" type="checkbox" id="physical">
+                                            <label for="physical">No</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" name="share">
+                                <div class="col-md-6 physical" >
                                     <div class="pt-2">{{ __('This Entity will then register itself at the physical office space that it wishes to obtain.') }}</div>
                                 </div>
-                                <div class="col-lg-3 col-sm-6">
+                                <div class="col-lg-3 col-sm-6 physical">
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="separateLegal" type="checkbox" id="separateLegal">
-                                            <label for="separateLegal">No</label>
+                                            <input class="input-switch" name="register" type="checkbox" id="register">
+                                            <label for="register">No</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" name="share">
+                                <div class="col-md-6 register" >
                                     <div class="pt-2">{{ __('This Entity already has an address at which it can register and which complies with the requirements set for a Registered Address.') }}</div>
                                 </div>
-                                <div class="col-lg-3 col-sm-6">
+                                <div class="col-lg-3 col-sm-6 register">
                                     <div class="input-item input-with-label">
                                         <div class="input-wrap input-wrap-switch">
                                             <span class="align-items-center d-flex pr-3">Yes</span>
-                                            <input class="input-switch" name="separateLegal" type="checkbox" id="separateLegal">
-                                            <label for="separateLegal">No</label>
+                                            <input class="input-switch" name="exist" type="checkbox" id="exist">
+                                            <label for="exist">No</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <hr/>
 
-                            <p>{{ __('Registered Office Selection') }}</p>
-                            <div class="row">
+                            <p class="office_selection">{{ __('Registered Office Selection') }}</p>
+                            <div class="row office_selection">
                                 <ul class="document-list guttar-vr-10px">
                                     <div class="col-md-6">
                                         <li class="document-item">
@@ -93,10 +93,10 @@
                                     </div>
                                 </ul>
                             </div>
-                            <hr/>
+                            <hr class="office_selection" />
 
-                            <p>{{ __('Registered Address') }}</p>
-                            <div class="row">
+                            <p class="address">{{ __('Registered Address') }}</p>
+                            <div class="row address">
                                 <div class="col-md-4">
                                     <div class="input-item input-with-label">
                                         <label for="trading_name" class="input-item-label">{{__('Country')}}</label>
@@ -175,7 +175,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" name="share">
+                                <div class="col-md-6" >
                                     <div class="pt-2">{{ __('The Registered Address is also the preferred Correspondence Address.') }}</div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -187,7 +187,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" name="share">
+                                <div class="col-md-6" >
                                     <div class="pt-2">{{ __('The Registered Address is also the address of the physical Local Head Office of this Entity.') }}</div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6">
@@ -201,7 +201,7 @@
                                 </div>
 
                             </div>
-                            <hr/>
+                            <hr class="address" />
 
                             <p>{{ __('Electronic Correspondence') }}</p>
                             <div class="row">
@@ -390,8 +390,8 @@
                             </div>
                             <hr/>
 
-                            <p>{{ __('Correspondence Address') }}</p>
-                            <div class="row">
+                            <p class="correspondence">{{ __('Correspondence Address') }}</p>
+                            <div class="row correspondence">
                                 <div class="col-md-4">
                                     <div class="input-item input-with-label">
                                         <label for="trading_name" class="input-item-label">{{__('Country')}}</label>
@@ -528,6 +528,42 @@
             var $_form = $('form#update_page');
             if ($_form.length > 0) {
                 ajax_form_submit($_form, false);
+            }
+            physicalclick();
+            $('#physical').on('click', function(){
+                physicalclick();
+            });
+            registerclick();
+            $('#register').on('click', function(){
+                registerclick();
+            });
+            existclick();
+            $('#exist').on('click', function(){
+                existclick();
+            })
+
+            function physicalclick(){
+                if ( $('#physical').prop('checked') ) $('.physical').show();
+                else $('.physical').hide();
+            }
+            function registerclick(){
+                if ( $('#register').prop('checked') ) {
+                    $('.register').hide();
+                    $('.correspondence').show()
+                }
+                else {
+                    $('.register').show();
+                    $('.correspondence').hide()
+                }
+            }
+            function existclick(){
+                if ( $('#exist').prop('checked') ) {
+                    $('.office_selection').hide();
+                    $('.address').show();
+                } else {
+                    $('.office_selection').show();
+                    $('.address').hide();
+                }
             }
         })(jQuery);
     </script>

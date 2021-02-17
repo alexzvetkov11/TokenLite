@@ -13,6 +13,9 @@ use App\Models\Transaction;
 use App\Helpers\IcoHandler;
 use App\Models\EmailTemplate;
 use App\Models\PaymentMethod;
+use App\Models\EntityTypes;
+use App\Models\UserRoles;
+
 use App\Helpers\TokenCalculate;
 use App\Notifications\TnxStatus;
 use Illuminate\Support\HtmlString;
@@ -1350,6 +1353,9 @@ if (!function_exists('set_id')) {
         if ($type == 'withdraw') {
             return config('icoapp.withdraw_prefix', 'WTX') . sprintf('%06s', $number);
         }
+        if ($type == 'entities') {
+            return config('icoapp.entities_prefix', 'E') . sprintf('%06s', $number);
+        }
     }
 }
 
@@ -2553,6 +2559,20 @@ if (!function_exists('recaptcha')) {
             }
         }
         return false;
+    }
+}
+
+/* @function get_role()  @version v1.0  @since 1.1.4 */
+if (!function_exists('get_role')) {
+    function get_role($entype_id, $user_id)
+    {
+        $roles = UserRoles::select('role_label')->where('user_id', $user_id)->where('entity_id', $entype_id)->get();
+        $str="";
+        foreach ( $roles as $role){
+            $str .=  $role->role_label .'; ';
+        }
+        if (strlen($str)==0) return "Incorporator";
+        else return substr($str, 0, strlen($str)-2);
     }
 }
 

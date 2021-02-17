@@ -23,7 +23,7 @@
                 </div> --}}
 
                 <div class="card-head has-aside pd-2x">
-                    <h4 class="card-title">Entities > Add Entity</h4>
+                    <div style="font-size:1.29em; color:#342d6e"> <b>{{ __('Entities') }} ></b> <span style="font-size:0.8em">{{ __('Add Entity') }}</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entity') }}" class="btn btn-auto btn-sm btn-primary">
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -50,7 +50,7 @@
                             <ul class="document-list guttar-vr-10px">
                                 <li class="document-item">
                                     <div class="input-wrap">
-                                        <input class="document-type" type="radio" name="documentType" value="passport"
+                                        <input class="document-type" type="radio" name="documentType" value="incorporate"
                                             id="entities_option_inco" data-title="Passport"
                                             data-img="{{ asset('assets/images/vector-passport.png') }}" checked>
                                         <label for="entities_option_inco">
@@ -58,16 +58,14 @@
                                                 <img src="{{ asset('assets/images/icon-passport.png') }}" alt="">
                                                 <img src="{{ asset('assets/images/icon-passport-color.png') }}" alt="">
                                             </div>
-                                            <span>Incorporate New Entity</span>
+                                            <span>{{ __('Incorporate New Entity') }}</span>
                                         </label>
                                     </div>
                                 </li>
-                                {{--  --}}
-                                {{--  --}}
                                 <li class="document-item">
                                     <div class="input-wrap">
                                         <input class="document-type" type="radio" name="documentType"
-                                            id="entities_option_exist" data-change=".doc-upload-d2" value="nidcard"
+                                            id="entities_option_exist" data-change=".doc-upload-d2" value="existing"
                                             data-title="National ID Card"
                                             data-img="{{ asset('assets/images/vector-nidcard.png') }}">
                                         <label for="entities_option_exist">
@@ -76,7 +74,7 @@
                                                 <img src="{{ asset('assets/images/icon-national-id-color.png') }}"
                                                     alt="">
                                             </div>
-                                            <span>Add Existing Entity</span>
+                                            <span>{{ __('Add Existing Entity') }}</span>
                                         </label>
                                     </div>
                                 </li>
@@ -100,11 +98,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Supported Jurisdictions') }}</label>
+                                            <label for="jurisdiction1" class="input-item-label">{{ __('Supported Jurisdictions') }}</label>
                                             <div class="input-wrap">
-                                                <select class="select-bordered select-block" name="Proof of Address Type"
-                                                    id="Proof of Address Type" data-dd-class="search-on">
+                                                <select class="select-bordered select-block" name="jurisdiction1" id="jurisdiction1" data-dd-class="search-on">
+                                                    <option value=""> {{ __('Select Option') }}</option>
+                                                    @foreach ( $juris_actived as $jur_act)
+                                                        <option value="{{ $jur_act->id }}"> {{ $jur_act->jurisdiction_name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -127,11 +127,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Supported Entity Types') }}</label>
+                                            <label for="entype1" class="input-item-label">{{ __('Supported Entity Types') }}</label>
                                             <div class="input-wrap">
-                                                <select class="select-bordered select-block" name="Proof of Address Type"
-                                                    id="Proof of Address Type" data-dd-class="search-on">
+                                                <select class="form-control" name="entype1" id="entype1">
+                                                    <option value="0">{{ __('Select Option') }}</option>
+                                                    @foreach($entype as $en)
+                                                        <option value="{{ $en->id }}" data-status="{{ $en->jur_status }}" data-juris="{{ $en->jurisdiction_id }}">{{ $en->entity_type_name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -168,19 +170,18 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name" class="input-item-label">Entity Name</label>
+                                            <label for="entity_name1" class="input-item-label">Entity Name</label>
                                             <div class="input-wrap">
-                                                <input class="input-bordered" type="text" id="first-name" name="first_name"
-                                                    value="Mercer Worth">
+                                                <input class="input-bordered" type="text" id="entity_name1" name="entity_name1" value="">
                                                 <div class="gaps-1x"> </div>
-                                                <div> <strong>Full Name: </strong> Mercer Worth B.V.</p>
-                                                </div>
+                                                <div> <strong>Full Name: </strong> <span id="fullname1"></span></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-step form-step5">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
@@ -197,7 +198,8 @@
                                         <div class="input-item input-with-label">
                                             <label for="first-name" class="input-item-label">Choosen Date</label>
                                             <div class="input-wrap">
-                                                <input class="input-bordered date-picker" type="text">
+                                                <input class="input-bordered date-picker" type="text" id="start_date" name="issue_date"  data-format="alt"
+                                                    min="{{ now()->toDateString('d-m-Y') }}" >
                                             </div>
                                         </div>
                                     </div>
@@ -235,11 +237,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Supported Jurisdictions') }}</label>
+                                            <label for="jurisdiction2" class="input-item-label">{{ __('Supported Jurisdictions') }}</label>
                                             <div class="input-wrap">
-                                                <select class="select-bordered select-block" name="Proof of Address Type"
-                                                    id="Proof of Address Type" data-dd-class="search-on">
+                                                <select class="select-bordered select-block" name="jurisdiction2" id="jurisdiction2" data-dd-class="search-on">
+                                                    <option value="0">{{ __('Select Option') }}</option>
+                                                    @foreach($juris as $jur)
+                                                        <option value="{{ $jur->id }}">{{ $jur->jurisdiction_name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -262,21 +266,23 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Entity Types') }}</label>
+                                            <label for="entype2" class="input-item-label">{{ __('Entity Types') }}</label>
                                             <div class="input-wrap">
-                                                <select class="select-bordered select-block" name="Proof of Address Type"
-                                                    id="Proof of Address Type" data-dd-class="search-on">
+                                                <select class="form-control" name="entype2" id="entype2" data-dd-class="search-on">
+                                                    <option value="0">{{ __('Select Option') }}</option>
+                                                    @foreach ($entype as $en)
+                                                        <option value="{{ $en->id }}" data-juris="{{ $en->jurisdiction_id }}"> {{ $en->entity_type_name }}</option>
+                                                    @endforeach
+                                                    <option value="other"> {{ __('Other') }}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 other">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Other Entity Type') }}</label>
+                                            <label for="other" class="input-item-label">{{ __('Other Entity Type') }}</label>
                                             <div class="input-wrap">
-                                                <input class="input-bordered" id="dd">
+                                                <input class="input-bordered" id="other" name="other">
                                             </div>
                                         </div>
                                     </div>
@@ -312,19 +318,18 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name" class="input-item-label">Entity Name</label>
+                                            <label for="entity_name2" class="input-item-label">Entity Name</label>
                                             <div class="input-wrap">
-                                                <input class="input-bordered" type="text" id="first-name" name="first_name"
-                                                    value="Mercer Worth">
+                                                <input class="input-bordered" type="text" id="entity_name2" name="entity_name2" value="">
                                                 <div class="gaps-1x"> </div>
-                                                <div> <strong>Full Name: </strong> Mercer Worth B.V.</p>
-                                                </div>
+                                                <div> <strong>Full Name: </strong> <span id="fullname2"></span></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-step form-step5">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
@@ -340,10 +345,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="first-name"
-                                                class="input-item-label">{{ __('Registration Number at Registrar:') }}</label>
+                                            <label for="registration" class="input-item-label">{{ __('Registration Number at Registrar:') }}</label>
                                             <div class="input-wrap">
-                                                <input class="input-bordered" type="text">
+                                                <input class="input-bordered" type="text" name="registration" id="registration">
                                             </div>
                                         </div>
                                     </div>
@@ -375,11 +379,9 @@
                                             <div class="upload-box">
                                                 <div class="upload-zone document_one">
                                                     <div class="dz-message" data-dz-message>
-                                                        <span
-                                                            class="dz-message-text">{{ __('Drag and drop file') }}</span>
+                                                        <span class="dz-message-text">{{ __('Drag and drop file') }}</span>
                                                         <span class="dz-message-or">{{ __('or') }}</span>
-                                                        <button type="button"
-                                                            class="btn btn-primary">{{ __('Select') }}</button>
+                                                        <button type="button" class="btn btn-primary">{{ __('Select') }}</button>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="document_one" />
@@ -419,7 +421,6 @@
                                             <label for="full_functionality"><span>Full Functionality</span></label>
                                         </div>
                                     </li>
-
                                     <li class="document-item">
                                         <div class="input-wrap">
                                             <input class="document-type" type="radio" name="onboarding"
@@ -442,6 +443,7 @@
                         </div>
                         <div class="gaps-1x"></div>
                     </div>
+
                     <div class="hiddenFiles"></div>
                 </form>
             </div>
@@ -457,6 +459,96 @@
                 return false;
             }
         }
-
     </script>
 @endsection
+
+@push('footer')
+    <script type="text/javascript">
+        (function($){
+
+            show_entype1();
+            $("#jurisdiction1").on('change', function(){
+                show_entype1();
+            });
+            function show_entype1(){
+                var entypeOptions = $('#entype1 option');
+                for( var i=1; i<entypeOptions.length; i++){
+                    if ($(entypeOptions[i]).data('status')=='supported' && $(entypeOptions[i]).data('juris')==$('#jurisdiction1').val() ){
+                        $(entypeOptions[i]).show();
+                    } else {
+                        $(entypeOptions[i]).hide();
+                    }
+                }
+                $('#entype1').val("0").change();
+            }
+
+
+            show_entype2();
+            $('#jurisdiction2').on('change', function(){
+                show_entype2();
+            });
+            function show_entype2(){
+                var entypeOptions = $('#entype2 option');
+                for( var i=1; i<entypeOptions.length-1; i++){
+                    if ($(entypeOptions[i]).data('juris')==$('#jurisdiction2').val() ){
+                        $(entypeOptions[i]).show();
+                    } else {
+                        $(entypeOptions[i]).hide();
+                    }
+                }
+                $('#entype2').val("0").change();
+            }
+
+            $('.other').hide();
+            $('#entype2').on('change', function (){
+                if ( $(this).val()=='other'){
+                    $('.other').show();
+                } else {
+                    $('.other').hide();
+                }
+            })
+
+
+            $("#entity_name1").on('keyup', function(){
+                var prefix="", position="";
+                @foreach($entype as $en)
+                    if( "{{ $en->id }}" == $('#entype1').val() ) {
+                        prefix = "{{ $en->abbrev_short }}";
+                        position = "{{ $en->abbrev_position }}";
+                    }
+                @endforeach
+
+                var str=$(this).val();
+                if ( str.length>0) {
+                    if ( position=="&lt;"){
+                        str = prefix + " " + str;
+                    } else {
+                        str += " " + prefix;
+                    }
+                }
+                $("#fullname1").text( str );
+            });
+
+            $("#entity_name2").on('keyup', function(){
+                var prefix="", position="";
+                @foreach($entype as $en)
+                    if( "{{ $en->id }}" == $('#entype2').val() ) {
+                        prefix = "{{ $en->abbrev_short }}";
+                        position = "{{ $en->abbrev_position }}";
+                    }
+                @endforeach
+
+                var str=$(this).val();
+                if ( str.length>0) {
+                    if ( position=="&lt;"){
+                        str = prefix + " " + str;
+                    } else {
+                        str += " " + prefix;
+                    }
+                }
+                $("#fullname2").text( str );
+            });
+
+        })(jQuery);
+    </script>
+@endpush
