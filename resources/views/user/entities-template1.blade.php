@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('title', __('Add Entity Type'))
     @php
     $has_sidebar = false;
@@ -13,12 +13,12 @@
                 <div class="card-head has-aside pd-2x">
                     <div style="font-size:1.29em; color:#342d6e"> <b>Entities > {{ $entities->entity_name }} ></b> <span style="font-size:0.8em"> Complete Formation/Onboarding</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
-                        <a href="{{ route('admin.entities') }}" class="btn btn-auto btn-sm btn-primary" >
+                        <a href="{{ route('user.entities') }}" class="btn btn-auto btn-sm btn-primary" >
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
                         </a>
                     </div>
                 </div>
-                <form action="{{ route('admin.ajax.entities.template1') }}" method="POST" autocomplete="off" id="formid">
+                <form method="POST" autocomplete="off" id="formid">
                     @csrf
                     <input type="hidden" name="entity_id" value="{{ $entities->id }}" />
                     <div class="form-step form-step1">

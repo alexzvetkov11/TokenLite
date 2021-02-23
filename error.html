@@ -1,29 +1,62 @@
-<!DOCTYPE html>
-<html lang="zxx" class="js">
-<head>
-    <meta charset="utf-8">
-    <meta name="author" content="Softnio">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="images/favicon.png">
-    <title>Error!</title>
-    <link rel="stylesheet" href="assets/css/vendor.bundle.css?ver=110">
-    <link rel="stylesheet" href="assets/css/style.css?ver=110">
-</head>
-<body class="page-ath">
-    <div class="vh100 d-flex align-items-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-7 col-xl-6 text-center">
-                    <div class="error-content">
-                        <span class="error-text-large">!!!</span>
-                        <h4 class="text-dark mt-5">Update your PHP version</h4>
-                        <p>Your current PHP version is below PHP 7.1.3 <br> We are very sorry for inconvenience. It looks like you are not fullfilled our server requirements.</p>
-                        <a href="./" class="btn btn-primary">Back to installation</a>
-                        <a  target="_blank" href="https://laravel.com/docs/5.7/installation#server-requirements" class="btn btn-primary">Check requirements</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<?php
+
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Symfony\Component\Translation\Extractor;
+
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Translation\MessageCatalogue;
+
+/**
+ * PhpExtractor extracts translation messages from a PHP template.
+ *
+ * @author Michel Salib <michelsalib@hotmail.com>
+ */
+class PhpExtractor extends AbstractFileExtractor implements ExtractorInterface
+{
+    const MESSAGE_TOKEN = 300;
+    const METHOD_ARGUMENTS_TOKEN = 1000;
+    const DOMAIN_TOKEN = 1001;
+
+    /**
+     * Prefix for new found message.
+     *
+     * @var string
+     */
+    private $prefix = '';
+
+    /**
+     * The sequence that captures translation messages.
+     *
+     * @var array
+     */
+    protected $sequences = [
+        [
+            '->',
+            'trans',
+            '(',
+            self::MESSAGE_TOKEN,
+            ',',
+            self::METHOD_ARGUMENTS_TOKEN,
+            ',',
+            self::DOMAIN_TOKEN,
+        ],
+        [
+            '->',
+            'transChoice',
+            '(',
+            self::MESSAGE_TOKEN,
+            ',',
+            self::METHOD_ARGUMENTS_TOKEN,
+            ',',
+            self::METHOD_ARGUMENTS_TOKEN,
+            ',',
+            self::DOMAIN_TOKEN,
+        ],

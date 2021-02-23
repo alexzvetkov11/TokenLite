@@ -17,10 +17,11 @@ $language=Setting::where('field',auth()->id())->first();
     <title>@yield('title') | {{ site_whitelabel('title') }}</title>
     <link rel="stylesheet" href="{{ asset(style_theme('vendor')) }}">
     <link rel="stylesheet" href="{{ asset(style_theme('user')) }}">
-    
+
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/selectize.default.css') }}">
     <style>
         label.required::after {
             content: " *";
@@ -44,6 +45,9 @@ $language=Setting::where('field',auth()->id())->first();
             background-color: #3e8e41;
             box-shadow: 0 5px rgb(185, 185, 185);
             transform: translateY(4px);
+        }
+        .selectize-input{
+            line-height:1.7;
         }
     </style>
     @stack('header')
@@ -113,7 +117,7 @@ $language=Setting::where('field',auth()->id())->first();
                     <ul class="navbar-menu" id="main-nav">
                         <li style="padding:0 0;"><a href="{{ route('user.home') }}"><em class="ikon ikon-dashboard"></em> {{__('Dashboard')}}</a></li>
 
-                        
+
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user"></em> {{__('Profile')}}</a>
                             <ul class="navbar-dropdown">
                                 <li><a href="{{  route('user.account') }}">{{__("Account Details") }}</a></li>
@@ -262,6 +266,7 @@ $language=Setting::where('field',auth()->id())->first();
     <script src="{{ asset('assets/js/app.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/custom_client.js').css_js_ver() }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script src="{{ asset('assets/js/selectize.js').css_js_ver() }}"></script>
 
     @stack('footer')
     <script type="text/javascript">

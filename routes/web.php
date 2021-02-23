@@ -75,7 +75,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
 
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
-    Route::get('/addentities', 'User\EntitiesController@add_entities')->name('addentities');
+    Route::get('/addentities', 'User\EntitiesController@addentities_index')->name('addentities');
 
 
     // User Ajax Request
@@ -89,6 +89,8 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
         Route::post('/transactions/view', 'User\TransactionController@show')->name('transactions.view');
         Route::post('/kyc/submit', 'User\KycController@submit')->name('kyc.submit');
         Route::post('/account/activity', 'User\UserController@account_activity_delete')->name('account.activity.delete')->middleware('demo_user');
+        Route::post('/entities/add', 'User\EntitiesController@entities_add')->name('entities.add')->middleware('demo_user');
+
     });
 });
 

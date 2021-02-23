@@ -24,6 +24,31 @@ $(document).ready(function() {
     });
 
 
+    /// user entities page
+    add_entities_page(1);
+    $('#entities_option_inco').on("click", function(){
+        add_entities_page(1);
+
+    });
+    $('#entities_option_exist').on("click", function(){
+        add_entities_page(2);
+    })
+
+    function add_entities_page( t){
+        if (t==1){
+            $('#incorporate').show();
+            $('#existing').hide();
+        } else{
+            $('#incorporate').hide();
+            $('#existing').show();
+            console.log("$('#existing').show();");
+        }
+    }
+
+
+
+
+
     $("#tt").datepicker({ dateFormat: 'dd/mm/yy', minDate: 0 });
 
 

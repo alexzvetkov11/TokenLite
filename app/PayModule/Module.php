@@ -280,8 +280,7 @@ class Module
         foreach ($directories as $dir) {
             if( ! in_array($dir, ['.', '..'])){
 
-                $path = $module_path.$ds.$dir.$ds.'module.json';
-
+                $path = $module_path.$ds.$dir.'module.json';
                 if( file_exists($path) && is_file($path) && is_dir($module_path.$ds.$dir) ){
                     $file = File::get($path);
                     $item = json_decode($file);

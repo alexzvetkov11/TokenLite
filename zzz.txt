@@ -773,7 +773,6 @@ Listing Only
 Full Functionality
 Purpose & Activities
 Trading Names
-Purpose Type
 Personal Holding Company
 Import (including parts, from one Custom Union to another)
 Manufacture
@@ -787,7 +786,7 @@ Via the Internet
 From Home
 By Mail Order
 Other, namely
-Customer Descriptions
+Customer & Offering Type
 Will the Company be providing any kind of Financial (Advisory) Services to Third-Parties?
 Will the Company be active as an Employment-, Secondment-, or Placement Agency?
 Regulatory Approvals
@@ -816,5 +815,23 @@ Incorporate New Entity
 Add Existing Entity
 Add Business Activity
 Division
+Group
+Class
+Sub-Class
 Relative Portion
-Add Business Activity
+Start Date
+Choose the earliest date at which this new Entity can be formally incorporated.
+Choosen Date
+Full Functionality
+Add Existing Entity
+Supported Jurisdictions
+Entity Purpose Type
+No, it will have no customers.
+Will this Company have customers?
+Yes, it will have customers.
+Offering Services
+Offering Products
+Product Business Model
+Import (including parts, from one Custom Union to another)
+Domestic Trade (with in Custom Union)
+Please explain

@@ -11,6 +11,7 @@
     <title>@yield('title') | {{ site_whitelabel('title') }}</title>
     <link rel="stylesheet" href="{{ asset(style_theme('vendor')) }}">
     <link rel="stylesheet" href="{{ asset(style_theme('admin')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/selectize.default.css') }}">
     <style>
         label.required::after {
             content: " *";
@@ -27,6 +28,9 @@
             display: none;
         }
 
+        .selectize-input{
+            line-height:1.7;
+        }
     </style>
     @stack('header')
 </head>
@@ -254,6 +258,7 @@
     <script src="{{ asset('assets/js/admin.app.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/custom.js').css_js_ver() }}"></script>
     <script src="{{ asset('assets/js/app.js').css_js_ver() }}"></script>
+    <script src="{{ asset('assets/js/selectize.js').css_js_ver() }}"></script>
 
     @stack('footer')
     @if(session()->has('global'))
