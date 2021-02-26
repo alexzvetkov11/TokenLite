@@ -52,12 +52,14 @@ class EntitiesController extends Controller
     {
         try{
             if ( $request->type=="incorporate"){
+
                 $entities = new Entity;
-                $entities->entity_name = $request->entity_name1;
-                $entities->entity_type = $request->entype1;
-                $entities->jurisdiction = $request->jurisdiction1;
-                $entities->onboarding = "full_functionality";
-                $entities->start_date = _date($request->start_date, 'Y-m-d');
+                $entities->jurisdiction = $request->jurisdiction2;
+                $entities->entity_type = $request->entype2;
+                $entities->entity_name = $request->entity_name2;
+                $entities->registration = $request->registration;
+                $entities->document = $request->document_one;
+                $entities->onboarding = $request->onboarding;
                 // $entities->save();
 
                 $business = BusinessActivities::get();
@@ -65,8 +67,8 @@ class EntitiesController extends Controller
                 $groups = ActivitiesGroup::get();
                 $classes = ActivitiesClass::get();
                 $subclasses = ActivitiesSubclass::get();
-
                 return view('user.entities-template1', compact('business', 'entities', 'divisions', 'groups', 'classes', 'subclasses'));
+
             } else if ($request->type=="exist") {
 
                 if ($request->type =='other' ){
@@ -76,22 +78,92 @@ class EntitiesController extends Controller
                     return back()->with( [$ret['msg']=> $ret['message'] ]);
                 } else {
                     $entities = new Entity;
-                    $entities->jurisdiction = $request->jurisdiction2;
-                    $entities->entity_type = $request->entype2;
-                    $entities->entity_name = $request->entity_name2;
-                    $entities->registration = $request->registration;
-                    $entities->document = $request->document_one;
-                    $entities->onboarding = $request->onboarding;
+                    $entities->entity_name = $request->entity_name1;
+                    $entities->entity_type = $request->entype1;
+                    $entities->jurisdiction = $request->jurisdiction1;
+                    $entities->onboarding = "full_functionality";
+                    $entities->start_date = _date($request->start_date, 'Y-m-d');
                     // $entities->save();
 
                     $business = BusinessActivities::get();
-                    return view('user.entities-template1', compact('business', 'entities'));
+                    $divisions = ActivitiesDivision::get();
+                    $groups = ActivitiesGroup::get();
+                    $classes = ActivitiesClass::get();
+                    $subclasses = ActivitiesSubclass::get();
+
+                    return view('user.entities-template1', compact('business', 'entities', 'divisions', 'groups', 'classes', 'subclasses'));
                 }
             }
         } catch (\Exception $e){
-            echo $e->getMessage();
-            exit;
+            $ret['msg'] = 'error';
+            $ret['message'] =__("didn't make this part");
+            return back()->with( [$ret['msg']=> $ret['message'] ]);
         }
 
+    }
+
+    public function change_business_activities(Request $request)
+    {
+        try{
+            if ( $request->type == "add"){
+                $busi = new BusinessActivities;
+                $busi->entity_id = $request->entities;
+                $busi->division_id = $request->division;
+                $busi->group_id= $request->group;
+                $busi->class_id = $request->class;
+                $busi->subclass_id = $request->subclass;
+                $busi->percent = $request->percent;
+                // $busi->save();
+
+                $business = BusinessActivities::get();
+                $divisions = ActivitiesDivision::get();
+                $groups = ActivitiesGroup::get();
+                $classes = ActivitiesClass::get();
+                $subclasses = ActivitiesSubclass::get();
+                $entities = Entity::where('id', $request->entities)->first();
+                $ret['msg'] = 'success';
+                $ret['message'] =__("Business Activities Successfully Changed");
+                return view('user.entities-template1', compact('business', 'entities', 'divisions', 'groups', 'classes', 'subclasses'));
+            } else {
+                $busi = BusinessActivities::where('id', $request->id)->first();
+                $busi->entity_id = $request->entities;
+                $busi->division_id = $request->division;
+                $busi->group_id= $request->group;
+                $busi->class_id = $request->class;
+                $busi->subclass_id = $request->subclass;
+                $busi->percent = $request->percent;
+                // $busi->save();
+
+                $business = BusinessActivities::get();
+                $divisions = ActivitiesDivision::get();
+                $groups = ActivitiesGroup::get();
+                $classes = ActivitiesClass::get();
+                $subclasses = ActivitiesSubclass::get();
+                $entities = Entity::where('id', $request->entities)->first();
+                $ret['msg'] = 'success';
+                $ret['message'] =__("Business Activities Successfully Changed");
+                return view('user.entities-template1', compact('business', 'entities', 'divisions', 'groups', 'classes', 'subclasses'));
+            }
+
+        } catch(\Exception $e){
+            echo $e->getMessage();
+            $ret['msg'] = 'error';
+            $ret['message'] =__("didn't make this part");
+            return response()->json($ret);
+        }
+    }
+
+
+    public function add_purpose_activities(Request $request)
+    {
+        // $entities = Entity::where("id", $request->entities)->first();
+        $offices = OfficeServices::get();
+        return view('user.entities-template2', compact('offices'));
+    }
+
+    public function add_domiciliation(Request $request)
+    {
+        // $entities = Entity::where("id", $request->entities)->first();
+        return view('user.entities-share-capital');
     }
 }

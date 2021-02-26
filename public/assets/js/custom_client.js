@@ -37,11 +37,10 @@ $(document).ready(function() {
     function add_entities_page( t){
         if (t==1){
             $('#incorporate').show();
-            $('#existing').hide();
+            $('#exist').hide();
         } else{
             $('#incorporate').hide();
-            $('#existing').show();
-            console.log("$('#existing').show();");
+            $('#exist').show();
         }
     }
 

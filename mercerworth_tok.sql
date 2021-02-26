@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5ubuntu0.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 18, 2021 at 05:01 PM
--- Server version: 5.7.33-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.7
+-- Host: 127.0.0.1
+-- Generation Time: Feb 26, 2021 at 09:50 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.3.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -32,7 +33,7 @@ CREATE TABLE `activities` (
   `device` varchar(191) NOT NULL,
   `browser` varchar(191) NOT NULL,
   `ip` varchar(191) NOT NULL,
-  `extra` text,
+  `extra` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -349,7 +350,7 @@ CREATE TABLE `articles` (
   `id` int(11) NOT NULL,
   `article_label` varchar(255) NOT NULL,
   `statue_type` varchar(255) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -376,7 +377,7 @@ CREATE TABLE `article_contents` (
   `section` int(11) NOT NULL,
   `entity_types` int(11) NOT NULL,
   `text` longtext NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -402,6 +403,110 @@ INSERT INTO `article_contents` (`id`, `article_title`, `section`, `entity_types`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `business_acitivities_class`
+--
+
+CREATE TABLE `business_acitivities_class` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `class_code` varchar(11) NOT NULL,
+  `class_label` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `business_acitivities_class`
+--
+
+INSERT INTO `business_acitivities_class` (`id`, `group_id`, `class_code`, `class_label`, `updated_at`, `created_at`) VALUES
+(1, 1, '01.11', 'Growing of cereals (except rice), leguminous crops and oil seeds', '2021-02-23 09:10:27', '0000-00-00 00:00:00'),
+(2, 1, '1.12', 'Growing of rice', '2021-02-23 09:03:22', '0000-00-00 00:00:00'),
+(3, 1, '1.13', 'Growing of vegetables and melons, roots and tubers', '2021-02-23 09:03:22', '0000-00-00 00:00:00'),
+(4, 1, '1.14', 'Growing of sugar cane', '2021-02-23 09:03:22', '0000-00-00 00:00:00'),
+(5, 1, '1.15', 'Growing of tobacco', '2021-02-23 09:03:23', '0000-00-00 00:00:00'),
+(6, 2, '5.10', 'Mining of hard coal', '2021-02-23 09:03:23', '0000-00-00 00:00:00'),
+(7, 3, '5.20', 'Mining of lignite', '2021-02-23 09:03:23', '0000-00-00 00:00:00'),
+(8, 4, '6.10', 'Extraction of crude petroleum', '2021-02-23 09:03:23', '0000-00-00 00:00:00'),
+(9, 5, '6.20', 'Extraction of natural gas', '2021-02-23 09:03:23', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business_acitivities_division`
+--
+
+CREATE TABLE `business_acitivities_division` (
+  `id` int(11) NOT NULL,
+  `division_code` int(11) NOT NULL,
+  `division_label` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `business_acitivities_division`
+--
+
+INSERT INTO `business_acitivities_division` (`id`, `division_code`, `division_label`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Crop and animal production, hunting and related service activities', '2021-02-23 08:58:04', '0000-00-00 00:00:00'),
+(2, 5, 'Mining of coal and lignite', '2021-02-23 08:58:08', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business_acitivities_group`
+--
+
+CREATE TABLE `business_acitivities_group` (
+  `id` int(11) NOT NULL,
+  `division_id` int(11) NOT NULL,
+  `group_code` varchar(11) NOT NULL,
+  `group_label` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `business_acitivities_group`
+--
+
+INSERT INTO `business_acitivities_group` (`id`, `division_id`, `group_code`, `group_label`, `updated_at`, `created_at`) VALUES
+(1, 1, '01.1', 'Growing of non-perennial crops', '2021-02-23 09:19:08', '0000-00-00 00:00:00'),
+(2, 2, '05.1', 'Mining of hard coal', '2021-02-23 09:19:16', '0000-00-00 00:00:00'),
+(3, 2, '05.2', 'Mining of lignite', '2021-02-23 09:19:21', '0000-00-00 00:00:00'),
+(4, 3, '06.1', 'Extraction of crude petroleum', '2021-02-23 09:19:25', '0000-00-00 00:00:00'),
+(5, 3, '06.2', 'Extraction of natural gas', '2021-02-23 09:19:26', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `business_acitivities_subclass`
+--
+
+CREATE TABLE `business_acitivities_subclass` (
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subclass_code` varchar(11) NOT NULL,
+  `subclass_label` varchar(255) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `business_acitivities_subclass`
+--
+
+INSERT INTO `business_acitivities_subclass` (`id`, `class_id`, `subclass_code`, `subclass_label`, `updated_at`, `created_at`) VALUES
+(1, 1, '01.13.1', 'Growing of vegetables in open fields', '2021-02-23 09:08:48', '0000-00-00 00:00:00'),
+(2, 1, '01.13.3', 'Growing of mushrooms', '2021-02-23 09:08:48', '0000-00-00 00:00:00'),
+(3, 1, '01.13.4', 'Growing of potatoes and other roots and tubers', '2021-02-23 09:08:48', '0000-00-00 00:00:00'),
+(4, 3, '05.10/1', 'Mining of hard coal from deep coal mines (underground mining)', '2021-02-23 09:08:53', '0000-00-00 00:00:00'),
+(5, 3, '05.10/2', 'Mining of hard coal from open cast coal working (surface mining)', '2021-02-23 09:08:53', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `countries`
 --
 
@@ -409,7 +514,7 @@ CREATE TABLE `countries` (
   `id` int(11) NOT NULL,
   `country_label` varchar(50) NOT NULL,
   `phone_code` varchar(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -692,7 +797,7 @@ CREATE TABLE `currencies` (
   `cur_id` int(11) NOT NULL,
   `cur_code` varchar(11) NOT NULL,
   `cur_label` varchar(255) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -750,7 +855,7 @@ CREATE TABLE `email_templates` (
   `greeting` varchar(191) DEFAULT NULL,
   `message` text NOT NULL,
   `regards` varchar(191) DEFAULT NULL,
-  `notify` smallint(6) NOT NULL DEFAULT '1',
+  `notify` smallint(6) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -785,6 +890,67 @@ INSERT INTO `email_templates` (`id`, `name`, `slug`, `subject`, `greeting`, `mes
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `entities_business_activities`
+--
+
+CREATE TABLE `entities_business_activities` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `branch_id` int(11) DEFAULT NULL,
+  `division_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `subclass_id` int(11) DEFAULT NULL,
+  `percent` varchar(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_business_activities`
+--
+
+INSERT INTO `entities_business_activities` (`id`, `entity_id`, `branch_id`, `division_id`, `group_id`, `class_id`, `subclass_id`, `percent`, `updated_at`, `created_at`) VALUES
+(1, 14, 1, 1, 1, 1, 1, '30%', '2021-02-23 13:54:20', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_companies_purpose`
+--
+
+CREATE TABLE `entities_companies_purpose` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `purpose_type` varchar(255) NOT NULL,
+  `activity_description` varchar(255) DEFAULT NULL,
+  `b2b_service` varchar(11) DEFAULT NULL,
+  `b2b_product` varchar(11) DEFAULT NULL,
+  `b2c_service` varchar(11) DEFAULT NULL,
+  `b2c_product` varchar(11) DEFAULT NULL,
+  `products_manufacture` varchar(11) DEFAULT NULL,
+  `products_import` varchar(11) DEFAULT NULL,
+  `products_export` varchar(11) DEFAULT NULL,
+  `products_domestic_trade` varchar(11) DEFAULT NULL,
+  `places_retail` varchar(11) DEFAULT NULL,
+  `places_market` varchar(11) DEFAULT NULL,
+  `places_street` varchar(11) DEFAULT NULL,
+  `palces_internet` varchar(11) DEFAULT NULL,
+  `places_home` varchar(11) DEFAULT NULL,
+  `places_mailorder` varchar(11) DEFAULT NULL,
+  `places_other` varchar(11) DEFAULT NULL,
+  `places_other_text` varchar(11) DEFAULT NULL,
+  `financial_services` varchar(11) DEFAULT NULL,
+  `employment_agency` varchar(11) DEFAULT NULL,
+  `regulatory_approvals` varchar(11) DEFAULT NULL,
+  `regulatory_approvals_text` varchar(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `entity`
 --
 
@@ -798,7 +964,7 @@ CREATE TABLE `entity` (
   `onboarding` varchar(255) DEFAULT NULL,
   `start_date` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -809,8 +975,7 @@ CREATE TABLE `entity` (
 INSERT INTO `entity` (`id`, `entity_name`, `entity_type`, `jurisdiction`, `registration`, `document`, `onboarding`, `start_date`, `status`, `updated_at`, `created_at`) VALUES
 (1, 'Mercer Worth 1\r\n', 1, 4, NULL, NULL, NULL, '2021-02-19 16:50:57', 'dissolved', '2021-02-16 04:17:10', '0000-00-00 00:00:00'),
 (2, 'Mercer Worth 2\r\n', 2, 2, NULL, NULL, NULL, '2021-02-10 16:51:03', 'active', '2021-02-16 04:17:28', '0000-00-00 00:00:00'),
-(3, 'dfsfd', 4, 2, NULL, NULL, 'passport', NULL, NULL, '2021-02-17 14:50:47', '2021-02-18 00:50:47'),
-(4, 'dfsfd', 4, 2, NULL, NULL, 'passport', NULL, NULL, '2021-02-17 14:53:46', '2021-02-18 00:53:46');
+(22, 'gjfgjfghjg', 4, 2, NULL, NULL, 'full_functionality', '2021-02-18 00:00:00', NULL, '2021-02-23 14:14:07', '2021-02-24 00:14:07');
 
 -- --------------------------------------------------------
 
@@ -832,7 +997,7 @@ CREATE TABLE `entity_types` (
   `formation_notary_req` varchar(5) DEFAULT NULL,
   `abbrev_position` varchar(5) DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -857,7 +1022,7 @@ CREATE TABLE `entity_types_associations` (
   `entity_type_id` int(11) NOT NULL,
   `members_min` int(11) NOT NULL,
   `members_max` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -907,7 +1072,7 @@ CREATE TABLE `entity_types_companies` (
   `filing_annual_accounts_req` varchar(5) DEFAULT NULL,
   `filing_annual_accounts_deadline_days` int(11) DEFAULT NULL,
   `filing_classification` int(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -932,7 +1097,7 @@ CREATE TABLE `entity_types_foundations` (
   `entity_type_id` int(11) NOT NULL,
   `members_min` int(11) DEFAULT NULL,
   `members_max` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -954,7 +1119,7 @@ CREATE TABLE `entity_types_partnerships` (
   `entity_type_id` int(11) NOT NULL,
   `members_min` int(11) NOT NULL,
   `members_max` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -976,7 +1141,7 @@ CREATE TABLE `entity_types_trusts` (
   `entity_type_id` int(11) NOT NULL,
   `members_min` int(11) NOT NULL,
   `members_max` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -997,8 +1162,8 @@ CREATE TABLE `global_metas` (
   `id` int(10) UNSIGNED NOT NULL,
   `pid` varchar(191) DEFAULT NULL,
   `name` varchar(191) NOT NULL,
-  `value` text,
-  `extra` text,
+  `value` text DEFAULT NULL,
+  `extra` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1081,15 +1246,15 @@ CREATE TABLE `ico_stages` (
   `end_date` datetime DEFAULT NULL,
   `total_tokens` bigint(20) NOT NULL,
   `base_price` double NOT NULL,
-  `min_purchase` int(11) NOT NULL DEFAULT '0',
-  `max_purchase` int(11) NOT NULL DEFAULT '0',
-  `soft_cap` bigint(20) NOT NULL DEFAULT '0',
-  `hard_cap` bigint(20) NOT NULL DEFAULT '0',
+  `min_purchase` int(11) NOT NULL DEFAULT 0,
+  `max_purchase` int(11) NOT NULL DEFAULT 0,
+  `soft_cap` bigint(20) NOT NULL DEFAULT 0,
+  `hard_cap` bigint(20) NOT NULL DEFAULT 0,
   `display_mode` varchar(191) NOT NULL,
-  `private` int(11) NOT NULL DEFAULT '0',
-  `user_panel_display` int(11) NOT NULL DEFAULT '0',
-  `sales_token` double NOT NULL DEFAULT '0',
-  `sales_amount` double NOT NULL DEFAULT '0',
+  `private` int(11) NOT NULL DEFAULT 0,
+  `user_panel_display` int(11) NOT NULL DEFAULT 0,
+  `sales_token` double NOT NULL DEFAULT 0,
+  `sales_amount` double NOT NULL DEFAULT 0,
   `status` varchar(191) NOT NULL DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1125,7 +1290,7 @@ CREATE TABLE `jurisdictions` (
   `language_code` varchar(11) NOT NULL,
   `main_currency_code` varchar(11) NOT NULL,
   `jur_status` varchar(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1162,7 +1327,7 @@ CREATE TABLE `kycs` (
   `nationality` varchar(255) DEFAULT NULL,
   `nationality_id` varchar(255) DEFAULT NULL,
   `street_no` varchar(255) DEFAULT NULL,
-  `street` text,
+  `street` text DEFAULT NULL,
   `floor` varchar(255) DEFAULT NULL,
   `state` varchar(191) DEFAULT NULL,
   `zip` varchar(191) DEFAULT NULL,
@@ -1177,8 +1342,8 @@ CREATE TABLE `kycs` (
   `addressType` varchar(255) DEFAULT NULL,
   `walletName` varchar(191) DEFAULT '',
   `walletAddress` varchar(191) DEFAULT '',
-  `notes` text,
-  `reviewedBy` int(11) NOT NULL DEFAULT '0',
+  `notes` text DEFAULT NULL,
+  `reviewedBy` int(11) NOT NULL DEFAULT 0,
   `reviewedAt` datetime DEFAULT NULL,
   `status` varchar(191) NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1220,13 +1385,13 @@ CREATE TABLE `kyc_identity` (
   `document2` varchar(255) DEFAULT NULL,
   `document3` varchar(255) DEFAULT NULL,
   `document4` varchar(255) DEFAULT NULL,
-  `notes` text,
+  `notes` text DEFAULT NULL,
   `reviewed_by` int(11) DEFAULT NULL,
   `reviewed_at` datetime DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
   `issue_date` datetime DEFAULT NULL,
   `expiration_date` datetime DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1260,11 +1425,11 @@ CREATE TABLE `kyc_residency` (
   `document_type` int(11) DEFAULT NULL,
   `document_issue_date` datetime DEFAULT NULL,
   `document` varchar(255) DEFAULT NULL,
-  `notes` text,
+  `notes` text DEFAULT NULL,
   `reviewed_by` int(11) DEFAULT NULL,
   `reviewed_at` datetime DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1299,9 +1464,9 @@ CREATE TABLE `kyc_tax` (
   `issue_date_secondary` datetime NOT NULL,
   `reviewed_by` int(11) DEFAULT NULL,
   `reviewed_at` datetime DEFAULT NULL,
-  `notes` text,
+  `notes` text DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1324,7 +1489,7 @@ CREATE TABLE `languages` (
   `label` varchar(191) NOT NULL,
   `short` varchar(191) DEFAULT NULL,
   `code` varchar(191) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1350,7 +1515,7 @@ CREATE TABLE `legal_structures` (
   `id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   `member_type` int(11) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1419,7 +1584,7 @@ CREATE TABLE `office_services` (
   `class_label` varchar(255) DEFAULT NULL,
   `subclass_code` varchar(11) DEFAULT NULL,
   `subclass_label` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1455,13 +1620,13 @@ CREATE TABLE `pages` (
   `slug` varchar(191) NOT NULL,
   `custom_slug` varchar(191) NOT NULL,
   `meta_keyword` varchar(191) DEFAULT NULL,
-  `meta_description` text,
-  `meta_index` int(11) NOT NULL DEFAULT '1',
+  `meta_description` text DEFAULT NULL,
+  `meta_index` int(11) NOT NULL DEFAULT 1,
   `description` longtext NOT NULL,
   `external_link` varchar(191) DEFAULT NULL,
   `status` varchar(191) NOT NULL DEFAULT 'active',
   `lang` varchar(191) NOT NULL DEFAULT 'en',
-  `public` tinyint(4) NOT NULL DEFAULT '0',
+  `public` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1538,7 +1703,7 @@ CREATE TABLE `referrals` (
   `user_bonus` int(11) DEFAULT NULL,
   `refer_by` int(11) DEFAULT NULL,
   `refer_bonus` int(11) DEFAULT NULL,
-  `meta_data` longtext,
+  `meta_data` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1576,7 +1741,7 @@ INSERT INTO `referrals` (`id`, `user_id`, `user_bonus`, `refer_by`, `refer_bonus
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `field` varchar(191) NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1598,7 +1763,7 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (10, 'token_sales_raised', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (11, 'token_sales_total', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (12, 'token_sales_cap', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
-(13, 'tokenlite_credible', 'e2Pkq1dTV1uHuePeZceBdnoxSxgRaHQ60Dw6Hj14yS3KmG89', '2020-06-01 01:07:02', '2021-02-18 04:33:27'),
+(13, 'tokenlite_credible', '0wvme9QgCyKFihiacyFBhzSJNBzBWcjcal2U76TjuLrwPEqI', '2020-06-01 01:07:02', '2021-02-23 11:57:20'),
 (14, 'main_website_url', NULL, '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (15, 'pm_automatic_rate_time', '30', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (16, 'theme_admin', 'style', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
@@ -1747,11 +1912,11 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (159, 'token_purchase_xmr', '0', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (160, 'pmc_active_xmr', '1', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (161, 'pm_exchange_method', 'automatic', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
-(162, 'pm_exchange_auto_lastcheck', '2021-02-18 04:32:09', '2020-06-01 01:07:03', '2021-02-18 04:32:09'),
+(162, 'pm_exchange_auto_lastcheck', '2021-02-26 00:39:35', '2020-06-01 01:07:03', '2021-02-25 14:39:35'),
 (163, 'token_calculate', 'normal', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (164, 'token_calculate_note', 'normal', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (165, 'token_default_method', 'ETH', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
-(166, 'active_payment_modules', '{\"Manual\":{\"type\":\"core\",\"version\":\"1.0\"},\"Bank\":{\"type\":\"core\",\"version\":\"1.0\"},\"Paypal\":{\"type\":\"core\",\"version\":\"1.0\"}}', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
+(166, 'active_payment_modules', '[]', '2020-06-01 01:07:03', '2021-02-22 07:20:46'),
 (167, 'site_api_key', '5ukFujjovuwDZOP0IRzNRet5', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (168, 'site_api_secret', '3fbF3ed3689aKY8u', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (169, 'nio_lkey', '1kJQekwp2gkqnqtw4meSpbggGsHFJU3B', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
@@ -1810,49 +1975,49 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (222, 'lang_db_version', '193514', '2020-06-01 01:07:04', '2020-06-01 01:07:04'),
 (223, 'env_ptype', 'Q', '2020-12-03 19:03:33', '2020-12-03 19:03:33'),
 (224, 'pmc_auto_rate_usd', '1', '2020-12-03 19:25:33', '2020-12-03 19:25:33'),
-(225, 'pmc_auto_rate_eur', '0.8306', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(226, 'pmc_auto_rate_gbp', '0.7236', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(227, 'pmc_auto_rate_cad', '1.269', '2020-12-03 19:25:33', '2021-02-17 15:33:37'),
-(228, 'pmc_auto_rate_aud', '1.286', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(229, 'pmc_auto_rate_try', '6.956', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(230, 'pmc_auto_rate_rub', '72.3', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(231, 'pmc_auto_rate_inr', '76', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(232, 'pmc_auto_rate_brl', '5.468', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(233, 'pmc_auto_rate_nzd', '1.373', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(234, 'pmc_auto_rate_pln', '3.705', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(235, 'pmc_auto_rate_jpy', '105.89', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(236, 'pmc_auto_rate_myr', '4.134', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(237, 'pmc_auto_rate_idr', '14081.17', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(238, 'pmc_auto_rate_ngn', '514.26', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(239, 'pmc_auto_rate_mxn', '20.3', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(240, 'pmc_auto_rate_php', '48.55', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(241, 'pmc_auto_rate_chf', '0.9016', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(242, 'pmc_auto_rate_thb', '30.31', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(243, 'pmc_auto_rate_sgd', '1.326', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(244, 'pmc_auto_rate_czk', '21.52', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(245, 'pmc_auto_rate_nok', '8.826', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(246, 'pmc_auto_rate_zar', '15.06', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(247, 'pmc_auto_rate_sek', '8.977', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(248, 'pmc_auto_rate_kes', '116.94', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(249, 'pmc_auto_rate_nad', '21.06', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(250, 'pmc_auto_rate_dkk', '5.775', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(251, 'pmc_auto_rate_hkd', '7.748', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(252, 'pmc_auto_rate_eth', '0.0005422', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(253, 'pmc_auto_rate_btc', '0.00001912', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(254, 'pmc_auto_rate_ltc', '0.004266', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(255, 'pmc_auto_rate_xrp', '1.838', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(256, 'pmc_auto_rate_xlm', '1.976', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(257, 'pmc_auto_rate_bch', '0.001389', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(258, 'pmc_auto_rate_bnb', '0.005916', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(259, 'pmc_auto_rate_usdt', '0.999', '2020-12-03 19:25:33', '2021-02-17 15:33:37'),
-(260, 'pmc_auto_rate_trx', '18.8', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
+(225, 'pmc_auto_rate_eur', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(226, 'pmc_auto_rate_gbp', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(227, 'pmc_auto_rate_cad', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(228, 'pmc_auto_rate_aud', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(229, 'pmc_auto_rate_try', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(230, 'pmc_auto_rate_rub', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(231, 'pmc_auto_rate_inr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(232, 'pmc_auto_rate_brl', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(233, 'pmc_auto_rate_nzd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(234, 'pmc_auto_rate_pln', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(235, 'pmc_auto_rate_jpy', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(236, 'pmc_auto_rate_myr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(237, 'pmc_auto_rate_idr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(238, 'pmc_auto_rate_ngn', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(239, 'pmc_auto_rate_mxn', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(240, 'pmc_auto_rate_php', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(241, 'pmc_auto_rate_chf', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(242, 'pmc_auto_rate_thb', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(243, 'pmc_auto_rate_sgd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(244, 'pmc_auto_rate_czk', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(245, 'pmc_auto_rate_nok', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(246, 'pmc_auto_rate_zar', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(247, 'pmc_auto_rate_sek', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(248, 'pmc_auto_rate_kes', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(249, 'pmc_auto_rate_nad', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(250, 'pmc_auto_rate_dkk', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(251, 'pmc_auto_rate_hkd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(252, 'pmc_auto_rate_eth', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(253, 'pmc_auto_rate_btc', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(254, 'pmc_auto_rate_ltc', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(255, 'pmc_auto_rate_xrp', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(256, 'pmc_auto_rate_xlm', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(257, 'pmc_auto_rate_bch', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(258, 'pmc_auto_rate_bnb', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(259, 'pmc_auto_rate_usdt', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(260, 'pmc_auto_rate_trx', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
 (261, 'pmc_auto_rate_usdc', '1', '2020-12-03 19:25:33', '2021-02-03 06:31:17'),
-(262, 'pmc_auto_rate_dash', '0.003759', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(263, 'pmc_auto_rate_waves', '0.08696', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(264, 'pmc_auto_rate_xmr', '0.003782', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
-(265, 'pmc_current_rate', '{\"usd\":1,\"eur\":0.8306,\"gbp\":0.7236,\"cad\":1.269,\"aud\":1.286,\"try\":6.956,\"rub\":72.3,\"inr\":76,\"brl\":5.468,\"nzd\":1.373,\"pln\":3.705,\"jpy\":105.89,\"myr\":4.134,\"idr\":14081.17,\"ngn\":514.26,\"mxn\":20.3,\"php\":48.55,\"chf\":0.9016,\"thb\":30.31,\"sgd\":1.326,\"czk\":21.52,\"nok\":8.826,\"zar\":15.06,\"sek\":8.977,\"kes\":116.94,\"nad\":21.06,\"dkk\":5.775,\"hkd\":7.748,\"eth\":0.0005422,\"btc\":1.912e-5,\"ltc\":0.004266,\"xrp\":1.838,\"xlm\":1.976,\"bch\":0.001389,\"bnb\":0.005916,\"usdt\":0.999,\"trx\":18.8,\"usdc\":1,\"dash\":0.003759,\"waves\":0.08696,\"xmr\":0.003782}', '2020-12-03 19:25:33', '2021-02-18 04:32:06'),
+(262, 'pmc_auto_rate_dash', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(263, 'pmc_auto_rate_waves', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(264, 'pmc_auto_rate_xmr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(265, 'pmc_current_rate', '{\"usd\":1,\"eur\":1,\"gbp\":1,\"cad\":1,\"aud\":1,\"try\":1,\"rub\":1,\"inr\":1,\"brl\":1,\"nzd\":1,\"pln\":1,\"jpy\":1,\"myr\":1,\"idr\":1,\"ngn\":1,\"mxn\":1,\"php\":1,\"chf\":1,\"thb\":1,\"sgd\":1,\"czk\":1,\"nok\":1,\"zar\":1,\"sek\":1,\"kes\":1,\"nad\":1,\"dkk\":1,\"hkd\":1,\"eth\":1,\"btc\":1,\"ltc\":1,\"xrp\":1,\"xlm\":1,\"bch\":1,\"bnb\":1,\"usdt\":1,\"trx\":1,\"usdc\":1,\"dash\":1,\"waves\":1,\"xmr\":1}', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
 (268, 'site_footer_code', NULL, '2020-12-04 18:25:31', '2020-12-24 18:41:18'),
-(266, 'token_all_price', '{\"base\":0.2,\"usd\":0.2,\"eur\":0.16612,\"gbp\":0.14472,\"cad\":0.2538,\"aud\":0.2572,\"try\":1.3912,\"rub\":14.46,\"inr\":15.2,\"brl\":1.0936,\"nzd\":0.2746,\"pln\":0.741,\"jpy\":21.178,\"myr\":0.8268,\"idr\":2816.234,\"ngn\":102.852,\"mxn\":4.06,\"php\":9.71,\"chf\":0.18032,\"thb\":6.062,\"sgd\":0.2652,\"czk\":4.304,\"nok\":1.7652,\"zar\":3.012,\"sek\":1.7954,\"kes\":23.388,\"nad\":4.212,\"dkk\":1.155,\"hkd\":1.5496,\"eth\":0.000108,\"btc\":4.0e-6,\"ltc\":0.000853,\"xrp\":0.3676,\"xlm\":0.3952,\"bch\":0.000278,\"bnb\":0.001183,\"usdt\":0.1998,\"trx\":3.76,\"usdc\":0.2,\"dash\":0.000752,\"waves\":0.017392,\"xmr\":0.000756}', '2020-12-03 19:25:35', '2021-02-18 04:32:09'),
+(266, 'token_all_price', '{\"base\":0.2,\"usd\":0.2,\"eur\":0.2,\"gbp\":0.2,\"cad\":0.2,\"aud\":0.2,\"try\":0.2,\"rub\":0.2,\"inr\":0.2,\"brl\":0.2,\"nzd\":0.2,\"pln\":0.2,\"jpy\":0.2,\"myr\":0.2,\"idr\":0.2,\"ngn\":0.2,\"mxn\":0.2,\"php\":0.2,\"chf\":0.2,\"thb\":0.2,\"sgd\":0.2,\"czk\":0.2,\"nok\":0.2,\"zar\":0.2,\"sek\":0.2,\"kes\":0.2,\"nad\":0.2,\"dkk\":0.2,\"hkd\":0.2,\"eth\":0.2,\"btc\":0.2,\"ltc\":0.2,\"xrp\":0.2,\"xlm\":0.2,\"bch\":0.2,\"bnb\":0.2,\"usdt\":0.2,\"trx\":0.2,\"usdc\":0.2,\"dash\":0.2,\"waves\":0.2,\"xmr\":0.2}', '2020-12-03 19:25:35', '2021-02-22 07:20:50'),
 (283, 'lang_last_generate_es', '1611136737', '2021-01-20 15:58:57', '2021-01-20 15:58:57'),
 (284, 'lang_last_generate_nl', '1613133792', '2021-01-20 16:07:30', '2021-02-12 18:43:12'),
 (269, 'site_logo', '1607929270.png', '2020-12-04 18:33:42', '2021-01-02 14:35:47'),
@@ -1885,8 +2050,8 @@ CREATE TABLE `table_breakdown_jurisdictions` (
   `user_id` int(11) NOT NULL,
   `table_id` int(11) DEFAULT NULL,
   `jurisdiction` int(11) DEFAULT NULL,
-  `percent` text,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `percent` text DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1909,33 +2074,33 @@ CREATE TABLE `transactions` (
   `tnx_id` varchar(191) NOT NULL,
   `tnx_type` varchar(191) NOT NULL,
   `tnx_time` datetime NOT NULL,
-  `tokens` double NOT NULL DEFAULT '0',
-  `bonus_on_base` double NOT NULL DEFAULT '0',
-  `bonus_on_token` double NOT NULL DEFAULT '0',
-  `total_bonus` double NOT NULL DEFAULT '0',
+  `tokens` double NOT NULL DEFAULT 0,
+  `bonus_on_base` double NOT NULL DEFAULT 0,
+  `bonus_on_token` double NOT NULL DEFAULT 0,
+  `total_bonus` double NOT NULL DEFAULT 0,
   `total_tokens` double NOT NULL,
   `stage` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `amount` double DEFAULT NULL,
-  `receive_amount` double NOT NULL DEFAULT '0',
+  `receive_amount` double NOT NULL DEFAULT 0,
   `receive_currency` varchar(191) DEFAULT NULL,
   `base_amount` double DEFAULT NULL,
   `base_currency` varchar(191) DEFAULT NULL,
   `base_currency_rate` double DEFAULT NULL,
   `currency` varchar(191) DEFAULT NULL,
   `currency_rate` double DEFAULT NULL,
-  `all_currency_rate` text,
+  `all_currency_rate` text DEFAULT NULL,
   `wallet_address` varchar(191) DEFAULT NULL,
   `payment_method` varchar(191) DEFAULT NULL,
   `payment_id` varchar(191) NOT NULL DEFAULT '',
   `payment_to` varchar(191) DEFAULT NULL,
-  `checked_by` text,
-  `added_by` text,
+  `checked_by` text DEFAULT NULL,
+  `added_by` text DEFAULT NULL,
   `checked_time` datetime DEFAULT NULL,
   `details` varchar(191) NOT NULL DEFAULT '',
-  `extra` text,
+  `extra` text DEFAULT NULL,
   `status` varchar(191) NOT NULL DEFAULT '',
-  `dist` int(11) NOT NULL DEFAULT '0',
+  `dist` int(11) NOT NULL DEFAULT 0,
   `refund` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1951,11 +2116,11 @@ CREATE TABLE `translates` (
   `id` int(10) UNSIGNED NOT NULL,
   `key` varchar(191) NOT NULL,
   `name` varchar(191) NOT NULL,
-  `text` text,
+  `text` text DEFAULT NULL,
   `pages` varchar(191) NOT NULL DEFAULT 'global',
   `group` varchar(191) NOT NULL DEFAULT 'system',
   `panel` varchar(191) NOT NULL DEFAULT 'any',
-  `load` tinyint(1) NOT NULL DEFAULT '0',
+  `load` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -6521,9 +6686,9 @@ CREATE TABLE `users` (
   `contributed` double DEFAULT NULL,
   `tokenBalance` double DEFAULT NULL,
   `referral` varchar(191) DEFAULT NULL,
-  `referralInfo` text,
-  `google2fa` int(11) NOT NULL DEFAULT '0',
-  `google2fa_secret` text,
+  `referralInfo` text DEFAULT NULL,
+  `google2fa` int(11) NOT NULL DEFAULT 0,
+  `google2fa_secret` text DEFAULT NULL,
   `type` enum('demo','main') NOT NULL DEFAULT 'main',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -6536,8 +6701,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `registerMethod`, `public_key`, `social_id`, `mobile_code`, `mobile`, `mobile_verified_at`, `dateOfBirth`, `nationality`, `nationality_id`, `lastLogin`, `walletType`, `walletAddress`, `role`, `contributed`, `tokenBalance`, `referral`, `referralInfo`, `google2fa`, `google2fa_secret`, `type`, `remember_token`, `created_at`, `updated_at`, `last_name`) VALUES
-(1, 'Robin', 'admin@admin.com', '2020-12-03 19:03:27', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-18 04:31:59', NULL, NULL, 'admin', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'TGW9J4dyh0fKv7i06cf5PNA2q5s4B6WTzKyYEbqDk3imDmzjbrcWTYJFCWPQ', '2020-12-03 19:03:27', '2021-02-18 04:31:59', 'Henderson'),
-(19, 'Robin', 'robinhenderson545@gmail.com', '2020-12-17 19:01:19', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', '6810', NULL, '+31', '0624734397', NULL, '04/01/1991', 'NETHERLANDS', NULL, '2021-02-18 13:23:58', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', '7HVvVNoVNRlh0PgS6zkGhvu0bIKvyJmkLjPvYRgbbYqoO3PvufDAr5LaNFif', '2020-12-18 16:43:12', '2021-02-18 13:23:58', 'bbbb'),
+(1, 'Robin', 'admin@admin.com', '2020-12-03 19:03:27', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-23 14:32:30', NULL, NULL, 'admin', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'eapjk7a7t6fIdDzm86iSYMkSFg1dBrj6VdqYBvVfByEBToL1craWsAfb3Kdo', '2020-12-03 19:03:27', '2021-02-23 04:32:30', 'Henderson'),
+(19, 'Robin', 'robinhenderson545@gmail.com', '2020-12-17 19:01:19', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', '6810', NULL, '+31', '0624734397', NULL, '04/01/1991', 'NETHERLANDS', NULL, '2021-02-26 00:39:16', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', '7HVvVNoVNRlh0PgS6zkGhvu0bIKvyJmkLjPvYRgbbYqoO3PvufDAr5LaNFif', '2020-12-18 16:43:12', '2021-02-25 14:39:16', 'bbbb'),
 (11, 'munir12', 'muneerahmad0152@gmail.com', '2020-12-03 19:03:27', '$2y$10$bjOb9E1vNwpj26QBEFPK6.VYCYVshk2Y2D6qp8DcxvvPb0ItLg3Lm', 'active', 'Email', NULL, NULL, '+31', '0624734456', NULL, '03/04/2013', '', NULL, '2020-12-19 16:23:13', '', '', 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'DbjPXb0BnqR7tuvdIRhcXwloLNgdbAjAUvdYWKwRGCINnxObcmrF0DhSF2qZ', '2020-12-10 11:10:08', '2020-12-19 15:37:11', ''),
 (17, 'Muhammad121', 'abubakarnaeem@einnovention.us', '2020-12-17 19:01:19', '$2y$10$NJron/WnxAp0n4joMOycdehooBs7OhrATCd1Le9qko7ryTB2Hrhi2', 'active', 'Email', NULL, NULL, NULL, '', NULL, '01/28/2020', 'ALBANIA', NULL, '2020-12-19 16:40:45', '', '', 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'uOOs7sa2TMqXKSPlneq6j93v0lIFrlBuu2JmqmG4uKZ8B6WPji6rIubAVPMA', '2020-12-17 18:51:30', '2021-01-07 19:42:01', ''),
 (18, 'Ahmad', 'ahmadnazir@einnovention.us', NULL, '$2y$10$WOf/6gV7a2OpVVBkyRYX7OsiGynGRAlIh.0lR24fGpSM.QELpwxUO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-17 19:54:22', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'lUwb9Kx2lRshlpPg9FT8eEE8aMc4WAUGaP7JeSZ0Ao24D1T0UNPvRX3GkPXJ', '2020-12-17 18:54:22', '2020-12-17 18:54:22', '');
@@ -6551,9 +6716,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `st
 CREATE TABLE `user_metas` (
   `id` int(10) UNSIGNED NOT NULL,
   `userId` int(11) NOT NULL,
-  `notify_admin` int(11) NOT NULL DEFAULT '0',
-  `newsletter` int(11) NOT NULL DEFAULT '1',
-  `unusual` int(11) NOT NULL DEFAULT '1',
+  `notify_admin` int(11) NOT NULL DEFAULT 0,
+  `newsletter` int(11) NOT NULL DEFAULT 1,
+  `unusual` int(11) NOT NULL DEFAULT 1,
   `save_activity` varchar(191) NOT NULL DEFAULT 'TRUE',
   `pwd_chng` varchar(191) NOT NULL DEFAULT 'TRUE',
   `pwd_temp` varchar(191) DEFAULT NULL,
@@ -6599,7 +6764,7 @@ CREATE TABLE `user_roles` (
   `user_id` int(11) DEFAULT NULL,
   `entity_id` int(11) DEFAULT NULL,
   `role_label` varchar(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -6634,6 +6799,30 @@ ALTER TABLE `article_contents`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `business_acitivities_class`
+--
+ALTER TABLE `business_acitivities_class`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `business_acitivities_division`
+--
+ALTER TABLE `business_acitivities_division`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `business_acitivities_group`
+--
+ALTER TABLE `business_acitivities_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `business_acitivities_subclass`
+--
+ALTER TABLE `business_acitivities_subclass`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `countries`
 --
 ALTER TABLE `countries`
@@ -6646,11 +6835,16 @@ ALTER TABLE `currencies`
   ADD PRIMARY KEY (`cur_id`);
 
 --
--- Indexes for table `email_templates`
+-- Indexes for table `entities_business_activities`
 --
-ALTER TABLE `email_templates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email_templates_slug_unique` (`slug`);
+ALTER TABLE `entities_business_activities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_companies_purpose`
+--
+ALTER TABLE `entities_companies_purpose`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `entity`
@@ -6659,362 +6853,58 @@ ALTER TABLE `entity`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `entity_types`
---
-ALTER TABLE `entity_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `entity_types_associations`
---
-ALTER TABLE `entity_types_associations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `entity_types_companies`
---
-ALTER TABLE `entity_types_companies`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `entity_types_foundations`
---
-ALTER TABLE `entity_types_foundations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `entity_types_partnerships`
---
-ALTER TABLE `entity_types_partnerships`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `entity_types_trusts`
---
-ALTER TABLE `entity_types_trusts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `global_metas`
---
-ALTER TABLE `global_metas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ico_metas`
---
-ALTER TABLE `ico_metas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ico_stages`
---
-ALTER TABLE `ico_stages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `jurisdictions`
---
-ALTER TABLE `jurisdictions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `kycs`
---
-ALTER TABLE `kycs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `kyc_identity`
---
-ALTER TABLE `kyc_identity`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `kyc_residency`
---
-ALTER TABLE `kyc_residency`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `kyc_tax`
---
-ALTER TABLE `kyc_tax`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `languages`
---
-ALTER TABLE `languages`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `languages_code_unique` (`code`);
-
---
--- Indexes for table `legal_structures`
---
-ALTER TABLE `legal_structures`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `office_services`
---
-ALTER TABLE `office_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pages_slug_unique` (`slug`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `payment_methods`
---
-ALTER TABLE `payment_methods`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `payment_methods_payment_method_unique` (`payment_method`);
-
---
--- Indexes for table `referrals`
---
-ALTER TABLE `referrals`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `table_breakdown_jurisdictions`
---
-ALTER TABLE `table_breakdown_jurisdictions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `transactions`
---
-ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `translates`
---
-ALTER TABLE `translates`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- Indexes for table `user_metas`
---
-ALTER TABLE `user_metas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_roles`
---
-ALTER TABLE `user_roles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `activities`
+-- AUTO_INCREMENT for table `business_acitivities_class`
 --
-ALTER TABLE `activities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+ALTER TABLE `business_acitivities_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
--- AUTO_INCREMENT for table `articles`
+-- AUTO_INCREMENT for table `business_acitivities_division`
 --
-ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `business_acitivities_division`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `article_contents`
+-- AUTO_INCREMENT for table `business_acitivities_group`
 --
-ALTER TABLE `article_contents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+ALTER TABLE `business_acitivities_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `business_acitivities_subclass`
+--
+ALTER TABLE `business_acitivities_subclass`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+
 --
--- AUTO_INCREMENT for table `currencies`
+-- AUTO_INCREMENT for table `entities_business_activities`
 --
-ALTER TABLE `currencies`
-  MODIFY `cur_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+ALTER TABLE `entities_business_activities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
--- AUTO_INCREMENT for table `email_templates`
+-- AUTO_INCREMENT for table `entities_companies_purpose`
 --
-ALTER TABLE `email_templates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `entities_companies_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `entity`
 --
 ALTER TABLE `entity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `entity_types`
---
-ALTER TABLE `entity_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `entity_types_associations`
---
-ALTER TABLE `entity_types_associations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `entity_types_companies`
---
-ALTER TABLE `entity_types_companies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `entity_types_foundations`
---
-ALTER TABLE `entity_types_foundations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `entity_types_partnerships`
---
-ALTER TABLE `entity_types_partnerships`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `entity_types_trusts`
---
-ALTER TABLE `entity_types_trusts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `global_metas`
---
-ALTER TABLE `global_metas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `ico_metas`
---
-ALTER TABLE `ico_metas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT for table `ico_stages`
---
-ALTER TABLE `ico_stages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `jurisdictions`
---
-ALTER TABLE `jurisdictions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT for table `kycs`
---
-ALTER TABLE `kycs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
---
--- AUTO_INCREMENT for table `kyc_identity`
---
-ALTER TABLE `kyc_identity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `kyc_residency`
---
-ALTER TABLE `kyc_residency`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `kyc_tax`
---
-ALTER TABLE `kyc_tax`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `languages`
---
-ALTER TABLE `languages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT for table `legal_structures`
---
-ALTER TABLE `legal_structures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT for table `office_services`
---
-ALTER TABLE `office_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `payment_methods`
---
-ALTER TABLE `payment_methods`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `referrals`
---
-ALTER TABLE `referrals`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT for table `settings`
---
-ALTER TABLE `settings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
---
--- AUTO_INCREMENT for table `table_breakdown_jurisdictions`
---
-ALTER TABLE `table_breakdown_jurisdictions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `transactions`
---
-ALTER TABLE `transactions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `translates`
---
-ALTER TABLE `translates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7029;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `user_metas`
---
-ALTER TABLE `user_metas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `user_roles`
---
-ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

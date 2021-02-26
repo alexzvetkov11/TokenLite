@@ -14,7 +14,7 @@
         </div>
     </div> --}}
     <div class="row justify-content-center">
-        <div class="col-lg-10 col-xl-9">
+        <div class="col-lg-12 col-xl-11">
             @include('layouts.messages')
             <div class="card mx-lg-4">
                 {{-- <div class="gaps-3-5x"></div>
@@ -54,7 +54,7 @@
                                             <img src="{{ asset('assets/images/icon-passport.png') }}" alt="">
                                             <img src="{{ asset('assets/images/icon-passport-color.png') }}" alt="">
                                         </div>
-                                        <span>{{ __('Incorporate New Entity') }}</span>
+                                        <span>{{ __('incorporate New Entity') }}</span>
                                     </label>
                                 </div>
                             </li>
@@ -81,8 +81,8 @@
 
                 <form action="{{ route('user.ajax.entities.add') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="type" value="incorporate">
-                    <div id='incorporate'>
+                    <input type="hidden" name="type" value="exist">
+                    <div id='exist'>
                         <div class="form-step form-step2">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
@@ -98,7 +98,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="jurisdiction1" class="input-item-label required">{{ __('Supported Jurisdictions') }}</label>
+                                            <label for="jurisdiction1" class="input-item-label ">{{ __('Supported Jurisdictions') }}</label>
                                             <div class="input-wrap">
                                                 <select class="select-bordered select-block " name="jurisdiction1" id="jurisdiction1" data-dd-class="search-on" required>
                                                     <option value=""> {{ __('Select Option') }}</option>
@@ -127,7 +127,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="entype1" class="input-item-label required">{{ __('Supported Entity Types') }}</label>
+                                            <label for="entype1" class="input-item-label">{{ __('Supported Entity Types') }}</label>
                                             <div class="input-wrap">
                                                 <select class="form-control" name="entype1" id="entype1">
                                                     <option value="0">{{ __('Select Option') }}</option>
@@ -170,7 +170,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="entity_name1 " class="input-item-label required">Entity Name</label>
+                                            <label for="entity_name1 " class="input-item-label">Entity Name</label>
                                             <div class="input-wrap">
                                                 <input class="input-bordered" type="text" id="entity_name1" name="entity_name1" value="" required>
                                                 <div class="gaps-1x"> </div>
@@ -187,8 +187,8 @@
                                 <div class="step-head">
                                     <div class="step-number">05</div>
                                     <div class="step-head-text">
-                                        <h4>Assignment</h4>
-                                        <p>Choose the User who will perform the Role of Secretary for this new entity.</p>
+                                        <h4>{{ __('Start Date') }}</h4>
+                                        <p>{{ __('Choose the earliest date at which this new Entity can be formally incorporated.') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="fstart_date" class="input-item-label required">Choosen Date</label>
+                                            <label for="fstart_date" class="input-item-label">{{ __('Choosen Date') }}</label>
                                             <div class="input-wrap">
                                                 <input class="input-bordered date-picker" type="text" id="start_date" name="start_date"  data-format="alt" required
                                                     min="{{ now()->toDateString('d-m-Y') }}" >
@@ -204,6 +204,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="gaps-2x"></div>
                                 <div class="note note-plane note-light-alt note-md pdb-1x">
                                     <em class="fas fa-info-circle"></em>
                                     <p>By clicking "Create" a new profile for the new entity will be created and saved as a
@@ -211,22 +212,18 @@
                                         application has been completed.
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-step form-final">
-                            <div class="form-step-fields card-innr">
+                                <div class="gaps-3x"></div>
                                 <button class="btn btn-primary" type="submit">{{ __('Create Entity') }} </button>
                             </div>
                         </div>
-                        <div class="gaps-1x"></div>
                     </div>
                 </form>
 
                 <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
                 <form action="{{ route('user.ajax.entities.add') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="type" value="exist">
-                    <div id='existing'>
+                    <input type="hidden" name="type" value="incorporate">
+                    <div id='incorporate'>
                         <div class="form-step form-step2">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
@@ -242,14 +239,27 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="jurisdiction2" class="input-item-label required">{{ __('Supported Jurisdictions') }}</label>
+                                            <label for="jurisdiction2" class="input-item-label">{{ __('Supported Jurisdictions') }}</label>
                                             <div class="input-wrap">
                                                 <select class="select-bordered select-block required" name="jurisdiction2" id="jurisdiction2" data-dd-class="search-on">
                                                     <option value="0">{{ __('Select Option') }}</option>
-                                                    @foreach($juris as $jur)
-                                                        <option value="{{ $jur->id }}">{{ $jur->jurisdiction_name }}</option>
-                                                    @endforeach
+                                                    <optgroup label="{{ __('Supported Jurisdictions') }}">
+                                                        @foreach($juris as $jur)
+                                                            @if ($jur->jur_status=='active' )
+                                                                <option value="{{ $jur->id }}">{{ $jur->jurisdiction_name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
+                                                    <optgroup label="{{ __('Unsupported Jurisdictions') }} ">
+                                                        @foreach($juris as $jur)
+                                                            @if ($jur->jur_status!='active' )
+                                                                <option value="{{ $jur->id }}">{{ $jur->jurisdiction_name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
+
                                                 </select>
+
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +281,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="entype2" class="input-item-label required">{{ __('Entity Types') }}</label>
+                                            <label for="entype2" class="input-item-label">{{ __('Entity Types') }}</label>
                                             <div class="input-wrap">
                                                 <select class="form-control required" name="entype2" id="entype2" data-dd-class="search-on">
                                                     <option value="0">{{ __('Select Option') }}</option>
@@ -323,7 +333,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-item input-with-label">
-                                            <label for="entity_name2" class="input-item-label required">Entity Name</label>
+                                            <label for="entity_name2" class="input-item-label">Entity Name</label>
                                             <div class="input-wrap">
                                                 <input class="input-bordered required" type="text" id="entity_name2" name="entity_name2" value="">
                                                 <div class="gaps-1x"> </div>
@@ -389,7 +399,7 @@
                                                         <button type="button" class="btn btn-primary">{{ __('Select') }}</button>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="document_one" />
+                                                <input type="hidden" name="document_one"/>
                                             </div>
                                         </div>
                                     </div>
@@ -421,31 +431,30 @@
                                 <ul class="document-list guttar-vr-10px">
                                     <li class="document-item">
                                         <div class="input-wrap">
-                                            <input class="document-type" type="radio" name="onboarding" value="passport"
+                                            <input class="document-type" type="radio" name="onboarding" value="full_functionality"
                                                 id="full_functionality" data-title="Passport" checked>
-                                            <label for="full_functionality"><span>Full Functionality</span></label>
+                                            <label for="full_functionality"><span>{{ __('Full Functionality') }}</span></label>
                                         </div>
                                     </li>
                                     <li class="document-item">
                                         <div class="input-wrap">
                                             <input class="document-type" type="radio" name="onboarding"
-                                                id="listing_only" value="nidcard" data-title="National ID Card">
-                                            <label for="listing_only"><span>Add Existing Entity</span></label>
+                                                id="listing_only" value="listing_only" data-title="National ID Card">
+                                            <label for="listing_only"><span>{{ __('Listing Only') }}</span></label>
                                         </div>
                                     </li>
                                 </ul>
+                                <div class="gaps-2x"></div>
                                 <div class="note note-plane note-light-alt note-md pdb-1x">
                                     <em class="fas fa-info-circle"></em>
                                     <p>{{ __('By clicking "Create" a new profile for the new entity will be created and saved as a draft. Actual incorporation of the new entity will only occur after the entire application has been completed.') }}
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-step form-final">
-                            <div class="form-step-fields card-innr">
+                                <div class="gaps-2x"></div>
                                 <button class="btn btn-primary" type="submit">{{ __('Add Entity') }} </button>
                             </div>
                         </div>
+
                         <div class="gaps-1x"></div>
                     </div>
                     <div class="hiddenFiles"></div>
@@ -476,7 +485,6 @@
             });
             function show_entype1(){
                 var entypeOptions = $('#entype1 option');
-                console.log('here');
                 for( var i=1; i<entypeOptions.length; i++){
                     if ($(entypeOptions[i]).data('status')=='supported' && $(entypeOptions[i]).data('juris')==$('#jurisdiction1').val() ){
                         $(entypeOptions[i]).show();
@@ -507,8 +515,12 @@
             $('.other').hide();
             $('#entype2').on('change', function (){
                 if ( $(this).val()=='other'){
+                    console.log("here");
                     $('.other').show();
+                    $('#listing_only').prop('checked', true).trigger('click');
+                    $('#full_functionality').prop('disabled', true);
                 } else {
+                    $('#full_functionality').prop('disabled', false);
                     $('.other').hide();
                 }
             })

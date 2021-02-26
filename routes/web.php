@@ -90,6 +90,9 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
         Route::post('/kyc/submit', 'User\KycController@submit')->name('kyc.submit');
         Route::post('/account/activity', 'User\UserController@account_activity_delete')->name('account.activity.delete')->middleware('demo_user');
         Route::post('/entities/add', 'User\EntitiesController@entities_add')->name('entities.add')->middleware('demo_user');
+        Route::post('/entities/change_business_activities', 'User\EntitiesController@change_business_activities')->name('change.business_activities')->middleware('demo_user');
+        Route::post('/entities/add_purpose_activities', 'User\EntitiesController@add_purpose_activities')->name('entities.add.purpose_activites')->middleware('demo_user');
+        Route::post('/entities/add_domiciliation', 'User\EntitiesController@add_domiciliation')->name('entities.add.domiciliation')->middleware('demo_user');
 
     });
 });

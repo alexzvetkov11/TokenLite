@@ -81,8 +81,8 @@
 
                 <form action="{{ route('admin.ajax.entities.add') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="type" value="incorporate">
-                    <div id='incorporate'>
+                    <input type="hidden" name="type" value="exist">
+                    <div id='exist'>
                         <div class="form-step form-step2">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
@@ -222,8 +222,8 @@
                 <input type="hidden" id="file_uploads" value="{{ route('ajax.kyc.file.upload') }}" />
                 <form action="{{ route('admin.ajax.entities.add') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="type" value="exist">
-                    <div id='existing'>
+                    <input type="hidden" name="type" value="incorporate">
+                    <div id='incorporate'>
                         <div class="form-step form-step2">
                             <div class="form-step-head card-innr">
                                 <div class="step-head">
