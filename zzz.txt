@@ -835,3 +835,46 @@ Product Business Model
 Import (including parts, from one Custom Union to another)
 Domestic Trade (with in Custom Union)
 Please explain
+Share Capital
+Share Class
+Class Code
+Share Type
+Share Class
+Authorized Shares
+Par Value
+Add Share Class
+Voting Rights
+Number of Votes per Share
+Call and Participate in Meetings
+Continuous Conversion Right
+Pre-emption rights
+Authorized Share Capital
+Number of shares held
+Branch Name
+Correspondence Address of Branch
+This Address is also the Correspondence Address for this Branch.
+This Branch will have a (slightly) different Activity Description than the Entity itself.
+The Electronic Correspondence details for the Branch are the same as for the Local Head Office.
+Activity Description
+Meetings Rights
+Voting & Metting
+Reserves
+Reserves Right
+Reserves & Preferred Dividend
+Preferred Dividend Calculation
+Maturity
+Perpetual
+Maturity Date
+Settlement
+Redemption Rights Start Date
+Redemption Rate
+Continuous Redemption Right
+Redemption
+Conversion Share Class
+Conversion Rate
+Conversion Share Class
+Conversion Rights (Holder)
+Conversion
+Redemption Right End Date
+Conversion Rights Start Date
+Conversion Right End Date

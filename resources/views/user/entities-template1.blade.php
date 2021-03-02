@@ -18,7 +18,7 @@
                         </a>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('user.ajax.entities.add.purpose_activites') }}" autocomplete="off" id="formid">
+                <form method="POST" action="{{ route('user.entities.add.purpose_activites') }}" autocomplete="off" id="formid">
                     @csrf
                     <input type="hidden" name="entity_id" value="{{ $entities->id }}" />
                     <div class="form-step form-step1">
@@ -51,7 +51,7 @@
                                     <div class="input-item input-with-label">
                                         <label for="trading_name" class="input-item-label">{{__('Trading Names')}}</label>
                                         <div class="input-wrap">
-                                            <input id="trading_name" class=""  type="text"/>
+                                            <input id="trading_name" name="trading_name"  type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                     <div class="col-md-12 yes">
                                         <div class="input-item text-left">
                                             <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm switch-toggle" data-switch="switch-to-b2b" type="checkbox" id='b2b' >
+                                                <input class="input-checkbox input-checkbox-sm switch-toggle" data-switch="switch-to-b2b" type="checkbox" id='b2b' name="chB2B">
                                                 <label for="b2b">{{ __('Business to Business') }}</label>
                                             </div>
                                         </div>
@@ -185,7 +185,7 @@
                                     <div class="col-md-12 yes">
                                         <div class="input-item text-left">
                                             <div class="input-wrap">
-                                                <input class="input-checkbox input-checkbox-sm switch-toggle" data-switch="switch-to-b2c" type="checkbox" id='b2c' >
+                                                <input class="input-checkbox input-checkbox-sm switch-toggle" data-switch="switch-to-b2c" type="checkbox" id='b2c' name="chB2C">
                                                 <label for="b2c">{{ __('Business to Consumers') }}</label>
                                             </div>
                                         </div>
@@ -252,31 +252,31 @@
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='street' value='street' name="product_offering">
+                                            <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='street'  name="street">
                                             <label for="street">{{ __('Via Street Trade or Door-to-Door Sales') }}</label>
                                         </div>
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='internet' value='internet' name="product_offering" >
+                                            <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='internet'  name="internet" >
                                             <label for="internet">{{ __('Via the Internet') }}</label>
                                         </div>
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" id='home' value='home' name="product_offering">
+                                            <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='home' name="home">
                                             <label for="home">{{ __('From Home') }}</label>
                                         </div>
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm all_methods" type="radio" value='mail' id='mail' name="product_offering">
+                                            <input class="input-checkbox input-checkbox-sm all_methods" type="checkbox" id='mail' name="mail">
                                             <label for="mail">{{ __('By Mail Order') }}</label>
                                         </div>
                                     </div>
                                     <div class="input-item text-left">
                                         <div class="input-wrap">
-                                            <input class="input-radio input-radio-sm" type="radio" id='namely' value='namely' name="product_offering">
+                                            <input class="input-checkbox input-checkbox-sm" type="checkbox" id='namely'  name="namely">
                                             <label for="namely">{{ __('Other, namely') }}</label>
                                         </div>
                                     </div>
@@ -579,16 +579,16 @@
             $('.yes').hide();
             $('input[name="customer"]').on('click', function(){
                 if ($(this).val()=="yes"){
-                    $('.yes').show();
+                    $('.yes').show("slow");
                 } else{
-                    $('.yes').hide();
+                    $('.yes').hide("slow");
                 }
             });
 
             $('input[name="customer"]').on("click", function(){
                 if ($(this).val() =="no" ){
-                    $(".business_model").hide();
-                    $(".product_offering").hide();
+                    $(".business_model").hide("slow");
+                    $(".product_offering").hide("slow");
                     $("#b2b").prop('checked', false).change();
                     $("#b2c").prop('checked', false).change();
                     $("#b2bservice").prop('checked', true).change();
@@ -599,38 +599,34 @@
             $(".business_model").hide();
             $('input[name="b2b"]').on('click', function(){
                 if ($(this).val()=="b2bproduct")    {
-                    $(".business_model").show();
+                    $(".business_model").show("slow");
                 }
                 else {
                     if ( ($('#b2cservice').prop('checked')==true && $('#b2c').prop('checked')==true) || $('#b2c').prop('checked')==false )
-                        $(".business_model").hide();
+                        $(".business_model").hide("slow");
 
                 }
             });
 
-            $(".product_offering").hide();
+            $(".product_offering").hide("slow");
             $('input[name="b2c"]').on('click', function(){
                 if ($(this).val()=="b2cproduct")    {
-                    $(".business_model").show();
-                    $(".product_offering").show();
+                    $(".business_model").show("slow");
+                    $(".product_offering").show("slow");
                 }
                 else {
-                    $(".product_offering").hide();
+                    $(".product_offering").hide("slow");
                     if ( ($('#b2bservice').prop('checked')==true && $('#b2b').prop('checked')==true) || $('#b2b').prop('checked')==false)
-                        $(".business_model").hide();
+                        $(".business_model").hide("slow");
                 }
             });
 
-
-
-
-
             $('[name="othername"]').hide();
-            $('input[name="product_offering"]').on('click', function(){
-                if ($(this).val()=='namely'){
-                    $('[name="othername"]').show();
+            $('#namely').on('click', function(){
+                if ($(this).is(":checked")){
+                    $('[name="othername"]').show("slow");
                 } else {
-                    $('[name="othername"]').hide();
+                    $('[name="othername"]').hide("slow");
                 }
             })
 
@@ -642,39 +638,39 @@
             $('[name="division"]').on('change', function(){
                 var id = $(this).val();
                 console.log(id);
-                if ( id==0) $('.group').hide();
+                if ( id==0) $('.group').hide("slow");
                 else{
-                    $(".group").show();
-                    jQuery(".group option[data-id='" + id + "']").show();
-                    jQuery(".group option[data-id!='" + id + "']").hide();
+                    $(".group").show("slow");
+                    jQuery(".group option[data-id='" + id + "']").show("slow");
+                    jQuery(".group option[data-id!='" + id + "']").hide("slow");
                 }
-                $(".group option[value='']").show().prop('selected', true);
+                $(".group option[value='']").show("slow").prop('selected', true);
                 $("[name='group']").change();
             });
 
-            $('.class').hide();
+            $('.class').hide("slow");
             $('[name="group"]').on('change', function(){
                 var id = $(this).val();
-                if ( id==0) $('.class').hide();
+                if ( id==0) $('.class').hide("slow");
                 else{
-                    $(".class").show();
-                    jQuery(".class option[data-id='" + id + "']").show();
-                    jQuery(".class option[data-id!='" + id + "']").hide();
+                    $(".class").show("slow");
+                    jQuery(".class option[data-id='" + id + "']").show("slow");
+                    jQuery(".class option[data-id!='" + id + "']").hide("slow");
                 }
-                $(".class option[value='']").show().prop('selected', true);
+                $(".class option[value='']").show("slow").prop('selected', true);
                 $('[name="class"]').change();
             });
 
-            $('.subclass').hide();
+            $('.subclass').hide("slow");
             $('[name="class"]').on('change', function(){
                 var id = $(this).val();
-                if ( id==0) $('.subclass').hide();
+                if ( id==0) $('.subclass').hide("slow");
                 else{
-                    $(".subclass").show();
-                    jQuery(".subclass option[data-id='" + id + "']").show();
-                    jQuery(".subclass option[data-id!='" + id + "']").hide();
+                    $(".subclass").show("slow");
+                    jQuery(".subclass option[data-id='" + id + "']").show("slow");
+                    jQuery(".subclass option[data-id!='" + id + "']").hide("slow");
                 }
-                $(".subclass option[value='']").show().prop('selected', true);
+                $(".subclass option[value='']").show("slow").prop('selected', true);
                 $("[name='subclass']").change();
             })
             $('[data-target="#editBusiness"]').on('click', function(){

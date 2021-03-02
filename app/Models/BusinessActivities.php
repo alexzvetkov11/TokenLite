@@ -20,7 +20,7 @@ class BusinessActivities extends Model
         return $this->belongsTo('App\Models\Entity', 'entity_id', 'id');
     }
     public function get_branch(){
-        // return $this->belongsTo('App\Models\Entity', 'entity_id', 'id');
+        return $this->belongsTo('App\Models\EntityBranches', 'branch_id', 'id');
     }
     public function get_division(){
         return $this->belongsTo('App\Models\ActivitiesDivision', 'division_id', 'id');
@@ -35,11 +35,4 @@ class BusinessActivities extends Model
         return $this->belongsTo('App\Models\ActivitiesSubclass', 'subclass_id', 'id');
     }
 
-
-
-
-    public function getAll()
-    {
-        return $this;
-    }
 }

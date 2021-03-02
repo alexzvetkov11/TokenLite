@@ -76,7 +76,12 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
 
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
     Route::get('/addentities', 'User\EntitiesController@addentities_index')->name('addentities');
+    Route::get('/entities/template1', 'User\EntitiesController@template1')->name('entites.template1');
 
+    Route::post('/entities/add', 'User\EntitiesController@entities_add')->name('entities.add')->middleware('demo_user');
+    Route::post('/entities/add_purpose_activities', 'User\EntitiesController@add_purpose_activities')->name('entities.add.purpose_activites')->middleware('demo_user');
+    Route::post('/entities/add_domiciliation', 'User\EntitiesController@add_domiciliation')->name('entities.add.domiciliation')->middleware('demo_user');
+    Route::post('/entities/add_sharecapital', 'User\EntitiesController@add_sharecapital')->name('entities.add.sharecapital')->middleware('demo_user');
 
     // User Ajax Request
     Route::name('ajax.')->prefix('ajax')->group(function () {
@@ -89,10 +94,12 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
         Route::post('/transactions/view', 'User\TransactionController@show')->name('transactions.view');
         Route::post('/kyc/submit', 'User\KycController@submit')->name('kyc.submit');
         Route::post('/account/activity', 'User\UserController@account_activity_delete')->name('account.activity.delete')->middleware('demo_user');
-        Route::post('/entities/add', 'User\EntitiesController@entities_add')->name('entities.add')->middleware('demo_user');
+
         Route::post('/entities/change_business_activities', 'User\EntitiesController@change_business_activities')->name('change.business_activities')->middleware('demo_user');
-        Route::post('/entities/add_purpose_activities', 'User\EntitiesController@add_purpose_activities')->name('entities.add.purpose_activites')->middleware('demo_user');
-        Route::post('/entities/add_domiciliation', 'User\EntitiesController@add_domiciliation')->name('entities.add.domiciliation')->middleware('demo_user');
+        Route::post('/entities/add_branches', 'User\EntitiesController@add_branches')->name('entities.add.branches')->middleware('demo_user');
+        Route::post('/entities/add_shareclass', 'User\EntitiesController@add_shareclass')->name('entities.add.shareclass')->middleware('demo_user');
+
+
 
     });
 });

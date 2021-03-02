@@ -144,7 +144,7 @@ class KycController extends Controller
         // return view('user.kyc_application', compact('user_kyc', 'countries', 'title', 'setting'));
 
 
-       
+
     }
 
     /**
@@ -163,9 +163,9 @@ class KycController extends Controller
         } else if ( $request->type=="residency"){
 
         } else{
-            
+
         }
-        
+
 //        dd($request->all());
         $type = $request->documentType;
         $validator = Validator::make($request->all(), KYC::rules(), [
@@ -180,7 +180,7 @@ class KycController extends Controller
             if ($validator->errors()->first()) {
                 $msg = $validator->errors()->first();
             } else {
-                $msg = __('messages.somthing_wrong');
+                $msg = __('messages.somthing.wrong');
             }
 
             $ret['msg'] = 'warning';
