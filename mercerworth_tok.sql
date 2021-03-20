@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2021 at 09:50 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.3.18
+-- Generation Time: Mar 17, 2021 at 10:34 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.2.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -890,19 +891,94 @@ INSERT INTO `email_templates` (`id`, `name`, `slug`, `subject`, `greeting`, `mes
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `entities_addresses`
+--
+
+CREATE TABLE `entities_addresses` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `branch_id` int(11) NOT NULL DEFAULT 0,
+  `branch_type` varchar(11) DEFAULT NULL,
+  `address_type` varchar(11) DEFAULT NULL,
+  `country` int(11) DEFAULT NULL,
+  `state_province` varchar(255) DEFAULT NULL,
+  `city` int(11) DEFAULT NULL,
+  `postal_zip` varchar(11) DEFAULT NULL,
+  `street_name` varchar(50) DEFAULT NULL,
+  `building_nr` varchar(50) DEFAULT NULL,
+  `building_unit` varchar(50) DEFAULT NULL,
+  `residential` varchar(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_addresses`
+--
+
+INSERT INTO `entities_addresses` (`id`, `entity_id`, `branch_id`, `branch_type`, `address_type`, `country`, `state_province`, `city`, `postal_zip`, `street_name`, `building_nr`, `building_unit`, `residential`, `updated_at`, `created_at`) VALUES
+(1, 1, 0, 'h', 'registered', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-03-02 04:11:44', '0000-00-00 00:00:00'),
+(2, 1, 0, 'h', 'physical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-03-02 04:11:44', '0000-00-00 00:00:00'),
+(3, 1, 0, 'h', 'corresponde', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-03-02 04:11:44', '0000-00-00 00:00:00'),
+(4, 16, 1, 'b', 'physical', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-03-02 04:26:43', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_branches`
+--
+
+CREATE TABLE `entities_branches` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `branch_name` varchar(255) DEFAULT NULL,
+  `activity_description` varchar(255) DEFAULT NULL,
+  `b2b_service` varchar(11) DEFAULT NULL,
+  `b2b_product` varchar(11) DEFAULT NULL,
+  `b2c_service` varchar(11) DEFAULT NULL,
+  `b2c_product` varchar(11) DEFAULT NULL,
+  `products_manufacture` varchar(11) DEFAULT NULL,
+  `products_import` varchar(11) DEFAULT NULL,
+  `products_export` varchar(11) DEFAULT NULL,
+  `products_domestic_trade` varchar(11) DEFAULT NULL,
+  `places_retail` varchar(11) DEFAULT NULL,
+  `places_market` varchar(11) DEFAULT NULL,
+  `places_street` varchar(11) DEFAULT NULL,
+  `places_internet` varchar(11) DEFAULT NULL,
+  `places_home` varchar(11) DEFAULT NULL,
+  `places_mailorder` varchar(11) DEFAULT NULL,
+  `places_other` varchar(11) DEFAULT NULL,
+  `places_other_text` text DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_branches`
+--
+
+INSERT INTO `entities_branches` (`id`, `entity_id`, `branch_name`, `activity_description`, `b2b_service`, `b2b_product`, `b2c_service`, `b2c_product`, `products_manufacture`, `products_import`, `products_export`, `products_domestic_trade`, `places_retail`, `places_market`, `places_street`, `places_internet`, `places_home`, `places_mailorder`, `places_other`, `places_other_text`, `phone_number`, `email_address`, `website`, `updated_at`, `created_at`) VALUES
+(1, 16, 'Mercer Worth Amsterdam', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-03-02 04:26:16', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `entities_business_activities`
 --
 
 CREATE TABLE `entities_business_activities` (
   `id` int(11) NOT NULL,
   `entity_id` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  `division_id` int(11) DEFAULT NULL,
-  `group_id` int(11) DEFAULT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `subclass_id` int(11) DEFAULT NULL,
-  `percent` varchar(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `branch_id` int(11) NOT NULL,
+  `division_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `subclass_id` int(11) NOT NULL,
+  `percent` varchar(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -911,7 +987,7 @@ CREATE TABLE `entities_business_activities` (
 --
 
 INSERT INTO `entities_business_activities` (`id`, `entity_id`, `branch_id`, `division_id`, `group_id`, `class_id`, `subclass_id`, `percent`, `updated_at`, `created_at`) VALUES
-(1, 14, 1, 1, 1, 1, 1, '30%', '2021-02-23 13:54:20', '0000-00-00 00:00:00');
+(1, 1, 1, 1, 1, 1, 1, '40%', '2021-02-23 09:24:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -951,6 +1027,146 @@ CREATE TABLE `entities_companies_purpose` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `entities_corporate_bodies_shareholders`
+--
+
+CREATE TABLE `entities_corporate_bodies_shareholders` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) DEFAULT NULL,
+  `body_label` varchar(50) DEFAULT NULL,
+  `body_type` varchar(50) DEFAULT NULL,
+  `share_class_id` int(11) DEFAULT NULL,
+  `meeting_rights` varchar(11) DEFAULT NULL,
+  `voting_rights` varchar(11) DEFAULT NULL,
+  `voting_rights_votes` int(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_corporate_bodies_shareholders`
+--
+
+INSERT INTO `entities_corporate_bodies_shareholders` (`id`, `entity_id`, `body_label`, `body_type`, `share_class_id`, `meeting_rights`, `voting_rights`, `voting_rights_votes`, `updated_at`, `created_at`) VALUES
+(1, 1, 'General_meeting', 'Required', 1, 'yes', 'yes', 1, '2021-03-17 20:06:59', '0000-00-00 00:00:00'),
+(2, NULL, 'Preferred_meeting', 'Optional', NULL, NULL, NULL, NULL, '2021-03-17 20:07:03', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_domiciliation_office`
+--
+
+CREATE TABLE `entities_domiciliation_office` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `obtain_new_office` varchar(11) DEFAULT NULL,
+  `register_new_office` varchar(11) DEFAULT NULL,
+  `registered_office_available` varchar(11) DEFAULT NULL,
+  `registered_office_offer_selection` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(11) DEFAULT NULL,
+  `email_address` varchar(11) DEFAULT NULL,
+  `website` varchar(11) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_domiciliation_office`
+--
+
+INSERT INTO `entities_domiciliation_office` (`id`, `entity_id`, `obtain_new_office`, `register_new_office`, `registered_office_available`, `registered_office_offer_selection`, `phone_number`, `email_address`, `website`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Y', 'N', 'Y', NULL, NULL, NULL, NULL, '2021-03-02 03:57:35', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_share_classes`
+--
+
+CREATE TABLE `entities_share_classes` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `share_type` varchar(50) DEFAULT NULL,
+  `class_code` varchar(11) DEFAULT NULL,
+  `par_value` varchar(11) DEFAULT NULL,
+  `authorized_shares` varchar(50) DEFAULT NULL,
+  `liquidation_preference_amount` varchar(255) DEFAULT NULL,
+  `liquidation_preference_ranking` varchar(255) DEFAULT NULL,
+  `updated_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_share_classes`
+--
+
+INSERT INTO `entities_share_classes` (`id`, `entity_id`, `share_type`, `class_code`, `par_value`, `authorized_shares`, `liquidation_preference_amount`, `liquidation_preference_ranking`, `updated_at`, `created_at`) VALUES
+(1, 1, 'ordinary', 'A', NULL, NULL, NULL, NULL, 0, 0),
+(2, 1, 'ordinary', 'A', '1', '100', NULL, NULL, 0, 0),
+(3, 1, 'preference', 'B', '1', '100', '50', '1', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_share_rights`
+--
+
+CREATE TABLE `entities_share_rights` (
+  `id` int(11) NOT NULL,
+  `share_class_id` int(11) NOT NULL,
+  `rights_voting` varchar(11) DEFAULT NULL,
+  `rights_voting_number` varchar(50) DEFAULT NULL,
+  `rights_meetings` varchar(11) DEFAULT NULL,
+  `rights_reserves` varchar(11) DEFAULT NULL,
+  `rights_conversion` varchar(11) DEFAULT NULL,
+  `rights_pre_emptive` varchar(11) DEFAULT NULL,
+  `rights_pre_emptive_apply` varchar(255) DEFAULT NULL,
+  `preference_dividend_calc` varchar(11) DEFAULT NULL,
+  `preference_dividend_benchmark` varchar(255) DEFAULT NULL,
+  `preference_dividend_benchmark_premium` varchar(255) DEFAULT NULL,
+  `preference_dividend_fixed_rate` varchar(255) DEFAULT NULL,
+  `preference_dividend_frequency` varchar(255) DEFAULT NULL,
+  `preference_dividend_cumulative` varchar(255) DEFAULT NULL,
+  `preference_maturity_type` varchar(11) DEFAULT NULL,
+  `preference_maturity_date` datetime DEFAULT NULL,
+  `preference_maturity_settlement` varchar(255) DEFAULT NULL,
+  `preference_redemption_rights` varchar(11) DEFAULT NULL,
+  `preference_redemption_rate` varchar(11) DEFAULT NULL,
+  `preference_redemption_start_date` datetime DEFAULT NULL,
+  `preference_redemption_end_date` datetime DEFAULT NULL,
+  `updated_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entities_trading_name`
+--
+
+CREATE TABLE `entities_trading_name` (
+  `id` int(11) NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `trading_name` varchar(255) DEFAULT NULL,
+  `updated_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `entities_trading_name`
+--
+
+INSERT INTO `entities_trading_name` (`id`, `entity_id`, `type`, `trading_name`, `updated_at`, `created_at`) VALUES
+(1, 1, 'head', 'abcdef', 0, 0),
+(2, 1, 'branch', '12345', 0, 0),
+(3, 1, 'head', 'abcdef', 0, 0),
+(4, 1, 'branch', '12345', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `entity`
 --
 
@@ -958,6 +1174,8 @@ CREATE TABLE `entity` (
   `id` int(11) NOT NULL,
   `entity_name` varchar(255) DEFAULT NULL,
   `entity_type` int(255) NOT NULL,
+  `adding_type` varchar(11) DEFAULT NULL,
+  `entity_type_other` varchar(255) DEFAULT NULL,
   `jurisdiction` int(11) NOT NULL,
   `registration` varchar(255) DEFAULT NULL,
   `document` varchar(255) DEFAULT NULL,
@@ -972,10 +1190,15 @@ CREATE TABLE `entity` (
 -- Dumping data for table `entity`
 --
 
-INSERT INTO `entity` (`id`, `entity_name`, `entity_type`, `jurisdiction`, `registration`, `document`, `onboarding`, `start_date`, `status`, `updated_at`, `created_at`) VALUES
-(1, 'Mercer Worth 1\r\n', 1, 4, NULL, NULL, NULL, '2021-02-19 16:50:57', 'dissolved', '2021-02-16 04:17:10', '0000-00-00 00:00:00'),
-(2, 'Mercer Worth 2\r\n', 2, 2, NULL, NULL, NULL, '2021-02-10 16:51:03', 'active', '2021-02-16 04:17:28', '0000-00-00 00:00:00'),
-(22, 'gjfgjfghjg', 4, 2, NULL, NULL, 'full_functionality', '2021-02-18 00:00:00', NULL, '2021-02-23 14:14:07', '2021-02-24 00:14:07');
+INSERT INTO `entity` (`id`, `entity_name`, `entity_type`, `adding_type`, `entity_type_other`, `jurisdiction`, `registration`, `document`, `onboarding`, `start_date`, `status`, `updated_at`, `created_at`) VALUES
+(1, 'Mercer Worth 1\r\n', 1, NULL, NULL, 163, NULL, NULL, NULL, '2021-02-19 16:50:57', 'dissolved', '2021-03-16 10:38:06', '0000-00-00 00:00:00'),
+(2, 'Mercer Worth 2\r\n', 2, NULL, NULL, 249, NULL, NULL, NULL, '2021-02-10 16:51:03', 'active', '2021-03-16 10:38:30', '0000-00-00 00:00:00'),
+(51, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-26 00:00:00', 'In Formation', '2021-03-16 08:02:10', '2021-03-16 18:02:10'),
+(52, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-25 00:00:00', 'In Formation', '2021-03-16 22:46:03', '2021-03-17 08:46:03'),
+(53, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-25 00:00:00', 'In Formation', '2021-03-17 04:56:48', '2021-03-17 14:56:48'),
+(54, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-25 00:00:00', 'In Formation', '2021-03-17 08:13:19', '2021-03-17 18:13:19'),
+(55, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-19 00:00:00', 'In Formation', '2021-03-17 11:59:01', '2021-03-17 21:59:01'),
+(56, 'dfghj', 1, 'existing', NULL, 143, NULL, NULL, 'full_functionality', '2021-03-25 00:00:00', 'In Formation', '2021-03-17 15:49:12', '2021-03-18 01:49:12');
 
 -- --------------------------------------------------------
 
@@ -1006,10 +1229,10 @@ CREATE TABLE `entity_types` (
 --
 
 INSERT INTO `entity_types` (`id`, `jurisdiction_id`, `entity_type_name`, `separate_legal_person`, `legal_structure_id`, `abbrev_long`, `abbrev_short`, `principal_statute`, `register_native_name`, `formation_documents`, `formation_notary_req`, `abbrev_position`, `status`, `updated_at`, `created_at`) VALUES
-(1, 5, 'Besloten Vennootschap', 'Y', 2, NULL, 'B.V.', NULL, 'Kamer van Koophandel', NULL, 'Y', '>', 'supported', '2021-02-16 06:22:57', NULL),
-(2, 1, 'Naamloze Vennootschap', 'Y', 2, NULL, 'N.V.', NULL, 'Kamer van Koophandel', NULL, 'Y', '>', 'unsupported', '2021-02-16 06:23:03', NULL),
-(3, 6, 'Private Limited Company', 'Y', 3, 'Limited', 'Ltd.', 'Companies Act 2006', 'Companies House', '', 'Y', '>', 'unsupported', '2021-02-16 06:23:05', NULL),
-(4, 2, 'Naamloze Vennootschap', 'Y', 4, NULL, 'PLC', NULL, 'Companies House', NULL, 'Y', '>', 'supported', '2021-02-16 17:45:33', NULL);
+(1, 143, 'Besloten Vennootschap', 'Y', 2, 'B.V.', 'B.V.', 'Burgerlijk Wetboek Boek 2', 'Kamer van Koophandel', NULL, 'Y', '>', 'supported', '2021-03-04 10:52:22', NULL),
+(2, 143, 'Naamloze Vennootschap', 'Y', 2, 'N.V.', 'N.V.', 'Burgerlijk Wetboek Boek 2', 'Kamer van Koophandel', NULL, 'Y', '>', 'unsupported', '2021-03-04 10:52:22', NULL),
+(3, 224, 'Private Limited Company', 'Y', 2, 'Limited', 'Ltd.', 'Companies Act 2006', 'Companies House', '', 'Y', '>', 'unsupported', '2021-03-04 13:38:16', NULL),
+(4, 224, 'Public Limited Company', 'Y', 2, 'Plc', 'Plc', NULL, NULL, NULL, NULL, NULL, 'supported', '2021-03-04 13:38:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -1287,23 +1510,306 @@ INSERT INTO `ico_stages` (`id`, `name`, `start_date`, `end_date`, `total_tokens`
 CREATE TABLE `jurisdictions` (
   `id` int(11) NOT NULL,
   `jurisdiction_name` varchar(255) NOT NULL,
-  `language_code` varchar(11) NOT NULL,
-  `main_currency_code` varchar(11) NOT NULL,
+  `language_id` varchar(11) NOT NULL,
+  `currency_id` varchar(11) NOT NULL,
   `jur_status` varchar(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `country_id` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jurisdictions`
 --
 
-INSERT INTO `jurisdictions` (`id`, `jurisdiction_name`, `language_code`, `main_currency_code`, `jur_status`, `updated_at`, `created_at`) VALUES
-(1, 'Chinese', '5', '39', 'inactive', '2021-02-16 06:05:31', NULL),
-(2, 'Unite Kingdom', '1', '49', 'active', '2021-02-01 00:17:28', NULL),
-(3, 'Germany', '1', '42', 'inactive', '2021-02-16 06:05:27', '2021-01-31 11:59:28'),
-(4, 'Netherlands', '4', '41', 'active', '2021-02-16 04:12:26', NULL),
-(5, 'French', '6', '42', 'inactive', '2021-02-01 00:17:34', '2021-01-07 17:34:36');
+INSERT INTO `jurisdictions` (`id`, `jurisdiction_name`, `language_id`, `currency_id`, `jur_status`, `updated_at`, `created_at`, `country_id`) VALUES
+(1, 'Afghanistan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(2, 'Aland (Åland)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(3, 'Albania', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(4, 'Algeria', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(5, 'American Samoa', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(6, 'Andorra', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(7, 'Angola', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(8, 'Anguilla', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(9, 'Antigua and Barbuda', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(10, 'Argentina', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(11, 'Armenia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(12, 'Aruba', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(13, 'Australia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(14, 'Austria', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(15, 'Azerbaijan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(16, 'Bahamas', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(17, 'Bahrain', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(18, 'Bailiwick of Guernsey', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(19, 'Bailiwick of Jersey', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(20, 'Bangladesh', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(21, 'Barbados', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(22, 'Belarus', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(23, 'Belgium', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(24, 'Belize', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(25, 'Benin', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(26, 'Bermuda', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(27, 'Bhutan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(28, 'Bolivia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(29, 'Bosnia and Herzegovina', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(30, 'Botswana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(31, 'Brazil', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(32, 'British Virgin Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(33, 'Brunei', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(34, 'Bulgaria', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(35, 'Burkina Faso', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(36, 'Burundi', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(37, 'Côte d\'Ivoire (Ivory Coast)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(38, 'Cabo Verde', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(39, 'Cambodia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(40, 'Cameroon', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(41, 'Canada', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(42, 'Cayman Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(43, 'Central African Republic', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(44, 'Chad', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(45, 'Chile', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(46, 'China - Hong Kong (Special Administrative Region)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(47, 'China - Macau (Special Administrative Region)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(48, 'China - Mainland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(49, 'Colombia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(50, 'Comoros', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(51, 'Congo (Congo-Brazzaville)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(52, 'Costa Rica', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(53, 'Croatia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(54, 'Cuba', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(55, 'Curaçao', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(56, 'Cyprus (Turkish)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(57, 'Cyrpus (Greek)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(58, 'Czech Republic', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(59, 'Democratic Republic of the Congo', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(60, 'Denmark', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(61, 'Djibouti', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(62, 'Dominica', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(63, 'Dominican Republic', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(64, 'Ecuador', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(65, 'Egypt', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(66, 'El Salvador', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(67, 'Equatorial Guinea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(68, 'Eritrea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(69, 'Estonia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(70, 'Eswatini', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(71, 'Ethiopia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(72, 'Falkland Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(73, 'Faroe Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(74, 'Fiji', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(75, 'Finland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(76, 'France', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(77, 'French Polynesia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(78, 'Gabon', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(79, 'Gambia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(80, 'Georgia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(81, 'Germany', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(82, 'Ghana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(83, 'Gibraltar', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(84, 'Greece', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(85, 'Greenland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(86, 'Grenada', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(87, 'Guam', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(88, 'Guatemala', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(89, 'Guinea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(90, 'Guinea-Bissau', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(91, 'Guyana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(92, 'Haiti', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(93, 'Holy See', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(94, 'Honduras', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(95, 'Hungary', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(96, 'Iceland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(97, 'India', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(98, 'Indonesia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(99, 'Iran', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(100, 'Iraq', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(101, 'Ireland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(102, 'Isle of Man', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(103, 'Israel', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(104, 'Italy', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(105, 'Jamaica', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(106, 'Japan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(107, 'Jordan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(108, 'Kazakhstan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(109, 'Kenya', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(110, 'Kiribati', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(111, 'Kuwait', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(112, 'Kyrgyzstan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(113, 'Laos', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(114, 'Latvia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(115, 'Lebanon', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(116, 'Lesotho', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(117, 'Liberia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(118, 'Libya', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(119, 'Liechtenstein', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(120, 'Lithuania', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(121, 'Luxembourg', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(122, 'Madagascar', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(123, 'Malawi', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(124, 'Malaysia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(125, 'Maldives', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(126, 'Mali', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(127, 'Malta', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(128, 'Marshall Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(129, 'Mauritius', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(130, 'Mexico', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(131, 'Micronesia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(132, 'Moldova', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(133, 'Monaco', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(134, 'Mongolia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(135, 'Montenegro', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(136, 'Montserrat', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(137, 'Morocco', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(138, 'Mozambique', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(139, 'Myanmar', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(140, 'Namibia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(141, 'Nauru', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(142, 'Nepal', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(143, 'Netherlands', '', '', 'active', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '163'),
+(144, 'New Caledonia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(145, 'New Zealand', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(146, 'Nicaragua', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(147, 'Niger', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(148, 'Nigeria', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(149, 'North Korea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(150, 'North Macedonia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(151, 'Northern Mariana Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(152, 'Norway', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(153, 'Oman', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(154, 'Pakistan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(155, 'Palau', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(156, 'Palestine State', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(157, 'Panama', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(158, 'Papua New Guinea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(159, 'Paraguay', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(160, 'Peru', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(161, 'Philippines', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(162, 'Pitcairn Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(163, 'Poland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(164, 'Portugal', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(165, 'Puerto Rico', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(166, 'Qatar', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(167, 'Romania', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(168, 'Russia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(169, 'Rwanda', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(170, 'Saint Barthélemy', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(171, 'Saint Helena, Ascension and Tristan da Cunha', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(172, 'Saint Kitts and Nevis', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(173, 'Saint Lucia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(174, 'Saint Martin (Dutch)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(175, 'Saint Martin (French)', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(176, 'Saint Pierre and Miquelon', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(177, 'Saint Vincent and the Grenadines', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(178, 'Samoa', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(179, 'San Marino', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(180, 'Sao Tome and Principe', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(181, 'Saudi Arabia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(182, 'Senegal', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(183, 'Serbia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(184, 'Seychelles', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(185, 'Sierra Leone', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(186, 'Singapore', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(187, 'Slovakia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(188, 'Slovenia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(189, 'Solomon Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(190, 'Somalia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(191, 'South Africa', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(192, 'South Korea', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(193, 'South Sudan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(194, 'Spain', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(195, 'Sri Lanka', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(196, 'Sudan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(197, 'Suriname', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(198, 'Sweden', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(199, 'Switzerland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(200, 'Syria', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(201, 'Taiwan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(202, 'Tajikistan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(203, 'Tanzania', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(204, 'Thailand', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(205, 'Timor-Leste', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(206, 'Togo', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(207, 'Tonga', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(208, 'Trinidad and Tobago', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(209, 'Tunisia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(210, 'Turkey', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(211, 'Turkmenistan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(212, 'Turks and Caicos Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(213, 'Tuvalu', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(214, 'Uganda', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(215, 'Ukraine', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(216, 'United Arab Emirates - Abu Dhabi', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(217, 'United Arab Emirates - Ajman', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(218, 'United Arab Emirates - Dubai', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(219, 'United Arab Emirates - Fujairah', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(220, 'United Arab Emirates - Ra\'s al-Khaimah', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(221, 'United Arab Emirates - Sharjah', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(222, 'United Arab Emirates - Umm al-Qaiwain', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(224, 'United Kingdom - England & Wales', '', '', 'active', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '248'),
+(225, 'United Kingdom - Northern Ireland', '', '', 'active', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '248'),
+(226, 'United Kingdom - Scotland', '', '', 'active', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '248'),
+(227, 'United Kingdom - Wales', '', '', 'active', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '248'),
+(228, 'United States Virgin Islands', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(229, 'United States of America - Alabama', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(230, 'United States of America - Alaska', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(231, 'United States of America - Arizona', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(232, 'United States of America - Arkansas', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(233, 'United States of America - California', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(234, 'United States of America - Colorado', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(235, 'United States of America - Connecticut', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(236, 'United States of America - Delaware', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(237, 'United States of America - District of Columbia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(238, 'United States of America - Florida', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(239, 'United States of America - Georgia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(240, 'United States of America - Hawaii', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(241, 'United States of America - Idaho', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(242, 'United States of America - Illinois', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(243, 'United States of America - Indiana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(244, 'United States of America - Iowa', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(245, 'United States of America - Kansas', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(246, 'United States of America - Kentucky', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(247, 'United States of America - Louisiana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(248, 'United States of America - Maine', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(249, 'United States of America - Maryland', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(250, 'United States of America - Massachusetts', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(251, 'United States of America - Michigan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(252, 'United States of America - Minnesota', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(253, 'United States of America - Mississippi', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(254, 'United States of America - Missouri', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(255, 'United States of America - Montana', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(256, 'United States of America - Nebraska', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(257, 'United States of America - Nevada', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(258, 'United States of America - New Hampshire', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(259, 'United States of America - New Jersey', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(260, 'United States of America - New Mexico', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(261, 'United States of America - New York', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(262, 'United States of America - North Carolina', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(263, 'United States of America - North Dakota', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(264, 'United States of America - Ohio', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(265, 'United States of America - Oklahoma', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(266, 'United States of America - Oregon', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(267, 'United States of America - Pennsylvania', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(268, 'United States of America - Rhode Island', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(269, 'United States of America - South Carolina', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(270, 'United States of America - South Dakota', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(271, 'United States of America - Tennessee', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(272, 'United States of America - Texas', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(273, 'United States of America - Utah', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(274, 'United States of America - Vermont', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(275, 'United States of America - Virginia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(276, 'United States of America - Washington', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(277, 'United States of America - West Virginia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(278, 'United States of America - Wisconsin', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(279, 'United States of America - Wyoming', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '249'),
+(280, 'Uruguay', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(281, 'Uzbekistan', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(282, 'Vanuatu', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(283, 'Venezuela', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(284, 'Vietnam', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(285, 'Wallis and Futuna', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(286, 'Yemen', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(287, 'Zambia', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', ''),
+(288, 'Zimbabwe', '', '', 'inactive', '2021-02-16 04:05:31', '2021-02-16 04:05:31', '');
 
 -- --------------------------------------------------------
 
@@ -1763,7 +2269,7 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (10, 'token_sales_raised', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (11, 'token_sales_total', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (12, 'token_sales_cap', 'token', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
-(13, 'tokenlite_credible', '0wvme9QgCyKFihiacyFBhzSJNBzBWcjcal2U76TjuLrwPEqI', '2020-06-01 01:07:02', '2021-02-23 11:57:20'),
+(13, 'tokenlite_credible', 'AinfRVwLiQtX9z66Z4Rq8GdvAsMgtsQAHE17yWfMeGxDtLN0', '2020-06-01 01:07:02', '2021-02-23 10:41:41'),
 (14, 'main_website_url', NULL, '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (15, 'pm_automatic_rate_time', '30', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
 (16, 'theme_admin', 'style', '2020-06-01 01:07:02', '2020-06-01 01:07:02'),
@@ -1912,7 +2418,7 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (159, 'token_purchase_xmr', '0', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (160, 'pmc_active_xmr', '1', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (161, 'pm_exchange_method', 'automatic', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
-(162, 'pm_exchange_auto_lastcheck', '2021-02-26 00:39:35', '2020-06-01 01:07:03', '2021-02-25 14:39:35'),
+(162, 'pm_exchange_auto_lastcheck', '2021-03-18 03:34:41', '2020-06-01 01:07:03', '2021-03-17 17:34:41'),
 (163, 'token_calculate', 'normal', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (164, 'token_calculate_note', 'normal', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
 (165, 'token_default_method', 'ETH', '2020-06-01 01:07:03', '2020-06-01 01:07:03'),
@@ -1975,49 +2481,49 @@ INSERT INTO `settings` (`id`, `field`, `value`, `created_at`, `updated_at`) VALU
 (222, 'lang_db_version', '193514', '2020-06-01 01:07:04', '2020-06-01 01:07:04'),
 (223, 'env_ptype', 'Q', '2020-12-03 19:03:33', '2020-12-03 19:03:33'),
 (224, 'pmc_auto_rate_usd', '1', '2020-12-03 19:25:33', '2020-12-03 19:25:33'),
-(225, 'pmc_auto_rate_eur', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(226, 'pmc_auto_rate_gbp', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(227, 'pmc_auto_rate_cad', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(228, 'pmc_auto_rate_aud', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(229, 'pmc_auto_rate_try', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(230, 'pmc_auto_rate_rub', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(231, 'pmc_auto_rate_inr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(232, 'pmc_auto_rate_brl', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(233, 'pmc_auto_rate_nzd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(234, 'pmc_auto_rate_pln', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(235, 'pmc_auto_rate_jpy', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(236, 'pmc_auto_rate_myr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(237, 'pmc_auto_rate_idr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(238, 'pmc_auto_rate_ngn', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(239, 'pmc_auto_rate_mxn', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(240, 'pmc_auto_rate_php', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(241, 'pmc_auto_rate_chf', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(242, 'pmc_auto_rate_thb', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(243, 'pmc_auto_rate_sgd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(244, 'pmc_auto_rate_czk', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(245, 'pmc_auto_rate_nok', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(246, 'pmc_auto_rate_zar', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(247, 'pmc_auto_rate_sek', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(248, 'pmc_auto_rate_kes', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(249, 'pmc_auto_rate_nad', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(250, 'pmc_auto_rate_dkk', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(251, 'pmc_auto_rate_hkd', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(252, 'pmc_auto_rate_eth', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(253, 'pmc_auto_rate_btc', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(254, 'pmc_auto_rate_ltc', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(255, 'pmc_auto_rate_xrp', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(256, 'pmc_auto_rate_xlm', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(257, 'pmc_auto_rate_bch', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(258, 'pmc_auto_rate_bnb', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(225, 'pmc_auto_rate_eur', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(226, 'pmc_auto_rate_gbp', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(227, 'pmc_auto_rate_cad', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(228, 'pmc_auto_rate_aud', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(229, 'pmc_auto_rate_try', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(230, 'pmc_auto_rate_rub', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(231, 'pmc_auto_rate_inr', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(232, 'pmc_auto_rate_brl', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(233, 'pmc_auto_rate_nzd', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(234, 'pmc_auto_rate_pln', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(235, 'pmc_auto_rate_jpy', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(236, 'pmc_auto_rate_myr', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(237, 'pmc_auto_rate_idr', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(238, 'pmc_auto_rate_ngn', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(239, 'pmc_auto_rate_mxn', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(240, 'pmc_auto_rate_php', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(241, 'pmc_auto_rate_chf', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(242, 'pmc_auto_rate_thb', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(243, 'pmc_auto_rate_sgd', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(244, 'pmc_auto_rate_czk', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(245, 'pmc_auto_rate_nok', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(246, 'pmc_auto_rate_zar', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(247, 'pmc_auto_rate_sek', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(248, 'pmc_auto_rate_kes', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(249, 'pmc_auto_rate_nad', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(250, 'pmc_auto_rate_dkk', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(251, 'pmc_auto_rate_hkd', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(252, 'pmc_auto_rate_eth', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(253, 'pmc_auto_rate_btc', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(254, 'pmc_auto_rate_ltc', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(255, 'pmc_auto_rate_xrp', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(256, 'pmc_auto_rate_xlm', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(257, 'pmc_auto_rate_bch', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(258, 'pmc_auto_rate_bnb', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
 (259, 'pmc_auto_rate_usdt', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(260, 'pmc_auto_rate_trx', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(260, 'pmc_auto_rate_trx', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
 (261, 'pmc_auto_rate_usdc', '1', '2020-12-03 19:25:33', '2021-02-03 06:31:17'),
-(262, 'pmc_auto_rate_dash', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(263, 'pmc_auto_rate_waves', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(264, 'pmc_auto_rate_xmr', '1', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
-(265, 'pmc_current_rate', '{\"usd\":1,\"eur\":1,\"gbp\":1,\"cad\":1,\"aud\":1,\"try\":1,\"rub\":1,\"inr\":1,\"brl\":1,\"nzd\":1,\"pln\":1,\"jpy\":1,\"myr\":1,\"idr\":1,\"ngn\":1,\"mxn\":1,\"php\":1,\"chf\":1,\"thb\":1,\"sgd\":1,\"czk\":1,\"nok\":1,\"zar\":1,\"sek\":1,\"kes\":1,\"nad\":1,\"dkk\":1,\"hkd\":1,\"eth\":1,\"btc\":1,\"ltc\":1,\"xrp\":1,\"xlm\":1,\"bch\":1,\"bnb\":1,\"usdt\":1,\"trx\":1,\"usdc\":1,\"dash\":1,\"waves\":1,\"xmr\":1}', '2020-12-03 19:25:33', '2021-02-22 07:20:49'),
+(262, 'pmc_auto_rate_dash', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(263, 'pmc_auto_rate_waves', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(264, 'pmc_auto_rate_xmr', '1', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
+(265, 'pmc_current_rate', '{\"usd\":1,\"eur\":1,\"gbp\":1,\"cad\":1,\"aud\":1,\"try\":1,\"rub\":1,\"inr\":1,\"brl\":1,\"nzd\":1,\"pln\":1,\"jpy\":1,\"myr\":1,\"idr\":1,\"ngn\":1,\"mxn\":1,\"php\":1,\"chf\":1,\"thb\":1,\"sgd\":1,\"czk\":1,\"nok\":1,\"zar\":1,\"sek\":1,\"kes\":1,\"nad\":1,\"dkk\":1,\"hkd\":1,\"eth\":1,\"btc\":1,\"ltc\":1,\"xrp\":1,\"xlm\":1,\"bch\":1,\"bnb\":1,\"usdt\":1,\"trx\":1,\"usdc\":1,\"dash\":1,\"waves\":1,\"xmr\":1}', '2020-12-03 19:25:33', '2021-03-13 00:29:49'),
 (268, 'site_footer_code', NULL, '2020-12-04 18:25:31', '2020-12-24 18:41:18'),
-(266, 'token_all_price', '{\"base\":0.2,\"usd\":0.2,\"eur\":0.2,\"gbp\":0.2,\"cad\":0.2,\"aud\":0.2,\"try\":0.2,\"rub\":0.2,\"inr\":0.2,\"brl\":0.2,\"nzd\":0.2,\"pln\":0.2,\"jpy\":0.2,\"myr\":0.2,\"idr\":0.2,\"ngn\":0.2,\"mxn\":0.2,\"php\":0.2,\"chf\":0.2,\"thb\":0.2,\"sgd\":0.2,\"czk\":0.2,\"nok\":0.2,\"zar\":0.2,\"sek\":0.2,\"kes\":0.2,\"nad\":0.2,\"dkk\":0.2,\"hkd\":0.2,\"eth\":0.2,\"btc\":0.2,\"ltc\":0.2,\"xrp\":0.2,\"xlm\":0.2,\"bch\":0.2,\"bnb\":0.2,\"usdt\":0.2,\"trx\":0.2,\"usdc\":0.2,\"dash\":0.2,\"waves\":0.2,\"xmr\":0.2}', '2020-12-03 19:25:35', '2021-02-22 07:20:50'),
+(266, 'token_all_price', '{\"base\":0.2,\"usd\":0.2,\"eur\":0.2,\"gbp\":0.2,\"cad\":0.2,\"aud\":0.2,\"try\":0.2,\"rub\":0.2,\"inr\":0.2,\"brl\":0.2,\"nzd\":0.2,\"pln\":0.2,\"jpy\":0.2,\"myr\":0.2,\"idr\":0.2,\"ngn\":0.2,\"mxn\":0.2,\"php\":0.2,\"chf\":0.2,\"thb\":0.2,\"sgd\":0.2,\"czk\":0.2,\"nok\":0.2,\"zar\":0.2,\"sek\":0.2,\"kes\":0.2,\"nad\":0.2,\"dkk\":0.2,\"hkd\":0.2,\"eth\":0.2,\"btc\":0.2,\"ltc\":0.2,\"xrp\":0.2,\"xlm\":0.2,\"bch\":0.2,\"bnb\":0.2,\"usdt\":0.2,\"trx\":0.2,\"usdc\":0.2,\"dash\":0.2,\"waves\":0.2,\"xmr\":0.2}', '2020-12-03 19:25:35', '2021-03-13 00:29:51'),
 (283, 'lang_last_generate_es', '1611136737', '2021-01-20 15:58:57', '2021-01-20 15:58:57'),
 (284, 'lang_last_generate_nl', '1613133792', '2021-01-20 16:07:30', '2021-02-12 18:43:12'),
 (269, 'site_logo', '1607929270.png', '2020-12-04 18:33:42', '2021-01-02 14:35:47'),
@@ -6701,8 +7207,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `registerMethod`, `public_key`, `social_id`, `mobile_code`, `mobile`, `mobile_verified_at`, `dateOfBirth`, `nationality`, `nationality_id`, `lastLogin`, `walletType`, `walletAddress`, `role`, `contributed`, `tokenBalance`, `referral`, `referralInfo`, `google2fa`, `google2fa_secret`, `type`, `remember_token`, `created_at`, `updated_at`, `last_name`) VALUES
-(1, 'Robin', 'admin@admin.com', '2020-12-03 19:03:27', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-23 14:32:30', NULL, NULL, 'admin', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'eapjk7a7t6fIdDzm86iSYMkSFg1dBrj6VdqYBvVfByEBToL1craWsAfb3Kdo', '2020-12-03 19:03:27', '2021-02-23 04:32:30', 'Henderson'),
-(19, 'Robin', 'robinhenderson545@gmail.com', '2020-12-17 19:01:19', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', '6810', NULL, '+31', '0624734397', NULL, '04/01/1991', 'NETHERLANDS', NULL, '2021-02-26 00:39:16', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', '7HVvVNoVNRlh0PgS6zkGhvu0bIKvyJmkLjPvYRgbbYqoO3PvufDAr5LaNFif', '2020-12-18 16:43:12', '2021-02-25 14:39:16', 'bbbb'),
+(1, 'Robin', 'admin@admin.com', '2020-12-03 19:03:27', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-23 14:32:30', NULL, NULL, 'admin', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'TGW9J4dyh0fKv7i06cf5PNA2q5s4B6WTzKyYEbqDk3imDmzjbrcWTYJFCWPQ', '2020-12-03 19:03:27', '2021-02-23 04:32:30', 'Henderson'),
+(19, 'Robin', 'robinhenderson545@gmail.com', '2020-12-17 19:01:19', '$2y$10$KPhDkmqOTcTVZCDskJSzXub8L1QvNo0tz04GrIc8xGzl6uWrUzWMO', 'active', 'Email', '6810', NULL, '+31', '0624734397', NULL, '04/01/1991', 'NETHERLANDS', NULL, '2021-03-18 01:48:44', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', '7HVvVNoVNRlh0PgS6zkGhvu0bIKvyJmkLjPvYRgbbYqoO3PvufDAr5LaNFif', '2020-12-18 16:43:12', '2021-03-17 15:48:44', 'bbbb'),
 (11, 'munir12', 'muneerahmad0152@gmail.com', '2020-12-03 19:03:27', '$2y$10$bjOb9E1vNwpj26QBEFPK6.VYCYVshk2Y2D6qp8DcxvvPb0ItLg3Lm', 'active', 'Email', NULL, NULL, '+31', '0624734456', NULL, '03/04/2013', '', NULL, '2020-12-19 16:23:13', '', '', 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'DbjPXb0BnqR7tuvdIRhcXwloLNgdbAjAUvdYWKwRGCINnxObcmrF0DhSF2qZ', '2020-12-10 11:10:08', '2020-12-19 15:37:11', ''),
 (17, 'Muhammad121', 'abubakarnaeem@einnovention.us', '2020-12-17 19:01:19', '$2y$10$NJron/WnxAp0n4joMOycdehooBs7OhrATCd1Le9qko7ryTB2Hrhi2', 'active', 'Email', NULL, NULL, NULL, '', NULL, '01/28/2020', 'ALBANIA', NULL, '2020-12-19 16:40:45', '', '', 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'uOOs7sa2TMqXKSPlneq6j93v0lIFrlBuu2JmqmG4uKZ8B6WPji6rIubAVPMA', '2020-12-17 18:51:30', '2021-01-07 19:42:01', ''),
 (18, 'Ahmad', 'ahmadnazir@einnovention.us', NULL, '$2y$10$WOf/6gV7a2OpVVBkyRYX7OsiGynGRAlIh.0lR24fGpSM.QELpwxUO', 'active', 'Email', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-17 19:54:22', NULL, NULL, 'user', NULL, NULL, NULL, NULL, 0, NULL, 'main', 'lUwb9Kx2lRshlpPg9FT8eEE8aMc4WAUGaP7JeSZ0Ao24D1T0UNPvRX3GkPXJ', '2020-12-17 18:54:22', '2020-12-17 18:54:22', '');
@@ -6835,6 +7341,18 @@ ALTER TABLE `currencies`
   ADD PRIMARY KEY (`cur_id`);
 
 --
+-- Indexes for table `entities_addresses`
+--
+ALTER TABLE `entities_addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_branches`
+--
+ALTER TABLE `entities_branches`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `entities_business_activities`
 --
 ALTER TABLE `entities_business_activities`
@@ -6847,9 +7365,51 @@ ALTER TABLE `entities_companies_purpose`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `entities_corporate_bodies_shareholders`
+--
+ALTER TABLE `entities_corporate_bodies_shareholders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_domiciliation_office`
+--
+ALTER TABLE `entities_domiciliation_office`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_share_classes`
+--
+ALTER TABLE `entities_share_classes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_share_rights`
+--
+ALTER TABLE `entities_share_rights`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entities_trading_name`
+--
+ALTER TABLE `entities_trading_name`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `entity`
 --
 ALTER TABLE `entity`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `entity_types`
+--
+ALTER TABLE `entity_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jurisdictions`
+--
+ALTER TABLE `jurisdictions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6887,10 +7447,22 @@ ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
+-- AUTO_INCREMENT for table `entities_addresses`
+--
+ALTER TABLE `entities_addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `entities_branches`
+--
+ALTER TABLE `entities_branches`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `entities_business_activities`
 --
 ALTER TABLE `entities_business_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `entities_companies_purpose`
@@ -6899,10 +7471,52 @@ ALTER TABLE `entities_companies_purpose`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `entities_corporate_bodies_shareholders`
+--
+ALTER TABLE `entities_corporate_bodies_shareholders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `entities_domiciliation_office`
+--
+ALTER TABLE `entities_domiciliation_office`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `entities_share_classes`
+--
+ALTER TABLE `entities_share_classes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `entities_share_rights`
+--
+ALTER TABLE `entities_share_rights`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `entities_trading_name`
+--
+ALTER TABLE `entities_trading_name`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `entity`
 --
 ALTER TABLE `entity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `entity_types`
+--
+ALTER TABLE `entity_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `jurisdictions`
+--
+ALTER TABLE `jurisdictions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

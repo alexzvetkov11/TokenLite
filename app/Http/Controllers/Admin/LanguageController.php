@@ -91,7 +91,7 @@ class LanguageController extends Controller
      */
     public function language_action(Request $request)
     {
-//        dd($request->input('actions'));
+    //    dd($request->all());
         $result['msg'] = 'info';
         $result['icon'] = 'ti ti-info-alt';
         $result['message'] = __('messages.nothing');
@@ -244,7 +244,7 @@ class LanguageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update_translate($request) {
-//        dd($request->input('actions'));
+    //    dd($request->input('actions'));
         $result['error'] = true;
         $result['msg'] = 'warning';
         $result['icon'] = 'ti ti-alert';
@@ -252,6 +252,7 @@ class LanguageController extends Controller
         $actions = $request->input('actions');
 
         $lang = strtolower($request->input('lang'));
+
         if($actions=='translation') {
             if($this->is_lang_exist($lang)) {
                 $translates = $request->$lang;
@@ -269,12 +270,18 @@ class LanguageController extends Controller
                             $by_lang->load = $by_base->load;
                         }
                         $by_lang->save();
+
+                        if ( !empty($request->base[$id]) ) {
+                            $by_base->text = $request->base[$id];
+                        }
+                        $by_base->save();
                     }
                     add_setting('lang_last_update_'.$lang, time());
                     $result['error'] = false;
                     $result['msg'] = 'success';
                     $result['icon'] = 'ti ti-check';
                     $result['message'] = __('messages.update.success', ['what' => 'Translation']);
+
                 }
             } else {
                 $result['message'] = __('Sorry! unable find the language.');
@@ -294,7 +301,7 @@ class LanguageController extends Controller
      * @param   string $action
      */
     public function generate_translate($request) {
-        // dd($request); 
+        // dd($request);
         $result['error'] = true;
         $result['msg'] = 'warning';
         $result['icon'] = 'ti ti-alert';
@@ -416,7 +423,7 @@ class LanguageController extends Controller
     /**
      * Get translate row by using key for language
      *
-     * 
+     *
      * @version 1.0.0
      * @since   1.1.3
      * @param   string $key

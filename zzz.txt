@@ -796,7 +796,7 @@ This Entity will then register itself at the physical office space that it wishe
 Registered Address
 Registered Office Selection
 Country
-Municipality, Province
+Province / State
 Number
 Unit
 This is a Residential Address.
@@ -856,6 +856,7 @@ This Address is also the Correspondence Address for this Branch.
 This Branch will have a (slightly) different Activity Description than the Entity itself.
 The Electronic Correspondence details for the Branch are the same as for the Local Head Office.
 Activity Description
+This Branch will have a (slightly) different Activity Description than the Entity itself.
 Meetings Rights
 Voting & Metting
 Reserves
@@ -878,3 +879,8 @@ Conversion
 Redemption Right End Date
 Conversion Rights Start Date
 Conversion Right End Date
+Complete Configuration
+Edit Primary Ordinary Share Class
+Number of Votes per Share
+Voting Rights
+Meeting Rights

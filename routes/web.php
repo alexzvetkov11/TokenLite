@@ -75,7 +75,7 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
     Route::get('/account/balance', 'User\UserController@mytoken_balance')->name('token.balance');
 
     Route::get('/entities', 'User\EntitiesController@index')->name('entities');
-    Route::get('/addentities', 'User\EntitiesController@addentities_index')->name('addentities');
+    Route::get('/add_entities', 'User\EntitiesController@addentities_index')->name('addentities');
     Route::get('/entities/template1', 'User\EntitiesController@template1')->name('entites.template1');
 
     Route::post('/entities/add', 'User\EntitiesController@entities_add')->name('entities.add')->middleware('demo_user');

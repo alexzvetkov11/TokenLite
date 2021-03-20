@@ -23,7 +23,7 @@
                 </div> --}}
 
                 <div class="card-head has-aside pd-2x">
-                    <div style="font-size:1.29em; color:#342d6e"> <b>{{ __('Entities') }} ></b> <span style="font-size:0.8em">{{ __('Add Entity') }}</span></div>
+                    <div style="font-size:1.29em; color:#342d6e"> <b>{{ __('Your Entities') }} ></b> <span style="font-size:0.8em">{{ __('Add Entity') }}</span></div>
                     <div class="card-opt data-action-list d-md-inline-flex">
                         <a href="{{ route('admin.entities') }}" class="btn btn-auto btn-sm btn-primary">
                             <em class="fa fa-arrow-circle-left"> </em><span>Back</span>
@@ -77,7 +77,6 @@
                         </ul>
                     </div>
                 </div>
-
 
                 <form action="{{ route('admin.ajax.entities.add') }}" method="POST">
                     @csrf

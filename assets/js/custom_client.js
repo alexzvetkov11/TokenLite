@@ -31,7 +31,7 @@ $(document).ready(function() {
     //     $('#date').datepicker({ dateFormat: 'dd-mm-yy' }).val();
     // }).trigger("change")
 
-    //custom datatable search 
+    //custom datatable search
     $("#search_table").on('keyup', function() {
         var input, filter, table, tr, td, i, txtValue;
         input = $("#search_table").val() + "";

@@ -45,19 +45,31 @@
                             <form action="{{ route('admin.ajax.lang.translate.action') }}" method="POST">
                                 @foreach ($translates as $translate)
                                 <div class="translate-item mgb-3x">
-                                    <div class="row align-items-baseline mb-2">
+                                    {{-- <div class="row align-items-baseline"> --}}
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="input-item-label">{{ __(':lang Text Key', ['lang' => ""]) }}  </label>
+                                        </div>
+                                        <div class="col-sm-9 col-md-10">
+                                            <div class="input-wrap">
+                                                <textarea class="input-bordered input-textarea-min" rows="1" name="key[{{ $translate['id'] }}]" disabled> {{ $translate['key']}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3 col-md-2">
                                             <label class="input-item-label">{{ __('Default Text') }}</label>
                                         </div>
                                         <div class="col-sm-9 col-md-10">
                                             <div class="input-wrap">
-                                                <textarea class="input-bordered input-textarea-min" rows="1" name="base[{{ $translate['id'] }}]" disabled>{{ $translate['base'] }}</textarea>
+                                                <textarea class="input-bordered input-textarea-min" rows="1" name="base[{{ $translate['id'] }}]" >{{ $translate['base'] }}</textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row align-items-baseline">
+
+                                    <div class="row">
                                         <div class="col-sm-3 col-md-2">
-                                            <label class="input-item-label">{{ __(':lang Text', ['lang' => $lang->name]) }}  Key:  {{ $translate['key']}}</label>
+                                            <label class="input-item-label">{{ __(':lang Text', ['lang' => $lang->name]) }}  </label>
                                         </div>
                                         <div class="col-sm-9 col-md-10">
                                             <div class="input-wrap">
@@ -66,6 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr/>
                                 @endforeach
                                 <div class="fake-class text-right">
                                     @csrf
