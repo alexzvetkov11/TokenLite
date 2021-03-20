@@ -33,13 +33,13 @@
                                             <li>
                                                 <h6 class="dropdown-title">Show</h6>
                                             </li>
-                                            <li {!! gmvl('jurisdiction_per_page', 10)==10 ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_per_page', 10) == 10 ? ' class="active"' : '' !!}>
                                                 <a href="#" data-meta="perpage=10">10</a>
                                             </li>
-                                            <li {!! gmvl('jurisdiction_per_page', 10)==20 ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_per_page', 10) == 20 ? ' class="active"' : '' !!}>
                                                 <a href="#" data-meta="perpage=20">20</a>
                                             </li>
-                                            <li {!! gmvl('jurisdiction_per_page', 10)==50 ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_per_page', 10) == 50 ? ' class="active"' : '' !!}>
                                                 <a href="#" data-meta="perpage=50">50</a>
                                             </li>
                                         </ul>
@@ -47,28 +47,26 @@
                                             <li>
                                                 <h6 class="dropdown-title">Order By</h6>
                                             </li>
-                                            <li {!! gmvl('jurisdiction_order_by', 'jurisdiction_name' )=='jurisdiction_name'
-                                                ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_order_by', 'jurisdiction_name') == 'jurisdiction_name' ? ' class="active"' : '' !!}>
                                                 <a href="#" data-meta="orderby=jurisdiction_name">Jurisdiction</a>
                                             </li>
-                                            <li {!! gmvl('jurisdiction_order_by', 'jur_status' )=='jur_status' ? ' class="active"' : '' !!}>
-                                                <a href="#" data-meta="orderby=jur_status">Status</a></li>
-                                                {{-- <li{!! gmvl('user_order_by', 'id' )=='token' ? ' class="active"' : '' !!}>
+                                            <li {!! gmvl('jurisdiction_order_by', 'jur_status') == 'jur_status' ? ' class="active"' : '' !!}>
+                                                <a href="#" data-meta="orderby=jur_status">Status</a>
+                                            </li>
+                                            {{-- <li{!! gmvl('user_order_by', 'id' )=='token' ? ' class="active"' : '' !!}>
                                                     <a href="#" data-meta="orderby=token">Token</a></li>
                                         </ul> --}}
-                                        <ul class="dropdown-list">
-                                            <li>
-                                                <h6 class="dropdown-title">Order</h6>
-                                            </li>
-                                            <li {!! gmvl('jurisdiction_ordered', 'DESC' )=='DESC' ? ' class="active"' : ''
-                                                !!}>
-                                                <a href="#" data-meta="ordered=DESC">DESC</a>
-                                            </li>
-                                            <li {!! gmvl('jurisdiction_ordered', 'DESC' )=='ASC' ? ' class="active"' : ''
-                                                !!}>
-                                                <a href="#" data-meta="ordered=ASC">ASC</a>
-                                            </li>
-                                        </ul>
+                                            <ul class="dropdown-list">
+                                                <li>
+                                                    <h6 class="dropdown-title">Order</h6>
+                                                </li>
+                                                <li {!! gmvl('jurisdiction_ordered', 'DESC') == 'DESC' ? ' class="active"' : '' !!}>
+                                                    <a href="#" data-meta="ordered=DESC">DESC</a>
+                                                </li>
+                                                <li {!! gmvl('jurisdiction_ordered', 'DESC') == 'ASC' ? ' class="active"' : '' !!}>
+                                                    <a href="#" data-meta="ordered=ASC">ASC</a>
+                                                </li>
+                                            </ul>
                                     </form>
                                 </div>
                             </div>
@@ -77,8 +75,9 @@
 
                     <div class="row justify-content-between pdb-1x" style="background-color: #f9fcff">
                         <div class="col-9 col-sm-6 text-left">
-                            <div  class="dataTables_filter pt-3">
-                                <input type="search" id="search_table" class="form-control form-control-sm" placeholder="Type in to Search" aria-controls="DataTables_Table_0">
+                            <div class="dataTables_filter pt-3">
+                                <input type="search" id="search_table" class="form-control form-control-sm"
+                                    placeholder="Type in to Search" aria-controls="DataTables_Table_0">
                             </div>
                         </div>
                         <div class="col-3 text-right">
@@ -114,14 +113,20 @@
                                                 <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger">
                                                     <em class="ti ti-more-alt"></em></a>
                                                 <div class="toggle-class dropdown-content dropdown-content-top-left">
-                                                    <ul class="dropdown-list more-menu-{{ $jur->jur_id }}">
+                                                    <ul class="dropdown-list more-menu-{{ $jur->id }}">
                                                         <li>
-                                                            <a href="#" data-toggle="modal" data-target="#editJurisdiction" data-id="{{ $jur->jur_id }}" data-juris="{{ $jur->jurisdiction_name }}" data-langcode="{{$jur->language_code}}" data-curcode="{{$jur->main_currency_code}}" data-statue={{$jur->jur_status}}
+                                                            <a href="#" data-toggle="modal" data-target="#editJurisdiction"
+                                                                data-id="{{ $jur->id }}"
+                                                                data-juris="{{ $jur->jurisdiction_name }}"
+                                                                data-langcode="{{ $jur->check_lang->code }}"
+                                                                data-curcode="{{ $jur->check_currency->cur_code }}"
+                                                                data-statue={{ $jur->jur_status }}
                                                                 class="user-action front editJurisdiction">
                                                                 <em class="fas fa-edit"></em>Edit
                                                             </a>
-                                                            <a href="#" data-uid="{{ $jur->jur_id }}" data-type="delete_user"
-                                                                data-url="{{ route('admin.ajax.juris.delete', $jur->jur_id) }}"
+                                                            <a href="#" data-uid="{{ $jur->id }}"
+                                                                data-type="delete_user"
+                                                                data-url="{{ route('admin.ajax.juris.delete', $jur->id) }}"
                                                                 class="user-action front"
                                                                 data-title="Are you sure you want to delete this Jurisdiction?">
                                                                 <em class="fas fa-trash-alt"></em>Delete
@@ -142,7 +147,7 @@
                                 {{ $is_page == 'all' ? 'No investor / user found!' : 'No ' . $is_page . ' user here!' }}
                             </p>
                             <p><a class="btn btn-primary btn-auto" href="{{ route('admin.users', 'user') }}">
-                                View All Users</a></p>
+                                    View All Users</a></p>
                         </div>
                     @endif
 
@@ -169,7 +174,8 @@
                                                 data-dd-class="search-{{ $pagi->lastPage() > 7 ? 'on' : 'off' }}">
                                                 @for ($i = 1; $i <= $pagi->lastPage(); $i++)
                                                     <option value="{{ $pagi->url($i) }}"
-                                                        {{ $pagi->currentPage() == $i ? ' selected' : '' }}>{{ $i }}
+                                                        {{ $pagi->currentPage() == $i ? ' selected' : '' }}>
+                                                        {{ $i }}
                                                     </option>
                                                 @endfor
                                             </select>
@@ -229,7 +235,7 @@
                                         <select class="select select-block select-bordered" name="cur_code">
                                             <option value="" default>Select Option</option>
                                             @foreach ($currencies as $cur)
-                                                <option value="{{ $cur->cur_id }}">{{ $cur->cur_label }}</option>
+                                                <option value="{{ $cur->id }}">{{ $cur->cur_label }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -240,7 +246,8 @@
                                     <label class="input-item-label">Status</label>
                                     <div class="input-wrap input-wrap-switch">
                                         <span class="align-items-center d-flex pr-3">Active</span>
-                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="addstatue_switcher">
+                                        <input class="input-switch" name="statue_switcher" type="checkbox"
+                                            id="addstatue_switcher">
                                         <label for="addstatue_switcher">Inactive</label>
                                     </div>
                                 </div>
@@ -295,7 +302,7 @@
                                     <div class="input-wrap">
                                         <select class="select select-block select-bordered" name="cur_code">
                                             @foreach ($currencies as $cur)
-                                                <option value="{{ $cur->cur_id }}">{{ $cur->cur_label }}</option>
+                                                <option value="{{ $cur->id }}">{{ $cur->cur_label }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -306,7 +313,8 @@
                                     <label class="input-item-label">Status</label>
                                     <div class="input-wrap input-wrap-switch">
                                         <span class="align-items-center d-flex pr-3">Active</span>
-                                        <input class="input-switch" name="statue_switcher" type="checkbox"  id="editstatue_switcher">
+                                        <input class="input-switch" name="statue_switcher" type="checkbox"
+                                            id="editstatue_switcher">
                                         <label for="editstatue_switcher">Enable</label>
                                     </div>
                                 </div>
@@ -366,15 +374,15 @@
     <script type="text/javascript">
         (function($) {
             var table = $('.data-table').DataTable({
-                "destroy":          true,
-                'scrollY':          800,
-                "scrollCollapse":   true,
-                "paging":           false,
-                "ordering":         false,
-                "info":             false,
-                "searching":        false,
-                "responsive":       true,
-                "autoWidth":        false,
+                "destroy": true,
+                'scrollY': 800,
+                "scrollCollapse": true,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                "responsive": true,
+                "autoWidth": false,
             });
 
 

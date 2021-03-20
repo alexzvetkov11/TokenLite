@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Admin;
  * @author Softnio
  * @version 1.1.0
  */
+
 use App\Http\Controllers\Controller;
 use App\Models\Jurisdictions;
 use App\Models\Language;
@@ -24,17 +25,14 @@ class JurisdictionController extends Controller
 
         //$role_data = '';
         $per_page = gmvl('jurisdiction_per_page', 10);
-        $order_by = gmvl('jurisdiction_order_by', 'jur_id');
+        $order_by = gmvl('jurisdiction_order_by', 'id');
         $ordered = gmvl('jurisdiction_ordered', 'DESC');
         $is_page = (empty($role) ? 'all' : ($role == 'user' ? 'investor' : $role));
-        $juris = \DB::table("jurisdictions")->select(['*', 'jurisdictions.id as jur_id'])
-                    ->join('languages', 'jurisdictions.language_code', '=', 'languages.id')
-                    ->join('currencies', 'jurisdictions.main_currency_code', '=', 'currencies.cur_id')
-                    ->orderby($order_by, $ordered)->paginate($per_page);
+        $juris = Jurisdictions::orderby($order_by, $ordered)->paginate($per_page);
         $pagi = $juris->appends(request()->all());
-        
+
         $languages = Language::orderby('id', 'ASC')->get();
-        $currencies = Currency::orderby('cur_id', 'ASC')->get();
+        $currencies = Currency::orderby('id', 'ASC')->get();
 
         return view('admin.jurisdiction', compact('juris', 'pagi', 'is_page', 'languages', 'currencies'));
     }
@@ -84,14 +82,14 @@ class JurisdictionController extends Controller
             $ret['message'] = $msg;
             return response()->json($ret);
         } else {
-            try{
-                $juris_one =new Jurisdictions;
+            try {
+                $juris_one = new Jurisdictions;
                 $juris_one->jurisdiction_name = $request->juris_name;
                 $juris_one->language_code = $request->lang_code;
                 $juris_one->main_currency_code = $request->cur_code;
                 $juris_one->jur_status = ($request->statue_switcher ? 'active' : 'inactive');
                 $juris_one->save();
-            } catch(\Exception $e){
+            } catch (\Exception $e) {
                 echo $e->getMessage();
             }
             $ret['msg'] = 'success';
@@ -101,17 +99,17 @@ class JurisdictionController extends Controller
                 return response()->json($ret);
             }
             return back()->with([$ret['msg'] => $ret['message']]);
-            
         }
     }
 
-    public function delJuris($jur_id){
-        $juris = Jurisdictions::where('id', $jur_id)->first();
-        if ($juris){
+    public function delJuris($id)
+    {
+        $juris = Jurisdictions::where('id', $id)->first();
+        if ($juris) {
             $juris->delete();
             $ret['msg'] = "success";
             $ret['message'] =  __('Jurisdiction Delete Successfully');
-        } else{
+        } else {
             $ret['msg'] = 'error';
             $ret['message'] = __('Jurisdiction Not Found');
         }

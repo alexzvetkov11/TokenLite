@@ -98,9 +98,6 @@ Route::prefix('user')->middleware(['auth', 'user', 'verify_user', 'g2fa'])->name
         Route::post('/entities/change_business_activities', 'User\EntitiesController@change_business_activities')->name('change.business_activities')->middleware('demo_user');
         Route::post('/entities/add_branches', 'User\EntitiesController@add_branches')->name('entities.add.branches')->middleware('demo_user');
         Route::post('/entities/add_shareclass', 'User\EntitiesController@add_shareclass')->name('entities.add.shareclass')->middleware('demo_user');
-
-
-
     });
 });
 
@@ -212,7 +209,7 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
 
         Route::post('/jurisdiction/edit', 'Admin\JurisdictionController@editJuris')->middleware(['ico', 'demo_user'])->name('juris.edit');
         Route::post('/jurisdiction/add', 'Admin\JurisdictionController@addJuris')->middleware(['ico', 'demo_user'])->name('juris.add');
-        Route::Post('/jurisdiction/delete/{jur_id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
+        Route::Post('/jurisdiction/delete/{id}', 'Admin\JurisdictionController@delJuris')->middleware(['ico', 'demo_user'])->name('juris.delete');
         Route::post('/article/new_add', 'Admin\ArticlesController@newAdd')->middleware(['ico', 'demo_user'])->name('article.new');
 
         Route::Post('/article/delete/{article_id}', 'Admin\ArticlesController@deleteArticle')->middleware(['ico', 'demo_user'])->name('article.delete');
@@ -236,7 +233,6 @@ Route::prefix('admin')->middleware(['auth', 'admin', 'g2fa', 'ico'])->name('admi
 
         Route::post('/entities/add', 'Admin\EntitiesController@add_entities_post')->middleware(['ico', 'demo_user'])->name('entities.add');
         Route::post('/entities/add_next', 'Admin\EntitiesController@add_entities_post_next')->middleware(['ico', 'demo_user'])->name('entities.template1');
-
     });
 
     //Clear Cache facade value:

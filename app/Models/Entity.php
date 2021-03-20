@@ -38,14 +38,14 @@ class Entity extends Model
      */
     public function __construct()
     {
-
     }
 
-    public function check_entype(){
+    public function check_entype()
+    {
         return $this->belongsTo('App\Models\EntityTypes', 'entity_type', 'id');
     }
-    public function check_juris(){
+    public function check_juris()
+    {
         return $this->belongsTo('App\Models\Jurisdictions', 'jurisdiction', 'id');
     }
-
 }

@@ -49,7 +49,7 @@
                                                         id="purpose_type" data-dd-class="search-on">
                                                         <option value="" default>{{ __('Select Option') }}</option>
                                                         @foreach ($currencies as $cur)
-                                                            <option value="{{ $cur->cur_id }}"> {{ $cur->cur_label }}
+                                                            <option value="{{ $cur->id }}"> {{ $cur->cur_label }}
                                                             </option>
                                                         @endforeach
                                                     </select>
